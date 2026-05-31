@@ -1,0 +1,109 @@
+﻿  ModelLoader.cpp
+  Editor.cpp
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(11,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "Editor/Editor.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(12,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "Editor/Editor.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(13,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "Editor/Editor.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(14,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "Editor/Editor.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\Editor\Editor.cpp(292,16): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+  Mesh.cpp
+C:\Users\Stanislav\Desktop\AEngine\Renderer\Mesh.cpp(46,74): warning C4312: приведение типов: преобразование из "int" в "void *" большего размера
+C:\Users\Stanislav\Desktop\AEngine\Renderer\Mesh.cpp(58,46): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
+  RenderSystem.cpp
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(11,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(12,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(13,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(14,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\Libraries\include\AMath.h(33,16): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\Renderer\RenderSystem.cpp(288,59): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngine\Renderer\RenderSystem.cpp(288,34): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngine\Renderer\RenderSystem.cpp(316,45): warning C4267: аргумент: преобразование из "size_t" в "unsigned int"; возможна потеря данных
+  EditorCamera.cpp
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(11,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "components/EditorCamera.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(12,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "components/EditorCamera.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(13,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "components/EditorCamera.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(14,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "components/EditorCamera.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\Libraries\include\AMath.h(33,16): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+  (компиляция исходного файла "components/EditorCamera.cpp")
+  
+  Render.cpp
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(11,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "components/Render.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(12,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "components/Render.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(13,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "components/Render.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(14,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "components/Render.cpp")
+  
+  Application.cpp
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(11,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "core/Application.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(12,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "core/Application.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(13,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "core/Application.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(14,1): warning C4010: однострочный комментарий содержит знак объединения строк
+  (компиляция исходного файла "core/Application.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\Libraries\include\AMath.h(33,16): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+  (компиляция исходного файла "core/Application.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngine\core\Application.cpp(131,19): warning C4244: аргумент: преобразование "double" в "unsigned int", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngine\core\Application.cpp(145,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngine\core\Application.cpp(147,18): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
+  AssetManager.cpp
+  Создание кода...
+glfw3.lib(input.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(input.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(init.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(init.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(window.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(window.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(context.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(context.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(monitor.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(monitor.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(win32_window.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_window.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(win32_time.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_time.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(win32_thread.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_thread.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(platform.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(platform.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(vulkan.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(vulkan.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(win32_init.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_init.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(win32_monitor.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_monitor.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(wgl_context.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(wgl_context.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(egl_context.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(egl_context.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(osmesa_context.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(osmesa_context.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(null_init.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(null_init.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(win32_module.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_module.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(win32_joystick.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_joystick.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(null_monitor.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(null_monitor.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(null_window.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(null_window.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+glfw3.lib(null_joystick.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(null_joystick.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Debug\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
+  AEngine.vcxproj -> C:\Users\Stanislav\Desktop\AEngine\x64\Debug\AEngine.exe

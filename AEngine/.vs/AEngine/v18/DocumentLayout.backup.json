@@ -1,0 +1,1668 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Stanislav\\Desktop\\AEngine\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Application.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:core\\Application.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Render.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\Render.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Rei.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\Rei.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\PostProcess.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\PostProcess.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\LightMoving.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\LightMoving.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\LightMoving.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\LightMoving.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Light.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\Light.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\Light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\EditorCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\EditorCamera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\cube.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\cube.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\cube.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\cube.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Skybox.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\Skybox.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Skybox.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\Skybox.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\SceneManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\SceneManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\SceneManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\SceneManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\LightManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\LightManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\LightManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\LightManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\AssetManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\AssetManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\AssetManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:scene\\AssetManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\runtime\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:runtime\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Texture.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Texture.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Texture.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Texture.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Shader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Shader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Shader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Shader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\RenderSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\RenderSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\RenderSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\RenderSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\RenderContext.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\RenderContext.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Mesh.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Material.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Material.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Material.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Material.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\GameObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\GameObject.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\FramebufferManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\FramebufferManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\FramebufferManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\FramebufferManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Framebuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Framebuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Framebuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Framebuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Cubemap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Cubemap.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Cubemap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Cubemap.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Buffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Buffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Buffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Renderer\\Buffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\Editor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Editor\\Editor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\Editor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Editor\\Editor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:core\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:core\\Window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Application.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:core\\Application.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Render.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\Render.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\PostProcess.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\PostProcess.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\AComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\AComponent.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\AComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\AComponent.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ParserGLSL.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:APIs\\ParserGLSL.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ParserGLSL.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:APIs\\ParserGLSL.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ComponentSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:core\\ComponentSystem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ComponentSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:core\\ComponentSystem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredLightingFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\DeferredLightingFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredSpotLighting.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\DeferredSpotLighting.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredPointLighting.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\DeferredPointLighting.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredLightingVS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\DeferredLightingVS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthShaderFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\DepthShaderFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthShaderPointFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\DepthShaderPointFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthShaderVS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\DepthShaderVS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\selectedObjectEditor.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\selectedObjectEditor.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthmapFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\DepthmapFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\FragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\ExposureFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\ExposureFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FragmentShaderDeferredGeometryTest.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\FragmentShaderDeferredGeometryTest.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\Lighting.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\Lighting.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\CubemapShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\CubemapShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ModelLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:APIs\\ModelLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\VertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\VertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\ExplodingGeometryShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\ExplodingGeometryShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FramebufferFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\FramebufferFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Assets\\ToonshaderFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Assets\\ToonshaderFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\Core.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\Core.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\BlurFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\BlurFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\BloomFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\BloomFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\AEngineGBufferFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\AEngineGBufferFS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FramebufferVertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\FramebufferVertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\SkyboxVertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\SkyboxVertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\SkyboxFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\SkyboxFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\Shadows.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\Shadows.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Assets\\ToonshaderVS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Assets\\ToonshaderVS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\ShadowsPointGS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\ShadowsPointGS.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\VertexSelectedObjectEditor.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Shaders\\VertexSelectedObjectEditor.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\EditorCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\EditorCamera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Rei.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:components\\Rei.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ModelLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:APIs\\ModelLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\LIBRARIES\\INCLUDE\\GLM\\GLM\\DETAIL\\TYPE_VEC4.INL||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:LIBRARIES\\INCLUDE\\GLM\\GLM\\DETAIL\\TYPE_VEC4.INL||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ErrorManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:core\\ErrorManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\imGUI\\imgui_demo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Editor\\imGUI\\imgui_demo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\imGUI\\imgui_impl_opengl3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:Editor\\imGUI\\imgui_impl_opengl3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ErrorManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3285865C-F509-42DD-989E-86CFC782EBC4}|AEngine.vcxproj|solutionrelative:core\\ErrorManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Stanislav\\Desktop\\AEngine\\SkyboxFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SkyboxFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glm\\glm\\gtx\\component_wise.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Libraries\\include\\glm\\glm\\gtx\\component_wise.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\AMath.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Libraries\\include\\AMath.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\assimp\\matrix4x4.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Libraries\\include\\assimp\\matrix4x4.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\assimp\\defs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Libraries\\include\\assimp\\defs.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glm\\glm\\gtx\\quaternion.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Libraries\\include\\glm\\glm\\gtx\\quaternion.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glad\\glad.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Libraries\\include\\glad\\glad.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PostProcess.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\PostProcess.cpp",
+              "RelativeDocumentMoniker": "components\\PostProcess.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\PostProcess.cpp",
+              "RelativeToolTip": "components\\PostProcess.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-05-06T18:42:17.283Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Rei.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Rei.cpp",
+              "RelativeDocumentMoniker": "components\\Rei.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Rei.cpp",
+              "RelativeToolTip": "components\\Rei.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Render.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Render.cpp",
+              "RelativeDocumentMoniker": "components\\Render.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Render.cpp",
+              "RelativeToolTip": "components\\Render.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LightMoving.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\LightMoving.cpp",
+              "RelativeDocumentMoniker": "components\\LightMoving.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\LightMoving.cpp",
+              "RelativeToolTip": "components\\LightMoving.cpp",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAwCMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Light.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Light.h",
+              "RelativeDocumentMoniker": "components\\Light.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Light.h",
+              "RelativeToolTip": "components\\Light.h",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAwCEAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Application.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Application.cpp",
+              "RelativeDocumentMoniker": "core\\Application.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Application.cpp",
+              "RelativeToolTip": "core\\Application.cpp",
+              "ViewState": "AgIAADsBAAAAAAAAAAAAwFgBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-20T18:04:48.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LightMoving.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\LightMoving.h",
+              "RelativeDocumentMoniker": "components\\LightMoving.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\LightMoving.h",
+              "RelativeToolTip": "components\\LightMoving.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Light.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Light.cpp",
+              "RelativeDocumentMoniker": "components\\Light.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Light.cpp",
+              "RelativeToolTip": "components\\Light.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EditorCamera.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\EditorCamera.cpp",
+              "RelativeDocumentMoniker": "components\\EditorCamera.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\EditorCamera.cpp",
+              "RelativeToolTip": "components\\EditorCamera.cpp",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAAAHQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-12T19:05:03.852Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "cube.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\cube.h",
+              "RelativeDocumentMoniker": "components\\cube.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\cube.h",
+              "RelativeToolTip": "components\\cube.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.71Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "cube.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\cube.cpp",
+              "RelativeDocumentMoniker": "components\\cube.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\cube.cpp",
+              "RelativeToolTip": "components\\cube.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.704Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Camera.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Camera.h",
+              "RelativeDocumentMoniker": "components\\Camera.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Camera.h",
+              "RelativeToolTip": "components\\Camera.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-27T10:44:11.672Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Camera.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Camera.cpp",
+              "RelativeDocumentMoniker": "components\\Camera.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Camera.cpp",
+              "RelativeToolTip": "components\\Camera.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-27T10:42:27.416Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Skybox.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Skybox.h",
+              "RelativeDocumentMoniker": "scene\\Skybox.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Skybox.h",
+              "RelativeToolTip": "scene\\Skybox.h",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAwDEAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-23T20:20:42.383Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Skybox.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Skybox.cpp",
+              "RelativeDocumentMoniker": "scene\\Skybox.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Skybox.cpp",
+              "RelativeToolTip": "scene\\Skybox.cpp",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAwB0AAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-23T20:26:15.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SceneManager.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\SceneManager.h",
+              "RelativeDocumentMoniker": "scene\\SceneManager.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\SceneManager.h",
+              "RelativeToolTip": "scene\\SceneManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "SceneManager.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\SceneManager.cpp",
+              "RelativeDocumentMoniker": "scene\\SceneManager.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\SceneManager.cpp",
+              "RelativeToolTip": "scene\\SceneManager.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Scene.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Scene.h",
+              "RelativeDocumentMoniker": "scene\\Scene.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Scene.h",
+              "RelativeToolTip": "scene\\Scene.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-11T09:34:40.025Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Scene.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Scene.cpp",
+              "RelativeDocumentMoniker": "scene\\Scene.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\Scene.cpp",
+              "RelativeToolTip": "scene\\Scene.cpp",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAwB8AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-11T09:37:42.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "LightManager.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\LightManager.h",
+              "RelativeDocumentMoniker": "scene\\LightManager.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\LightManager.h",
+              "RelativeToolTip": "scene\\LightManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-30T17:28:08.367Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "LightManager.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\LightManager.cpp",
+              "RelativeDocumentMoniker": "scene\\LightManager.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\LightManager.cpp",
+              "RelativeToolTip": "scene\\LightManager.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-30T17:27:17.913Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AssetManager.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\AssetManager.h",
+              "RelativeDocumentMoniker": "scene\\AssetManager.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\AssetManager.h",
+              "RelativeToolTip": "scene\\AssetManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.62Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "AssetManager.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\AssetManager.cpp",
+              "RelativeDocumentMoniker": "scene\\AssetManager.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\scene\\AssetManager.cpp",
+              "RelativeToolTip": "scene\\AssetManager.cpp",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAwEQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.62Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\runtime\\main.cpp",
+              "RelativeDocumentMoniker": "runtime\\main.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\runtime\\main.cpp",
+              "RelativeToolTip": "runtime\\main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.703Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Texture.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Texture.h",
+              "RelativeDocumentMoniker": "Renderer\\Texture.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Texture.h",
+              "RelativeToolTip": "Renderer\\Texture.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.699Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Texture.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Texture.cpp",
+              "RelativeDocumentMoniker": "Renderer\\Texture.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Texture.cpp",
+              "RelativeToolTip": "Renderer\\Texture.cpp",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAwEgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.699Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Shader.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Shader.h",
+              "RelativeDocumentMoniker": "Renderer\\Shader.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Shader.h",
+              "RelativeToolTip": "Renderer\\Shader.h",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAwC0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.708Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Shader.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Shader.cpp",
+              "RelativeDocumentMoniker": "Renderer\\Shader.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Shader.cpp",
+              "RelativeToolTip": "Renderer\\Shader.cpp",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAAwMQAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.7Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "RenderSystem.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\RenderSystem.h",
+              "RelativeDocumentMoniker": "Renderer\\RenderSystem.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\RenderSystem.h",
+              "RelativeToolTip": "Renderer\\RenderSystem.h",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAwC0AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-19T20:55:29.634Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "RenderSystem.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\RenderSystem.cpp",
+              "RelativeDocumentMoniker": "Renderer\\RenderSystem.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\RenderSystem.cpp",
+              "RelativeToolTip": "Renderer\\RenderSystem.cpp",
+              "ViewState": "AgIAAH0DAAAAAAAAAAAAwJcDAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-03-19T20:56:35.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "RenderContext.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\RenderContext.h",
+              "RelativeDocumentMoniker": "Renderer\\RenderContext.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\RenderContext.h",
+              "RelativeToolTip": "Renderer\\RenderContext.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-03-27T08:23:54.202Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Mesh.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Mesh.h",
+              "RelativeDocumentMoniker": "Renderer\\Mesh.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Mesh.h",
+              "RelativeToolTip": "Renderer\\Mesh.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.708Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Mesh.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Mesh.cpp",
+              "RelativeDocumentMoniker": "Renderer\\Mesh.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Mesh.cpp",
+              "RelativeToolTip": "Renderer\\Mesh.cpp",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAwEAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.699Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Material.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Material.h",
+              "RelativeDocumentMoniker": "Renderer\\Material.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Material.h",
+              "RelativeToolTip": "Renderer\\Material.h",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAwDsAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.71Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Material.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Material.cpp",
+              "RelativeDocumentMoniker": "Renderer\\Material.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Material.cpp",
+              "RelativeToolTip": "Renderer\\Material.cpp",
+              "ViewState": "AgIAAPAAAAAAAAAAAAAAwBABAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "GameObject.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\GameObject.h",
+              "RelativeDocumentMoniker": "Renderer\\GameObject.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\GameObject.h",
+              "RelativeToolTip": "Renderer\\GameObject.h",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAwE0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.701Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "GameObject.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\GameObject.cpp",
+              "RelativeDocumentMoniker": "Renderer\\GameObject.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\GameObject.cpp",
+              "RelativeToolTip": "Renderer\\GameObject.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.7Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "FramebufferManager.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\FramebufferManager.h",
+              "RelativeDocumentMoniker": "Renderer\\FramebufferManager.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\FramebufferManager.h",
+              "RelativeToolTip": "Renderer\\FramebufferManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.617Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "FramebufferManager.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\FramebufferManager.cpp",
+              "RelativeDocumentMoniker": "Renderer\\FramebufferManager.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\FramebufferManager.cpp",
+              "RelativeToolTip": "Renderer\\FramebufferManager.cpp",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAwCUAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Framebuffer.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Framebuffer.h",
+              "RelativeDocumentMoniker": "Renderer\\Framebuffer.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Framebuffer.h",
+              "RelativeToolTip": "Renderer\\Framebuffer.h",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwCkAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Framebuffer.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Framebuffer.cpp",
+              "RelativeDocumentMoniker": "Renderer\\Framebuffer.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Framebuffer.cpp",
+              "RelativeToolTip": "Renderer\\Framebuffer.cpp",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAAwKoAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Cubemap.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Cubemap.h",
+              "RelativeDocumentMoniker": "Renderer\\Cubemap.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Cubemap.h",
+              "RelativeToolTip": "Renderer\\Cubemap.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-21T18:33:23.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Cubemap.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Cubemap.cpp",
+              "RelativeDocumentMoniker": "Renderer\\Cubemap.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Cubemap.cpp",
+              "RelativeToolTip": "Renderer\\Cubemap.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-21T18:38:54.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Buffer.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Buffer.h",
+              "RelativeDocumentMoniker": "Renderer\\Buffer.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Buffer.h",
+              "RelativeToolTip": "Renderer\\Buffer.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-27T11:55:41.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Buffer.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Buffer.cpp",
+              "RelativeDocumentMoniker": "Renderer\\Buffer.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Renderer\\Buffer.cpp",
+              "RelativeToolTip": "Renderer\\Buffer.cpp",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAwDsAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-27T11:59:38.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Editor.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\Editor.h",
+              "RelativeDocumentMoniker": "Editor\\Editor.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\Editor.h",
+              "RelativeToolTip": "Editor\\Editor.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.691Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Editor.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\Editor.cpp",
+              "RelativeDocumentMoniker": "Editor\\Editor.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\Editor.cpp",
+              "RelativeToolTip": "Editor\\Editor.cpp",
+              "ViewState": "AgIAAIkBAAAAAAAAAAAAwKYBAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Window.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Window.h",
+              "RelativeDocumentMoniker": "core\\Window.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Window.h",
+              "RelativeToolTip": "core\\Window.h",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwDUAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Window.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Window.cpp",
+              "RelativeDocumentMoniker": "core\\Window.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Window.cpp",
+              "RelativeToolTip": "core\\Window.cpp",
+              "ViewState": "AgIAAL8AAAAAAAAAAAAAwOMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Application.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Application.h",
+              "RelativeDocumentMoniker": "core\\Application.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\Application.h",
+              "RelativeToolTip": "core\\Application.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "Render.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Render.h",
+              "RelativeDocumentMoniker": "components\\Render.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Render.h",
+              "RelativeToolTip": "components\\Render.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.705Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "PostProcess.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\PostProcess.h",
+              "RelativeDocumentMoniker": "components\\PostProcess.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\PostProcess.h",
+              "RelativeToolTip": "components\\PostProcess.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-06T18:40:44.116Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "AComponent.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\AComponent.h",
+              "RelativeDocumentMoniker": "components\\AComponent.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\AComponent.h",
+              "RelativeToolTip": "components\\AComponent.h",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAwCkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.704Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "AComponent.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\AComponent.cpp",
+              "RelativeDocumentMoniker": "components\\AComponent.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\AComponent.cpp",
+              "RelativeToolTip": "components\\AComponent.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "ParserGLSL.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ParserGLSL.h",
+              "RelativeDocumentMoniker": "APIs\\ParserGLSL.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ParserGLSL.h",
+              "RelativeToolTip": "APIs\\ParserGLSL.h",
+              "ViewState": "AgIAAJYAAAAAAAAAAADwv6kAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-21T18:57:44.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "ParserGLSL.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ParserGLSL.cpp",
+              "RelativeDocumentMoniker": "APIs\\ParserGLSL.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ParserGLSL.cpp",
+              "RelativeToolTip": "APIs\\ParserGLSL.cpp",
+              "ViewState": "AgIAANwCAAAAAAAAAADwv+oCAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-21T19:34:48.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "ComponentSystem.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ComponentSystem.cpp",
+              "RelativeDocumentMoniker": "core\\ComponentSystem.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ComponentSystem.cpp",
+              "RelativeToolTip": "core\\ComponentSystem.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.621Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "ComponentSystem.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ComponentSystem.h",
+              "RelativeDocumentMoniker": "core\\ComponentSystem.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ComponentSystem.h",
+              "RelativeToolTip": "core\\ComponentSystem.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.621Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "DeferredPointLighting.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredPointLighting.glsl",
+              "RelativeDocumentMoniker": "Shaders\\DeferredPointLighting.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredPointLighting.glsl",
+              "RelativeToolTip": "Shaders\\DeferredPointLighting.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-20T18:43:54.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "DeferredLightingFS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredLightingFS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\DeferredLightingFS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredLightingFS.glsl",
+              "RelativeToolTip": "Shaders\\DeferredLightingFS.glsl",
+              "ViewState": "AgIAABkAAAAAAAAAAADwvywAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-16T21:44:13.86Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "DeferredLightingVS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredLightingVS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\DeferredLightingVS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredLightingVS.glsl",
+              "RelativeToolTip": "Shaders\\DeferredLightingVS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-20T18:22:15.957Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "DeferredSpotLighting.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredSpotLighting.glsl",
+              "RelativeDocumentMoniker": "Shaders\\DeferredSpotLighting.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DeferredSpotLighting.glsl",
+              "RelativeToolTip": "Shaders\\DeferredSpotLighting.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-20T19:06:54.352Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "DepthShaderFS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthShaderFS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\DepthShaderFS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthShaderFS.glsl",
+              "RelativeToolTip": "Shaders\\DepthShaderFS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-01T17:37:11.052Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "DepthShaderPointFS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthShaderPointFS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\DepthShaderPointFS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthShaderPointFS.glsl",
+              "RelativeToolTip": "Shaders\\DepthShaderPointFS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-13T17:46:53.01Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "DepthShaderVS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthShaderVS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\DepthShaderVS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthShaderVS.glsl",
+              "RelativeToolTip": "Shaders\\DepthShaderVS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-01T17:35:56.886Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "selectedObjectEditor.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\selectedObjectEditor.glsl",
+              "RelativeDocumentMoniker": "Shaders\\selectedObjectEditor.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\selectedObjectEditor.glsl",
+              "RelativeToolTip": "Shaders\\selectedObjectEditor.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-01-09T10:40:17.62Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "DepthmapFS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthmapFS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\DepthmapFS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\DepthmapFS.glsl",
+              "RelativeToolTip": "Shaders\\DepthmapFS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-02T09:53:26.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "FragmentShader.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FragmentShader.glsl",
+              "RelativeDocumentMoniker": "Shaders\\FragmentShader.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FragmentShader.glsl",
+              "RelativeToolTip": "Shaders\\FragmentShader.glsl",
+              "ViewState": "AgIAAGkAAAAAAAAAAADwv5AAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-25T19:21:22.163Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "ExposureFS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\ExposureFS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\ExposureFS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\ExposureFS.glsl",
+              "RelativeToolTip": "Shaders\\ExposureFS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-09T18:39:23.221Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "FragmentShaderDeferredGeometryTest.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FragmentShaderDeferredGeometryTest.glsl",
+              "RelativeDocumentMoniker": "Shaders\\FragmentShaderDeferredGeometryTest.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FragmentShaderDeferredGeometryTest.glsl",
+              "RelativeToolTip": "Shaders\\FragmentShaderDeferredGeometryTest.glsl",
+              "ViewState": "AgIAAFMAAAAAAAAAAADwv3YAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-17T17:15:10.79Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "Lighting.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\Lighting.glsl",
+              "RelativeDocumentMoniker": "Shaders\\Lighting.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\Lighting.glsl",
+              "RelativeToolTip": "Shaders\\Lighting.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALwAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-26T17:55:48.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "CubemapShader.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\CubemapShader.glsl",
+              "RelativeDocumentMoniker": "Shaders\\CubemapShader.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\CubemapShader.glsl",
+              "RelativeToolTip": "Shaders\\CubemapShader.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-01-27T19:22:03.445Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "ModelLoader.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ModelLoader.h",
+              "RelativeDocumentMoniker": "APIs\\ModelLoader.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ModelLoader.h",
+              "RelativeToolTip": "APIs\\ModelLoader.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.697Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "VertexShader.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\VertexShader.glsl",
+              "RelativeDocumentMoniker": "Shaders\\VertexShader.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\VertexShader.glsl",
+              "RelativeToolTip": "Shaders\\VertexShader.glsl",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-25T19:04:26.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "ExplodingGeometryShader.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\ExplodingGeometryShader.glsl",
+              "RelativeDocumentMoniker": "Shaders\\ExplodingGeometryShader.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\ExplodingGeometryShader.glsl",
+              "RelativeToolTip": "Shaders\\ExplodingGeometryShader.glsl",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-03-15T20:46:38.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "FramebufferFragmentShader.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FramebufferFragmentShader.glsl",
+              "RelativeDocumentMoniker": "Shaders\\FramebufferFragmentShader.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FramebufferFragmentShader.glsl",
+              "RelativeToolTip": "Shaders\\FramebufferFragmentShader.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-01-09T10:40:17.618Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "ToonshaderFS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Assets\\ToonshaderFS.glsl",
+              "RelativeDocumentMoniker": "Assets\\ToonshaderFS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Assets\\ToonshaderFS.glsl",
+              "RelativeToolTip": "Assets\\ToonshaderFS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-21T17:45:55.561Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "Core.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\Core.glsl",
+              "RelativeDocumentMoniker": "Shaders\\Core.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\Core.glsl",
+              "RelativeToolTip": "Shaders\\Core.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-03-11T20:25:23.76Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "BlurFS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\BlurFS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\BlurFS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\BlurFS.glsl",
+              "RelativeToolTip": "Shaders\\BlurFS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-11T18:41:10.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "BloomFS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\BloomFS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\BloomFS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\BloomFS.glsl",
+              "RelativeToolTip": "Shaders\\BloomFS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-11T17:56:28.174Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "AEngineGBufferFS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\AEngineGBufferFS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\AEngineGBufferFS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\AEngineGBufferFS.glsl",
+              "RelativeToolTip": "Shaders\\AEngineGBufferFS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-17T09:45:27.025Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "FramebufferVertexShader.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FramebufferVertexShader.glsl",
+              "RelativeDocumentMoniker": "Shaders\\FramebufferVertexShader.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\FramebufferVertexShader.glsl",
+              "RelativeToolTip": "Shaders\\FramebufferVertexShader.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-01-09T10:40:17.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "SkyboxVertexShader.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\SkyboxVertexShader.glsl",
+              "RelativeDocumentMoniker": "Shaders\\SkyboxVertexShader.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\SkyboxVertexShader.glsl",
+              "RelativeToolTip": "Shaders\\SkyboxVertexShader.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-01-23T21:18:53.34Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "SkyboxFragmentShader.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\SkyboxFragmentShader.glsl",
+              "RelativeDocumentMoniker": "Shaders\\SkyboxFragmentShader.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\SkyboxFragmentShader.glsl",
+              "RelativeToolTip": "Shaders\\SkyboxFragmentShader.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-01-23T21:21:36.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "Shadows.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\Shadows.glsl",
+              "RelativeDocumentMoniker": "Shaders\\Shadows.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\Shadows.glsl",
+              "RelativeToolTip": "Shaders\\Shadows.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-02T15:28:53.098Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "ToonshaderVS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Assets\\ToonshaderVS.glsl",
+              "RelativeDocumentMoniker": "Assets\\ToonshaderVS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Assets\\ToonshaderVS.glsl",
+              "RelativeToolTip": "Assets\\ToonshaderVS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-21T17:38:01.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "ShadowsPointGS.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\ShadowsPointGS.glsl",
+              "RelativeDocumentMoniker": "Shaders\\ShadowsPointGS.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\ShadowsPointGS.glsl",
+              "RelativeToolTip": "Shaders\\ShadowsPointGS.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-13T19:59:35.583Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "VertexSelectedObjectEditor.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\VertexSelectedObjectEditor.glsl",
+              "RelativeDocumentMoniker": "Shaders\\VertexSelectedObjectEditor.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Shaders\\VertexSelectedObjectEditor.glsl",
+              "RelativeToolTip": "Shaders\\VertexSelectedObjectEditor.glsl",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-27T13:52:47.165Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "EditorCamera.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\EditorCamera.h",
+              "RelativeDocumentMoniker": "components\\EditorCamera.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\EditorCamera.h",
+              "RelativeToolTip": "components\\EditorCamera.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-05-06T18:44:14.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "Rei.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Rei.h",
+              "RelativeDocumentMoniker": "components\\Rei.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\components\\Rei.h",
+              "RelativeToolTip": "components\\Rei.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 90,
+              "Title": "ModelLoader.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ModelLoader.cpp",
+              "RelativeDocumentMoniker": "APIs\\ModelLoader.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\APIs\\ModelLoader.cpp",
+              "RelativeToolTip": "APIs\\ModelLoader.cpp",
+              "ViewState": "AgIAAFkAAAAAAAAAAADwv2wAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 91,
+              "Title": "type_vec4.inl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glm\\glm\\detail\\type_vec4.inl",
+              "RelativeDocumentMoniker": "Libraries\\include\\glm\\glm\\detail\\type_vec4.inl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glm\\glm\\detail\\type_vec4.inl",
+              "RelativeToolTip": "Libraries\\include\\glm\\glm\\detail\\type_vec4.inl",
+              "ViewState": "AgIAAJUBAAAAAAAAAAAYwKkBAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-05-01T19:03:09.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 92,
+              "Title": "ErrorManager.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ErrorManager.h",
+              "RelativeDocumentMoniker": "core\\ErrorManager.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ErrorManager.h",
+              "RelativeToolTip": "core\\ErrorManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.708Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 93,
+              "Title": "imgui_demo.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\imGUI\\imgui_demo.cpp",
+              "RelativeDocumentMoniker": "Editor\\imGUI\\imgui_demo.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\imGUI\\imgui_demo.cpp",
+              "RelativeToolTip": "Editor\\imGUI\\imgui_demo.cpp",
+              "ViewState": "AgIAAHQDAAAAAAAAAAAAAHQDAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-04-29T17:15:06.056Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 94,
+              "Title": "imgui_impl_opengl3.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\imGUI\\imgui_impl_opengl3.cpp",
+              "RelativeDocumentMoniker": "Editor\\imGUI\\imgui_impl_opengl3.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Editor\\imGUI\\imgui_impl_opengl3.cpp",
+              "RelativeToolTip": "Editor\\imGUI\\imgui_impl_opengl3.cpp",
+              "ViewState": "AgIAALQAAAAAAAAAAAAAAMoAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.691Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 95,
+              "Title": "ErrorManager.cpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ErrorManager.cpp",
+              "RelativeDocumentMoniker": "core\\ErrorManager.cpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\core\\ErrorManager.cpp",
+              "RelativeToolTip": "core\\ErrorManager.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-01-09T10:40:17.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 96,
+              "Title": "SkyboxFragmentShader.glsl",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\SkyboxFragmentShader.glsl",
+              "RelativeDocumentMoniker": "SkyboxFragmentShader.glsl",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\SkyboxFragmentShader.glsl",
+              "RelativeToolTip": "SkyboxFragmentShader.glsl",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-01-23T21:18:11.423Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 97,
+              "Title": "component_wise.hpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glm\\glm\\gtx\\component_wise.hpp",
+              "RelativeDocumentMoniker": "Libraries\\include\\glm\\glm\\gtx\\component_wise.hpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glm\\glm\\gtx\\component_wise.hpp",
+              "RelativeToolTip": "Libraries\\include\\glm\\glm\\gtx\\component_wise.hpp",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAMwCgAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 98,
+              "Title": "AMath.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\AMath.h",
+              "RelativeDocumentMoniker": "Libraries\\include\\AMath.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\AMath.h",
+              "RelativeToolTip": "Libraries\\include\\AMath.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 99,
+              "Title": "matrix4x4.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\assimp\\matrix4x4.h",
+              "RelativeDocumentMoniker": "Libraries\\include\\assimp\\matrix4x4.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\assimp\\matrix4x4.h",
+              "RelativeToolTip": "Libraries\\include\\assimp\\matrix4x4.h",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAADcAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.694Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 100,
+              "Title": "defs.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\assimp\\defs.h",
+              "RelativeDocumentMoniker": "Libraries\\include\\assimp\\defs.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\assimp\\defs.h",
+              "RelativeToolTip": "Libraries\\include\\assimp\\defs.h",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAADIAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 101,
+              "Title": "quaternion.hpp",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glm\\glm\\gtx\\quaternion.hpp",
+              "RelativeDocumentMoniker": "Libraries\\include\\glm\\glm\\gtx\\quaternion.hpp",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glm\\glm\\gtx\\quaternion.hpp",
+              "RelativeToolTip": "Libraries\\include\\glm\\glm\\gtx\\quaternion.hpp",
+              "ViewState": "AgIAAJcAAAAAAAAAAADwvxcAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.706Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 102,
+              "Title": "glad.h",
+              "DocumentMoniker": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glad\\glad.h",
+              "RelativeDocumentMoniker": "Libraries\\include\\glad\\glad.h",
+              "ToolTip": "C:\\Users\\Stanislav\\Desktop\\AEngine\\Libraries\\include\\glad\\glad.h",
+              "RelativeToolTip": "Libraries\\include\\glad\\glad.h",
+              "ViewState": "AgIAAAQAAAAAAAAAAADwvxoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-09T10:40:17.711Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

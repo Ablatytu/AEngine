@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Renderer">
+      <UniqueIdentifier>{e7f42d6d-7885-4bf9-a17c-4a11b4ff9067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\runtime">
+      <UniqueIdentifier>{11d4f949-25db-4c47-8876-25f17d6e8f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\core">
+      <UniqueIdentifier>{0406c4bc-905d-4c0d-856d-8f258613ee12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\APIs">
+      <UniqueIdentifier>{70359b9a-fdcc-441c-ae68-16b9ec51d070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\components">
+      <UniqueIdentifier>{447df89c-9d06-410d-b588-cf01b781e7f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\scene">
+      <UniqueIdentifier>{e3353d72-9ae0-4123-86d7-e44fed0f9664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Shaders">
+      <UniqueIdentifier>{936272bd-c3c6-4f07-ad7b-48a8ee108775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\ImGUI">
+      <UniqueIdentifier>{4dcf51f6-52ba-4bbf-9563-89c3522207f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Editor">
+      <UniqueIdentifier>{c8071096-d438-4442-aae7-dd5fcccd53ec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="runtime\main.cpp">
+      <Filter>Файлы ресурсов\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Window.cpp">
+      <Filter>Файлы ресурсов\core</Filter>
+    </ClCompile>
+    <ClCompile Include="APIs\glad.c">
+      <Filter>Файлы ресурсов\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Shader.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Mesh.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="components\Render.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\GameObject.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\SceneManager.cpp">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="core\Application.cpp">
+      <Filter>Файлы ресурсов\core</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Texture.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="core\ErrorManager.cpp">
+      <Filter>Файлы ресурсов\core</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Material.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="components\Transform.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\Camera.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\cube.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\EditorCamera.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="APIs\ModelLoader.cpp">
+      <Filter>Файлы ресурсов\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="components\Light.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\LightMoving.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\imGUI\imgui.cpp">
+      <Filter>Файлы ресурсов\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\imGUI\imgui_demo.cpp">
+      <Filter>Файлы ресурсов\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\imGUI\imgui_draw.cpp">
+      <Filter>Файлы ресурсов\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\imGUI\imgui_impl_glfw.cpp">
+      <Filter>Файлы ресурсов\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\imGUI\imgui_impl_opengl3.cpp">
+      <Filter>Файлы ресурсов\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\imGUI\imgui_tables.cpp">
+      <Filter>Файлы ресурсов\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\imGUI\imgui_widgets.cpp">
+      <Filter>Файлы ресурсов\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Editor.cpp">
+      <Filter>Файлы ресурсов\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="components\AComponent.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\Rei.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="core\ComponentSystem.cpp">
+      <Filter>Файлы ресурсов\core</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\AssetManager.cpp">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Framebuffer.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\FramebufferManager.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\Scene.cpp">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Cubemap.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\Skybox.cpp">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="APIs\ParserGLSL.cpp">
+      <Filter>Файлы ресурсов\APIs</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Buffer.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderSystem.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\LightManager.cpp">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\imGUI\ImGuizmo.cpp">
+      <Filter>Файлы ресурсов\ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="components\PostProcess.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\Application.h">
+      <Filter>Файлы ресурсов\core</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Window.h">
+      <Filter>Файлы ресурсов\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\GameObject.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Shader.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Mesh.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="components\AComponent.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Render.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneManager.h">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ErrorManager.h">
+      <Filter>Файлы ресурсов\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Texture.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="APIs\stb_image.h">
+      <Filter>Файлы ресурсов\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Material.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Transform.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Camera.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\cube.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\EditorCamera.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="APIs\ModelLoader.h">
+      <Filter>Файлы ресурсов\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Light.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\LightMoving.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\imGUI\imgui.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\imGUI\imgui_impl_glfw.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\imGUI\imgui_impl_opengl3.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\imGUI\imgui_internal.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\imGUI\imstb_rectpack.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\imGUI\imstb_textedit.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\imGUI\imstb_truetype.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\imGUI\imconfig.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Editor.h">
+      <Filter>Файлы ресурсов\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="components\Rei.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ComponentSystem.h">
+      <Filter>Файлы ресурсов\core</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\AssetManager.h">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Framebuffer.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\FramebufferManager.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Scene.h">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Cubemap.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\Skybox.h">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="APIs\ParserGLSL.h">
+      <Filter>Файлы ресурсов\APIs</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Buffer.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderSystem.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderContext.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\LightManager.h">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\imGUI\ImGuizmo.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="components\PostProcess.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\FragmentShader.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\VertexShader.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\selectedObjectEditor.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\VertexSelectedObjectEditor.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\FramebufferFragmentShader.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\FramebufferVertexShader.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\SkyboxFragmentShader.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\SkyboxVertexShader.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\CubemapShader.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Core.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Lighting.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\ExplodingGeometryShader.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\DepthShaderFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\DepthShaderVS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\DepthmapFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\Shadows.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\DepthShaderPointFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\ShadowsPointGS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Assets\ToonshaderFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Assets\ToonshaderVS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\ExposureFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\BloomFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\BlurFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\DeferredLightingFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\AEngineGBufferFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\FragmentShaderDeferredGeometryTest.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\DeferredLightingVS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\DeferredPointLighting.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\DeferredSpotLighting.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
