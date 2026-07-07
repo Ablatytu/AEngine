@@ -11,6 +11,7 @@ void Light::Awake()
 void Light::OnInspector()
 {
 	RegisterField(intensive);
+	RegisterField(Radius);
 	Range(intensive, 0.0f, 5.0f);
 }
 void Light::OnDestroy()

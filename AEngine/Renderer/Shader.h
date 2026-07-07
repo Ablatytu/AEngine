@@ -10,8 +10,9 @@
 #include <sstream>
 #include "../APIs/ParserGLSL.h"
 #include <optional>
+#include "../core/AEngineAPI.h"
 
-class Shader
+class AENGINE_API Shader
 {
 public:
     Shader(std::string pathShaderFragment, std::string pathVertexShader, std::optional<std::string> pathGeometryShader = std::nullopt);

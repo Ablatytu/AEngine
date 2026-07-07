@@ -6,12 +6,14 @@
 #include "../Renderer/Mesh.h"
 #include "../APIs/ModelLoader.h"
 #include "../Renderer/Cubemap.h"
+#include "../Renderer/HDRTexture.h"
 #include <memory>
 #include <optional>
 
 std::unordered_map<std::string, std::unique_ptr<Model>> models;
 std::unordered_map<std::string, std::unique_ptr<Shader>> shaders;
 std::unordered_map<std::string, std::unique_ptr<Texture>> textures;
+std::unordered_map<std::string, std::unique_ptr<HDRTexture>> HDRtextures;
 std::unordered_map<std::string, std::unique_ptr<Cubemap>> cubemaps;
 
 const std::unordered_map<std::string, std::unique_ptr<Texture>>& AssetManager::GetTextures()
@@ -51,14 +53,14 @@ Shader* AssetManager::LoadShader(const std::string& VertexName, const std::strin
 #endif
 	return returnShader;
 }
-Texture* AssetManager::LoadTexture(const std::string& textureName, bool linear)
+Texture* AssetManager::LoadTexture(const std::string& textureName, bool linear, std::optional<Texture::DataFormat> imageFormat, std::optional<Texture::DataFormat> dataFormat, std::vector<Texture::FilterType> filter1, std::vector<Texture::FilterType> filter2)
 {
 	auto it = textures.find(textureName);
 	if (it != textures.end())
 		return it->second.get();
 	std::unique_ptr<Texture> texture = std::make_unique<Texture>();
 	Texture* returnTexture = texture.get();
-	texture->CreateTexture(textureName.c_str(), linear);
+	texture->LoadTexture(textureName.c_str(), linear, imageFormat, dataFormat, filter1, filter2);
 	textures[textureName] = std::move(texture);
 #ifdef _DEBUG
 	std::cout << textureName << " has been sucñsessfully loaded" << std::endl;
@@ -77,4 +79,19 @@ Cubemap* AssetManager::LoadCubemap(const std::string& path, unsigned int size)
 	std::cout << path << " has been sucñsessfully loaded" << std::endl;
 #endif
 	return returnCubemap;
+}
+
+HDRTexture* AssetManager::LoadHDRTexture(const std::string& textureName)
+{
+	auto it = HDRtextures.find(textureName);
+	if (it != HDRtextures.end())
+		return it->second.get();
+	std::unique_ptr<HDRTexture> texture = std::make_unique<HDRTexture>();
+	HDRTexture* returnTexture = texture.get();
+	texture->LoadTexture(textureName.c_str());
+	HDRtextures[textureName] = std::move(texture);
+#ifdef _DEBUG
+	std::cout << textureName << " has been sucñsessfully loaded" << std::endl;
+#endif
+	return returnTexture;
 }

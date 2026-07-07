@@ -5,6 +5,7 @@
 #include "../Renderer/Cubemap.h"
 #include "AssetManager.h"
 #include "../Renderer/RenderContext.h"
+#include "../Renderer/RenderSystem.h"
 #include "LightManager.h"
 #include "../components/PostProcess.h"
 #include <glm/glm/glm.hpp>
@@ -17,11 +18,13 @@ RenderContext Scene::CollectRenderContext()
 	context.camera = activeCamera;
 	context.fog.enabled = fogSettings.Fog;
 	context.fog.fogColor = fogSettings.FogColor;
-	context.skybox = SkyBox.get();
+	context.skybox = skyBox.get();
 	context.lights = A_LightManager->GetLights();
 	context.renders = renders;
 	context.HDR = HDR;
 	context.postProcess = postProcess;
+	context.irradianceMap = irradianceMap.get();
+	context.prefilterMap = preilterCubemap.get();
 	return context;
 }
 GameObject* Scene::CreateGameObject()
@@ -47,6 +50,27 @@ Scene::Scene()
 	defaultSkybox->ChangeTexture(TypeTexture::bottom, texturebottom);
 	defaultSkybox->ChangeTexture(TypeTexture::front, textureFront);
 	defaultSkybox->ChangeTexture(TypeTexture::back, textureBack);
-	SkyBox = std::make_unique<Skybox>(defaultSkybox);
+	SetSkyBox(defaultSkybox);
+}
+void Scene::SetSkyBox(Cubemap* cubemap)
+{
+	cubemap->CreateMipmap();
+	if (!skyBox)
+		skyBox = std::make_unique<Skybox>(cubemap);
+	else
+		skyBox->ChangeSkyBox(cubemap);
+	std::unique_ptr<Cubemap> irradianceCubeMap = std::make_unique<Cubemap>(32, true);
+	RenderSystem::rs_RenderIrradianceMap(*cubemap, *irradianceCubeMap, 32, 32);
+	std::unique_ptr<Cubemap> prefiltercubemap = std::make_unique<Cubemap>(128, true, true);
+	RenderSystem::rs_RenderPrefilterMap(*cubemap, *prefiltercubemap);
+	irradianceMap = std::move(irradianceCubeMap);
+	preilterCubemap = std::move(prefiltercubemap);
+}
+
+void Scene::SetSkyBox(HDRTexture* texture)
+{
+	Cubemap* environmentcubemap = new Cubemap(512, true);
+	RenderSystem::rs_RenderEnvironmentHDR(*environmentcubemap, *texture, 512, 512);
+	SetSkyBox(environmentcubemap);
 }
 Scene::~Scene() = default;

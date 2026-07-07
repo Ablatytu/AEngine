@@ -6,12 +6,14 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
 #include "../APIs/ParserGLSL.h"
+#include "../core/AEngineAPI.h"
+
 class Shader;
 class Texture;
 class Cubemap;
 
 
-class Material
+class AENGINE_API Material
 {
 public:
 	enum class SurfaceType

@@ -27,26 +27,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -76,6 +76,7 @@
     <LibraryPath>C:\Users\stass\OneDrive\Desktop\AEngine\Libraries\lib;C:\Users\stass\OneDrive\Desktop\AEngine\Libraries\lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>C:\Users\stass\OneDrive\Desktop\AEngine\Libraries\include;$(ExternalIncludePath)</ExternalIncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
+    <OutDir>..\Solution\bin</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>
@@ -83,6 +84,7 @@
     <LibraryPath>C:\Users\Stanislav\Desktop\AEngine\Libraries\lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>C:\Users\Stanislav\Desktop\AEngine\Libraries\include;$(ExternalIncludePath)</ExternalIncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
+    <OutDir>..\Solution\bin</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>
@@ -90,13 +92,15 @@
     <LibraryPath>C:\Users\stass\OneDrive\Desktop\AEngine\Libraries\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
     <ExternalIncludePath>C:\Users\stass\OneDrive\Desktop\AEngine\Libraries\include;$(ExternalIncludePath)</ExternalIncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
+    <OutDir>..\Solution\bin</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>
     </IncludePath>
-    <LibraryPath>C:\Users\Stanislav\Desktop\AEngine\Libraries\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
-    <ExternalIncludePath>C:\Users\Stanislav\Desktop\AEngine\Libraries\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <ExternalIncludePath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include;$(ExternalIncludePath)</ExternalIncludePath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
+    <OutDir>..\bin</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -104,11 +108,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;kernel32.lib;winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.dll;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -119,11 +124,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;kernel32.lib;winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.dll;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,13 +138,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngine\Editor\imGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;unit.lib;user32.lib;gdi32.lib;shell32.lib;kernel32.lib;winmm.lib;assimp-vc143-mtd.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.dll;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,15 +153,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;AENGINE_BUILD_DLL;GLFW_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngine\Editor\imGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;unit.lib;user32.lib;gdi32.lib;shell32.lib;kernel32.lib;winmm.lib;assimp-vc143-mtd.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;user32.lib;
+gdi32.lib
+;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -164,7 +172,6 @@
     <ClCompile Include="APIs\ParserGLSL.cpp" />
     <ClCompile Include="components\AComponent.cpp" />
     <ClCompile Include="components\Camera.cpp" />
-    <ClCompile Include="components\EditorCamera.cpp" />
     <ClCompile Include="components\cube.cpp" />
     <ClCompile Include="components\Light.cpp" />
     <ClCompile Include="components\LightMoving.cpp" />
@@ -176,26 +183,17 @@
     <ClCompile Include="core\ComponentSystem.cpp" />
     <ClCompile Include="core\ErrorManager.cpp" />
     <ClCompile Include="core\Window.cpp" />
-    <ClCompile Include="Editor\Editor.cpp" />
-    <ClCompile Include="Editor\imGUI\imgui.cpp" />
-    <ClCompile Include="Editor\imGUI\ImGuizmo.cpp" />
-    <ClCompile Include="Editor\imGUI\imgui_demo.cpp" />
-    <ClCompile Include="Editor\imGUI\imgui_draw.cpp" />
-    <ClCompile Include="Editor\imGUI\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Editor\imGUI\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Editor\imGUI\imgui_tables.cpp" />
-    <ClCompile Include="Editor\imGUI\imgui_widgets.cpp" />
     <ClCompile Include="Renderer\Buffer.cpp" />
     <ClCompile Include="Renderer\Cubemap.cpp" />
     <ClCompile Include="Renderer\Framebuffer.cpp" />
     <ClCompile Include="Renderer\FramebufferManager.cpp" />
     <ClCompile Include="Renderer\GameObject.cpp" />
+    <ClCompile Include="Renderer\HDRTexture.cpp" />
     <ClCompile Include="Renderer\Material.cpp" />
     <ClCompile Include="Renderer\Mesh.cpp" />
     <ClCompile Include="Renderer\RenderSystem.cpp" />
     <ClCompile Include="Renderer\Shader.cpp" />
     <ClCompile Include="Renderer\Texture.cpp" />
-    <ClCompile Include="runtime\main.cpp" />
     <ClCompile Include="scene\AssetManager.cpp" />
     <ClCompile Include="scene\LightManager.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
@@ -207,7 +205,6 @@
     <ClInclude Include="APIs\ParserGLSL.h" />
     <ClInclude Include="APIs\stb_image.h" />
     <ClInclude Include="components\Camera.h" />
-    <ClInclude Include="components\EditorCamera.h" />
     <ClInclude Include="components\AComponent.h" />
     <ClInclude Include="components\cube.h" />
     <ClInclude Include="components\Light.h" />
@@ -216,25 +213,17 @@
     <ClInclude Include="components\Rei.h" />
     <ClInclude Include="components\Render.h" />
     <ClInclude Include="components\Transform.h" />
+    <ClInclude Include="core\AEngineAPI.h" />
     <ClInclude Include="core\Application.h" />
     <ClInclude Include="core\ComponentSystem.h" />
     <ClInclude Include="core\ErrorManager.h" />
     <ClInclude Include="core\Window.h" />
-    <ClInclude Include="Editor\Editor.h" />
-    <ClInclude Include="Editor\imGUI\imconfig.h" />
-    <ClInclude Include="Editor\imGUI\imgui.h" />
-    <ClInclude Include="Editor\imGUI\ImGuizmo.h" />
-    <ClInclude Include="Editor\imGUI\imgui_impl_glfw.h" />
-    <ClInclude Include="Editor\imGUI\imgui_impl_opengl3.h" />
-    <ClInclude Include="Editor\imGUI\imgui_internal.h" />
-    <ClInclude Include="Editor\imGUI\imstb_rectpack.h" />
-    <ClInclude Include="Editor\imGUI\imstb_textedit.h" />
-    <ClInclude Include="Editor\imGUI\imstb_truetype.h" />
     <ClInclude Include="Renderer\Buffer.h" />
     <ClInclude Include="Renderer\Cubemap.h" />
     <ClInclude Include="Renderer\Framebuffer.h" />
     <ClInclude Include="Renderer\FramebufferManager.h" />
     <ClInclude Include="Renderer\GameObject.h" />
+    <ClInclude Include="Renderer\HDRTexture.h" />
     <ClInclude Include="Renderer\Material.h" />
     <ClInclude Include="Renderer\Mesh.h" />
     <ClInclude Include="Renderer\RenderContext.h" />
@@ -269,12 +258,22 @@
     <None Include="Shaders\FragmentShaderDeferredGeometryTest.glsl" />
     <None Include="Shaders\FramebufferFragmentShader.glsl" />
     <None Include="Shaders\FramebufferVertexShader.glsl" />
+    <None Include="Shaders\HDRToCubemapFS.glsl" />
+    <None Include="Shaders\HDRToCubemapVS.glsl" />
+    <None Include="Shaders\IntegrateBRDFFS.glsl" />
+    <None Include="Shaders\IntegrateBRDFVS.glsl" />
+    <None Include="Shaders\IrradianceShaderFS.glsl" />
     <None Include="Shaders\Lighting.glsl" />
+    <None Include="Shaders\PBRShaderFS.glsl" />
+    <None Include="Shaders\PBRShaderVS.glsl" />
+    <None Include="Shaders\PrefilterHDRMapFS.glsl" />
     <None Include="Shaders\selectedObjectEditor.glsl" />
     <None Include="Shaders\Shadows.glsl" />
     <None Include="Shaders\ShadowsPointGS.glsl" />
     <None Include="Shaders\SkyboxFragmentShader.glsl" />
     <None Include="Shaders\SkyboxVertexShader.glsl" />
+    <None Include="Shaders\SSAOblurFS.glsl" />
+    <None Include="Shaders\SSAOFS.glsl" />
     <None Include="Shaders\VertexSelectedObjectEditor.glsl" />
     <None Include="Shaders\VertexShader.glsl" />
   </ItemGroup>

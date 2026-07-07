@@ -4,7 +4,7 @@
 #include <glm/glm/gtc/type_ptr.hpp>
 #include <vector>
 #include <string>
-
+#include "../core/AEngineAPI.h"
 class Scene;
 class Material;
 class Mesh;
@@ -13,6 +13,9 @@ class RenderContext;
 class Shader;
 class Light;
 class Framebuffer;
+class HDRTexture;
+class Cubemap;
+class Texture;
 
 namespace RenderSystem
 {
@@ -43,10 +46,11 @@ namespace RenderSystem
 		SurfaceType surfacetype = SurfaceType::opaque;
 		RenderQueue renderqueue = RenderQueue::ForwardOpaque;
 	};
-	void rs_Render(RenderContext& context);
-	void rs_Init();
-	void rs_Start();
-	void rs_End();
+	AENGINE_API void rs_Render(RenderContext& context);
+	AENGINE_API void rs_Init();
+	void rs_InitAfterFirstFrame();
+	AENGINE_API void rs_Start();
+	AENGINE_API void rs_End();
 	void rs_CollectBatches(RenderContext& context, std::vector<Batch>& batches);
 	void rs_CreateShadowMap(Light* light);
 	void rs_RenderBatchOpaque(RenderContext& context, std::vector<Batch>& batches);
@@ -54,12 +58,20 @@ namespace RenderSystem
 	void rs_RenderShadowMaps(RenderContext& context, std::vector<Batch>& batches);
 	void rs_CopyDepthBufferFromGBuffer(RenderContext& context, Framebuffer* buffer);
 	void rs_RenderBatchTransparent(RenderContext& context, std::vector<Batch>& batches);
+	void rs_LoadShadowsInShader(RenderContext& context, Shader* shader, unsigned int& slotTextureShadow);
+	void rs_RenderSSAO(RenderContext& context);
 	void rs_RenderMesh(Batch& batch, bool instance, Shader* shader, glm::mat4* modelMatrix = nullptr);
 	void rs_RenderDeferredLighting(RenderContext& context, std::vector<Batch>& batches);
-	void rs_LoadGBufferInShader(RenderContext& context, Shader* shader);
-	void rs_RenderOutline(Render* render, Shader* outlineShader);
+	void rs_LoadGBufferInShader(RenderContext& context, Shader* shader, std::vector<int> buffers);
+	AENGINE_API void rs_RenderOutline(Render* render, Shader* outlineShader);
 	void rs_UploadLighting(RenderContext& context);
 	void rs_UploadCamera(RenderContext& context);
-	void rs_PostProcess(RenderContext& context);
-	void rs_Present(RenderContext& context);
+	AENGINE_API void rs_PostProcess(RenderContext& context);
+	void rs_RenderEnvironmentHDR(Cubemap& cubemap, HDRTexture& hdrTexture, int width, int height);
+	void rs_RenderIrradianceMap(Cubemap& envcubemap, Cubemap& irradianceCubemap, int width, int height);
+	void rs_RenderPrefilterMap(Cubemap& envcubemap, Cubemap& prefilterCubemap);
+	void rs_CreateBRDFTexture();
+	void rs_RenderQuad();
+	void rs_SetEIPMap(RenderContext& context, Shader* shader, unsigned int& slot);
+	AENGINE_API void rs_Present(RenderContext& context);
 };

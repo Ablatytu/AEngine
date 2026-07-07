@@ -33,7 +33,7 @@ void Skybox::RenderSkyBox()
 	skyboxShader->setMat4("proj", SceneManager::Get().GetActiveScene().activeCamera->projection);
 	skyboxShader->setMat4("view", glm::mat4(glm::mat3(SceneManager::Get().GetActiveScene().activeCamera->viewMatrix)));
 	glBindVertexArray(VAO);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->GetTextureID());
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glDepthFunc(GL_LESS);
 	glDepthMask(true);

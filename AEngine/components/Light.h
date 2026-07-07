@@ -4,10 +4,12 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
 #include <memory>
+#include "../core/AEngineAPI.h"
+
 class Transform;
 class Material;
 class Texture;
-class Light : public AComponent
+class AENGINE_API Light : public AComponent
 {
 	RegisterComponent(Light)
 public:
@@ -33,15 +35,9 @@ public:
 	glm::vec3 lightColor = glm::vec3(1.0f);
 	int ShadowMapResolution = 1024;
 	float intensive = 1.0f;
-	float constant = 1.0f;
-	float linear = 0.35f;
-	float quadratic = 0.44f;
 	float cutOff = glm::cos(glm::radians(12.5f));
 	float outerCutOff = glm::cos(glm::radians(17.5f));
-	float lightMax = std::fmaxf(std::fmaxf(lightColor.r, lightColor.g), lightColor.b);
-	float radius =
-		(-linear + std::sqrtf(linear * linear - 4 * quadratic * (constant - (256.0 / 5.0) * lightMax)))
-		/ (2 * quadratic);
+	float Radius = 5.0f;
 	glm::mat4 lightSpaceMatrix = glm::mat4(1.0);
 	void Awake() override;
 	void OnInspector() override;

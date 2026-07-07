@@ -4,8 +4,8 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <string>
-
-class Model
+#include "../core/AEngineAPI.h"
+class AENGINE_API  Model
 {
 public:
     std::vector<Mesh> meshes;

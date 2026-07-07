@@ -1,6 +1,5 @@
 #include "Window.h"
 #include "ErrorManager.h"
-#include "../Editor/Editor.h"
 #include "../Renderer/FramebufferManager.h"
 #include "../Renderer/Buffer.h"
 
@@ -51,7 +50,7 @@ void Input::mouseButtonCallback(GLFWwindow* window, int key, int action, int mod
 		mouseButtons[key] = true;
 		mouseButtonsUp[key] = false;
 	}
-	else if(action == GLFW_RELEASE)
+	else if (action == GLFW_RELEASE)
 	{
 		mouseButtonsUp[key] = true;
 		mouseButtons[key] = false;
@@ -74,13 +73,14 @@ void Input::keyButton_callback(GLFWwindow* window, int key, int scancode, int ac
 		keys[key] = false;
 	}
 }
-void Window_size(GLFWwindow * window, int width, int height)
+void Window_size(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 	Window::GlobalWindow->ChangeScreenSize((float)width, (float)height);
 }
 Window::Window()
 {
+	std::cout << "CREATING WINDOW\n";
 	GlobalWindow = this;
 	Input::xpos = screenX / 2;
 	Input::ypos = screenY / 2;
@@ -95,9 +95,9 @@ Window::Window()
 #endif
 	//glfwWindowHint(GLFW_SAMPLES, 4);
 	const char* nameWindow = "AEngine";
-	#ifdef _DEBUG
-		nameWindow = "AEngine(Debug)";
-	#endif
+#ifdef _DEBUG
+	nameWindow = "AEngine(Debug)";
+#endif
 
 	window = glfwCreateWindow(screenX, screenY, nameWindow, NULL, NULL);
 	if (window == NULL)
@@ -123,13 +123,6 @@ Window::Window()
 	glfwSetScrollCallback(window, Input::scroll_callback);
 	glfwSetKeyCallback(window, Input::keyButton_callback);
 	glfwSetMouseButtonCallback(window, Input::mouseButtonCallback);
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	ImGui_ImplOpenGL3_Init();
-	editorGUI = new EditorGUI();
 }
 void Window::ChangeScreenSize(float width, float height)
 {
@@ -208,7 +201,7 @@ bool Input::GetKeyUp(int button)
 }
 bool Input::GetKey(int button)
 {
-	if(button >= 0 && button < 512)
+	if (button >= 0 && button < 512)
 		return keys[button];
 	return false;
 }

@@ -36,6 +36,11 @@ static void GetFormat(Framebuffer::TypeFrameBuffer typeFrameBuffer, GLenum& inte
 		dataFormat = GL_RGBA;
 		dataType = GL_FLOAT;
 		break;
+	case Framebuffer::TypeFrameBuffer::RED:
+		internalFormat = GL_RED;
+		dataFormat = GL_RED;
+		dataType = GL_FLOAT;
+		break;
 	default:
 		internalFormat = GL_RGB;
 		dataFormat = GL_RGB;
@@ -63,8 +68,8 @@ Framebuffer::Framebuffer(Shader* shader, const std::vector<TypeFrameBuffer>& typ
 	this->typeFrameBuffer = typeFrameBuffer;
 	this->resizable = resizable;
 	this->typeFilter = typeFilter;
-	unsigned int _width = width == -1 ? Application::Get().window.screenX : width;
-	unsigned int _height = height == -1 ? Application::Get().window.screenY : height;
+	unsigned int _width = width == -1 ? Application::Get().GetWindow().screenX : width;
+	unsigned int _height = height == -1 ? Application::Get().GetWindow().screenY : height;
 	GLenum internalFormat;
 	GLenum dataFormat;
 	GLenum dataType;
@@ -104,22 +109,11 @@ Framebuffer::Framebuffer(Shader* shader, const std::vector<TypeFrameBuffer>& typ
 
 	screenShader = shader;
 
-	unsigned int quadVBO;
-	glGenVertexArrays(1, &quadVAO);
-	glGenBuffers(1, &quadVBO);
-	glBindVertexArray(quadVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 	if (shader)
 	{
 		screenShader->Update();
 		screenShader->setInt("ScreenTexture", 0);
 	}
-	glBindVertexArray(0);
 }
 Shader* Framebuffer::GetShader()
 {
@@ -133,13 +127,6 @@ void Framebuffer::UseShader()
 {
 	if(screenShader)
 		screenShader->Update();
-}
-void Framebuffer::Drawframebuffer()
-{
-	glBindVertexArray(quadVAO);
-	glDisable(GL_DEPTH_TEST);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	glEnable(GL_DEPTH_TEST);
 }
 void Framebuffer::Bind()
 {

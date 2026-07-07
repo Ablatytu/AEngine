@@ -6,10 +6,11 @@
 #include <glm/glm/gtc/matrix_inverse.hpp>
 #include <memory>
 #include "../components/Transform.h"
+#include "../core/AEngineAPI.h"
 
 class Material;
 
-class Camera : public AComponent
+class AENGINE_API Camera : public AComponent
 {
 	RegisterComponent(Camera)
 public:

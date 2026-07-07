@@ -7,6 +7,7 @@
 #include <memory>
 #include <glad/glad.h>
 #include <map>
+#include "../core/AEngineAPI.h"
 namespace GLSLParserMath
 {
 	struct Vector3
@@ -96,7 +97,7 @@ namespace PGLinfos
 		UniformGPU location;
 	};
 }
-class PropertiesWithUniforms
+class AENGINE_API PropertiesWithUniforms
 {
 public:
 	std::vector<std::string> propertiesNames;

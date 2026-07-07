@@ -5,7 +5,9 @@
 #include <glm/glm/gtc/type_ptr.hpp>
 #include <glm/glm/gtx/quaternion.hpp>
 #include "AComponent.h"
-class Transform : public AComponent
+#include "../core/AEngineAPI.h"
+
+class AENGINE_API Transform : public AComponent
 {
 	RegisterComponent(Transform)
 public:
@@ -23,5 +25,5 @@ private:
 class Quaternion
 {
 public:
-	static glm::quat Euler(float x, float y, float z);
+	AENGINE_API static glm::quat Euler(float x, float y, float z);
 };

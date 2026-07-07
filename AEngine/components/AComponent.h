@@ -5,8 +5,10 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
 #include "../core/ComponentSystem.h"
+#include "../core/AEngineAPI.h"
 
 #define RegisterComponent(className) \
+public:                                                              \
 const char* GetComponentName() const override \
 { \
 	return #className; \
@@ -34,7 +36,7 @@ struct FieldInfo
 	float minValue = 0.0f;
 	float maxValue = 0.0f;
 };
-class AComponent
+class AENGINE_API AComponent
 {
 public:
 	GameObject* gameObject;

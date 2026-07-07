@@ -11,6 +11,7 @@ void PostProcess::OnInspector()
 	RegisterField(adaptationSpeed);
 	RegisterField(AutoExposure);
 	RegisterField(Bloom);
+	RegisterField(SSAO);
 
 	Range(exposure, 0.01f, 50.0f);
 	Range(minExposure, 0.01f, 50.0f);

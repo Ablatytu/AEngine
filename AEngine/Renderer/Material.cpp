@@ -177,11 +177,13 @@ void Material::UpdateMaterial()
 			}
 			break;
 		case GL_SAMPLER_2D:
+			if (field.first == "shadowMap")
+				continue;
 			shader->setInt(field.first, slotTexture);
 			if (textures.find(field.first) != textures.end())
 			{
 				glActiveTexture(GL_TEXTURE0 + slotTexture);
-				glBindTexture(GL_TEXTURE_2D, textures.find(field.first)->second->texture);
+				glBindTexture(GL_TEXTURE_2D, textures.find(field.first)->second->GetTexturePixels());
 			}
 			else
 			{
@@ -191,38 +193,40 @@ void Material::UpdateMaterial()
 					if (*it == "blue")
 					{
 						glActiveTexture(GL_TEXTURE0 + slotTexture);
-						glBindTexture(GL_TEXTURE_2D, GetBlueTexture()->texture);
+						glBindTexture(GL_TEXTURE_2D, GetBlueTexture()->GetTexturePixels());
 					}
 					else if (*it == "normal")
 					{
 						glActiveTexture(GL_TEXTURE0 + slotTexture);
-						glBindTexture(GL_TEXTURE_2D, GetNormalTexture()->texture);
+						glBindTexture(GL_TEXTURE_2D, GetNormalTexture()->GetTexturePixels());
 					}
 					else if (*it == "black")
 					{
 						glActiveTexture(GL_TEXTURE0 + slotTexture);
-						glBindTexture(GL_TEXTURE_2D, GetBlackTexture()->texture);
+						glBindTexture(GL_TEXTURE_2D, GetBlackTexture()->GetTexturePixels());
 					}
 					else
 					{
 						glActiveTexture(GL_TEXTURE0 + slotTexture);
-						glBindTexture(GL_TEXTURE_2D, GetWhiteTexture()->texture);
+						glBindTexture(GL_TEXTURE_2D, GetWhiteTexture()->GetTexturePixels());
 					}
 				}
 				else
 				{
 					glActiveTexture(GL_TEXTURE0 + slotTexture);
-					glBindTexture(GL_TEXTURE_2D, GetWhiteTexture()->texture);
+					glBindTexture(GL_TEXTURE_2D, GetWhiteTexture()->GetTexturePixels());
 				}
 			}
 			slotTexture++;
 			break;
 		case GL_SAMPLER_CUBE:
+			if (field.first == "shadowMapCube" || field.first == "irradianceMap")
+				continue;
 			shader->setInt(field.first, slotTexture);
 			if (cubemaps.find(field.first) != cubemaps.end())
 			{
 				glActiveTexture(GL_TEXTURE0 + slotTexture);
-				glBindTexture(GL_TEXTURE_CUBE_MAP, cubemaps.find(field.first)->second->textureID);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, cubemaps.find(field.first)->second->GetTextureID());
 			}
 			slotTexture++;
 			break;

@@ -1,7 +1,8 @@
 #pragma once
 #include "AComponent.h"
+#include "../core/AEngineAPI.h"
 
-class Rei : public AComponent
+class AENGINE_API Rei : public AComponent
 {
 	RegisterComponent(Rei)
 public:

@@ -1,8 +1,9 @@
 #pragma once
 #include "Transform.h"
 #include <memory>
+#include "../core/AEngineAPI.h"
 
-class Cube : public AComponent
+class AENGINE_API Cube : public AComponent
 {
 	RegisterComponent(Cube)
 public:

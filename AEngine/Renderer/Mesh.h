@@ -6,6 +6,7 @@
 #include <glm/glm/gtc/type_ptr.hpp>
 #include <string> 
 #include "Material.h"
+#include "../core/AEngineAPI.h"
 
 struct Vertex {
     glm::vec3 Position;
@@ -15,7 +16,7 @@ struct Vertex {
     glm::vec3 Bitangent = glm::vec3(0.0);
 };
 
-class Mesh
+class AENGINE_API Mesh
 {
 public:
     std::vector<Vertex>       vertices;

@@ -1,10 +1,11 @@
 #pragma once
 #include "AComponent.h"
 #include <memory>
+#include "../core/AEngineAPI.h"
 
 class Transform;
 
-class LightMoving : public AComponent
+class AENGINE_API LightMoving : public AComponent
 {
 	RegisterComponent(LightMoving)
 	public:

@@ -4,6 +4,7 @@
 #include <memory>
 #include "../Renderer/Material.h"
 #include "Transform.h"
+#include "../core/AEngineAPI.h"
 
 class Mesh;
 class Shader;
@@ -13,7 +14,7 @@ enum RenderLayer
 	defaultRender = 0,
 	stencilTest = 1
 };
-class Render : public AComponent
+class AENGINE_API Render : public AComponent
 {
 	RegisterComponent(Render)
 public:

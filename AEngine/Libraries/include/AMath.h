@@ -32,3 +32,7 @@ inline float Vector3_Distance(glm::vec3 point1, glm::vec3(point2))
 {
     return sqrt(pow(point2.x - point1.x, 2) + pow(point2.y - point1.y, 2) + pow(point2.z - point1.z, 2));
 }
+inline float lerp(float a, float b, float f)
+{
+    return a + f * (b - a);
+}

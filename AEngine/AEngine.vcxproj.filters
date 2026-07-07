@@ -5,19 +5,12 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Файлы заголовков">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Файлы ресурсов">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Файлы ресурсов\Renderer">
       <UniqueIdentifier>{e7f42d6d-7885-4bf9-a17c-4a11b4ff9067}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы ресурсов\runtime">
-      <UniqueIdentifier>{11d4f949-25db-4c47-8876-25f17d6e8f08}</UniqueIdentifier>
     </Filter>
     <Filter Include="Файлы ресурсов\core">
       <UniqueIdentifier>{0406c4bc-905d-4c0d-856d-8f258613ee12}</UniqueIdentifier>
@@ -34,17 +27,8 @@
     <Filter Include="Файлы ресурсов\Shaders">
       <UniqueIdentifier>{936272bd-c3c6-4f07-ad7b-48a8ee108775}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы ресурсов\ImGUI">
-      <UniqueIdentifier>{4dcf51f6-52ba-4bbf-9563-89c3522207f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы ресурсов\Editor">
-      <UniqueIdentifier>{c8071096-d438-4442-aae7-dd5fcccd53ec}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="runtime\main.cpp">
-      <Filter>Файлы ресурсов\runtime</Filter>
-    </ClCompile>
     <ClCompile Include="core\Window.cpp">
       <Filter>Файлы ресурсов\core</Filter>
     </ClCompile>
@@ -87,9 +71,6 @@
     <ClCompile Include="components\cube.cpp">
       <Filter>Файлы ресурсов\components</Filter>
     </ClCompile>
-    <ClCompile Include="components\EditorCamera.cpp">
-      <Filter>Файлы ресурсов\components</Filter>
-    </ClCompile>
     <ClCompile Include="APIs\ModelLoader.cpp">
       <Filter>Файлы ресурсов\APIs</Filter>
     </ClCompile>
@@ -98,30 +79,6 @@
     </ClCompile>
     <ClCompile Include="components\LightMoving.cpp">
       <Filter>Файлы ресурсов\components</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\imGUI\imgui.cpp">
-      <Filter>Файлы ресурсов\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\imGUI\imgui_demo.cpp">
-      <Filter>Файлы ресурсов\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\imGUI\imgui_draw.cpp">
-      <Filter>Файлы ресурсов\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\imGUI\imgui_impl_glfw.cpp">
-      <Filter>Файлы ресурсов\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\imGUI\imgui_impl_opengl3.cpp">
-      <Filter>Файлы ресурсов\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\imGUI\imgui_tables.cpp">
-      <Filter>Файлы ресурсов\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\imGUI\imgui_widgets.cpp">
-      <Filter>Файлы ресурсов\ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Editor\Editor.cpp">
-      <Filter>Файлы ресурсов\Editor</Filter>
     </ClCompile>
     <ClCompile Include="components\AComponent.cpp">
       <Filter>Файлы ресурсов\components</Filter>
@@ -162,11 +119,11 @@
     <ClCompile Include="scene\LightManager.cpp">
       <Filter>Файлы ресурсов\scene</Filter>
     </ClCompile>
-    <ClCompile Include="Editor\imGUI\ImGuizmo.cpp">
-      <Filter>Файлы ресурсов\ImGUI</Filter>
-    </ClCompile>
     <ClCompile Include="components\PostProcess.cpp">
       <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\HDRTexture.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +172,6 @@
     <ClInclude Include="components\cube.h">
       <Filter>Файлы ресурсов\components</Filter>
     </ClInclude>
-    <ClInclude Include="components\EditorCamera.h">
-      <Filter>Файлы ресурсов\components</Filter>
-    </ClInclude>
     <ClInclude Include="APIs\ModelLoader.h">
       <Filter>Файлы ресурсов\APIs</Filter>
     </ClInclude>
@@ -226,33 +180,6 @@
     </ClInclude>
     <ClInclude Include="components\LightMoving.h">
       <Filter>Файлы ресурсов\components</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\imGUI\imgui.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\imGUI\imgui_impl_glfw.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\imGUI\imgui_impl_opengl3.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\imGUI\imgui_internal.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\imGUI\imstb_rectpack.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\imGUI\imstb_textedit.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\imGUI\imstb_truetype.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\imGUI\imconfig.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Editor\Editor.h">
-      <Filter>Файлы ресурсов\Editor</Filter>
     </ClInclude>
     <ClInclude Include="components\Rei.h">
       <Filter>Файлы ресурсов\components</Filter>
@@ -293,11 +220,14 @@
     <ClInclude Include="scene\LightManager.h">
       <Filter>Файлы ресурсов\scene</Filter>
     </ClInclude>
-    <ClInclude Include="Editor\imGUI\ImGuizmo.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="components\PostProcess.h">
       <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\HDRTexture.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="core\AEngineAPI.h">
+      <Filter>Файлы ресурсов\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -386,6 +316,36 @@
       <Filter>Файлы ресурсов\Shaders</Filter>
     </None>
     <None Include="Shaders\DeferredSpotLighting.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\SSAOFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\SSAOblurFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\PBRShaderFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\PBRShaderVS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\HDRToCubemapFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\HDRToCubemapVS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\IrradianceShaderFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\PrefilterHDRMapFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\IntegrateBRDFFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="Shaders\IntegrateBRDFVS.glsl">
       <Filter>Файлы ресурсов\Shaders</Filter>
     </None>
   </ItemGroup>

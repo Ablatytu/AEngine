@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <string>
 #include "../scene/Scene.h"
+#include "../core/AEngineAPI.h"
 class GameObject
 {
 public:
@@ -46,7 +47,7 @@ public:
 	{
 		components.erase(std::remove(components.begin(), components.end(), component), components.end());
 	}
-	void RemoveComponent(AComponent* component)
+	AENGINE_API void RemoveComponent(AComponent* component)
 	{
 		for (int i = 0; i < components.size();)
 		{
@@ -71,7 +72,7 @@ public:
 			}
 		}
 	}
-	GameObject()
+	AENGINE_API GameObject()
 	{
 		AddComponent<Transform>();
 	}

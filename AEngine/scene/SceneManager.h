@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include "../core/AEngineAPI.h"
 
 class Scene;
 class GameObject;
@@ -10,13 +11,13 @@ class GameObject;
 class SceneManager
 {
 public:
-	static SceneManager& Get();
-	Scene& GetActiveScene();
-	void LoadScene(int count);
-	void CreateScene();
-	GameObject* CreateGameObject();
+	AENGINE_API static SceneManager& Get();
+	AENGINE_API Scene& GetActiveScene();
+	AENGINE_API void LoadScene(int count);
+	AENGINE_API void CreateScene();
+	AENGINE_API GameObject* CreateGameObject();
 
-	~SceneManager();
+	AENGINE_API ~SceneManager();
 
 private:
 

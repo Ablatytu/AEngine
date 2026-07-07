@@ -12,7 +12,8 @@ public:
         HDR,
         R16F,
         RGBA16F,
-        RGBA
+        RGBA,
+        RED
     };
     enum class TypeFilter
     {
@@ -21,7 +22,6 @@ public:
     };
     Framebuffer(Shader* shader, const std::vector<TypeFrameBuffer>& typeFrameBuffer = {TypeFrameBuffer::LDR}, bool resizable = true, int width = -1, int height = -1, const std::vector<TypeFilter>& typeFilter = {TypeFilter::Liner});
     void UseShader();
-    void Drawframebuffer();
     void Bind();
     void UnBind();
     void Resize(int width, int height);
@@ -30,17 +30,7 @@ public:
     unsigned int GetColorBuffer(unsigned int MCBNumber);
     Shader* GetShader();
 private:
-    float quadVertices[24] = {
-        -1.0f,  1.0f,  0.0f, 1.0f,
-        -1.0f, -1.0f,  0.0f, 0.0f,
-         1.0f, -1.0f,  1.0f, 0.0f,
-
-        -1.0f,  1.0f,  0.0f, 1.0f,
-         1.0f, -1.0f,  1.0f, 0.0f,
-         1.0f,  1.0f,  1.0f, 1.0f
-    };
     unsigned int framebuffer;
-    unsigned int quadVAO;
     std::vector<unsigned int> ColorBuffer;
     std::vector<TypeFilter> typeFilter = { TypeFilter::Liner };
     std::vector<TypeFrameBuffer> typeFrameBuffer = {TypeFrameBuffer::LDR};

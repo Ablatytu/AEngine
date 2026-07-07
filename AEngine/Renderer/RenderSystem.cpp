@@ -8,6 +8,8 @@
 #include "../scene/Skybox.h"
 #include "../components/Camera.h"
 #include "../APIs/ModelLoader.h"
+#include "HDRTexture.h"
+#include "Cubemap.h"
 #include "GameObject.h"
 #include "Buffer.h"
 #include "../Renderer/RenderContext.h"
@@ -22,6 +24,7 @@
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
+#include <random>
 
 #define MAXPOINTLIGHTS 192
 #define MAXSPOTLIGHTS 128
@@ -48,12 +51,23 @@ namespace RenderSystem
 	Framebuffer* bloomPing = nullptr;
 	Framebuffer* bloomPong = nullptr;
 	Framebuffer* GBuffer = nullptr;
+	Framebuffer* SSAO = nullptr;
+	Framebuffer* SSAOblur = nullptr;
+	Shader* EnviromentHDRShader = nullptr;
+	Shader* irradianceShader = nullptr;
 	Shader* LightingGBuffer = nullptr;
 	Shader* PointLightDeferred = nullptr;
 	Shader* SpotLightDeferred = nullptr;
+	Shader* prefilterShader = nullptr;
+	Shader* BRDFLUTShader = nullptr;
 	Framebuffer* finalBloom = nullptr;
+	std::vector<glm::vec3> ssaoKernel;
+	std::unique_ptr<Texture> SSAONoise = nullptr;
+	std::unique_ptr<Texture> BRDFLUTTexture = nullptr;
 	Mesh deferredLowPolySphere;
 	Mesh deferredCone;
+	Mesh Cube;
+	std::unique_ptr<Texture> whiteTexture = nullptr;
 	bool exposurePing = false;
 
 	void rs_CollectBatches(RenderContext& context, std::vector<Batch>& batches)
@@ -320,6 +334,44 @@ namespace RenderSystem
 		glViewport(0, 0, context.window->screenX, context.window->screenY);
 		UBOBuffer::ChangeInfoBuffer("LightMatrices", 64, &lightMatrixCamera, 0);
 	}
+	void rs_RenderQuad()
+	{
+		static unsigned int quadVAO = 0;
+		static unsigned int quadVBO = 0;
+
+		if (quadVAO == 0)
+		{
+			float quadVertices[24] = {
+				 -1.0f,  1.0f,  0.0f, 1.0f,
+				 -1.0f, -1.0f,  0.0f, 0.0f,
+				  1.0f, -1.0f,  1.0f, 0.0f,
+
+				 -1.0f,  1.0f,  0.0f, 1.0f,
+				  1.0f, -1.0f,  1.0f, 0.0f,
+				  1.0f,  1.0f,  1.0f, 1.0f
+			};
+
+			glGenVertexArrays(1, &quadVAO);
+			glGenBuffers(1, &quadVBO);
+
+			glBindVertexArray(quadVAO);
+
+			glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), quadVertices ,GL_STATIC_DRAW);
+
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+
+			glBindVertexArray(0);
+		}
+		glBindVertexArray(quadVAO);
+		glDisable(GL_DEPTH_TEST);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glEnable(GL_DEPTH_TEST);
+		glBindVertexArray(0);
+	}
 	void rs_RenderOutline(Render* render, Shader* outlineShader)
 	{
 		glEnable(GL_STENCIL_TEST);
@@ -376,26 +428,9 @@ namespace RenderSystem
 			if (batch.renderqueue != RenderQueue::ForwardOpaque) continue;
 			batch.material->GetShader()->Update();
 			batch.material->UpdateMaterial();
-			unsigned int slotTextureShadow = batch.material->GetLastTextureSlot();
-			for (auto light : context.lights)
-			{
-				if (!light->shadow)
-					continue;
-				if (light->typeLight == Light::Type::Directional)
-				{
-					glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
-					glBindTexture(GL_TEXTURE_2D, light->shadowMap.ID);
-					batch.material->GetShader()->setInt("shadowMap", slotTextureShadow);
-					slotTextureShadow += 1;
-				}
-				else if (light->typeLight == Light::Type::Point)
-				{
-					glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
-					glBindTexture(GL_TEXTURE_CUBE_MAP, light->shadowMap.ID);
-					batch.material->GetShader()->setInt("shadowMapCube", slotTextureShadow);
-					slotTextureShadow += 1;
-				}
-			}
+			unsigned int slots = batch.material->GetLastTextureSlot();
+			rs_SetEIPMap(context, batch.material->GetShader(), slots);
+			rs_LoadShadowsInShader(context, batch.material->GetShader(), slots);
 			if (auto instancing = batch.material->GetValue<bool>("GPUInstancing"))
 			{
 				if (*instancing)
@@ -451,26 +486,9 @@ namespace RenderSystem
 
 			b.material->GetShader()->Update();
 			b.material->UpdateMaterial();
-			unsigned int slotTextureShadow = b.material->GetLastTextureSlot();
-			for (auto light : context.lights)
-			{
-				if (!light->shadow)
-					continue;
-				if (light->typeLight == Light::Type::Directional)
-				{
-					glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
-					glBindTexture(GL_TEXTURE_2D, light->shadowMap.ID);
-					b.material->GetShader()->setInt("shadowMap", slotTextureShadow);
-					slotTextureShadow += 1;
-				}
-				else if (light->typeLight == Light::Type::Point)
-				{
-					glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
-					glBindTexture(GL_TEXTURE_CUBE_MAP, light->shadowMap.ID);
-					b.material->GetShader()->setInt("shadowMapCube", slotTextureShadow);
-					slotTextureShadow += 1;
-				}
-			}
+			unsigned int slots = b.material->GetLastTextureSlot();
+			rs_SetEIPMap(context, b.material->GetShader(), slots);
+			rs_LoadShadowsInShader(context, b.material->GetShader(), slots);
 			rs_RenderMesh(b, false, b.material->GetShader(), &b.model[batch.index]);
 		}
 		glDisable(GL_BLEND);
@@ -479,6 +497,7 @@ namespace RenderSystem
 	{
 		GBuffer->Bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		glViewport(0, 0, context.window->screenX, context.window->screenY);
 		for (auto& batch : batches)
 		{
 			if (batch.surfacetype == SurfaceType::transparent) continue;
@@ -505,17 +524,8 @@ namespace RenderSystem
 		}
 		GBuffer->UnBind();
 	}
-	void rs_LoadGBufferInShader(RenderContext& context, Shader* shader)
+	void rs_LoadShadowsInShader(RenderContext& context, Shader* shader, unsigned int& slotTextureShadow)
 	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, GBuffer->GetColorBuffer(0));
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, GBuffer->GetColorBuffer(1));
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, GBuffer->GetColorBuffer(2));
-		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, GBuffer->GetColorBuffer(3));
-		unsigned int slotTextureShadow = 4;
 		for (auto light : context.lights)
 		{
 			if (!light->shadow)
@@ -535,10 +545,59 @@ namespace RenderSystem
 				slotTextureShadow += 1;
 			}
 		}
-		shader->setInt("gPosition", 0);
-		shader->setInt("gNormal", 1);
-		shader->setInt("gAlbedo", 2);
-		shader->setInt("gMaterial", 3);
+		if (context.postProcess && context.postProcess->SSAO && context.postProcess->camera == context.camera)
+		{
+			glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
+			glBindTexture(GL_TEXTURE_2D, SSAOblur->GetColorBuffer(0));
+			shader->setInt("SSAO", slotTextureShadow);
+		}
+		else
+		{
+			glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
+			glBindTexture(GL_TEXTURE_2D, whiteTexture->GetTexturePixels());
+			shader->setInt("SSAO", slotTextureShadow);
+		}
+	}
+	void rs_LoadGBufferInShader(RenderContext& context, Shader* shader, std::vector<int> buffers)
+	{
+		for (unsigned int i = 0; i < buffers.size(); i++)
+		{
+			switch (i)
+			{
+			case 0:
+				if (buffers[0] == 1)
+				{
+					glActiveTexture(GL_TEXTURE0);
+					glBindTexture(GL_TEXTURE_2D, GBuffer->GetColorBuffer(0));
+					shader->setInt("gPosition", 0);
+				}
+				break;
+			case 1:
+				if (buffers[1] == 1)
+				{
+					glActiveTexture(GL_TEXTURE1);
+					glBindTexture(GL_TEXTURE_2D, GBuffer->GetColorBuffer(1));
+					shader->setInt("gNormal", 1);
+				}
+				break;
+			case 2:
+				if (buffers[2] == 1)
+				{
+					glActiveTexture(GL_TEXTURE2);
+					glBindTexture(GL_TEXTURE_2D, GBuffer->GetColorBuffer(2));
+					shader->setInt("gAlbedo", 2);
+				}
+				break;
+			case 3:
+				if (buffers[3] == 1)
+				{
+					glActiveTexture(GL_TEXTURE3);
+					glBindTexture(GL_TEXTURE_2D, GBuffer->GetColorBuffer(3));
+					shader->setInt("gMaterial", 3);
+				}
+				break;
+			}
+		}
 	}
 	void rs_RenderDeferredLighting(RenderContext& context, std::vector<Batch>& batches)
 	{
@@ -556,13 +615,13 @@ namespace RenderSystem
 				if (PointlightsMatrices.size() >= MAXPOINTLIGHTS) continue;
 				glm::mat4 model = glm::mat4(1.0f);
 				model = glm::translate(model, light->transform->position);
-				model = glm::scale(model, glm::vec3(light->radius));
+				model = glm::scale(model, glm::vec3(light->Radius));
 				PointlightsMatrices.push_back(model);
 			}
 			else if (light->typeLight == Light::Type::Spot)
 			{
 				if (SpotlightsMatrices.size() >= MAXSPOTLIGHTS) continue;
-				float range = light->radius;
+				float range = light->Radius;
 				float angle = acos(light->outerCutOff);
 				float coneRadius = tan(angle) * range;
 
@@ -584,19 +643,24 @@ namespace RenderSystem
 		glDisable(GL_DEPTH_TEST);
 
 		LightingGBuffer->Update();
-		rs_LoadGBufferInShader(context, LightingGBuffer);
-		GBuffer->Drawframebuffer();
+		rs_LoadGBufferInShader(context, LightingGBuffer, {1, 1, 1, 1});
+		unsigned int slots = 4;
+		rs_SetEIPMap(context, LightingGBuffer, slots);
+		rs_LoadShadowsInShader(context, LightingGBuffer, slots);
+		rs_RenderQuad();
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_FRONT);
 		PointLightDeferred->Update();
 		PointLightDeferred->setVec2("screenSize", context.window->screenX, context.window->screenY);
-		rs_LoadGBufferInShader(context, PointLightDeferred);
+		rs_LoadGBufferInShader(context, PointLightDeferred, { 1, 1, 1, 1 });
+		slots = 4;
+		rs_LoadShadowsInShader(context, PointLightDeferred, slots);
 		if(!PointlightsMatrices.empty())
 			deferredLowPolySphere.DrawInstance(PointlightsMatrices.size(), PointlightsMatrices.data());
 		SpotLightDeferred->Update();
 		SpotLightDeferred->setVec2("screenSize", context.window->screenX, context.window->screenY);
-		rs_LoadGBufferInShader(context, SpotLightDeferred);
+		rs_LoadGBufferInShader(context, SpotLightDeferred, { 1, 1, 1, 1 });
 		if (!SpotlightsMatrices.empty())
 			deferredCone.DrawInstance(SpotlightsMatrices.size(), SpotlightsMatrices.data());
 		glDepthMask(GL_TRUE);
@@ -656,13 +720,10 @@ namespace RenderSystem
 
 			glm::vec3 lightColor;
 
-			float constant;
-			float linear;
-			float quadratic;
 			float far_plane;
 			float castShadow;
 			float Radius;
-			float pad3[3];
+			float pad3[2];
 		};
 		struct SpotLight
 		{
@@ -674,9 +735,7 @@ namespace RenderSystem
 			float pad1[3];
 			glm::vec4 lightColor;
 			float outerCutOff;
-			float constant;
-			float linear;
-			float quadratic;
+			float pad2[3];
 		};
 		struct Fog
 		{
@@ -733,12 +792,9 @@ namespace RenderSystem
 				pointLight.PointLights[point].intensive = light->intensive;
 				pointLight.PointLights[point].lightColor = light->lightColor;
 				pointLight.PointLights[point].position = light->transform->position;
-				pointLight.PointLights[point].constant = light->constant;
-				pointLight.PointLights[point].linear = light->linear;
-				pointLight.PointLights[point].quadratic = light->quadratic;
 				pointLight.PointLights[point].far_plane = light->shadowMap.far_plane;
 				pointLight.PointLights[point].castShadow = light->shadow ? 1.0f : 0.0f;
-				pointLight.PointLights[point].Radius = light->radius;
+				pointLight.PointLights[point].Radius = light->Radius;
 				point++;
 				break;
 			case Light::Type::Spot:
@@ -747,9 +803,6 @@ namespace RenderSystem
 				spotLight.SpotLights[spot].intensive = light->intensive;
 				spotLight.SpotLights[spot].lightColor = glm::vec4(light->lightColor, 1.0);
 				spotLight.SpotLights[spot].position = glm::vec4(light->transform->position, 1.0);
-				spotLight.SpotLights[spot].constant = light->constant;
-				spotLight.SpotLights[spot].linear = light->linear;
-				spotLight.SpotLights[spot].quadratic = light->quadratic;
 				spotLight.SpotLights[spot].cutOff = light->cutOff;
 				spotLight.SpotLights[spot].outerCutOff = light->outerCutOff;
 				spot++;
@@ -787,6 +840,53 @@ namespace RenderSystem
 		SpotLightDeferred = AssetManager::LoadShader("Shaders/DeferredLightingVS.glsl", "Shaders/DeferredSpotLighting.glsl");
 		deferredCone = AssetManager::LoadModel("Assets/Models/Cone.obj")->meshes[0];
 		deferredLowPolySphere = AssetManager::LoadModel("Assets/Models/SphereLowPoly.obj")->meshes[0];
+		SSAO = FramebufferManager::Get().Add("SSAOFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/SSAOFS.glsl", { Framebuffer::TypeFrameBuffer::RED }, true, -1, -1, { Framebuffer::TypeFilter::Nearest });
+		SSAOblur = FramebufferManager::Get().Add("SSAOblurFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/SSAOblurFS.glsl", { Framebuffer::TypeFrameBuffer::RED }, true, -1, -1, { Framebuffer::TypeFilter::Nearest });
+		EnviromentHDRShader = AssetManager::LoadShader("Shaders/HDRToCubemapVS.glsl", "Shaders/HDRToCubemapFS.glsl");
+		irradianceShader = AssetManager::LoadShader("Shaders/HDRToCubemapVS.glsl", "Shaders/IrradianceShaderFS.glsl");
+		prefilterShader = AssetManager::LoadShader("Shaders/HDRToCubemapVS.glsl", "Shaders/PrefilterHDRMapFS.glsl");
+		BRDFLUTShader = AssetManager::LoadShader("Shaders/IntegrateBRDFVS.glsl", "Shaders/IntegrateBRDFFS.glsl");
+		Cube = AssetManager::LoadModel("Assets/Models/Cube.obj")->meshes[0];
+		whiteTexture = std::make_unique<Texture>();
+		whiteTexture->CreateColorTexture("white");
+		SSAO->GetShader()->Update();
+		SSAO->GetShader()->setInt("gPosition", 0);
+		SSAO->GetShader()->setInt("gNormal", 1);
+		SSAO->GetShader()->setInt("texNoise", 2);
+		std::uniform_real_distribution<float> randomFloats(0.0, 1.0);
+		std::default_random_engine generator;
+		for (unsigned int i = 0; i < 64; ++i)
+		{
+			glm::vec3 sample(randomFloats(generator) * 2.0 - 1.0, randomFloats(generator) * 2.0 - 1.0, randomFloats(generator));
+			sample = glm::normalize(sample);
+			sample *= randomFloats(generator);
+			float scale = (float)i / 64.0;
+			scale = lerp(0.1f, 1.0f, scale * scale);
+			sample *= scale;
+			ssaoKernel.push_back(sample);
+		}
+		std::vector<glm::vec3> ssaoNoise;
+		for (unsigned int i = 0; i < 16; i++)
+		{
+			glm::vec3 noise(randomFloats(generator) * 2.0 - 1.0, randomFloats(generator) * 2.0 - 1.0, 0.0f);
+			ssaoNoise.push_back(noise);
+		}
+		SSAONoise = std::make_unique<Texture>();
+		SSAONoise->CreateTexture(4, 4, Texture::DataFormat::RGBA16F, Texture::DataFormat::RGB, Texture::FilterType::NEAREST, Texture::FilterType::REPEAT, ssaoNoise.data());
+
+		BRDFLUTTexture = std::make_unique<Texture>();
+		std::vector<float> emptyBRDF(512 * 512 * 2, 0.0f);
+		BRDFLUTTexture->CreateTexture(512, 512, Texture::DataFormat::RG16F, Texture::DataFormat::RG, Texture::FilterType::LINEAR, Texture::FilterType::CLAMP_TO_EDGE, emptyBRDF.data());
+		std::cout << "Complited" << std::endl;
+	}
+	void rs_InitAfterFirstFrame()
+	{
+		static bool firstFrame = false;
+		if (!firstFrame)
+		{
+			rs_CreateBRDFTexture();
+			firstFrame = true;
+		}
 	}
 	void rs_Start()
 	{
@@ -798,9 +898,34 @@ namespace RenderSystem
 	{
 		sceneHDR->UnBind();
 	}
+	void rs_RenderSSAO(RenderContext& context)
+	{
+		if (context.postProcess && context.postProcess->SSAO && context.camera == context.postProcess->camera)
+		{
+			SSAO->Bind();
+			glClear(GL_COLOR_BUFFER_BIT);
+			SSAO->GetShader()->Update();
+			rs_LoadGBufferInShader(context, SSAO->GetShader(), { 1, 1 });
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_2D, SSAONoise->GetTexturePixels());
+			for (unsigned int i = 0; i < 64; ++i)
+				SSAO->GetShader()->setVec3("samples[" + std::to_string(i) + "]", ssaoKernel[i]);
+			SSAO->GetShader()->setVec2("screenSize", glm::vec2(context.window->screenX, context.window->screenY));
+			rs_RenderQuad();
+			SSAO->UnBind();
+			SSAOblur->Bind();
+			SSAOblur->GetShader()->Update();
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, SSAO->GetColorBuffer(0));
+			SSAOblur->GetShader()->setInt("SSAO", 0);
+			rs_RenderQuad();
+			SSAOblur->UnBind();
+		}
+	}
 	void rs_PostProcess(RenderContext& context)
 	{
-		if (context.postProcess && context.postProcess->AutoExposure && context.postProcess->camera == context.camera)
+		if (!context.postProcess) return;
+		if (context.postProcess->AutoExposure && context.postProcess->camera == context.camera)
 		{
 
 			Framebuffer* oldFrameBuffer = exposurePing ? exposureA : exposureB;
@@ -831,13 +956,13 @@ namespace RenderSystem
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, oldFrameBuffer->GetColorBuffer(0));
 
-			currectFrameBuffer->Drawframebuffer();
+			rs_RenderQuad();
 			currectFrameBuffer->UnBind();
 
 			glViewport(0, 0, context.window->screenX, context.window->screenY);
 			exposurePing = !exposurePing;
 		}
-		if (context.postProcess && context.postProcess->Bloom && context.postProcess->camera == context.camera)
+		if (context.postProcess->Bloom && context.postProcess->camera == context.camera)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, sceneHDR->GetColorBuffer(0));
@@ -850,7 +975,7 @@ namespace RenderSystem
 			bloomShader->Update();
 			bloomShader->setInt("SceneTexture", 0);
 
-			bloom->Drawframebuffer();
+			rs_RenderQuad();
 			bloom->UnBind();
 
 			bool horizontalBlurForBloom = true;
@@ -870,7 +995,7 @@ namespace RenderSystem
 				finalBloom->Bind();
 				blurShader->setInt("horizontal", horizontalBlurForBloom);
 				glBindTexture(GL_TEXTURE_2D, first_iterationBlurForBloom ? bloom->GetColorBuffer(0) : horizontalBlurForBloom ? bloomPong->GetColorBuffer(0) : bloomPing->GetColorBuffer(0));
-				finalBloom->Drawframebuffer();
+				rs_RenderQuad();
 				horizontalBlurForBloom = !horizontalBlurForBloom;
 				if (first_iterationBlurForBloom)
 					first_iterationBlurForBloom = false;
@@ -913,7 +1038,168 @@ namespace RenderSystem
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, finalBloom->GetColorBuffer(0));
 		}
-		sceneHDR->Drawframebuffer();
+		rs_RenderQuad();
+	}
+	void rs_RenderEnvironmentHDR(Cubemap& cubemap, HDRTexture& hdrTexture, int width, int height)
+	{
+		glm::mat4 captureProjection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
+		glm::mat4 captureViews[] =
+		{
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  1.0f,  0.0f), glm::vec3(0.0f,  0.0f,  1.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f,  0.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  0.0f,  1.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  0.0f, -1.0f), glm::vec3(0.0f, -1.0f,  0.0f))
+		};
+		unsigned int captureFBO, captureRBO;
+		glGenFramebuffers(1, &captureFBO);
+		glGenRenderbuffers(1, &captureRBO);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, width, height);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
+
+		EnviromentHDRShader->Update();
+		EnviromentHDRShader->setInt("equirectangularMap", 0);
+		EnviromentHDRShader->setMat4("projection", captureProjection);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, hdrTexture.GetTexturePixels());
+		glViewport(0, 0, width, height);
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		for (unsigned int i = 0; i < 6; ++i)
+		{
+			EnviromentHDRShader->setMat4("view", captureViews[i]);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, cubemap.GetTextureID(), 0);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			Cube.Draw();
+		}
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glDeleteFramebuffers(1, &captureFBO);
+		glDeleteRenderbuffers(1, &captureRBO);
+	}
+	void rs_RenderIrradianceMap(Cubemap& envcubemap, Cubemap& irradianceCubemap, int width, int height)
+	{
+		glm::mat4 captureProjection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
+		glm::mat4 captureViews[] =
+		{
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  1.0f,  0.0f), glm::vec3(0.0f,  0.0f,  1.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f,  0.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  0.0f,  1.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  0.0f, -1.0f), glm::vec3(0.0f, -1.0f,  0.0f))
+		};
+		unsigned int captureFBO, captureRBO;
+		glGenFramebuffers(1, &captureFBO);
+		glGenRenderbuffers(1, &captureRBO);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, width, height);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, captureRBO);
+
+		irradianceShader->Update();
+		irradianceShader->setInt("environmentMap", 0);
+		irradianceShader->setMat4("projection", captureProjection);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, envcubemap.GetTextureID());
+		glViewport(0, 0, width, height);
+		for (unsigned int i = 0; i < 6; ++i)
+		{
+			irradianceShader->setMat4("view", captureViews[i]);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, irradianceCubemap.GetTextureID(), 0);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			Cube.Draw();
+		}
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glDeleteFramebuffers(1, &captureFBO);
+		glDeleteRenderbuffers(1, &captureRBO);
+	}
+	void rs_RenderPrefilterMap(Cubemap& envcubemap, Cubemap& prefilterCubemap)
+	{
+		glm::mat4 captureProjection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
+		glm::mat4 captureViews[] =
+		{
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  1.0f,  0.0f), glm::vec3(0.0f,  0.0f,  1.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f,  0.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  0.0f,  1.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+		   glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f,  0.0f, -1.0f), glm::vec3(0.0f, -1.0f,  0.0f))
+		};
+		unsigned int captureFBO, captureRBO;
+		glGenFramebuffers(1, &captureFBO);
+		glGenRenderbuffers(1, &captureRBO);
+
+		prefilterShader->Update();
+		prefilterShader->setInt("environmentMap", 0);
+		prefilterShader->setMat4("projection", captureProjection);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, envcubemap.GetTextureID());
+
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		unsigned int maxMipLevels = 5;
+		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+		for (unsigned int mip = 0; mip < maxMipLevels; ++mip)
+		{
+			unsigned int mipWidth = 128 * std::pow(0.5, mip);
+			unsigned int mipHeight = 128 * std::pow(0.5, mip);
+			glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+			glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, mipWidth, mipHeight);
+			glViewport(0, 0, mipWidth, mipHeight);
+
+			float roughness = (float)mip / (float)(maxMipLevels - 1);
+			prefilterShader->setFloat("roughness", roughness);
+			for (unsigned int i = 0; i < 6; ++i)
+			{
+				prefilterShader->setMat4("view", captureViews[i]);
+				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, prefilterCubemap.GetTextureID(), mip);
+
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				Cube.Draw();
+			}
+		}
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glDeleteFramebuffers(1, &captureFBO);
+		glDeleteRenderbuffers(1, &captureRBO);
+		glDisable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+	}
+	void rs_CreateBRDFTexture()
+	{
+		unsigned int captureFBO, captureRBO;
+		glGenFramebuffers(1, &captureFBO);
+		glGenRenderbuffers(1, &captureRBO);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, captureFBO);
+		glBindRenderbuffer(GL_RENDERBUFFER, captureRBO);
+
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 512, 512);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, BRDFLUTTexture->GetTexturePixels(), 0);
+		glViewport(0, 0, 512, 512);
+		BRDFLUTShader->Update();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		rs_RenderQuad();
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glDeleteFramebuffers(1, &captureFBO);
+		glDeleteRenderbuffers(1, &captureRBO);
+	}
+	void rs_SetEIPMap(RenderContext& context, Shader* shader, unsigned int& slot)
+	{
+		shader->setInt("irradianceMap", slot);
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, context.irradianceMap->GetTextureID());
+		slot += 1;
+		shader->setInt("prefilterMap", slot);
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, context.prefilterMap->GetTextureID());
+		slot += 1;
+		shader->setInt("brdfLUT", slot);
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_2D, BRDFLUTTexture->GetTexturePixels());
+		slot += 1;
 	}
 	void rs_Render(RenderContext& context)
 	{
@@ -924,6 +1210,7 @@ namespace RenderSystem
 		rs_UploadLighting(context);
 		UBOBuffer::UpdateAll();
 		rs_RenderDeferredGeometry(context, batches);
+		rs_RenderSSAO(context);
 		sceneHDR->Bind();
 		rs_RenderDeferredLighting(context, batches);
 		rs_CopyDepthBufferFromGBuffer(context, sceneHDR);

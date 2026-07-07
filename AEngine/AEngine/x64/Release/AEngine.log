@@ -1,50 +1,8 @@
-﻿  Application.cpp
-C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(11,1): warning C4010: однострочный комментарий содержит знак объединения строк
-  (компиляция исходного файла "core/Application.cpp")
-  
-C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(12,1): warning C4010: однострочный комментарий содержит знак объединения строк
-  (компиляция исходного файла "core/Application.cpp")
-  
-C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(13,1): warning C4010: однострочный комментарий содержит знак объединения строк
-  (компиляция исходного файла "core/Application.cpp")
-  
-C:\Users\Stanislav\Desktop\AEngine\core\ComponentSystem.h(14,1): warning C4010: однострочный комментарий содержит знак объединения строк
-  (компиляция исходного файла "core/Application.cpp")
-  
-C:\Users\Stanislav\Desktop\AEngine\components\Light.h(43,41): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "core/Application.cpp")
-  
-C:\Users\Stanislav\Desktop\AEngine\Libraries\include\AMath.h(33,16): warning C4244: return: преобразование "double" в "float", возможна потеря данных
-  (компиляция исходного файла "core/Application.cpp")
-  
-C:\Users\Stanislav\Desktop\AEngine\core\Application.cpp(147,19): warning C4244: аргумент: преобразование "double" в "unsigned int", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngine\core\Application.cpp(161,15): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngine\core\Application.cpp(163,18): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
-LINK : warning LNK4098: библиотека по умолчанию "MSVCRTD" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
+﻿C:\Program Files\Microsoft Visual Studio\18\Insiders\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(537,5): warning MSB8004: каталог Output заканчивается не косой чертой.  Этот экземпляр сборки добавит косую черту, поскольку она необходима для правильного определения каталога Output.
+     Создается библиотека ..\bin\AEngine.lib и объект ..\bin\AEngine.exp
   Создание кода
-  1 of 7217 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  0 of 5627 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    64 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
-glfw3.lib(input.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(input.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(context.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(context.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(init.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(init.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(window.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(window.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(monitor.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(monitor.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(win32_window.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_window.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(win32_time.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_time.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(win32_thread.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_thread.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(platform.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(platform.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(vulkan.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(vulkan.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(win32_init.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_init.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(win32_monitor.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_monitor.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(wgl_context.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(wgl_context.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(egl_context.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(egl_context.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(osmesa_context.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(osmesa_context.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(null_init.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(null_init.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(win32_module.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_module.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(win32_joystick.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(win32_joystick.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(null_monitor.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(null_monitor.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(null_window.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(null_window.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-glfw3.lib(null_joystick.obj) : warning LNK4099: "glfw3.pdb" PDB не найден с "glfw3.lib(null_joystick.obj)" или на "C:\Users\Stanislav\Desktop\AEngine\x64\Release\glfw3.pdb"; компоновка объекта выполняется как при отсутствии отладочных данных
-  AEngine.vcxproj -> C:\Users\Stanislav\Desktop\AEngine\x64\Release\AEngine.exe
+  AEngine.vcxproj -> C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\AEngine.dll
