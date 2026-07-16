@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
-
+#include "../core/AEngineAPI.h"
 class Shader;
 
-class Framebuffer
+class AENGINE_API Framebuffer
 {
 public:
     enum class TypeFrameBuffer
@@ -24,12 +24,15 @@ public:
     void UseShader();
     void Bind();
     void UnBind();
-    void Resize(int width, int height);
+    void Resize(int _width, int _height);
+    int GetWidth();
+    int GetHeight();
     void ChangeShader(Shader* shader);
     unsigned int GetFBO();
     unsigned int GetColorBuffer(unsigned int MCBNumber);
     Shader* GetShader();
 private:
+    int width = 0, height = 0;
     unsigned int framebuffer;
     std::vector<unsigned int> ColorBuffer;
     std::vector<TypeFilter> typeFilter = { TypeFilter::Liner };

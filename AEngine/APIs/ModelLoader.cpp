@@ -37,7 +37,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 
     for (unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
-        Vertex vertex;
+        Vertex vertex{};
 
         glm::vec3 vector;
         vector.x = mesh->mVertices[i].x;

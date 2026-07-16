@@ -7,6 +7,12 @@ void Transform::UpdateMatrices()
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), this->scale);
 	matrixModel = pos * rot * scale;
 }
+void Transform::OnInspector()
+{
+	RegisterField(position);
+	RegisterField(rotation);
+	RegisterField(scale);
+}
 glm::mat4 Transform::GetModelMatrix()
 {
 	return matrixModel;

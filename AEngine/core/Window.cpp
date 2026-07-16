@@ -12,6 +12,10 @@ double Input::ypos = 0.0;
 float Input::lastX = 0.0;
 float Input::lastY = 0.0f;
 float Input::scrollYOffset = 0.0f;
+float Input::viewportX = 0.0f;
+float Input::viewportY = 0.0f;
+float Input::viewportWidth = 0.0f;
+float Input::viewportHeight = 0.0f;
 static bool keysDown[512];
 static bool keysUp[512];
 static bool keys[512];
@@ -23,6 +27,19 @@ float Time::deltaTime = 0.0f;
 void Input::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	scrollYOffset = yoffset;
+}
+void Input::SetViewport(float x, float y, float width, float height)
+{
+	viewportX = x; viewportY = y;
+	viewportWidth = std::max(1.0f, width); viewportHeight = std::max(1.0f, height);
+}
+float Input::GetMouseX()
+{
+	return xpos - viewportX;
+}
+float Input::GetMouseY()
+{
+	return ypos - viewportY;
 }
 void Input::mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
@@ -128,8 +145,6 @@ void Window::ChangeScreenSize(float width, float height)
 {
 	screenX = width;
 	screenY = height;
-	for (Framebuffer* framebuffer : FramebufferManager::Get().GetFramebuffers())
-		framebuffer->Resize(width, height);
 }
 float Input::GetAxis(const char* axis)
 {

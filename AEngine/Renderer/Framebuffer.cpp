@@ -70,6 +70,8 @@ Framebuffer::Framebuffer(Shader* shader, const std::vector<TypeFrameBuffer>& typ
 	this->typeFilter = typeFilter;
 	unsigned int _width = width == -1 ? Application::Get().GetWindow().screenX : width;
 	unsigned int _height = height == -1 ? Application::Get().GetWindow().screenY : height;
+	this->width = _width;
+	this->height = _height;
 	GLenum internalFormat;
 	GLenum dataFormat;
 	GLenum dataType;
@@ -147,10 +149,21 @@ unsigned int Framebuffer::GetFBO()
 {
 	return framebuffer;
 }
-void Framebuffer::Resize(int width, int height)
+int Framebuffer::GetWidth()
 {
-	if ((width <= 0 || height <= 0) || !resizable)
+	return width;
+}
+int Framebuffer::GetHeight()
+{
+	return height;
+}
+void Framebuffer::Resize(int _width, int _height)
+{
+	if ((_width <= 0 || _height <= 0) || !resizable)
 		return;
+	if (width == _width && height == _height)
+		return;
+	width = _width, height = _height;
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 	GLenum internalFormat;
 	GLenum dataFormat;

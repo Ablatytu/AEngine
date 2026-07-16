@@ -16,6 +16,7 @@ public:
 	glm::vec3 scale = glm::vec3(1.0f);
 	glm::mat4 GetModelMatrix();
 	void UpdateMatrices();
+	void OnInspector() override;
 	glm::vec3 forward();
 	glm::vec3 right();
 	glm::vec3 up();

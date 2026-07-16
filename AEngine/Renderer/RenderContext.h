@@ -28,7 +28,7 @@ public:
 	FogSettings fog{};
 	std::vector<Light*> lights;
 	Skybox* skybox = nullptr;
-	Window* window;
+	int width, height = 0;
 	Render* selectedObject = nullptr;
 	PostProcess* postProcess;
 	Cubemap* irradianceMap;

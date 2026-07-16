@@ -21,6 +21,9 @@
 #include "../AEngine/APIs/ParserGLSL.h"
 #include "../AEngine/Renderer/Cubemap.h"
 #include "../AEngine/Renderer/RenderSystem.h"
+#include "../AEngine/Renderer/FramebufferManager.h"
+#include "../AEngine/Renderer/Framebuffer.h"
+#include "imgui_internal.h"
 #include <ImGuizmo.h>
 
 Transform* transform;
@@ -38,6 +41,97 @@ void EditorGUI::RenderOutline(Render* mesh)
 	}
 	RenderSystem::rs_RenderOutline(selectedObject.selectedObjectRender, OutlineShader);
 }
+void EditorGUI::EDITOR_INIT()
+{
+	sceneHDR = FramebufferManager::Get().Add("defaultFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
+	viewport = FramebufferManager::Get().Add("ViewportFramebuffer", "__NULL__", "__NULL__", { Framebuffer::TypeFrameBuffer::HDR }, true);
+	ImGuiIO& io = ImGui::GetIO();
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+}
+void EditorGUI::RenderViewport()
+{
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
+	ImGui::Begin("Viewport");
+	auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
+	auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+	auto viewportOffset = ImGui::GetWindowPos();
+	viewportBounds[0][0] = viewportMinRegion.x + viewportOffset.x;
+	viewportBounds[0][1] = viewportMinRegion.y + viewportOffset.y;
+
+	viewportBounds[1][0] = viewportMaxRegion.x + viewportOffset.x;
+	viewportBounds[1][1] = viewportMaxRegion.y + viewportOffset.y;
+
+	float sizeviewportWidth = viewportBounds[1][0] - viewportBounds[0][0];
+	float sizeviewportHeight = viewportBounds[1][1] - viewportBounds[0][1];
+	sizeviewport[0] = std::max(1, (int)sizeviewportWidth);
+	sizeviewport[1] = std::max(1, (int)sizeviewportHeight);
+	viewportHovered = ImGui::IsWindowHovered();
+	ImGui::Image((ImTextureID)(uintptr_t)viewport->GetColorBuffer(0), ImVec2(sizeviewportWidth, sizeviewportHeight), ImVec2(0, 1), ImVec2(1, 0)	);
+	ImGuizmo::BeginFrame();
+	ImGuizmo::SetOrthographic(false);
+	ImGuizmo::SetDrawlist();
+	ImGuizmo::SetRect(viewportBounds[0][0], viewportBounds[0][1], sizeviewportWidth, sizeviewportHeight);
+	RenderGizmo();
+	ImGui::End();
+	ImGui::PopStyleVar();
+}
+void EditorGUI::BeginDockspace()
+{
+	static bool dockspaceOpen = true;
+
+	ImGuiViewport* viewport = ImGui::GetMainViewport();
+
+	ImGui::SetNextWindowPos(viewport->Pos);
+	ImGui::SetNextWindowSize(viewport->Size);
+	ImGui::SetNextWindowViewport(viewport->ID);
+
+	ImGuiWindowFlags windowFlags =
+		ImGuiWindowFlags_MenuBar |
+		ImGuiWindowFlags_NoDocking |
+		ImGuiWindowFlags_NoTitleBar |
+		ImGuiWindowFlags_NoCollapse |
+		ImGuiWindowFlags_NoResize |
+		ImGuiWindowFlags_NoMove |
+		ImGuiWindowFlags_NoBringToFrontOnFocus |
+		ImGuiWindowFlags_NoNavFocus;
+
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+
+	ImGui::Begin("MainDockspaceWindow", &dockspaceOpen, windowFlags);
+
+	ImGui::PopStyleVar(2);
+
+	ImGuiID dockspaceID = ImGui::GetID("MainDockspace");
+
+	ImGui::DockSpace(dockspaceID, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
+
+	static bool firstTime = true;
+	if (firstTime)
+	{
+		firstTime = false;
+
+		ImGui::DockBuilderRemoveNode(dockspaceID);
+		ImGui::DockBuilderAddNode(dockspaceID, ImGuiDockNodeFlags_DockSpace);
+		ImGui::DockBuilderSetNodeSize(dockspaceID, viewport->Size);
+
+		ImGuiID dockMain = dockspaceID;
+		ImGuiID dockLeft = 0;
+		ImGuiID dockRight = 0;
+
+		ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Left, 0.22f, &dockLeft, &dockMain);
+		ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Right, 0.28f, &dockRight, &dockMain);
+
+		ImGui::DockBuilderDockWindow("Hierarchy", dockLeft);
+		ImGui::DockBuilderDockWindow("Inspector", dockRight);
+		ImGui::DockBuilderDockWindow("Viewport", dockMain);
+
+		ImGui::DockBuilderFinish(dockspaceID);
+	}
+
+	ImGui::End();
+}
 void EditorGUI::RenderGizmo()
 {
 	if (!selectedObject.selectedObject)
@@ -48,11 +142,6 @@ void EditorGUI::RenderGizmo()
 
 	glm::mat4 modelMatrix = transform->GetModelMatrix();
 
-	ImGuizmo::BeginFrame();
-	ImGuizmo::SetOrthographic(false);
-	ImGuizmo::SetDrawlist(ImGui::GetBackgroundDrawList());
-
-	ImGuiIO& io = ImGui::GetIO();
 	static ImGuizmo::OPERATION operation = ImGuizmo::TRANSLATE;
 	if (ImGui::IsKeyPressed(ImGuiKey_W))
 		operation = ImGuizmo::TRANSLATE;
@@ -62,7 +151,6 @@ void EditorGUI::RenderGizmo()
 
 	if (ImGui::IsKeyPressed(ImGuiKey_R))
 		operation = ImGuizmo::SCALE;
-	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 	ImGuizmo::Manipulate(glm::value_ptr(view), glm::value_ptr(proj), operation, ImGuizmo::WORLD, glm::value_ptr(modelMatrix));
 	if (ImGuizmo::IsUsing())
 	{
@@ -108,20 +196,8 @@ void EditorGUI::RenderEditorParts()
 }
 void EditorGUI::ShowHierarchyWindow()
 {
-	ImGuiIO& io = ImGui::GetIO();
 
-	float hierarchyWidth = 300.0f;
-	float hierarchyHeight = io.DisplaySize.y;
-	float hierarchyX = 0.0f;
-	float hierarchyY = 0.0f;
-
-	ImGui::SetNextWindowPos(ImVec2(hierarchyX, hierarchyY));
-	ImGui::SetNextWindowSize(ImVec2(hierarchyWidth, hierarchyHeight));
-
-	ImGuiWindowFlags flags = ImGuiWindowFlags_NoMove |
-		ImGuiWindowFlags_NoResize |
-		ImGuiWindowFlags_NoCollapse;
-	ImGui::Begin("Hierarchy", nullptr, flags);
+	ImGui::Begin("Hierarchy");
 	for (std::unique_ptr<GameObject>& object : SceneManager::Get().GetActiveScene().objects)
 	{
 		bool selected = (selectedObject.selectedObject == object.get());
@@ -135,66 +211,22 @@ void EditorGUI::ShowHierarchyWindow()
 }
 void EditorGUI::ShowInspectorWindow()
 {
-	ImGuiIO& io = ImGui::GetIO();
 
-	float inspectorWidth = 300.0f;
-	float inspectorHeight = io.DisplaySize.y;
-	float inspectorX = io.DisplaySize.x - inspectorWidth;
-	float inspectorY = 0;
-
-	ImGui::SetNextWindowPos(ImVec2(inspectorX, inspectorY));
-	ImGui::SetNextWindowSize(ImVec2(inspectorWidth, inspectorHeight));
-
-	ImGuiWindowFlags flags = ImGuiWindowFlags_NoMove |
-		ImGuiWindowFlags_NoResize |
-		ImGuiWindowFlags_NoCollapse;
 	static GameObject* prevObj = nullptr;
-	ImGui::Begin("Inspector", nullptr, flags);
+	ImGui::Begin("Inspector");
 	if (selectedObject.selectedObject)
 	{
-		glm::vec3 euler = glm::vec3(1.0f);
-		if (prevObj != selectedObject.selectedObject)
-		{
-			prevObj = selectedObject.selectedObject;
-			transform = selectedObject.selectedObject->GetComponent<Transform>();
-			pos[0] = transform->position.x;
-			pos[1] = transform->position.y;
-			pos[2] = transform->position.z;
-			scale[0] = transform->scale.x;
-			scale[1] = transform->scale.y;
-			scale[2] = transform->scale.z;
-			euler = glm::degrees(glm::eulerAngles(transform->rotation));
-			rot[0] = euler.x;
-			rot[1] = euler.y;
-			rot[2] = euler.z;
-		}
-		ImGui::Text(("Object name: " + std::string(selectedObject.selectedObject->name)).c_str());
-		ImGui::Separator();
-		if (ImGui::DragFloat3("position", pos, 0.1f))
-				transform->position = glm::vec3(pos[0], pos[1], pos[2]);
-		pos[0] = transform->position.x;
-		pos[1] = transform->position.y;
-		pos[2] = transform->position.z;
-		if (ImGui::DragFloat3("rotation", rot, 0.1f))
-		{
-			transform->rotation = Quaternion::Euler(rot[0], rot[1], rot[2]);
-		}
-		euler = glm::degrees(glm::eulerAngles(transform->rotation));
-		rot[0] = euler.x;
-		rot[1] = euler.y;
-		rot[2] = euler.z;
-		if (ImGui::DragFloat3("scale", scale, 0.1f))
-				transform->scale = glm::vec3(scale[0], scale[1], scale[2]);
-		scale[0] = transform->scale.x;
-		scale[1] = transform->scale.y;
-		scale[2] = transform->scale.z;
 		AComponent* removedComponent = nullptr;
 		for (auto& component : selectedObject.selectedObject->components)
 		{
 			component->fields.clear();
 			component->OnInspector();
-			std::string componentName = std::string(component->GetComponentName()) + ": ";
-			ImGui::Text(componentName.c_str());
+			ImGuiTreeNodeFlags flags =
+				ImGuiTreeNodeFlags_DefaultOpen |
+				ImGuiTreeNodeFlags_Framed |
+				ImGuiTreeNodeFlags_SpanAvailWidth |
+				ImGuiTreeNodeFlags_FramePadding;
+			bool opened = ImGui::TreeNodeEx(component.get(), flags, "%s", component->GetComponentName());
 			if (ImGui::BeginPopupContextItem(("ComponentContext:##" + std::to_string((uintptr_t)component.get())).c_str()))
 			{
 				if (!dynamic_cast<Transform*>(component.get()))
@@ -209,25 +241,244 @@ void EditorGUI::ShowInspectorWindow()
 
 				ImGui::EndPopup();
 			}
-			for (auto& field : component->fields)
-				switch (field.type)
+			if (opened)
+			{
+				for (auto& field : component->fields)
 				{
-				case FieldType::BOOL:
-					ImGui::Checkbox(field.name, (bool*)field.ptr);
-					break;
-				case FieldType::FLOAT:
-					if (field.maxValue > field.minValue)
-						ImGui::SliderFloat(field.name, (float*)field.ptr, field.minValue, field.maxValue);
-					else
-						ImGui::DragFloat(field.name, (float*)field.ptr, 0.1f);
-					break;
-				case FieldType::INT:
-					if ((int)field.maxValue > (int)field.minValue)
-						ImGui::SliderInt(field.name, (int*)field.ptr, (int)field.minValue, (int)field.maxValue);
-					else
-						ImGui::DragInt(field.name, (int*)field.ptr, 1.0f);
-					break;
+					switch (field.type)
+					{
+						case FieldType::BOOL:
+							ImGui::Checkbox(field.name, (bool*)field.ptr);
+							break;
+						case FieldType::FLOAT:
+							if (field.maxValue > field.minValue)
+								ImGui::SliderFloat(field.name, (float*)field.ptr, field.minValue, field.maxValue);
+							else
+								ImGui::DragFloat(field.name, (float*)field.ptr, 0.1f);
+							break;
+						case FieldType::INT:
+							if ((int)field.maxValue > (int)field.minValue)
+								ImGui::SliderInt(field.name, (int*)field.ptr, (int)field.minValue, (int)field.maxValue);
+							else
+								ImGui::DragInt(field.name, (int*)field.ptr, 1.0f);
+							break;
+						case FieldType::VEC3:
+						{
+							auto* value3 = static_cast<glm::vec3*>(field.ptr);
+							ImGui::DragFloat3(field.name, glm::value_ptr(*value3), 0.1f);
+							break;
+						}
+						case FieldType::QUAT:
+						{
+							auto* valueq = static_cast<glm::quat*>(field.ptr);
+							glm::vec3 euler = glm::degrees(glm::eulerAngles(*valueq));
+							float data[3] = { euler.x, euler.y,euler.z };
+							if (ImGui::DragFloat3(field.name, data, 0.1f))
+							{
+								*valueq = Quaternion::Euler(data[0], data[1], data[2]);
+							}
+							break;
+						}
+					}
+
 				}
+				ImGui::TreePop();
+			}
+		}
+		if (auto* selectedTransform = selectedObject.selectedObject->GetComponent<Transform>())
+		{
+			selectedTransform->UpdateMatrices();
+		}
+		if (removedComponent)
+		{
+			selectedObject.selectedObject->RemoveComponent(removedComponent);
+			removedComponent = nullptr;
+		}
+		Render* renderComponent = selectedObject.selectedObject->GetComponent<Render>();
+		if (renderComponent)
+		{
+			ImGuiTreeNodeFlags flags =
+				ImGuiTreeNodeFlags_DefaultOpen |
+				ImGuiTreeNodeFlags_Framed |
+				ImGuiTreeNodeFlags_SpanAvailWidth |
+				ImGuiTreeNodeFlags_FramePadding;
+			Material* material = renderComponent->material;
+			if (material)
+			{
+				bool opened = ImGui::TreeNodeEx(material, flags, "%s", "some material");
+				if (opened)
+				{
+					for (auto& fieldmaterial : renderComponent->material->GetProperties()->propertiesNames)
+					{
+						auto fieldmaterialinfo = material->GetProperties()->infoes.find(fieldmaterial);
+						if (fieldmaterialinfo == material->GetProperties()->infoes.end()) continue;
+						if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Float)
+						{
+							float temp = 0.0f;
+							if (fieldmaterialinfo->second.info.useRange)
+							{
+								if (auto t = material->GetProperties()->GetValue<float>(fieldmaterial))
+								{
+									temp = *t;
+									if (ImGui::SliderFloat(fieldmaterial.c_str(), &temp, fieldmaterialinfo->second.info.minrange, fieldmaterialinfo->second.info.maxrange))
+									{
+										material->GetProperties()->SetValue<float>(fieldmaterial, temp);
+									}
+								}
+							}
+							else
+							{
+								if (auto t = material->GetProperties()->GetValue<float>(fieldmaterial))
+								{
+									temp = *t;
+									if (ImGui::DragFloat(fieldmaterial.c_str(), &temp, 0.1f))
+									{
+										material->GetProperties()->SetValue<float>(fieldmaterial, temp);
+									}
+								}
+							}
+						}
+						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Int)
+						{
+							int temp = 0.0f;
+							if (fieldmaterialinfo->second.info.useRange)
+							{
+								if (auto t = material->GetProperties()->GetValue<int>(fieldmaterial))
+								{
+									temp = *t;
+									if (ImGui::SliderInt(fieldmaterial.c_str(), &temp, static_cast<int>(fieldmaterialinfo->second.info.minrange), static_cast<int>(fieldmaterialinfo->second.info.maxrange)))
+									{
+										material->GetProperties()->SetValue<int>(fieldmaterial, temp);
+									}
+								}
+							}
+							else
+							{
+								if (auto t = material->GetProperties()->GetValue<int>(fieldmaterial))
+								{
+									temp = *t;
+									if (ImGui::DragInt(fieldmaterial.c_str(), &temp, 1))
+									{
+										material->GetProperties()->SetValue<int>(fieldmaterial, temp);
+									}
+								}
+							}
+						}
+						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Bool)
+						{
+							bool temp = false;
+							if (auto t = material->GetProperties()->GetValue<bool>(fieldmaterial))
+							{
+								temp = *t;
+								if (ImGui::Checkbox(fieldmaterial.c_str(), &temp))
+								{
+									material->GetProperties()->SetValue<bool>(fieldmaterial, temp);
+								}
+							}
+						}
+						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector4)
+						{
+							float color[4];
+							if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector4>(fieldmaterial))
+							{
+								color[0] = t->data[0];
+								color[1] = t->data[1];
+								color[2] = t->data[2];
+								color[3] = t->data[3];
+								if (fieldmaterialinfo->second.info.isColor)
+								{
+									if (fieldmaterialinfo->second.info.RGB)
+									{
+										if (ImGui::ColorEdit3(fieldmaterial.c_str(), color))
+										{
+											material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
+										}
+									}
+									else
+									{
+										if (ImGui::ColorEdit4(fieldmaterial.c_str(), color))
+										{
+											material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
+										}
+									}
+								}
+								else
+								{
+									if (ImGui::DragFloat4(fieldmaterial.c_str(), color, 0.1f))
+									{
+										material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
+									}
+								}
+							}
+						}
+						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector3)
+						{
+							float color[3];
+							if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector3>(fieldmaterial))
+							{
+								color[0] = t->data[0];
+								color[1] = t->data[1];
+								color[2] = t->data[2];
+								if (ImGui::DragFloat3(fieldmaterial.c_str(), color, 0.1f))
+								{
+									material->GetProperties()->SetValue<GLSLParserMath::Vector3>(fieldmaterial, GLSLParserMath::Vector3::float3_to_vector3(color));
+								}
+							}
+						}
+						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector2)
+						{
+							float color[2];
+							if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector2>(fieldmaterial))
+							{
+								color[0] = t->data[0];
+								color[1] = t->data[1];
+								if (ImGui::DragFloat2(fieldmaterial.c_str(), color, 0.1f))
+								{
+									material->GetProperties()->SetValue<GLSLParserMath::Vector2>(fieldmaterial, GLSLParserMath::Vector2::float2_to_vector2(color));
+								}
+							}
+						}
+						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Sampler2D)
+						{
+							std::string comboId = fieldmaterial;
+							Texture* selectedTexture = material->GetTexture(fieldmaterial);
+							const char* preview = selectedTexture ? selectedTexture->path.c_str() : "None";
+							if (ImGui::BeginCombo(comboId.c_str(), preview))
+							{
+								if (ImGui::Selectable("None"))
+								{
+									material->Set(fieldmaterial, (Texture*)nullptr);
+								}
+								for (auto& texture : AssetManager::GetTextures())
+								{
+									if (ImGui::Selectable(texture.first.c_str()))
+									{
+										material->Set(fieldmaterial, texture.second.get());
+									}
+								}
+								ImGui::EndCombo();
+							}
+						}
+						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::SamplerCube)
+						{
+							std::string comboId = fieldmaterial;
+							std::string nameTexture = std::get<std::string>(fieldmaterialinfo->second.info.value);
+							if (ImGui::BeginCombo(comboId.c_str(), nameTexture.c_str()))
+							{
+								for (auto& texture : AssetManager::GetCubemaps())
+								{
+									if (ImGui::Selectable(texture.first.c_str()))
+									{
+										material->Set(fieldmaterial, texture.second.get());
+									}
+								}
+								ImGui::EndCombo();
+							}
+						}
+					}
+					ImGui::TreePop();
+				}
+			}
 		}
 		if (ImGui::BeginCombo("AddComponent", "Select"))
 		{
@@ -244,186 +495,6 @@ void EditorGUI::ShowInspectorWindow()
 				selectedObject.selectedObject->AddComponent<Rei>();
 			}
 			ImGui::EndCombo();
-		}
-		transform->UpdateMatrices();
-		if (removedComponent)
-		{
-			selectedObject.selectedObject->RemoveComponent(removedComponent);
-			removedComponent = nullptr;
-		}
-		Render* renderComponent = selectedObject.selectedObject->GetComponent<Render>();
-		if (renderComponent)
-		{
-			Material* material = renderComponent->material;
-			if (material)
-			{
-				for (auto& fieldmaterial : renderComponent->material->GetProperties()->propertiesNames)
-				{
-					auto fieldmaterialinfo = material->GetProperties()->infoes.find(fieldmaterial);
-					if (fieldmaterialinfo == material->GetProperties()->infoes.end()) continue;
-					if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Float)
-					{
-						float temp = 0.0f;
-						if (fieldmaterialinfo->second.info.useRange)
-						{
-							if (auto t = material->GetProperties()->GetValue<float>(fieldmaterial))
-							{
-								temp = *t;
-								if (ImGui::SliderFloat(fieldmaterial.c_str(), &temp, fieldmaterialinfo->second.info.minrange, fieldmaterialinfo->second.info.maxrange))
-								{
-									material->GetProperties()->SetValue<float>(fieldmaterial, temp);
-								}
-							}
-						}
-						else
-						{
-							if (auto t = material->GetProperties()->GetValue<float>(fieldmaterial))
-							{
-								temp = *t;
-								if (ImGui::DragFloat(fieldmaterial.c_str(), &temp, 0.1f)) 
-								{
-									material->GetProperties()->SetValue<float>(fieldmaterial, temp);
-								}
-							}
-						}
-					}
-					else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Int)
-					{
-						int temp = 0.0f;
-						if (fieldmaterialinfo->second.info.useRange)
-						{
-							if (auto t = material->GetProperties()->GetValue<int>(fieldmaterial))
-							{
-								temp = *t;
-								if (ImGui::SliderInt(fieldmaterial.c_str(), &temp, static_cast<int>(fieldmaterialinfo->second.info.minrange), static_cast<int>(fieldmaterialinfo->second.info.maxrange)))
-								{
-									material->GetProperties()->SetValue<int>(fieldmaterial, temp);
-								}
-							}
-						}
-						else
-						{
-							if (auto t = material->GetProperties()->GetValue<int>(fieldmaterial))
-							{
-								temp = *t;
-								if (ImGui::DragInt(fieldmaterial.c_str(), &temp, 1))
-								{
-									material->GetProperties()->SetValue<int>(fieldmaterial, temp);
-								}
-							}
-						}
-					}
-					else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Bool)
-					{
-						bool temp = false;
-						if (auto t = material->GetProperties()->GetValue<bool>(fieldmaterial))
-						{
-							temp = *t;
-							if (ImGui::Checkbox(fieldmaterial.c_str(), &temp))
-							{
-								material->GetProperties()->SetValue<bool>(fieldmaterial, temp);
-							}
-						}
-					}
-					else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector4)
-					{
-						float color[4];
-						if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector4>(fieldmaterial))
-						{
-							color[0] = t->data[0];
-							color[1] = t->data[1];
-							color[2] = t->data[2];
-							color[3] = t->data[3];
-							if (fieldmaterialinfo->second.info.isColor)
-							{
-								if (fieldmaterialinfo->second.info.RGB)
-								{
-									if (ImGui::ColorEdit3(fieldmaterial.c_str(), color))
-									{
-										material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
-									}
-								}
-								else
-								{
-									if (ImGui::ColorEdit4(fieldmaterial.c_str(), color))
-									{
-										material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
-									}
-								}
-							}
-							else
-							{
-								if (ImGui::DragFloat4(fieldmaterial.c_str(), color, 0.1f))
-								{
-									material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
-								}
-							}
-						}
-					}
-					else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector3)
-					{
-						float color[3];
-						if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector3>(fieldmaterial))
-						{
-							color[0] = t->data[0];
-							color[1] = t->data[1];
-							color[2] = t->data[2];
-							if (ImGui::DragFloat3(fieldmaterial.c_str(), color, 0.1f))
-							{
-								material->GetProperties()->SetValue<GLSLParserMath::Vector3>(fieldmaterial, GLSLParserMath::Vector3::float3_to_vector3(color));
-							}
-						}
-					}
-					else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector2)
-					{
-						float color[2];
-						if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector2>(fieldmaterial))
-						{
-							color[0] = t->data[0];
-							color[1] = t->data[1];
-							if (ImGui::DragFloat2(fieldmaterial.c_str(), color, 0.1f))
-							{
-								material->GetProperties()->SetValue<GLSLParserMath::Vector2>(fieldmaterial, GLSLParserMath::Vector2::float2_to_vector2(color));
-							}
-						}
-					}
-					else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Sampler2D)
-					{
-						std::string comboId = "Textures##" + fieldmaterial;
-						static std::string nameTexture = "Select";
-						if (ImGui::BeginCombo(comboId.c_str(), nameTexture.c_str()))
-						{
-							if (ImGui::Selectable("None"))
-							{
-								material->Set(fieldmaterial, (Texture*)nullptr);
-							}
-							for (auto& texture : AssetManager::GetTextures())
-							{
-								if (ImGui::Selectable(texture.first.c_str()))
-								{
-									material->Set(fieldmaterial, texture.second.get());
-								}
-							}
-							ImGui::EndCombo();
-						}
-					}
-					else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::SamplerCube)
-					{
-						std::string comboId = "Cubemaps##" + fieldmaterial;
-						if (ImGui::BeginCombo(comboId.c_str(), "Select"))
-						{
-							for (auto& texture : AssetManager::GetCubemaps())
-							{
-								if (ImGui::Selectable(texture.first.c_str()))
-								{
-									material->Set(fieldmaterial, texture.second.get());
-								}
-							}
-							ImGui::EndCombo();
-						}
-					}
-				}
-			}
 		}
 	}
 	else

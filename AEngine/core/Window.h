@@ -6,13 +6,15 @@
 #include <string>
 #include "AEngineAPI.h"
 
+class Framebuffer;
+
 class AENGINE_API Window
 {
 public:
 	GLFWwindow* window;
 	static Window* GlobalWindow;
-	float screenX = 800.0f;
-	float screenY = 600.0f;
+	float screenX = 1280.0f;
+	float screenY = 720.0f;
 	float lastX = screenX / 2.0f;
 	Window();
 
@@ -21,6 +23,9 @@ public:
 class Input
 {
 public:
+	AENGINE_API static void SetViewport(float x, float y, float width, float height);
+	AENGINE_API static float GetMouseX();
+	AENGINE_API static float GetMouseY();
 	AENGINE_API static double xpos, ypos;
 	AENGINE_API static float yaw, pitch, lastX, lastY, xoffset, yoffset, scrollYOffset;
 	AENGINE_API static bool firstMouse;
@@ -35,6 +40,11 @@ public:
 	AENGINE_API static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 	AENGINE_API static bool GetMouseButtonDown(int button);
 	AENGINE_API static bool GetMouseButtonUp(int button);
+private:
+	static float viewportX;
+	static float viewportY;
+	static float viewportWidth;
+	static float viewportHeight;
 };
 class AENGINE_API Time
 {

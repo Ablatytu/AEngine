@@ -44,7 +44,6 @@ namespace RenderSystem
 	Shader* depthShaderDirectional = nullptr;
 	Shader* depthShaderPoint = nullptr;
 	Shader* depthScreenShader = nullptr;
-	Framebuffer* sceneHDR = nullptr;
 	Framebuffer* exposureA = nullptr;
 	Framebuffer* exposureB = nullptr;
 	Framebuffer* bloom = nullptr;
@@ -331,7 +330,7 @@ namespace RenderSystem
 			}
 		}
 		glBindFramebuffer(GL_FRAMEBUFFER, prevFBO);
-		glViewport(0, 0, context.window->screenX, context.window->screenY);
+		glViewport(0, 0, context.width, context.height);
 		UBOBuffer::ChangeInfoBuffer("LightMatrices", 64, &lightMatrixCamera, 0);
 	}
 	void rs_RenderQuad()
@@ -453,7 +452,7 @@ namespace RenderSystem
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, GBuffer->GetFBO());
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, buffer->GetFBO());
 
-		glBlitFramebuffer(0, 0, context.window->screenX, context.window->screenY, 0, 0, context.window->screenX, context.window->screenY, GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT, GL_NEAREST);
+		glBlitFramebuffer(0, 0, context.width, context.height, 0, 0, context.width, context.height, GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT, GL_NEAREST);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 	void rs_RenderSkyBox(RenderContext& context)
@@ -497,7 +496,7 @@ namespace RenderSystem
 	{
 		GBuffer->Bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-		glViewport(0, 0, context.window->screenX, context.window->screenY);
+		glViewport(0, 0, context.width, context.height);
 		for (auto& batch : batches)
 		{
 			if (batch.surfacetype == SurfaceType::transparent) continue;
@@ -652,14 +651,14 @@ namespace RenderSystem
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_FRONT);
 		PointLightDeferred->Update();
-		PointLightDeferred->setVec2("screenSize", context.window->screenX, context.window->screenY);
+		PointLightDeferred->setVec2("screenSize", context.width, context.height);
 		rs_LoadGBufferInShader(context, PointLightDeferred, { 1, 1, 1, 1 });
 		slots = 4;
 		rs_LoadShadowsInShader(context, PointLightDeferred, slots);
 		if(!PointlightsMatrices.empty())
 			deferredLowPolySphere.DrawInstance(PointlightsMatrices.size(), PointlightsMatrices.data());
 		SpotLightDeferred->Update();
-		SpotLightDeferred->setVec2("screenSize", context.window->screenX, context.window->screenY);
+		SpotLightDeferred->setVec2("screenSize", context.width, context.height);
 		rs_LoadGBufferInShader(context, SpotLightDeferred, { 1, 1, 1, 1 });
 		if (!SpotlightsMatrices.empty())
 			deferredCone.DrawInstance(SpotlightsMatrices.size(), SpotlightsMatrices.data());
@@ -828,7 +827,7 @@ namespace RenderSystem
 	void rs_Init()
 	{
 		std::cout << glGetString(GL_RENDERER) << std::endl;
-		sceneHDR = FramebufferManager::Get().Add("defaultFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
+		//sceneHDR = FramebufferManager::Get().Add("defaultFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
 		exposureA = FramebufferManager::Get().Add("exposureAFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/ExposureFS.glsl", { Framebuffer::TypeFrameBuffer::R16F }, false, 1, 1);
 		exposureB = FramebufferManager::Get().Add("exposureBFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/ExposureFS.glsl", { Framebuffer::TypeFrameBuffer::R16F }, false, 1, 1);
 		bloom = FramebufferManager::Get().Add("bloomAFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/BloomFS.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
@@ -888,7 +887,7 @@ namespace RenderSystem
 			firstFrame = true;
 		}
 	}
-	void rs_Start()
+	void rs_Start(Framebuffer* sceneHDR)
 	{
 		sceneHDR->Bind();
 		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
@@ -896,7 +895,7 @@ namespace RenderSystem
 	}
 	void rs_End()
 	{
-		sceneHDR->UnBind();
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 	void rs_RenderSSAO(RenderContext& context)
 	{
@@ -910,7 +909,7 @@ namespace RenderSystem
 			glBindTexture(GL_TEXTURE_2D, SSAONoise->GetTexturePixels());
 			for (unsigned int i = 0; i < 64; ++i)
 				SSAO->GetShader()->setVec3("samples[" + std::to_string(i) + "]", ssaoKernel[i]);
-			SSAO->GetShader()->setVec2("screenSize", glm::vec2(context.window->screenX, context.window->screenY));
+			SSAO->GetShader()->setVec2("screenSize", glm::vec2(context.width, context.height));
 			rs_RenderQuad();
 			SSAO->UnBind();
 			SSAOblur->Bind();
@@ -922,7 +921,7 @@ namespace RenderSystem
 			SSAOblur->UnBind();
 		}
 	}
-	void rs_PostProcess(RenderContext& context)
+	void rs_PostProcess(RenderContext& context, Framebuffer* sceneHDR)
 	{
 		if (!context.postProcess) return;
 		if (context.postProcess->AutoExposure && context.postProcess->camera == context.camera)
@@ -941,7 +940,7 @@ namespace RenderSystem
 			exposureShader->setInt("SceneTexture", 0);
 			exposureShader->setInt("PreviousExposure", 1);
 
-			float mipLevel = std::floor(std::log2(std::max(context.window->screenX, context.window->screenY)));
+			float mipLevel = std::floor(std::log2(std::max(context.width, context.height)));
 			exposureShader->setFloat("mipLevel", mipLevel);
 			exposureShader->setFloat("targetBrightness", context.postProcess->targetBrightness);
 			exposureShader->setFloat("minExposure", context.postProcess->minExposure);
@@ -959,7 +958,7 @@ namespace RenderSystem
 			rs_RenderQuad();
 			currectFrameBuffer->UnBind();
 
-			glViewport(0, 0, context.window->screenX, context.window->screenY);
+			glViewport(0, 0, context.width, context.height);
 			exposurePing = !exposurePing;
 		}
 		if (context.postProcess->Bloom && context.postProcess->camera == context.camera)
@@ -968,7 +967,7 @@ namespace RenderSystem
 			glBindTexture(GL_TEXTURE_2D, sceneHDR->GetColorBuffer(0));
 
 			bloom->Bind();
-			glViewport(0, 0, context.window->screenX, context.window->screenY);
+			glViewport(0, 0, context.width, context.height);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			Shader* bloomShader = bloom->GetShader();
@@ -1003,8 +1002,10 @@ namespace RenderSystem
 			finalBloom->UnBind();
 		}
 	}
-	void rs_Present(RenderContext& context)
+	void rs_Present(RenderContext& context, Framebuffer* sceneHDR, Framebuffer* targetHDR)
 	{
+		if (targetHDR)
+			targetHDR->Bind();
 		sceneHDR->UseShader();
 		sceneHDR->GetShader()->setBool("HDR", context.HDR);
 		float exposure = 1.0f;
@@ -1039,6 +1040,8 @@ namespace RenderSystem
 			glBindTexture(GL_TEXTURE_2D, finalBloom->GetColorBuffer(0));
 		}
 		rs_RenderQuad();
+		if (targetHDR)
+			targetHDR->UnBind();
 	}
 	void rs_RenderEnvironmentHDR(Cubemap& cubemap, HDRTexture& hdrTexture, int width, int height)
 	{
@@ -1201,7 +1204,7 @@ namespace RenderSystem
 		glBindTexture(GL_TEXTURE_2D, BRDFLUTTexture->GetTexturePixels());
 		slot += 1;
 	}
-	void rs_Render(RenderContext& context)
+	void rs_Render(RenderContext& context, Framebuffer* sceneHDR)
 	{
 		std::vector<Batch> batches;
 		rs_CollectBatches(context, batches);

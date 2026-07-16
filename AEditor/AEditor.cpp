@@ -45,7 +45,6 @@ void AEditor::OnInit()
 	Model* terrainModel = AssetManager::LoadModel("Assets/Models/8842eed260aa4dad81773d51ca9066fb.obj");
 	Model* cube = AssetManager::LoadModel("Assets/Models/Untitled.obj");
 	Model* planeModel = AssetManager::LoadModel("Assets/Models/Plane.obj");
-	Model* cave = AssetManager::LoadModel("Assets/Models/LP.obj");
 	Model* sphere = AssetManager::LoadModel("Assets/Models/Sphere.obj");
 
 	Shader* standartShader = AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl");
@@ -89,8 +88,6 @@ void AEditor::OnInit()
 	Texture* BrickWall = AssetManager::LoadTexture("Assets/Textures/bricks2.jpg");
 	Texture* BrickWallHeight = AssetManager::LoadTexture("Assets/Textures/bricks2_disp.jpg", true);
 	Texture* BrickWallNormal = AssetManager::LoadTexture("Assets/Textures/bricks2_normal.jpg", true);
-	Texture* CaveTexture = AssetManager::LoadTexture("Assets/Textures/LP_cave1_BaseColor.png");
-	Texture* CaveNormalTexture = AssetManager::LoadTexture("Assets/Textures/LP_cave1_Normal.png", true);
 
 	ToonMaterial.SetShader(toonShader);
 	ToonMaterial.Set("_MainTexture", texture);
@@ -125,19 +122,13 @@ void AEditor::OnInit()
 	CubemapMaterial.SetShader(cubemapShader);
 	CubemapMaterial.Set("cubemap", cubeMapDefaultSkyBox);
 
-	CaveMaterial.SetShader(standartShader);
-	CaveMaterial.Set("texture_diffuse1", CaveTexture);
-	CaveMaterial.Set("coefficientCubemap", 0.0f);
-	CaveMaterial.Set("Cubemap", cubeMapDefaultSkyBox);
-	CaveMaterial.Set("normalMap", CaveNormalTexture);
-	CaveMaterial.Set("coefficientNormal", 1.0f);
-
 	spherePBRMaterial.SetShader(standartShader);
 	spherePBRMaterial.Set("Cubemap", cubeMapDefaultSkyBox);
 	spherePBRMaterial.Set("metallic", 1.0f);
 	spherePBRMaterial.Set("roughness", 0.0f);
 
 	rs_Init();
+	editorGUI->EDITOR_INIT();
 	std::cout << "LOAD SCENE AND GAMEOBJECTS...";
 	SceneManager::Get().CreateScene();
 	SceneManager::Get().LoadScene(0);
@@ -154,7 +145,6 @@ void AEditor::OnInit()
 	GameObject* terrain = SceneManager::Get().CreateGameObject();
 	GameObject* Cube3D = SceneManager::Get().CreateGameObject();
 	GameObject* plane = SceneManager::Get().CreateGameObject();
-	GameObject* caveObject = SceneManager::Get().CreateGameObject();
 	std::cout << "COMPLITE\n";
 	unsigned int amount = 1000;
 	unsigned int maxLights = 192;
@@ -300,11 +290,6 @@ void AEditor::OnInit()
 	Plush_rei2->GetComponent<Render>()->material = &material;
 	Plush_rei2->GetComponent<Transform>()->position = glm::vec3(0.0f, -0.2f, 0.5f);
 	Plush_rei2->GetComponent<Transform>()->UpdateMatrices();
-	caveObject->AddComponent<Render>();
-	caveObject->GetComponent<Render>()->mesh = &cave->meshes[0];
-	caveObject->GetComponent<Render>()->material = &CaveMaterial;
-	caveObject->GetComponent<Transform>()->position = glm::vec3(2.0f, -0.2f, 0.5f);
-	caveObject->GetComponent<Transform>()->UpdateMatrices();
 	//Plush_rei2.AddComponent<Cube>();
 	camera->AddComponent<Camera>();
 	camera->GetComponent<Transform>()->position = glm::vec3(2.0f, 2.0f, 7.0f);
@@ -323,6 +308,10 @@ void AEditor::OnInit()
 
 void AEditor::OnBeforeSceneUpdate()
 {
+	//frame++;
+	//if (frame > 10)
+	//	close();
+	Input::SetViewport(editorGUI->viewportBounds[0][0], editorGUI->viewportBounds[0][1], editorGUI->sizeviewport[0], editorGUI->sizeviewport[1]);
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
@@ -331,21 +320,27 @@ void AEditor::OnBeforeSceneUpdate()
 }
 void AEditor::OnRender()
 {
+	FramebufferManager::Get().Resize(editorGUI->sizeviewport[0], editorGUI->sizeviewport[1]);
+	//std::cout << editorGUI->sizeviewport[0] << " " << editorGUI->sizeviewport[1] << "\n";
 	RenderContext renderContext = SceneManager::Get().GetActiveScene().CollectRenderContext();
-	renderContext.window = &GetWindow();
+	renderContext.width = editorGUI->sizeviewport[0];
+	renderContext.height = editorGUI->sizeviewport[1];
 	if (editorGUI && editorGUI->selectedObject.selectedObjectRender)
 		renderContext.selectedObject = editorGUI->selectedObject.selectedObjectRender;
 	else
 		renderContext.selectedObject = nullptr;
-	rs_Start();
-	rs_Render(renderContext);
+	if (renderContext.camera)
+		renderContext.camera->SetViewport(renderContext.width, renderContext.height);
+	rs_Start(editorGUI->sceneHDR);
+	rs_Render(renderContext, editorGUI->sceneHDR);
 	editorGUI->RenderEditorParts();
 	rs_End();
-	rs_PostProcess(renderContext);
-	rs_Present(renderContext);
+	rs_PostProcess(renderContext, editorGUI->sceneHDR);
+	rs_Present(renderContext, editorGUI->sceneHDR, editorGUI->viewport);
+	editorGUI->BeginDockspace();
 	editorGUI->ShowInspectorWindow();
 	editorGUI->ShowHierarchyWindow();
-	editorGUI->RenderGizmo();
+	editorGUI->RenderViewport();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

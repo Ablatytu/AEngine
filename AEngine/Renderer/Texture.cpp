@@ -70,15 +70,16 @@ void Texture::CreateColorTexture(std::string name)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, px);
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
-void Texture::LoadTexture(const char* path, bool linear, std::optional<DataFormat> imageFormat, std::optional<DataFormat> dataFormat, std::vector<FilterType> filter1, std::vector<FilterType> filter2)
+void Texture::LoadTexture(const char* _path, bool linear, std::optional<DataFormat> imageFormat, std::optional<DataFormat> dataFormat, std::vector<FilterType> filter1, std::vector<FilterType> filter2)
 {
+	path = _path;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, filter1.size() == 2 ? GLFilterFormat(filter1[0]) : GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, filter1.size() == 2 ? GLFilterFormat(filter1[1]) : GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter2.size() == 2 ? GLFilterFormat(filter2[0]) : GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter2.size() == 2 ? GLFilterFormat(filter2[1]) : GL_LINEAR);
-	data = stbi_load(path, &width, &height, &nrChannels, 0);
+	data = stbi_load(_path, &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		GLenum format = GL_RGB;

@@ -16,11 +16,11 @@
 
 glm::vec3 EditorCamera::CalcMouseRay()
 {
-	float mouseX = (float)Input::xpos;
-	float mouseY = (float)Input::ypos;
+	float mouseX = Input::GetMouseX();
+	float mouseY = Input::GetMouseY();
 
-	float width = Window::GlobalWindow->screenX;
-	float height = Window::GlobalWindow->screenY;
+	float width = (float)editorGUI->sizeviewport[0];
+	float height = (float)editorGUI->sizeviewport[1];
 
 	float x = (2.0f * mouseX) / width - 1.0f;
 	float y = 1.0f - (2.0f * mouseY) / height;
@@ -107,7 +107,7 @@ void EditorCamera::Update()
 	if (Input::GetMouseButtonDown(0))
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		if (!io.WantCaptureMouse && !(ImGuizmo::IsUsing() || ImGuizmo::IsOver()))
+		if (editorGUI->viewportHovered && !(ImGuizmo::IsUsing() || ImGuizmo::IsOver()))
 		{
 			GameObject* selectedObject = FindClosestObject();
 			editorGUI->selectedObject.selectedObject = selectedObject;

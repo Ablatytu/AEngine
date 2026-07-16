@@ -25,7 +25,8 @@ enum class FieldType
 	BOOL,
 	FLOAT,
 	VEC3,
-	INT
+	INT,
+	QUAT
 };
 
 struct FieldInfo
@@ -50,6 +51,10 @@ public:
 	virtual void OnDestroy() {}
 	virtual const char* GetComponentName() const { return "New AComponent"; }
 	template<typename t> FieldType fieldTypeInitial();
+	template<> inline FieldType fieldTypeInitial<glm::quat>()
+	{
+		return FieldType::QUAT;
+	}
 	template<> inline FieldType fieldTypeInitial<float>()
 	{
 		return FieldType::FLOAT;

@@ -12,10 +12,18 @@ void Camera::Start()
 {
 	transform = gameObject->GetComponent<Transform>();
 	viewMatrix = glm::lookAt(transform->position, transform->position + transform->forward(), transform->up());
-	projection = glm::perspective(glm::radians(fieldOView), (float)Application::Get().GetWindow().screenX / (float)Application::Get().GetWindow().screenY, near, far);
+	RecultivateProjection();
+}
+void Camera::SetViewport(int width, int height)
+{
+	ratio = (float)width / (float)height;
+	RecultivateProjection();
+}
+void Camera::RecultivateProjection()
+{
+	projection = glm::perspective(glm::radians(fieldOView), ratio, near, far);
 }
 void Camera::Update()
 {
 	viewMatrix = glm::lookAt(transform->position, transform->position + transform->forward(), transform->up());
-	projection = glm::perspective(glm::radians(fieldOView), (float)Application::Get().GetWindow().screenX / (float)Application::Get().GetWindow().screenY, near, far);
 }

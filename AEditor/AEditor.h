@@ -26,7 +26,6 @@ private:
 	Material ExplodingMaterial;
 	Material planeMaterial;
 	Material ToonMaterial;
-	Material CaveMaterial;
 	Material spherePBRMaterial;
 	unsigned int frame = 0;
 };

@@ -21,8 +21,9 @@ public:
 	glm::vec3 camFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	float near = 0.1f;
 	float far = 100.0f;
-
+	float ratio = 0.0f;
 	void Start() override;
-
+	void RecultivateProjection(); 
+	void SetViewport(int width, int height);
 	void Update() override;
 };

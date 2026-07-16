@@ -46,10 +46,10 @@ namespace RenderSystem
 		SurfaceType surfacetype = SurfaceType::opaque;
 		RenderQueue renderqueue = RenderQueue::ForwardOpaque;
 	};
-	AENGINE_API void rs_Render(RenderContext& context);
+	AENGINE_API void rs_Render(RenderContext& context, Framebuffer* sceneHDR);
 	AENGINE_API void rs_Init();
 	void rs_InitAfterFirstFrame();
-	AENGINE_API void rs_Start();
+	AENGINE_API void rs_Start(Framebuffer* sceneHDR);
 	AENGINE_API void rs_End();
 	void rs_CollectBatches(RenderContext& context, std::vector<Batch>& batches);
 	void rs_CreateShadowMap(Light* light);
@@ -66,12 +66,12 @@ namespace RenderSystem
 	AENGINE_API void rs_RenderOutline(Render* render, Shader* outlineShader);
 	void rs_UploadLighting(RenderContext& context);
 	void rs_UploadCamera(RenderContext& context);
-	AENGINE_API void rs_PostProcess(RenderContext& context);
+	AENGINE_API void rs_PostProcess(RenderContext& context, Framebuffer* sceneHDR);
 	void rs_RenderEnvironmentHDR(Cubemap& cubemap, HDRTexture& hdrTexture, int width, int height);
 	void rs_RenderIrradianceMap(Cubemap& envcubemap, Cubemap& irradianceCubemap, int width, int height);
 	void rs_RenderPrefilterMap(Cubemap& envcubemap, Cubemap& prefilterCubemap);
 	void rs_CreateBRDFTexture();
 	void rs_RenderQuad();
 	void rs_SetEIPMap(RenderContext& context, Shader* shader, unsigned int& slot);
-	AENGINE_API void rs_Present(RenderContext& context);
+	AENGINE_API void rs_Present(RenderContext& context, Framebuffer* sceneHDR, Framebuffer* targetHDR = nullptr);
 };
