@@ -5,12 +5,10 @@ Properties
 	[Range(0.0, 1.0)] roughness = (Float, 0.5)
 	[Range(0.0, 1.0)] ao = (Float, 1.0)
     objectColor = (Color, (1.0, 1.0, 1.0, 1.0))
-    [Range(0.0, 1.0)] coefficientCubemap = (Float, 0.0)
     texture_diffuse1 = (Texture2D, white)
     coefficientNormal = (Float, 0.0)
     InvertNormalY = (Bool, False)
     normalMap = (Texture2D, normal)
-    Cubemap = (TextureCube, white)
     heightMap = (Texture2D, black) 
     [Range(0.0, 0.1)] height_scale = (Float, 0.0)
 }
@@ -24,9 +22,7 @@ GLSLPROGRAM
 
 uniform vec3 uambient;
 uniform vec4 objectColor;
-uniform float coefficientCubemap;
 uniform sampler2D texture_diffuse1;
-uniform samplerCube Cubemap;
 uniform sampler2D normalMap;
 uniform sampler2D heightMap;
 uniform float coefficientNormal;
@@ -47,13 +43,6 @@ in VS_OUT
     vec3 TangentViewDir;
 } fs_in;
 
-vec3 CalcCubemap(vec3 normal)
-{
-    vec3 I = normalize(fs_in.FragPos - camPos);
-    vec3 R = reflect(I, normalize(normal));
-    vec3 color = texture(Cubemap, R).rgb;
-    return color;
-}
 vec2 ParallaxMapping(vec2 texCoords, vec3 viewDirTBN)
 {
     vec3 NviewDirTBN = normalize(viewDirTBN);
@@ -112,16 +101,7 @@ void main()
     }
     float alpha = _texture.a * objectColor.a;
     vec3 objectColorFinal = _texture.rgb * vec3(objectColor);
-    if(coefficientCubemap > 0.0)
-    {
-        vec3 objectCubemap = CalcCubemap(normal);
-        vec3 objectColorWithLightingTexture_Cubemap = mix(_texture.rgb, objectCubemap, coefficientCubemap);
-        albedo = vec4(objectColorWithLightingTexture_Cubemap, alpha);
-    }
-    else
-    {
-        albedo = vec4(objectColorFinal, alpha);
-    }
+    albedo = vec4(objectColorFinal, alpha);
     gPosition = fs_in.FragPos;
     gNormal = normal;
     gAlbedo = vec4(albedo.rgb, 0.0);

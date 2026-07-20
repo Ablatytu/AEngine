@@ -19,13 +19,5 @@ private:
 private:
 	std::unique_ptr<EditorGUI> editorGUI;
 	std::unique_ptr<EditorCamera> editorCamera;
-	Material material;
-	Material terrainMaterial;
-	Material cubeMaterial;
-	Material CubemapMaterial;
-	Material ExplodingMaterial;
-	Material planeMaterial;
-	Material ToonMaterial;
-	Material spherePBRMaterial;
 	unsigned int frame = 0;
 };

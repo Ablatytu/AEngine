@@ -69,8 +69,8 @@ void Scene::SetSkyBox(Cubemap* cubemap)
 
 void Scene::SetSkyBox(HDRTexture* texture)
 {
-	Cubemap* environmentcubemap = new Cubemap(512, true);
+	environmentcubemap = std::make_unique<Cubemap>(512, true);
 	RenderSystem::rs_RenderEnvironmentHDR(*environmentcubemap, *texture, 512, 512);
-	SetSkyBox(environmentcubemap);
+	SetSkyBox(environmentcubemap.get());
 }
 Scene::~Scene() = default;

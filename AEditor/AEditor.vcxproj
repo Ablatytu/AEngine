@@ -31,6 +31,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -44,6 +45,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -73,30 +75,39 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ExternalIncludePath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib;$(LibraryPath)</LibraryPath>
-    <OutDir>..\bin</OutDir>
+    <OutDir>..\bin\Release</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\Solution\bin</OutDir>
+    <OutDir>..\bin\Debug</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <ExternalIncludePath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\Solution\bin</OutDir>
+    <OutDir>..\bin\Release</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <ExternalIncludePath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\Solution\bin</OutDir>
+    <OutDir>..\bin\Debug</OutDir>
+    <ExternalIncludePath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include;$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLFW_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\imGUI;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Solution\bin</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;AEngine.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AEngine.lib;glfw3dll.lib;unit.lib;user32.lib;gdi32.lib;shell32.lib;kernel32.lib;winmm.lib</AdditionalDependencies>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -108,15 +119,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLFW_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\imGUI;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Solution\bin</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;AEngine.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AEngine.lib;glfw3dll.lib;unit.lib;user32.lib;gdi32.lib;shell32.lib;kernel32.lib;winmm.lib</AdditionalDependencies>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -126,15 +138,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLFW_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\imGUI;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Solution\bin</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;AEngine.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AEngine.lib;glfw3dll.lib;unit.lib;user32.lib;gdi32.lib;shell32.lib;kernel32.lib;winmm.lib</AdditionalDependencies>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
@@ -146,16 +159,16 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLFW_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLFW_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\imGUI;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\imGUI;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>AEngine.lib;glfw3dll.lib;unit.lib;user32.lib;gdi32.lib;shell32.lib;kernel32.lib;winmm.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\Release</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>

@@ -111,6 +111,7 @@ void EditorCamera::Update()
 		{
 			GameObject* selectedObject = FindClosestObject();
 			editorGUI->selectedObject.selectedObject = selectedObject;
+			editorGUI->selectedTexture = nullptr;
 			if(selectedObject)
 				editorGUI->selectedObject.selectedObjectRender = selectedObject->GetComponent<Render>();
 			else

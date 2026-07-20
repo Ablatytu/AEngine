@@ -5,7 +5,6 @@ Properties
 	[Range(0.0, 1.0)] roughness = (Float, 0.5)
 	[Range(0.0, 1.0)] ao = (Float, 1.0)
     objectColor = (Color, (1.0, 1.0, 1.0, 1.0))
-    [Range(0.0, 1.0)] coefficientCubemap = (Float, 0.0)
     texture_diffuse1 = (Texture2D, white)
     coefficientNormal = (Float, 0.0)
     InvertNormalY = (Bool, False)
@@ -28,9 +27,7 @@ uniform vec3 udiffuse;
 uniform vec3 uspecular;
 uniform float ushininess;
 uniform vec4 objectColor;
-uniform float coefficientCubemap;
 uniform sampler2D texture_diffuse1;
-uniform samplerCube Cubemap;
 uniform sampler2D normalMap;
 uniform sampler2D heightMap;
 uniform float coefficientNormal;
@@ -62,13 +59,6 @@ float CalcFog()
     float depth = LinearDepth(gl_FragCoord.z) / far;
     depth = clamp(depth, 0.0, 1.0);
     return pow(depth, 1.4);
-}
-vec3 CalcCubemap(vec3 normal)
-{
-    vec3 I = normalize(fs_in.FragPos - camPos);
-    vec3 R = reflect(I, normalize(normal));
-    vec3 color = texture(Cubemap, R).rgb;
-    return color;
 }
 vec2 ParallaxMapping(vec2 texCoords, vec3 viewDirTBN)
 {
@@ -138,17 +128,7 @@ void main()
     surfinfo.ao = ao;
     vec3 _lighting = FragmentStandartPBR(geominfo, surfinfo);
     float alpha = _texture.a * objectColor.a;
-    if(coefficientCubemap > 0.0)
-    {
-        vec3 objectCubemap = CalcCubemap(normal);
-        vec3 objectColorWithLightingTexture_Cubemap = mix(_lighting, objectCubemap, coefficientCubemap);
-        vec3 objectColorFinal = mix(objectColorWithLightingTexture_Cubemap, fog.colorFog, CalcFog());
-        result = vec4(objectColorFinal, alpha);
-    }
-    else
-    {
-        vec3 objectColorFinal = mix(_lighting, fog.colorFog, CalcFog());
-        result = vec4(objectColorFinal, alpha);
-    }
+    vec3 objectColorFinal = mix(_lighting, fog.colorFog, CalcFog());
+    result = vec4(objectColorFinal, alpha);
     FragColor = result;
 } 

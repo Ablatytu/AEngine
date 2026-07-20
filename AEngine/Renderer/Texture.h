@@ -25,19 +25,27 @@ enum class DataFormat
 
 class AENGINE_API Texture
 {
-private:
-	unsigned char* data;
-	unsigned int texture;
 public:
 	using DataFormat = DataFormat;
 	using FilterType = FilterType;
 
-	int width, height, nrChannels;
+	int width = 0, height = 0, nrChannels = 0;
 	std::string path;
 	void CreateColorTexture(std::string name);
-	void LoadTexture(const char* path, bool linear, std::optional<DataFormat> imageFormat = std::nullopt, std::optional<DataFormat> dataFormat = std::nullopt, std::vector<FilterType> filter1 = {}, std::vector<FilterType> filter2 = {});
-	void CreateTexture(unsigned int width, unsigned int height, DataFormat iternalFormat , DataFormat dataformat, FilterType filter1, FilterType filter2, void* data = nullptr);
+	void LoadTexture(const char* path, bool _linear = false, std::optional<DataFormat> _imageFormat = std::nullopt, std::optional<DataFormat> _dataFormat = std::nullopt, std::vector<FilterType> filter1 = {}, std::vector<FilterType> filter2 = {});
+	void CreateTexture(unsigned int width, unsigned int height, DataFormat _iternalFormat , DataFormat _dataformat, FilterType filter1, FilterType filter2, void* data = nullptr);
+	void SetLinear(bool _linear);
+	int GetWidth();
+	int GetHeight();
+	bool GetLinear();
 	unsigned char* GetData();
 	unsigned int GetTexturePixels();
 	~Texture();
+private:
+	unsigned char* data = nullptr;;
+	unsigned int texture = 0;
+	bool linear = false;
+	unsigned int imageFormat = 0;
+	unsigned int dataFormat = 0;
+
 };

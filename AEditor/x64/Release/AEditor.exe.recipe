@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\AEngine.dll</FullPath>
+      <FullPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\Release\AEngine.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\AEditor.exe</FullPath>
+      <FullPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\Release\AEditor.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

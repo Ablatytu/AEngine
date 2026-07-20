@@ -70,7 +70,8 @@ void Texture::CreateColorTexture(std::string name)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, px);
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
-void Texture::LoadTexture(const char* _path, bool linear, std::optional<DataFormat> imageFormat, std::optional<DataFormat> dataFormat, std::vector<FilterType> filter1, std::vector<FilterType> filter2)
+
+void Texture::LoadTexture(const char* _path, bool _linear, std::optional<DataFormat> _imageFormat, std::optional<DataFormat> _dataFormat, std::vector<FilterType> filter1, std::vector<FilterType> filter2)
 {
 	path = _path;
 	glGenTextures(1, &texture);
@@ -80,30 +81,40 @@ void Texture::LoadTexture(const char* _path, bool linear, std::optional<DataForm
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter2.size() == 2 ? GLFilterFormat(filter2[0]) : GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter2.size() == 2 ? GLFilterFormat(filter2[1]) : GL_LINEAR);
 	data = stbi_load(_path, &width, &height, &nrChannels, 0);
+	linear = _linear;
 	if (data)
 	{
 		GLenum format = GL_RGB;
+		GLenum externalFormat = GL_RGB;
 		if (nrChannels == 1)
 		{
 			format = GL_RED;
+			externalFormat = GL_RED;
 		}
 		else if (nrChannels == 3)
 		{
 			format = GL_RGB;
 			if (!linear)
 				format = GL_SRGB;
+			externalFormat = GL_RGB;
 		}
 		else if (nrChannels == 4)
 		{
 			format = GL_RGBA;
 			if (!linear)
 				format = GL_SRGB_ALPHA;
+			externalFormat = GL_RGBA;
 		}
-		if (imageFormat)
-			format = GLDataFormat(*imageFormat);
-		GLenum externalFormat = (nrChannels == 4) ? GL_RGBA : GL_RGB;
-		if (dataFormat)
-			externalFormat = GLDataFormat(*dataFormat);
+		if (_imageFormat)
+		{
+			format = GLDataFormat(*_imageFormat);
+		}
+		imageFormat = format;
+		if (_dataFormat)
+		{
+			externalFormat = GLDataFormat(*_dataFormat);
+		}
+		dataFormat = externalFormat;
 		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, externalFormat, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
@@ -113,25 +124,72 @@ void Texture::LoadTexture(const char* _path, bool linear, std::optional<DataForm
 		return;
 	}
 }
-void Texture::CreateTexture(unsigned int width, unsigned int height, DataFormat iternalFormat, DataFormat dataformat, FilterType filter1, FilterType filter2, void* data)
+void Texture::CreateTexture(unsigned int width, unsigned int height, DataFormat _iternalFormat, DataFormat _dataformat, FilterType filter1, FilterType filter2, void* data)
 {
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GLDataFormat(iternalFormat), width, height, 0, GLDataFormat(dataformat), GL_FLOAT, data == nullptr ? NULL : data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GLDataFormat(_iternalFormat), width, height, 0, GLDataFormat(_dataformat), GL_FLOAT, data == nullptr ? NULL : data);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GLFilterFormat(filter1));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GLFilterFormat(filter1));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GLFilterFormat(filter2));
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GLFilterFormat(filter2));
+	imageFormat = GLDataFormat(_iternalFormat);
+	dataFormat = GLDataFormat(_dataformat);
+	this->width = static_cast<int>(width);
+	this->height = static_cast<int>(height);
+}
+void Texture::SetLinear(bool _linear)
+{
+	if (linear == _linear) return;
+	if (!data || texture == 0) return;
+	GLenum format = GL_RGB;
+	if (data)
+	{
+		if (nrChannels == 1)
+		{
+			linear = _linear;
+			return;
+		}
+		else if (nrChannels == 3)
+		{
+			format = GL_RGB;
+			if(!_linear)
+				format = GL_SRGB;
+		}
+		else if (nrChannels == 4)
+		{
+			format = GL_RGBA;
+			if (!_linear)
+				format = GL_SRGB_ALPHA;
+		}
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, dataFormat, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	imageFormat = format;
+	linear = _linear;
 }
 unsigned char* Texture::GetData()
 {
 	return data;
+}
+bool Texture::GetLinear()
+{
+	return linear;
 }
 Texture::~Texture()
 {
 	if (data)
 		stbi_image_free(data);
 	glDeleteTextures(1, &texture);
+}
+int Texture::GetWidth()
+{
+	return width;
+}
+int Texture::GetHeight()
+{
+	return height;
 }
 unsigned int Texture::GetTexturePixels()
 {

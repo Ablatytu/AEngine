@@ -7,6 +7,7 @@
 #include "../APIs/ModelLoader.h"
 #include "../Renderer/Cubemap.h"
 #include "../Renderer/HDRTexture.h"
+#include "../Renderer/Material.h"
 #include <memory>
 #include <optional>
 
@@ -15,6 +16,7 @@ std::unordered_map<std::string, std::unique_ptr<Shader>> shaders;
 std::unordered_map<std::string, std::unique_ptr<Texture>> textures;
 std::unordered_map<std::string, std::unique_ptr<HDRTexture>> HDRtextures;
 std::unordered_map<std::string, std::unique_ptr<Cubemap>> cubemaps;
+std::vector<std::unique_ptr<Material>> materials;
 
 const std::unordered_map<std::string, std::unique_ptr<Texture>>& AssetManager::GetTextures()
 {
@@ -23,6 +25,15 @@ const std::unordered_map<std::string, std::unique_ptr<Texture>>& AssetManager::G
 const std::unordered_map<std::string, std::unique_ptr<Cubemap>>& AssetManager::GetCubemaps()
 {
 	return cubemaps;
+}
+Material* AssetManager::CreateMaterial(Shader* shader)
+{
+	std::unique_ptr<Material> newmaterial = std::make_unique<Material>();
+	newmaterial->SetShader(shader);
+	Material* result = newmaterial.get();
+	materials.push_back(std::move(newmaterial));
+
+	return result;
 }
 Model* AssetManager::LoadModel(const std::string& modelName)
 {
@@ -37,6 +48,7 @@ Model* AssetManager::LoadModel(const std::string& modelName)
 #endif
 	return returnModel;
 }
+
 Shader* AssetManager::LoadShader(const std::string& VertexName, const std::string& FragmentName, const std::optional<std::string>& GeometryShader)
 {
 	std::string nameshader = VertexName + "|" + FragmentName;

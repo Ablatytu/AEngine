@@ -41,6 +41,7 @@ class Scene
 		std::unique_ptr<LightManager> A_LightManager;
 		std::unique_ptr<Cubemap> irradianceMap;
 		std::unique_ptr<Cubemap> preilterCubemap;
+		std::unique_ptr<Cubemap> environmentcubemap;
 		AENGINE_API void SetSkyBox(Cubemap* cubemap);
 		AENGINE_API void SetSkyBox(HDRTexture* texture);
 		AENGINE_API Scene();

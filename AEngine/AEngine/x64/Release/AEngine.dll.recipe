@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\AEngine.dll</FullPath>
+      <FullPath>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\Release\AEngine.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

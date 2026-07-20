@@ -68,15 +68,14 @@ void AEditor::OnInit()
 	cubeMapDefaultSkyBox->ChangeTexture(TypeTexture::front, textureFront);
 	cubeMapDefaultSkyBox->ChangeTexture(TypeTexture::back, textureBack);
 
-	//Material material;
-	//Material terrainMaterial;
-	//Material cubeMaterial;
-	//Material CubemapMaterial;
-	//Material ExplodingMaterial;
-	//Material planeMaterial;
-	//Material ToonMaterial;
-	//Material CaveMaterial;
-	//Material spherePBRMaterial;
+	Material* material = AssetManager::CreateMaterial(standartShader);
+	Material* terrainMaterial = AssetManager::CreateMaterial(standartShader);
+	Material* cubeMaterial = AssetManager::CreateMaterial(cubeTransparent);
+	Material* CubemapMaterial = AssetManager::CreateMaterial(cubemapShader);
+	Material* ExplodingMaterial = AssetManager::CreateMaterial(explodingStandartShader);
+	Material* planeMaterial = AssetManager::CreateMaterial(standartShader);
+	Material* ToonMaterial = AssetManager::CreateMaterial(toonShader);
+	Material* spherePBRMaterial = AssetManager::CreateMaterial(standartShader);
 
 	Texture* texture = AssetManager::LoadTexture("Assets/Textures/d8c637d6-f500-44a3-bf33-c7896b95f8a0.png");
 	Texture* terrainTexture = AssetManager::LoadTexture("Assets/Textures/diff2.jpg");
@@ -89,43 +88,26 @@ void AEditor::OnInit()
 	Texture* BrickWallHeight = AssetManager::LoadTexture("Assets/Textures/bricks2_disp.jpg", true);
 	Texture* BrickWallNormal = AssetManager::LoadTexture("Assets/Textures/bricks2_normal.jpg", true);
 
-	ToonMaterial.SetShader(toonShader);
-	ToonMaterial.Set("_MainTexture", texture);
+	ToonMaterial->Set("_MainTexture", texture);
 
-	ExplodingMaterial.SetShader(explodingStandartShader);
-	ExplodingMaterial.Set("texture_diffuse1", texture);
-	ExplodingMaterial.Set("coefficientCubemap", 0.0f);
-	ExplodingMaterial.Set("Cubemap", cubeMapDefaultSkyBox);
+	ExplodingMaterial->Set("texture_diffuse1", texture);
 
-	planeMaterial.SetShader(standartShader);
-	planeMaterial.Set("texture_diffuse1", BrickWall);
-	planeMaterial.Set("normalMap", PlaneTextureNormal);
-	planeMaterial.Set("coefficientNormal", 0.0f);
-	planeMaterial.Set("heightMap", BrickWallHeight);
-	planeMaterial.Set("height_scale", 0.1f);
-	planeMaterial.Set("coefficientCubemap", 0.0f);
+	planeMaterial->Set("texture_diffuse1", BrickWall);
+	planeMaterial->Set("normalMap", PlaneTextureNormal);
+	planeMaterial->Set("coefficientNormal", 0.0f);
+	planeMaterial->Set("heightMap", BrickWallHeight);
+	planeMaterial->Set("height_scale", 0.1f);
 
-	material.SetShader(standartShader);
-	material.Set("GPUInstancing", true);
-	material.Set("texture_diffuse1", texture);
-	material.Set("coefficientCubemap", 0.0f);
-	material.Set("Cubemap", cubeMapDefaultSkyBox);
-	terrainMaterial.SetShader(standartShader);
-	terrainMaterial.Set("texture_diffuse1", terrainTexture);
-	terrainMaterial.Set("coefficientCubemap", 0.0f);
-	terrainMaterial.Set("Cubemap", cubeMapDefaultSkyBox);
-	cubeMaterial.surfaceType = Material::SurfaceType::Transparent;
-	cubeMaterial.SetShader(cubeTransparent);
-	cubeMaterial.Set("texture_diffuse1", cubeTexture);
-	cubeMaterial.Set("coefficientCubemap", 0.0f);
-	cubeMaterial.Set("objectColor", glm::vec4(0.8f, 0.5f, 1.0f, 0.5f));
-	CubemapMaterial.SetShader(cubemapShader);
-	CubemapMaterial.Set("cubemap", cubeMapDefaultSkyBox);
+	material->Set("GPUInstancing", true);
+	material->Set("texture_diffuse1", texture);
+	terrainMaterial->Set("texture_diffuse1", terrainTexture);
+	cubeMaterial->surfaceType = Material::SurfaceType::Transparent;
+	cubeMaterial->Set("texture_diffuse1", cubeTexture);
+	cubeMaterial->Set("objectColor", glm::vec4(0.8f, 0.5f, 1.0f, 0.5f));
+	CubemapMaterial->Set("cubemap", cubeMapDefaultSkyBox);
 
-	spherePBRMaterial.SetShader(standartShader);
-	spherePBRMaterial.Set("Cubemap", cubeMapDefaultSkyBox);
-	spherePBRMaterial.Set("metallic", 1.0f);
-	spherePBRMaterial.Set("roughness", 0.0f);
+	spherePBRMaterial->Set("metallic", 1.0f);
+	spherePBRMaterial->Set("roughness", 0.0f);
 
 	rs_Init();
 	editorGUI->EDITOR_INIT();
@@ -183,14 +165,14 @@ void AEditor::OnInit()
 		Plush_reiInstancing->AddComponent<Cube>();
 		Plush_reiInstancing->GetComponent<Cube>()->rotate = true;
 		Plush_reiInstancing->GetComponent<Render>()->mesh = &rei->meshes[0];
-		Plush_reiInstancing->GetComponent<Render>()->material = &material;
+		Plush_reiInstancing->GetComponent<Render>()->material = material;
 		Plush_reiInstancing->GetComponent<Transform>()->UpdateMatrices();
 	}
 
 	GameObject* newSphere = SceneManager::Get().CreateGameObject();
 	newSphere->AddComponent<Render>();
 	newSphere->GetComponent<Render>()->mesh = &sphere->meshes[0];
-	newSphere->GetComponent<Render>()->material = &spherePBRMaterial;
+	newSphere->GetComponent<Render>()->material = spherePBRMaterial;
 	newSphere->GetComponent<Transform>()->position = glm::vec3(2.0f, 2.0f, 5.0f);
 	newSphere->GetComponent<Transform>()->scale = glm::vec3(0.5f);
 	newSphere->GetComponent<Transform>()->UpdateMatrices();
@@ -208,18 +190,18 @@ void AEditor::OnInit()
 	pointLightR->name = "pointLightR";
 	plane->AddComponent<Render>();
 	plane->GetComponent<Render>()->mesh = &planeModel->meshes[0];
-	plane->GetComponent<Render>()->material = &planeMaterial;
+	plane->GetComponent<Render>()->material = planeMaterial;
 	plane->GetComponent<Transform>()->position = glm::vec3(0.0f, 0.0f, 0.0f);
 	plane->GetComponent<Transform>()->scale = glm::vec3(5.0f, 1.0f, 5.0f);
 	plane->GetComponent<Transform>()->UpdateMatrices();
 	Cube3D->AddComponent<Render>();
 	Cube3D->GetComponent<Render>()->mesh = &cube->meshes[0];
-	Cube3D->GetComponent<Render>()->material = &CubemapMaterial;
+	Cube3D->GetComponent<Render>()->material = CubemapMaterial;
 	Cube3D->GetComponent<Transform>()->position = glm::vec3(5.0f, 1.0f, -3.0f);
 	Cube3D->GetComponent<Transform>()->UpdateMatrices();
 	terrain->AddComponent<Render>();
 	terrain->GetComponent<Render>()->mesh = &terrainModel->meshes[0];
-	terrain->GetComponent<Render>()->material = &terrainMaterial;
+	terrain->GetComponent<Render>()->material = terrainMaterial;
 	terrain->GetComponent<Transform>()->scale = glm::vec3(0.005f, 0.005f, 0.005f);
 	terrain->GetComponent<Transform>()->position = glm::vec3(5.0f, 0.0f, 3.0f);
 	terrain->GetComponent<Transform>()->UpdateMatrices();
@@ -231,7 +213,7 @@ void AEditor::OnInit()
 	spotLight->AddComponent<Cube>();
 	spotLight->AddComponent<Render>();
 	spotLight->GetComponent<Render>()->mesh = &cube->meshes[0];
-	spotLight->GetComponent<Render>()->material = &cubeMaterial;
+	spotLight->GetComponent<Render>()->material = cubeMaterial;
 	spotLight->GetComponent<Transform>()->UpdateMatrices();
 	pointLight->AddComponent<Light>();
 	pointLight->GetComponent<Light>()->typeLight = Light::Type::Point;
@@ -245,7 +227,7 @@ void AEditor::OnInit()
 	//pointLight->GetComponent<Render>()->material = &cubeMaterial;
 	pointLightR->AddComponent<Render>();
 	pointLightR->GetComponent<Render>()->mesh = &cube->meshes[0];
-	pointLightR->GetComponent<Render>()->material = &cubeMaterial;
+	pointLightR->GetComponent<Render>()->material = cubeMaterial;
 	pointLightR->GetComponent<Transform>()->position = glm::vec3(0.0f, 3.0f, 1.5f);
 	pointLightR->AddComponent<Light>();
 	pointLightR->GetComponent<Light>()->typeLight = Light::Type::Point;
@@ -255,7 +237,7 @@ void AEditor::OnInit()
 	pointLightR->GetComponent<LightMoving>()->rigntPos = true;
 	pointLightG->AddComponent<Render>();
 	pointLightG->GetComponent<Render>()->mesh = &cube->meshes[0];
-	pointLightG->GetComponent<Render>()->material = &cubeMaterial;
+	pointLightG->GetComponent<Render>()->material = cubeMaterial;
 	pointLightG->GetComponent<Transform>()->position = glm::vec3(0.0f, 2.0f, -45.5f);
 	pointLightG->AddComponent<Light>();
 	pointLightG->GetComponent<Light>()->typeLight = Light::Type::Point;
@@ -275,19 +257,19 @@ void AEditor::OnInit()
 	Plush_rei->AddComponent<Render>();
 	Plush_rei->AddComponent<Rei>();
 	Plush_rei->GetComponent<Render>()->mesh = &rei->meshes[0];
-	Plush_rei->GetComponent<Render>()->material = &ToonMaterial;
+	Plush_rei->GetComponent<Render>()->material = ToonMaterial;
 	Plush_rei->GetComponent<Transform>()->position = glm::vec3(-2.0f, -0.2f, 0.5f);
 	Plush_rei->GetComponent<Transform>()->UpdateMatrices();
 	Plush_rei->AddComponent<Cube>();
 	Plush_rei1->AddComponent<Render>();
 	Plush_rei1->GetComponent<Render>()->mesh = &rei->meshes[0];
-	Plush_rei1->GetComponent<Render>()->material = &material;
+	Plush_rei1->GetComponent<Render>()->material = material;
 	Plush_rei1->GetComponent<Transform>()->position = glm::vec3(2.0f, -0.2f, 0.5f);
 	Plush_rei1->GetComponent<Transform>()->UpdateMatrices();
 	//Plush_rei1.AddComponent<Cube>();
 	Plush_rei2->AddComponent<Render>();
 	Plush_rei2->GetComponent<Render>()->mesh = &rei->meshes[0];
-	Plush_rei2->GetComponent<Render>()->material = &material;
+	Plush_rei2->GetComponent<Render>()->material = material;
 	Plush_rei2->GetComponent<Transform>()->position = glm::vec3(0.0f, -0.2f, 0.5f);
 	Plush_rei2->GetComponent<Transform>()->UpdateMatrices();
 	//Plush_rei2.AddComponent<Cube>();
@@ -340,7 +322,9 @@ void AEditor::OnRender()
 	editorGUI->BeginDockspace();
 	editorGUI->ShowInspectorWindow();
 	editorGUI->ShowHierarchyWindow();
+	editorGUI->ShowProject();
 	editorGUI->RenderViewport();
+	editorGUI->ShowLightingMenu();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }

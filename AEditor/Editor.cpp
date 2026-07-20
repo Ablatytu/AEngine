@@ -5,6 +5,9 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
 #include <memory>
+#include <filesystem>
+#include <algorithm>
+#include <cctype>
 #include "../AEngine/components/Transform.h"
 #include "../AEngine/Renderer/GameObject.h"
 #include "../AEngine/components/AComponent.h"
@@ -23,21 +26,16 @@
 #include "../AEngine/Renderer/RenderSystem.h"
 #include "../AEngine/Renderer/FramebufferManager.h"
 #include "../AEngine/Renderer/Framebuffer.h"
+#include "../AEngine/APIs/ModelLoader.h"
+#include "../AEngine/core/Application.h"
 #include "imgui_internal.h"
 #include <ImGuizmo.h>
 
-Transform* transform;
-float pos[3];
-float scale[3];
-float rot[3];
-Shader* OutlineShader;
-Material OutlineMaterial;
 void EditorGUI::RenderOutline(Render* mesh)
 {
 	if (!OutlineShader)
 	{
 		OutlineShader = AssetManager::LoadShader("Shaders/VertexSelectedObjectEditor.glsl", "Shaders/selectedObjectEditor.glsl");
-		OutlineMaterial.SetShader(OutlineShader);
 	}
 	RenderSystem::rs_RenderOutline(selectedObject.selectedObjectRender, OutlineShader);
 }
@@ -45,6 +43,10 @@ void EditorGUI::EDITOR_INIT()
 {
 	sceneHDR = FramebufferManager::Get().Add("defaultFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
 	viewport = FramebufferManager::Get().Add("ViewportFramebuffer", "__NULL__", "__NULL__", { Framebuffer::TypeFrameBuffer::HDR }, true);
+	folderIcon = std::make_unique<Texture>();
+	folderIcon->LoadTexture("EditorAssets/FolderIconAEngine.png");
+	ModelIcon = std::make_unique<Texture>();
+	ModelIcon->LoadTexture("EditorAssets/3DModelIconAEngine.png");
 	ImGuiIO& io = ImGui::GetIO();
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
@@ -68,6 +70,36 @@ void EditorGUI::RenderViewport()
 	sizeviewport[1] = std::max(1, (int)sizeviewportHeight);
 	viewportHovered = ImGui::IsWindowHovered();
 	ImGui::Image((ImTextureID)(uintptr_t)viewport->GetColorBuffer(0), ImVec2(sizeviewportWidth, sizeviewportHeight), ImVec2(0, 1), ImVec2(1, 0)	);
+	if (ImGui::BeginDragDropTarget())
+	{
+		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
+		{
+			const char* relativePath = static_cast<const char*>(payload->Data);
+			std::filesystem::path fullPath = projectDirectory / relativePath;
+			std::string extension = fullPath.extension().string();
+			std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char symbol) {return static_cast<char>(std::tolower(symbol)); });
+			if (extension == ".obj")
+			{
+				Model* model = AssetManager::LoadModel(fullPath.string());
+				if (model)
+				{
+					GameObject* newObject = SceneManager::Get().GetActiveScene().CreateGameObject();
+					newObject->name = fullPath.stem().string();
+					Render* render = newObject->AddComponent<Render>();
+
+					render->mesh = &model->meshes[0];
+					Material* material = AssetManager::CreateMaterial(AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl"));
+
+					render->material = material;
+					selectedTexture = nullptr;
+
+					selectedObject.selectedObject = newObject;
+					selectedObject.selectedObjectRender = render;
+				}
+			}
+		}
+		ImGui::EndDragDropTarget();
+	}
 	ImGuizmo::BeginFrame();
 	ImGuizmo::SetOrthographic(false);
 	ImGuizmo::SetDrawlist();
@@ -76,6 +108,185 @@ void EditorGUI::RenderViewport()
 	ImGui::End();
 	ImGui::PopStyleVar();
 }
+void EditorGUI::DrawDockspaceMenuBar()
+{
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("New Scene(Not working now)", "Ctrl+N"), false, false)
+			{
+
+			}
+			if (ImGui::MenuItem("Save Scene(Not working now)", "Ctrl+S"), false, false)
+			{
+
+			}
+			ImGui::Separator();
+			if (ImGui::MenuItem("Exit"))
+			{
+				Application::Get().close();
+			}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("GameObject"))
+		{
+			if (ImGui::MenuItem("Create Empty"))
+			{
+				GameObject* newObject = SceneManager::Get().CreateGameObject();
+				selectedObject.selectedObject = newObject;
+			}
+			if (ImGui::BeginMenu("Light"))
+			{
+				if (ImGui::MenuItem("Directional Light"))
+				{
+
+				}
+				if (ImGui::MenuItem("Point Light"))
+				{
+
+				}
+				if (ImGui::MenuItem("Spot Light"))
+				{
+
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Window"))
+		{
+			if (ImGui::BeginMenu("Rendering"))
+			{
+				ImGui::MenuItem("Lighting", nullptr, &showLightingMenu);
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+}
+void EditorGUI::ShowLightingMenu()
+{
+	if (!showLightingMenu)
+		return;
+	ImGui::SetNextWindowSize(ImVec2(400.0f, 300.0f), ImGuiCond_FirstUseEver );
+	if (ImGui::Begin("Lighting", &showLightingMenu))
+	{
+		ImGui::TextUnformatted("Environment Lighting");
+
+		ImGui::Button("Drop skybox", ImVec2(ImGui::GetContentRegionAvail().x, 60.0f));
+
+		if (ImGui::BeginDragDropTarget())
+		{
+			if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
+			{
+				const char* relativePath = static_cast<const char*>(payload->Data);
+
+				std::filesystem::path fullpath = projectDirectory / relativePath;
+
+				std::string extension = fullpath.extension().string();
+
+				std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char symbol) { return static_cast<char>(std::tolower(symbol)); });
+
+				if (extension == ".hdr")
+				{
+					HDRTexture* newTexture = AssetManager::LoadHDRTexture(fullpath.generic_string());
+					if (newTexture)
+					{
+						SceneManager::Get().GetActiveScene().SetSkyBox(newTexture);
+					}
+				}
+			}
+			ImGui::EndDragDropTarget();
+		}
+	}
+	ImGui::End();
+}
+void EditorGUI::ShowProject()
+{
+	ImGui::Begin("Project");
+	if (!std::filesystem::exists(projectDirectory))
+		std::filesystem::create_directories(projectDirectory);
+	if (currentDirectory != projectDirectory)
+	{
+		if (ImGui::Button("<-"))
+			currentDirectory = currentDirectory.parent_path();
+		ImGui::SameLine();
+	}
+	ImGui::TextUnformatted(currentDirectory.string().c_str());
+	ImGui::Separator();
+	
+	std::error_code error;
+	for (const auto& entry : std::filesystem::directory_iterator(currentDirectory, error))
+	{
+		const std::filesystem::path& path = entry.path();
+		std::string filename = path.filename().string();
+
+		ImGui::PushID(path.string().c_str());
+
+		if (entry.is_directory())
+		{
+			float iconSize = ImGui::GetTextLineHeight();
+			ImGui::Image((ImTextureID)(uintptr_t)folderIcon->GetTexturePixels(), ImVec2(iconSize, iconSize), ImVec2(0, 0), ImVec2(1, 1));
+			ImGui::SameLine();
+			if (ImGui::Selectable(filename.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick))
+			{
+				if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+				{
+					currentDirectory = path;
+				}
+			}
+		}
+		else
+		{
+			std::string extension = path.extension().string();
+			std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char symbol) { return static_cast<char>(std::tolower(symbol));});
+			float iconSize = ImGui::GetTextLineHeight();
+			if (extension == ".obj")
+			{
+				ImGui::Image((ImTextureID)(uintptr_t)ModelIcon->GetTexturePixels(), ImVec2(iconSize, iconSize), ImVec2(0, 0), ImVec2(1, 1));
+				ImGui::SameLine();
+			}
+			else if (extension == ".png" || extension == ".jpg")
+			{
+				Texture* previewTexture = AssetManager::LoadTexture(path.generic_string());
+				if (previewTexture)
+				{
+					ImGui::Image((ImTextureID)(uintptr_t)previewTexture->GetTexturePixels(), ImVec2(iconSize, iconSize), ImVec2(0, 0), ImVec2(1, 1));
+					ImGui::SameLine();
+				}
+
+			}
+			bool clicked = ImGui::Selectable(filename.c_str());
+			if (clicked)
+			{
+				if (extension == ".png" || extension == ".jpg")
+				{
+					selectedTexture = AssetManager::LoadTexture(path.generic_string());
+					selectedObject.selectedObject = nullptr;
+					selectedObject.selectedObjectRender = nullptr;
+				}
+				else
+					selectedTexture = nullptr;
+			}
+			if (ImGui::BeginDragDropSource())
+			{
+				std::string relativePath = std::filesystem::relative(path, projectDirectory).generic_string();
+				ImGui::SetDragDropPayload("PROJECT_ASSET", relativePath.c_str(), relativePath.size() + 1);
+				ImGui::TextUnformatted(filename.c_str());
+				ImGui::EndDragDropSource();
+			}
+		}
+		ImGui::PopID();
+	}
+	if (error)
+	{
+		ImGui::Text("Directory error: %s", error.message().c_str());
+	}
+	ImGui::End();
+}
+
 void EditorGUI::BeginDockspace()
 {
 	static bool dockspaceOpen = true;
@@ -119,17 +330,20 @@ void EditorGUI::BeginDockspace()
 		ImGuiID dockMain = dockspaceID;
 		ImGuiID dockLeft = 0;
 		ImGuiID dockRight = 0;
+		ImGuiID dockDown = 0;
 
 		ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Left, 0.22f, &dockLeft, &dockMain);
 		ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Right, 0.28f, &dockRight, &dockMain);
+		ImGui::DockBuilderSplitNode(dockMain, ImGuiDir_Down, 0.22f, &dockDown, &dockMain);
 
 		ImGui::DockBuilderDockWindow("Hierarchy", dockLeft);
 		ImGui::DockBuilderDockWindow("Inspector", dockRight);
 		ImGui::DockBuilderDockWindow("Viewport", dockMain);
+		ImGui::DockBuilderDockWindow("Project", dockDown);
 
 		ImGui::DockBuilderFinish(dockspaceID);
 	}
-
+	DrawDockspaceMenuBar();
 	ImGui::End();
 }
 void EditorGUI::RenderGizmo()
@@ -203,6 +417,8 @@ void EditorGUI::ShowHierarchyWindow()
 		bool selected = (selectedObject.selectedObject == object.get());
 		if (ImGui::Selectable((std::string(object->name) + "##" + std::to_string((uintptr_t)object.get())).c_str(), selected))
 		{
+			selectedTexture = nullptr;
+
 			selectedObject.selectedObject = object.get();
 			selectedObject.selectedObjectRender = object.get()->GetComponent<Render>();
 		}
@@ -211,9 +427,40 @@ void EditorGUI::ShowHierarchyWindow()
 }
 void EditorGUI::ShowInspectorWindow()
 {
-
 	static GameObject* prevObj = nullptr;
 	ImGui::Begin("Inspector");
+	if (selectedTexture)
+	{
+		ImGui::TextUnformatted(selectedTexture->path.c_str());
+		ImGui::Separator();
+
+		float avaliableWidth = ImGui::GetContentRegionAvail().x;
+		float previewWidth = std::min(avaliableWidth, 256.0f);
+
+		float aspect = static_cast<float>(selectedTexture->GetWidth()) / static_cast<float>(selectedTexture->GetHeight());
+
+		ImVec2 previewSize;
+
+		if (aspect >= 1.0f)
+		{
+			previewSize.x = previewWidth;
+			previewSize.y = previewWidth / aspect;
+		}
+		else
+		{
+			previewSize.y = previewWidth;
+			previewSize.x = previewWidth * aspect;
+		}
+
+		ImGui::Image((ImTextureID)(uintptr_t)selectedTexture->GetTexturePixels(), previewSize, ImVec2(0, 0), ImVec2(1, 1));
+
+		ImGui::Text("%d x %d", selectedTexture->GetWidth(), selectedTexture->GetHeight());
+		bool linear = selectedTexture->GetLinear();
+		if (ImGui::Checkbox("Linear: ", &linear))
+			selectedTexture->SetLinear(linear);
+		ImGui::End();
+		return;
+	}
 	if (selectedObject.selectedObject)
 	{
 		AComponent* removedComponent = nullptr;
@@ -443,6 +690,7 @@ void EditorGUI::ShowInspectorWindow()
 							std::string comboId = fieldmaterial;
 							Texture* selectedTexture = material->GetTexture(fieldmaterial);
 							const char* preview = selectedTexture ? selectedTexture->path.c_str() : "None";
+							ImGui::BeginGroup();
 							if (ImGui::BeginCombo(comboId.c_str(), preview))
 							{
 								if (ImGui::Selectable("None"))
@@ -457,6 +705,27 @@ void EditorGUI::ShowInspectorWindow()
 									}
 								}
 								ImGui::EndCombo();
+							}
+							ImGui::EndGroup();
+
+							if (ImGui::BeginDragDropTarget())
+							{
+								if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
+								{
+									const char* relativePath = static_cast<const char*>(payload->Data);
+									std::filesystem::path fullpath = projectDirectory / relativePath;
+									std::string extension = fullpath.extension().string();
+
+									std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
+
+									if (extension == ".png" || extension == ".jpg")
+									{
+										Texture* newTexture = AssetManager::LoadTexture(fullpath.generic_string());
+										if (newTexture)
+											material->Set(fieldmaterial, newTexture);
+									}
+								}
+								ImGui::EndDragDropTarget();
 							}
 						}
 						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::SamplerCube)
