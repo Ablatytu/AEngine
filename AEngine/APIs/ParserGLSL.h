@@ -104,6 +104,11 @@ public:
 	unsigned int RenderPath = 0;
 	std::unordered_map<std::string, PGLinfos::ShaderInfo> infoes;
 	PropertiesWithUniforms(std::string path, unsigned int shader);
+
+	const PGLinfos::ShaderInfo* GetInfo(std::string name);
+
+	const PGLinfos::FieldType GetType(std::string name);
+
 	template<typename type> void SetValue(const std::string& name, const type& newValue)
 	{
 		auto it = infoes.find(name);

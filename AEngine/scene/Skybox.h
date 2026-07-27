@@ -7,11 +7,12 @@ class Skybox
 {
 public:
 	Skybox(Cubemap* cubemap);
+    ~Skybox();
 	void RenderSkyBox();
 	void ChangeSkyBox(Cubemap* cubemap);
 private:
 	Cubemap* skybox = nullptr;
-	Shader* skyboxShader = nullptr;
+	std::unique_ptr<Shader> skyboxShader = nullptr;
     unsigned int VAO;
     float skyboxVertices[108] = {
 

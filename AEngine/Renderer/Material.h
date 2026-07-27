@@ -31,6 +31,7 @@ public:
 	void SetShader(Shader* newshader);
 	Shader* GetShader();
 	Texture* GetTexture(const std::string& name);
+	Cubemap* GetCubemap(const std::string& name);
 	void SetUBO(std::string nameUBO, std::string nameField, const void* data, uint32_t sizevalue);
 	void Set(std::string name, float value);
 	void Set(std::string name, int value);
@@ -48,6 +49,7 @@ public:
 	Texture* GetBlueTexture();
 	Texture* GetNormalTexture();
 	Texture* GetBlackTexture();
+	Cubemap* GetBlackCubemap();
 	unsigned int GetLastTextureSlot() const;
 	template<typename type> const type* GetValue(std::string nameuniform)
 	{
@@ -58,6 +60,9 @@ public:
 	void UpdateMaterial();
 	PropertiesWithUniforms* GetProperties();
 	~Material();
+
+	std::string path = "";
+	bool hasFile = false;
 private:
 	RenderPath renderPath = RenderPath::forward;
 	Shader* shader = nullptr;

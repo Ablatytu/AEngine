@@ -1,0 +1,8 @@
+Type: Material
+Shader_vertex: Assets/ToonshaderVS.glsl
+Shader_fragment: Assets/ToonshaderFS.glsl
+Shader_geometry: ""
+Properties:
+  _Color: [1, 1, 1, 1]
+  _Threshold: 0.5
+  _MainTexture: Assets/Textures/d8c637d6-f500-44a3-bf33-c7896b95f8a0.png

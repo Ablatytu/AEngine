@@ -50,10 +50,10 @@ void AEditor::OnInit()
 	Shader* standartShader = AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl");
 	Shader* cubeTransparent = AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
 	Shader* cubemapShader = AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/CubemapShader.glsl");
-	Shader* explodingStandartShader = AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl", "Shaders/ExplodingGeometryShader.glsl");
+	//Shader* explodingStandartShader = AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl", "Shaders/ExplodingGeometryShader.glsl");
 	Shader* toonShader = AssetManager::LoadShader("Assets/ToonshaderVS.glsl", "Assets/ToonshaderFS.glsl");
 
-	Cubemap* cubeMapDefaultSkyBox = AssetManager::LoadCubemap("cubeMap", 2048);
+	Cubemap* cubeMapDefaultSkyBox = AssetManager::CreateCubemap("cubeMap", 2048);
 	Texture* textureRight = AssetManager::LoadTexture("Assets/Textures/skybox/right.jpg");
 	Texture* textureLeft = AssetManager::LoadTexture("Assets/Textures/skybox/left.jpg");
 	Texture* textureTop = AssetManager::LoadTexture("Assets/Textures/skybox/top.jpg");
@@ -68,14 +68,14 @@ void AEditor::OnInit()
 	cubeMapDefaultSkyBox->ChangeTexture(TypeTexture::front, textureFront);
 	cubeMapDefaultSkyBox->ChangeTexture(TypeTexture::back, textureBack);
 
-	Material* material = AssetManager::CreateMaterial(standartShader);
-	Material* terrainMaterial = AssetManager::CreateMaterial(standartShader);
-	Material* cubeMaterial = AssetManager::CreateMaterial(cubeTransparent);
-	Material* CubemapMaterial = AssetManager::CreateMaterial(cubemapShader);
-	Material* ExplodingMaterial = AssetManager::CreateMaterial(explodingStandartShader);
-	Material* planeMaterial = AssetManager::CreateMaterial(standartShader);
-	Material* ToonMaterial = AssetManager::CreateMaterial(toonShader);
-	Material* spherePBRMaterial = AssetManager::CreateMaterial(standartShader);
+	Material* material = AssetManager::CreateMaterial("StandartMaterial", standartShader);
+	Material* terrainMaterial = AssetManager::CreateMaterial("TerrainMaterial", standartShader);
+	Material* cubeMaterial = AssetManager::CreateMaterial("CubeMaterial", cubeTransparent);
+	Material* CubemapMaterial = AssetManager::CreateMaterial("CubemapMaterial", cubemapShader);
+	//Material* ExplodingMaterial = AssetManager::CreateMaterial("ExplodingMaterial", explodingStandartShader);
+	Material* planeMaterial = AssetManager::CreateMaterial("PlaneMaterial", standartShader);
+	Material* ToonMaterial = AssetManager::CreateMaterial("ToonMaterial", toonShader);
+	Material* spherePBRMaterial = AssetManager::CreateMaterial("spherePBRMaterial", standartShader);
 
 	Texture* texture = AssetManager::LoadTexture("Assets/Textures/d8c637d6-f500-44a3-bf33-c7896b95f8a0.png");
 	Texture* terrainTexture = AssetManager::LoadTexture("Assets/Textures/diff2.jpg");
@@ -90,7 +90,7 @@ void AEditor::OnInit()
 
 	ToonMaterial->Set("_MainTexture", texture);
 
-	ExplodingMaterial->Set("texture_diffuse1", texture);
+	//ExplodingMaterial->Set("texture_diffuse1", texture);
 
 	planeMaterial->Set("texture_diffuse1", BrickWall);
 	planeMaterial->Set("normalMap", PlaneTextureNormal);

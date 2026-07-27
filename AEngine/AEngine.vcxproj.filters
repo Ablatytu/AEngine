@@ -125,6 +125,15 @@
     <ClCompile Include="Renderer\HDRTexture.cpp">
       <Filter>Файлы ресурсов\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="scene\SceneSerializer.cpp">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\MaterialSerializer.cpp">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\CubemapSerializer.cpp">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h">
@@ -228,6 +237,15 @@
     </ClInclude>
     <ClInclude Include="core\AEngineAPI.h">
       <Filter>Файлы ресурсов\core</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\SceneSerializer.h">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\MaterialSerializer.h">
+      <Filter>Файлы ресурсов\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\CubemapSerializer.h">
+      <Filter>Файлы ресурсов\scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

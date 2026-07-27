@@ -29,24 +29,31 @@
 #include "../AEngine/APIs/ModelLoader.h"
 #include "../AEngine/core/Application.h"
 #include "imgui_internal.h"
+#include "../AEngine/scene/CubemapSerializer.h"
+#include "../AEngine/scene/MaterialSerializer.h"
 #include <ImGuizmo.h>
 
 void EditorGUI::RenderOutline(Render* mesh)
 {
 	if (!OutlineShader)
 	{
-		OutlineShader = AssetManager::LoadShader("Shaders/VertexSelectedObjectEditor.glsl", "Shaders/selectedObjectEditor.glsl");
+		OutlineShader = std::make_unique<Shader>("Shaders/VertexSelectedObjectEditor.glsl", "Shaders/selectedObjectEditor.glsl");
 	}
-	RenderSystem::rs_RenderOutline(selectedObject.selectedObjectRender, OutlineShader);
+	RenderSystem::rs_RenderOutline(selectedObject.selectedObjectRender, OutlineShader.get());
 }
 void EditorGUI::EDITOR_INIT()
 {
-	sceneHDR = FramebufferManager::Get().Add("defaultFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
-	viewport = FramebufferManager::Get().Add("ViewportFramebuffer", "__NULL__", "__NULL__", { Framebuffer::TypeFrameBuffer::HDR }, true);
+	sceneHDRShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl");
+	sceneHDR = FramebufferManager::Get().Add("defaultFramebuffer", sceneHDRShader.get(), {Framebuffer::TypeFrameBuffer::HDR}, true);
+	viewport = FramebufferManager::Get().Add("ViewportFramebuffer", nullptr, { Framebuffer::TypeFrameBuffer::HDR }, true);
 	folderIcon = std::make_unique<Texture>();
 	folderIcon->LoadTexture("EditorAssets/FolderIconAEngine.png");
 	ModelIcon = std::make_unique<Texture>();
 	ModelIcon->LoadTexture("EditorAssets/3DModelIconAEngine.png");
+	CubemapIcon = std::make_unique<Texture>();
+	CubemapIcon->LoadTexture("EditorAssets/CubemapIconAEngine.png");
+	MaterialIcon = std::make_unique<Texture>();
+	MaterialIcon->LoadTexture("EditorAssets/MaterialIconAEngine.png");
 	ImGuiIO& io = ImGui::GetIO();
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
@@ -88,13 +95,15 @@ void EditorGUI::RenderViewport()
 					Render* render = newObject->AddComponent<Render>();
 
 					render->mesh = &model->meshes[0];
-					Material* material = AssetManager::CreateMaterial(AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl"));
+					Material* material = AssetManager::CreateMaterial("StandartMaterial", AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl"));
 
 					render->material = material;
 					selectedTexture = nullptr;
-
+					selectedCubemap = nullptr;
+					selectedMaterial = nullptr;
 					selectedObject.selectedObject = newObject;
 					selectedObject.selectedObjectRender = render;
+					selectedAsset = SelectedAsset::None;
 				}
 			}
 		}
@@ -134,7 +143,12 @@ void EditorGUI::DrawDockspaceMenuBar()
 			if (ImGui::MenuItem("Create Empty"))
 			{
 				GameObject* newObject = SceneManager::Get().CreateGameObject();
+				selectedTexture = nullptr;
+				selectedCubemap = nullptr;
+				selectedMaterial = nullptr;
+				selectedAsset = SelectedAsset::None;
 				selectedObject.selectedObject = newObject;
+				selectedObject.selectedObjectRender = nullptr;
 			}
 			if (ImGui::BeginMenu("Light"))
 			{
@@ -258,17 +272,46 @@ void EditorGUI::ShowProject()
 				}
 
 			}
+			else if (extension == ".aasset")
+			{
+				if (AssetManager::LoadCubemap(path.generic_string()))
+				{
+					ImGui::Image((ImTextureID)(uintptr_t)CubemapIcon->GetTexturePixels(), ImVec2(iconSize, iconSize), ImVec2(0, 0), ImVec2(1, 1));
+					ImGui::SameLine();
+				}
+				else if (AssetManager::LoadMaterial(path.generic_string()))
+				{
+					ImGui::Image((ImTextureID)(uintptr_t)MaterialIcon->GetTexturePixels(), ImVec2(iconSize, iconSize), ImVec2(0, 0), ImVec2(1, 1));
+					ImGui::SameLine();
+				}
+			}
 			bool clicked = ImGui::Selectable(filename.c_str());
 			if (clicked)
 			{
+				selectedTexture = nullptr;
+				selectedCubemap = nullptr;
+				selectedMaterial = nullptr;
+				selectedAsset = SelectedAsset::None;
+				selectedObject.selectedObject = nullptr;
+				selectedObject.selectedObjectRender = nullptr;
 				if (extension == ".png" || extension == ".jpg")
 				{
+					selectedAsset = SelectedAsset::Texture;
 					selectedTexture = AssetManager::LoadTexture(path.generic_string());
-					selectedObject.selectedObject = nullptr;
-					selectedObject.selectedObjectRender = nullptr;
 				}
-				else
-					selectedTexture = nullptr;
+				else if (extension == ".aasset")
+				{
+					if (CubemapSerializer::IsCubemap(path.generic_string()))
+					{
+						selectedCubemap = AssetManager::LoadCubemap(path.generic_string());
+						selectedAsset = SelectedAsset::Cubemap;
+					}
+					else if (MaterialSerializer::IsMaterial(path.generic_string()))
+					{
+						selectedAsset = SelectedAsset::Material;
+						selectedMaterial = AssetManager::LoadMaterial(path.generic_string());
+					}
+				}
 			}
 			if (ImGui::BeginDragDropSource())
 			{
@@ -283,6 +326,32 @@ void EditorGUI::ShowProject()
 	if (error)
 	{
 		ImGui::Text("Directory error: %s", error.message().c_str());
+	}
+	if (ImGui::BeginPopupContextWindow("ProjectContextWindow", ImGuiPopupFlags_MouseButtonRight | ImGuiPopupFlags_NoOpenOverItems))
+	{
+		if (ImGui::MenuItem("Create new cubemap"))
+		{
+			int index = 1;
+			std::filesystem::path path = currentDirectory / "NewCubemap.aasset";
+			while (std::filesystem::exists(path))
+			{
+				path = currentDirectory / ("NewCubemap" + std::to_string(index) + ".aasset");
+				index++;
+			}
+			AssetManager::CreateCubemap(path.generic_string(), 512, true);
+		}
+		if (ImGui::MenuItem("Create new material"))
+		{
+			int index = 1;
+			std::filesystem::path path = currentDirectory / "NewMaterial.aasset";
+			while (std::filesystem::exists(path))
+			{
+				path = currentDirectory / ("NewMaterial" + std::to_string(index) + ".aasset");
+				index++;
+			}
+			AssetManager::CreateMaterial(path.generic_string(), AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl"), true);
+		}
+		ImGui::EndPopup();
 	}
 	ImGui::End();
 }
@@ -418,7 +487,9 @@ void EditorGUI::ShowHierarchyWindow()
 		if (ImGui::Selectable((std::string(object->name) + "##" + std::to_string((uintptr_t)object.get())).c_str(), selected))
 		{
 			selectedTexture = nullptr;
-
+			selectedCubemap = nullptr;
+			selectedMaterial = nullptr;
+			selectedAsset = SelectedAsset::None;
 			selectedObject.selectedObject = object.get();
 			selectedObject.selectedObjectRender = object.get()->GetComponent<Render>();
 		}
@@ -429,347 +500,640 @@ void EditorGUI::ShowInspectorWindow()
 {
 	static GameObject* prevObj = nullptr;
 	ImGui::Begin("Inspector");
-	if (selectedTexture)
+	switch (selectedAsset)
 	{
-		ImGui::TextUnformatted(selectedTexture->path.c_str());
-		ImGui::Separator();
-
-		float avaliableWidth = ImGui::GetContentRegionAvail().x;
-		float previewWidth = std::min(avaliableWidth, 256.0f);
-
-		float aspect = static_cast<float>(selectedTexture->GetWidth()) / static_cast<float>(selectedTexture->GetHeight());
-
-		ImVec2 previewSize;
-
-		if (aspect >= 1.0f)
+		case SelectedAsset::Material:
 		{
-			previewSize.x = previewWidth;
-			previewSize.y = previewWidth / aspect;
-		}
-		else
-		{
-			previewSize.y = previewWidth;
-			previewSize.x = previewWidth * aspect;
-		}
-
-		ImGui::Image((ImTextureID)(uintptr_t)selectedTexture->GetTexturePixels(), previewSize, ImVec2(0, 0), ImVec2(1, 1));
-
-		ImGui::Text("%d x %d", selectedTexture->GetWidth(), selectedTexture->GetHeight());
-		bool linear = selectedTexture->GetLinear();
-		if (ImGui::Checkbox("Linear: ", &linear))
-			selectedTexture->SetLinear(linear);
-		ImGui::End();
-		return;
-	}
-	if (selectedObject.selectedObject)
-	{
-		AComponent* removedComponent = nullptr;
-		for (auto& component : selectedObject.selectedObject->components)
-		{
-			component->fields.clear();
-			component->OnInspector();
-			ImGuiTreeNodeFlags flags =
-				ImGuiTreeNodeFlags_DefaultOpen |
-				ImGuiTreeNodeFlags_Framed |
-				ImGuiTreeNodeFlags_SpanAvailWidth |
-				ImGuiTreeNodeFlags_FramePadding;
-			bool opened = ImGui::TreeNodeEx(component.get(), flags, "%s", component->GetComponentName());
-			if (ImGui::BeginPopupContextItem(("ComponentContext:##" + std::to_string((uintptr_t)component.get())).c_str()))
+			if (selectedMaterial)
 			{
-				if (!dynamic_cast<Transform*>(component.get()))
-				{
-					if (ImGui::MenuItem("RemoveComponent"))
-					{
-						removedComponent = component.get();
-					}
-				}
-				ImGui::MenuItem("Reset");
-				ImGui::MenuItem("Duplicate");
-
-				ImGui::EndPopup();
+				ImGui::TextUnformatted(selectedMaterial->path.c_str());
+				ImGui::Separator();
+				bool writed = false;
+				RenderMaterialPart(selectedMaterial, writed);
+				if (writed)
+					AssetManager::SaveMaterial(selectedMaterial, selectedMaterial->path.c_str());
 			}
-			if (opened)
+			break;
+		}
+		case SelectedAsset::Cubemap:
+		{
+			if (selectedCubemap)
 			{
-				for (auto& field : component->fields)
-				{
-					switch (field.type)
-					{
-						case FieldType::BOOL:
-							ImGui::Checkbox(field.name, (bool*)field.ptr);
-							break;
-						case FieldType::FLOAT:
-							if (field.maxValue > field.minValue)
-								ImGui::SliderFloat(field.name, (float*)field.ptr, field.minValue, field.maxValue);
-							else
-								ImGui::DragFloat(field.name, (float*)field.ptr, 0.1f);
-							break;
-						case FieldType::INT:
-							if ((int)field.maxValue > (int)field.minValue)
-								ImGui::SliderInt(field.name, (int*)field.ptr, (int)field.minValue, (int)field.maxValue);
-							else
-								ImGui::DragInt(field.name, (int*)field.ptr, 1.0f);
-							break;
-						case FieldType::VEC3:
-						{
-							auto* value3 = static_cast<glm::vec3*>(field.ptr);
-							ImGui::DragFloat3(field.name, glm::value_ptr(*value3), 0.1f);
-							break;
-						}
-						case FieldType::QUAT:
-						{
-							auto* valueq = static_cast<glm::quat*>(field.ptr);
-							glm::vec3 euler = glm::degrees(glm::eulerAngles(*valueq));
-							float data[3] = { euler.x, euler.y,euler.z };
-							if (ImGui::DragFloat3(field.name, data, 0.1f))
-							{
-								*valueq = Quaternion::Euler(data[0], data[1], data[2]);
-							}
-							break;
-						}
-					}
+				ImGui::TextUnformatted(selectedCubemap->path.c_str());
+				ImGui::Separator();
 
-				}
-				ImGui::TreePop();
-			}
-		}
-		if (auto* selectedTransform = selectedObject.selectedObject->GetComponent<Transform>())
-		{
-			selectedTransform->UpdateMatrices();
-		}
-		if (removedComponent)
-		{
-			selectedObject.selectedObject->RemoveComponent(removedComponent);
-			removedComponent = nullptr;
-		}
-		Render* renderComponent = selectedObject.selectedObject->GetComponent<Render>();
-		if (renderComponent)
-		{
-			ImGuiTreeNodeFlags flags =
-				ImGuiTreeNodeFlags_DefaultOpen |
-				ImGuiTreeNodeFlags_Framed |
-				ImGuiTreeNodeFlags_SpanAvailWidth |
-				ImGuiTreeNodeFlags_FramePadding;
-			Material* material = renderComponent->material;
-			if (material)
-			{
-				bool opened = ImGui::TreeNodeEx(material, flags, "%s", "some material");
-				if (opened)
-				{
-					for (auto& fieldmaterial : renderComponent->material->GetProperties()->propertiesNames)
+				float avaliableWidth = ImGui::GetContentRegionAvail().x;
+				float previewWidth = std::min(avaliableWidth, 256.0f);
+
+				auto SelectTextureForCubemap = [&](const char* ID, TypeTexture type)
 					{
-						auto fieldmaterialinfo = material->GetProperties()->infoes.find(fieldmaterial);
-						if (fieldmaterialinfo == material->GetProperties()->infoes.end()) continue;
-						if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Float)
+						ImGui::PushID(ID);
+						ImGui::Button((std::string("Drop ") + std::string(ID)).c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 60.0f));
+						if (ImGui::BeginDragDropTarget())
 						{
-							float temp = 0.0f;
-							if (fieldmaterialinfo->second.info.useRange)
+							if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
 							{
-								if (auto t = material->GetProperties()->GetValue<float>(fieldmaterial))
+								const char* relativePath = static_cast<const char*>(payload->Data);
+
+								std::filesystem::path fullpath = projectDirectory / relativePath;
+
+								std::string extension = fullpath.extension().string();
+
+								std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char symbol) { return static_cast<char>(std::tolower(symbol)); });
+
+								if (extension == ".jpg" || extension == ".png")
 								{
-									temp = *t;
-									if (ImGui::SliderFloat(fieldmaterial.c_str(), &temp, fieldmaterialinfo->second.info.minrange, fieldmaterialinfo->second.info.maxrange))
+									Texture* newTexture = AssetManager::LoadTexture(fullpath.generic_string());
+									if (newTexture && newTexture->GetWidth() == selectedCubemap->size && newTexture->GetHeight() == selectedCubemap->size)
 									{
-										material->GetProperties()->SetValue<float>(fieldmaterial, temp);
+										selectedCubemap->ChangeTexture(type, newTexture);
+										AssetManager::SaveCubemap(selectedCubemap, selectedCubemap->path);
 									}
 								}
 							}
-							else
+							ImGui::EndDragDropTarget();
+						}
+						ImGui::PopID();
+					};
+				auto RightTexture = selectedCubemap->textures.find(TypeTexture::right);
+				if (RightTexture != selectedCubemap->textures.end() && RightTexture->second)
+				{
+					ImGui::Image((ImTextureID)(uintptr_t)RightTexture->second->GetTexturePixels(), ImVec2(previewWidth, previewWidth), ImVec2(0, 0), ImVec2(1, 1));
+				}
+				SelectTextureForCubemap("Right", TypeTexture::right);
+
+				ImGui::Separator();
+
+				auto LeftTexture = selectedCubemap->textures.find(TypeTexture::left);
+				if (LeftTexture != selectedCubemap->textures.end() && LeftTexture->second)
+				{
+					ImGui::Image((ImTextureID)(uintptr_t)LeftTexture->second->GetTexturePixels(), ImVec2(previewWidth, previewWidth), ImVec2(0, 0), ImVec2(1, 1));
+				}
+				SelectTextureForCubemap("Left", TypeTexture::left);
+				ImGui::Separator();
+
+				auto TopTexture = selectedCubemap->textures.find(TypeTexture::top);
+				if (TopTexture != selectedCubemap->textures.end() && TopTexture->second)
+				{
+					ImGui::Image((ImTextureID)(uintptr_t)TopTexture->second->GetTexturePixels(), ImVec2(previewWidth, previewWidth), ImVec2(0, 0), ImVec2(1, 1));
+				}
+				SelectTextureForCubemap("Top", TypeTexture::top);
+				ImGui::Separator();
+
+				auto BottomTexture = selectedCubemap->textures.find(TypeTexture::bottom);
+				if (BottomTexture != selectedCubemap->textures.end() && BottomTexture->second)
+				{
+					ImGui::Image((ImTextureID)(uintptr_t)BottomTexture->second->GetTexturePixels(), ImVec2(previewWidth, previewWidth), ImVec2(0, 0), ImVec2(1, 1));
+				}
+				SelectTextureForCubemap("Bottom", TypeTexture::bottom);
+				ImGui::Separator();
+
+				auto FrontTexture = selectedCubemap->textures.find(TypeTexture::front);
+				if (FrontTexture != selectedCubemap->textures.end() && FrontTexture->second)
+				{
+					ImGui::Image((ImTextureID)(uintptr_t)FrontTexture->second->GetTexturePixels(), ImVec2(previewWidth, previewWidth), ImVec2(0, 0), ImVec2(1, 1));
+				}
+				SelectTextureForCubemap("Front", TypeTexture::front);
+				ImGui::Separator();
+
+				auto BackTexture = selectedCubemap->textures.find(TypeTexture::back);
+				if (BackTexture != selectedCubemap->textures.end() && BackTexture->second)
+				{
+					ImGui::Image((ImTextureID)(uintptr_t)BackTexture->second->GetTexturePixels(), ImVec2(previewWidth, previewWidth), ImVec2(0, 0), ImVec2(1, 1));
+				}
+				SelectTextureForCubemap("Back", TypeTexture::back);
+
+				if (ImGui::BeginCombo("Settings", std::to_string(selectedCubemap->size).c_str()))
+				{
+					if (ImGui::Selectable("16x16"))
+					{
+						selectedCubemap->ChangeSize(16);
+						AssetManager::SaveCubemap(selectedCubemap, selectedCubemap->path);
+					}
+					if (ImGui::Selectable("32x32"))
+					{
+						selectedCubemap->ChangeSize(32);
+						AssetManager::SaveCubemap(selectedCubemap, selectedCubemap->path);
+					}
+					if (ImGui::Selectable("64x64"))
+					{
+						selectedCubemap->ChangeSize(64);
+						AssetManager::SaveCubemap(selectedCubemap, selectedCubemap->path);
+					}
+					if (ImGui::Selectable("128x128"))
+					{
+						selectedCubemap->ChangeSize(128);
+						AssetManager::SaveCubemap(selectedCubemap, selectedCubemap->path);
+					}
+					if (ImGui::Selectable("256x256"))
+					{
+						selectedCubemap->ChangeSize(256);
+						AssetManager::SaveCubemap(selectedCubemap, selectedCubemap->path);
+					}
+					if (ImGui::Selectable("512x512"))
+					{
+						selectedCubemap->ChangeSize(512);
+						AssetManager::SaveCubemap(selectedCubemap, selectedCubemap->path);
+					}
+					if (ImGui::Selectable("1024x1024"))
+					{
+						selectedCubemap->ChangeSize(1024);
+						AssetManager::SaveCubemap(selectedCubemap, selectedCubemap->path);
+					}
+					if (ImGui::Selectable("2048x2048"))
+					{
+						selectedCubemap->ChangeSize(2048);
+						AssetManager::SaveCubemap(selectedCubemap, selectedCubemap->path);
+					}
+					ImGui::EndCombo();
+				}
+			}
+			break;
+		}
+		case SelectedAsset::Texture:
+		{
+			if (selectedTexture)
+			{
+				ImGui::TextUnformatted(selectedTexture->path.c_str());
+				ImGui::Separator();
+
+				float avaliableWidth = ImGui::GetContentRegionAvail().x;
+				float previewWidth = std::min(avaliableWidth, 256.0f);
+
+				float aspect = static_cast<float>(selectedTexture->GetWidth()) / static_cast<float>(selectedTexture->GetHeight());
+
+				ImVec2 previewSize;
+
+				if (aspect >= 1.0f)
+				{
+					previewSize.x = previewWidth;
+					previewSize.y = previewWidth / aspect;
+				}
+				else
+				{
+					previewSize.y = previewWidth;
+					previewSize.x = previewWidth * aspect;
+				}
+
+				ImGui::Image((ImTextureID)(uintptr_t)selectedTexture->GetTexturePixels(), previewSize, ImVec2(0, 0), ImVec2(1, 1));
+
+				ImGui::Text("%d x %d", selectedTexture->GetWidth(), selectedTexture->GetHeight());
+				bool linear = selectedTexture->GetLinear();
+				if (ImGui::Checkbox("Linear: ", &linear))
+					selectedTexture->SetLinear(linear);
+			}
+			break;
+		}
+		case SelectedAsset::None:
+		{
+			if (selectedObject.selectedObject)
+			{
+				AComponent* removedComponent = nullptr;
+				for (auto& component : selectedObject.selectedObject->components)
+				{
+					component->fields.clear();
+					component->OnInspector();
+					ImGuiTreeNodeFlags flags =
+						ImGuiTreeNodeFlags_DefaultOpen |
+						ImGuiTreeNodeFlags_Framed |
+						ImGuiTreeNodeFlags_SpanAvailWidth |
+						ImGuiTreeNodeFlags_FramePadding;
+					bool opened = ImGui::TreeNodeEx(component.get(), flags, "%s", component->GetComponentName());
+					if (ImGui::BeginPopupContextItem(("ComponentContext:##" + std::to_string((uintptr_t)component.get())).c_str()))
+					{
+						if (!dynamic_cast<Transform*>(component.get()))
+						{
+							if (ImGui::MenuItem("RemoveComponent"))
 							{
-								if (auto t = material->GetProperties()->GetValue<float>(fieldmaterial))
-								{
-									temp = *t;
-									if (ImGui::DragFloat(fieldmaterial.c_str(), &temp, 0.1f))
-									{
-										material->GetProperties()->SetValue<float>(fieldmaterial, temp);
-									}
-								}
+								removedComponent = component.get();
 							}
 						}
-						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Int)
+						ImGui::MenuItem("Reset");
+						ImGui::MenuItem("Duplicate");
+
+						ImGui::EndPopup();
+					}
+					if (opened)
+					{
+						for (auto& field : component->fields)
 						{
-							int temp = 0.0f;
-							if (fieldmaterialinfo->second.info.useRange)
+							switch (field.type)
 							{
-								if (auto t = material->GetProperties()->GetValue<int>(fieldmaterial))
-								{
-									temp = *t;
-									if (ImGui::SliderInt(fieldmaterial.c_str(), &temp, static_cast<int>(fieldmaterialinfo->second.info.minrange), static_cast<int>(fieldmaterialinfo->second.info.maxrange)))
-									{
-										material->GetProperties()->SetValue<int>(fieldmaterial, temp);
-									}
-								}
-							}
-							else
-							{
-								if (auto t = material->GetProperties()->GetValue<int>(fieldmaterial))
-								{
-									temp = *t;
-									if (ImGui::DragInt(fieldmaterial.c_str(), &temp, 1))
-									{
-										material->GetProperties()->SetValue<int>(fieldmaterial, temp);
-									}
-								}
-							}
-						}
-						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Bool)
-						{
-							bool temp = false;
-							if (auto t = material->GetProperties()->GetValue<bool>(fieldmaterial))
-							{
-								temp = *t;
-								if (ImGui::Checkbox(fieldmaterial.c_str(), &temp))
-								{
-									material->GetProperties()->SetValue<bool>(fieldmaterial, temp);
-								}
-							}
-						}
-						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector4)
-						{
-							float color[4];
-							if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector4>(fieldmaterial))
-							{
-								color[0] = t->data[0];
-								color[1] = t->data[1];
-								color[2] = t->data[2];
-								color[3] = t->data[3];
-								if (fieldmaterialinfo->second.info.isColor)
-								{
-									if (fieldmaterialinfo->second.info.RGB)
-									{
-										if (ImGui::ColorEdit3(fieldmaterial.c_str(), color))
-										{
-											material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
-										}
-									}
-									else
-									{
-										if (ImGui::ColorEdit4(fieldmaterial.c_str(), color))
-										{
-											material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
-										}
-									}
-								}
+							case FieldType::BOOL:
+								ImGui::Checkbox(field.name, (bool*)field.ptr);
+								break;
+							case FieldType::FLOAT:
+								if (field.maxValue > field.minValue)
+									ImGui::SliderFloat(field.name, (float*)field.ptr, field.minValue, field.maxValue);
 								else
-								{
-									if (ImGui::DragFloat4(fieldmaterial.c_str(), color, 0.1f))
-									{
-										material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
-									}
-								}
-							}
-						}
-						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector3)
-						{
-							float color[3];
-							if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector3>(fieldmaterial))
+									ImGui::DragFloat(field.name, (float*)field.ptr, 0.1f);
+								break;
+							case FieldType::INT:
+								if ((int)field.maxValue > (int)field.minValue)
+									ImGui::SliderInt(field.name, (int*)field.ptr, (int)field.minValue, (int)field.maxValue);
+								else
+									ImGui::DragInt(field.name, (int*)field.ptr, 1.0f);
+								break;
+							case FieldType::VEC3:
 							{
-								color[0] = t->data[0];
-								color[1] = t->data[1];
-								color[2] = t->data[2];
-								if (ImGui::DragFloat3(fieldmaterial.c_str(), color, 0.1f))
-								{
-									material->GetProperties()->SetValue<GLSLParserMath::Vector3>(fieldmaterial, GLSLParserMath::Vector3::float3_to_vector3(color));
-								}
+								auto* value3 = static_cast<glm::vec3*>(field.ptr);
+								ImGui::DragFloat3(field.name, glm::value_ptr(*value3), 0.1f);
+								break;
 							}
-						}
-						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector2)
-						{
-							float color[2];
-							if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector2>(fieldmaterial))
+							case FieldType::QUAT:
 							{
-								color[0] = t->data[0];
-								color[1] = t->data[1];
-								if (ImGui::DragFloat2(fieldmaterial.c_str(), color, 0.1f))
+								auto* valueq = static_cast<glm::quat*>(field.ptr);
+								glm::vec3 euler = glm::degrees(glm::eulerAngles(*valueq));
+								float data[3] = { euler.x, euler.y,euler.z };
+								if (ImGui::DragFloat3(field.name, data, 0.1f))
 								{
-									material->GetProperties()->SetValue<GLSLParserMath::Vector2>(fieldmaterial, GLSLParserMath::Vector2::float2_to_vector2(color));
+									*valueq = Quaternion::Euler(data[0], data[1], data[2]);
 								}
+								break;
 							}
-						}
-						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Sampler2D)
-						{
-							std::string comboId = fieldmaterial;
-							Texture* selectedTexture = material->GetTexture(fieldmaterial);
-							const char* preview = selectedTexture ? selectedTexture->path.c_str() : "None";
-							ImGui::BeginGroup();
-							if (ImGui::BeginCombo(comboId.c_str(), preview))
-							{
-								if (ImGui::Selectable("None"))
-								{
-									material->Set(fieldmaterial, (Texture*)nullptr);
-								}
-								for (auto& texture : AssetManager::GetTextures())
-								{
-									if (ImGui::Selectable(texture.first.c_str()))
-									{
-										material->Set(fieldmaterial, texture.second.get());
-									}
-								}
-								ImGui::EndCombo();
 							}
-							ImGui::EndGroup();
 
-							if (ImGui::BeginDragDropTarget())
-							{
-								if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
-								{
-									const char* relativePath = static_cast<const char*>(payload->Data);
-									std::filesystem::path fullpath = projectDirectory / relativePath;
-									std::string extension = fullpath.extension().string();
-
-									std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
-
-									if (extension == ".png" || extension == ".jpg")
-									{
-										Texture* newTexture = AssetManager::LoadTexture(fullpath.generic_string());
-										if (newTexture)
-											material->Set(fieldmaterial, newTexture);
-									}
-								}
-								ImGui::EndDragDropTarget();
-							}
 						}
-						else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::SamplerCube)
-						{
-							std::string comboId = fieldmaterial;
-							std::string nameTexture = std::get<std::string>(fieldmaterialinfo->second.info.value);
-							if (ImGui::BeginCombo(comboId.c_str(), nameTexture.c_str()))
-							{
-								for (auto& texture : AssetManager::GetCubemaps())
-								{
-									if (ImGui::Selectable(texture.first.c_str()))
-									{
-										material->Set(fieldmaterial, texture.second.get());
-									}
-								}
-								ImGui::EndCombo();
-							}
-						}
+						ImGui::TreePop();
 					}
-					ImGui::TreePop();
+				}
+				if (auto* selectedTransform = selectedObject.selectedObject->GetComponent<Transform>())
+				{
+					selectedTransform->UpdateMatrices();
+				}
+				if (removedComponent)
+				{
+					selectedObject.selectedObject->RemoveComponent(removedComponent);
+					removedComponent = nullptr;
+				}
+				Render* renderComponent = selectedObject.selectedObject->GetComponent<Render>();
+				if (renderComponent && renderComponent->material)
+				{
+					bool writed = false;
+					RenderMaterialPart(renderComponent->material, writed);
+					if (writed)
+						AssetManager::SaveMaterial(renderComponent->material, renderComponent->material->path);
+					ImGui::Text("Select material");
+					std::string materialName = "None";
+					if (renderComponent && renderComponent->material)
+						materialName = renderComponent->material->path;
+					ImGui::Button(materialName.c_str(), ImVec2(200, 30));
+
+					if (ImGui::BeginDragDropTarget())
+					{
+						if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
+						{
+							const char* relativePath = static_cast<const char*>(payload->Data);
+							std::filesystem::path fullpath = projectDirectory / relativePath;
+							std::string extension = fullpath.extension().string();
+							std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
+							if (extension == ".aasset" && MaterialSerializer::IsMaterial(fullpath.generic_string()))
+							{
+								renderComponent->material = AssetManager::LoadMaterial(fullpath.generic_string());
+							}
+						}
+						ImGui::EndDragDropTarget();
+					}
+				}
+				if (ImGui::BeginCombo("AddComponent", "Select"))
+				{
+					if (ImGui::Selectable("Cube"))
+					{
+						selectedObject.selectedObject->AddComponent<Cube>();
+					}
+					if (ImGui::Selectable("Light"))
+					{
+						selectedObject.selectedObject->AddComponent<Light>();
+					}
+					if (ImGui::Selectable("Rei"))
+					{
+						selectedObject.selectedObject->AddComponent<Rei>();
+					}
+					ImGui::EndCombo();
 				}
 			}
+			else
+			{
+				transform = nullptr;
+				prevObj = nullptr;
+			}
+			break;
 		}
-		if (ImGui::BeginCombo("AddComponent", "Select"))
-		{
-			if (ImGui::Selectable("Cube"))
-			{
-				selectedObject.selectedObject->AddComponent<Cube>();
-			}
-			if (ImGui::Selectable("Light"))
-			{
-				selectedObject.selectedObject->AddComponent<Light>();
-			}
-			if (ImGui::Selectable("Rei"))
-			{
-				selectedObject.selectedObject->AddComponent<Rei>();
-			}
-			ImGui::EndCombo();
-		}
-	}
-	else
-	{
-		transform = nullptr;
-		prevObj = nullptr;
 	}
 	ImGui::End();
+}
+void EditorGUI::RenderMaterialPart(Material* material, bool &writed)
+{
+	ImGuiTreeNodeFlags flags =
+		ImGuiTreeNodeFlags_DefaultOpen |
+		ImGuiTreeNodeFlags_Framed |
+		ImGuiTreeNodeFlags_SpanAvailWidth |
+		ImGuiTreeNodeFlags_FramePadding;
+	if (material)
+	{
+		bool opened = ImGui::TreeNodeEx(material, flags, "%s", material->path.c_str());
+		if (opened)
+		{
+			ImGui::BeginDisabled(!material->hasFile);
+			if (ImGui::BeginCombo("Shader", (material->GetShader()->GetPathVertexShader() + "|" + material->GetShader()->GetPathFragmentShader() + (material->GetShader()->GetPathGeometryShader() != "" ? "|" + material->GetShader()->GetPathGeometryShader() : "")).c_str()))
+			{
+				for (const auto& shader : AssetManager::GetShaders())
+				{
+					bool selected = material->GetShader() == shader.second.get();
+					if (ImGui::Selectable(shader.first.c_str(), selected))
+					{
+						if (material->hasFile)
+						{
+							material->SetShader(shader.second.get());
+							writed = true;
+						}
+					}
+				}
+				ImGui::EndCombo();
+			}
+			for (auto& fieldmaterial : material->GetProperties()->propertiesNames)
+			{
+				auto fieldmaterialinfo = material->GetProperties()->infoes.find(fieldmaterial);
+				if (fieldmaterialinfo == material->GetProperties()->infoes.end()) continue;
+				if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Float)
+				{
+					float temp = 0.0f;
+					if (fieldmaterialinfo->second.info.useRange)
+					{
+						if (auto t = material->GetProperties()->GetValue<float>(fieldmaterial))
+						{
+							temp = *t;
+							if (ImGui::SliderFloat(fieldmaterial.c_str(), &temp, fieldmaterialinfo->second.info.minrange, fieldmaterialinfo->second.info.maxrange))
+							{
+								if (material->hasFile)
+								{
+									material->GetProperties()->SetValue<float>(fieldmaterial, temp);
+									writed = true;
+								}
+							}
+						}
+					}
+					else
+					{
+						if (auto t = material->GetProperties()->GetValue<float>(fieldmaterial))
+						{
+							temp = *t;
+							if (ImGui::DragFloat(fieldmaterial.c_str(), &temp, 0.1f))
+							{
+								if (material->hasFile)
+								{
+									material->GetProperties()->SetValue<float>(fieldmaterial, temp);
+									writed = true;
+								}
+							}
+						}
+					}
+				}
+				else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Int)
+				{
+					int temp = 0.0f;
+					if (fieldmaterialinfo->second.info.useRange)
+					{
+						if (auto t = material->GetProperties()->GetValue<int>(fieldmaterial))
+						{
+							temp = *t;
+							if (ImGui::SliderInt(fieldmaterial.c_str(), &temp, static_cast<int>(fieldmaterialinfo->second.info.minrange), static_cast<int>(fieldmaterialinfo->second.info.maxrange)))
+							{
+								if (material->hasFile)
+								{
+									material->GetProperties()->SetValue<int>(fieldmaterial, temp);
+									writed = true;
+								}
+							}
+						}
+					}
+					else
+					{
+						if (auto t = material->GetProperties()->GetValue<int>(fieldmaterial))
+						{
+							temp = *t;
+							if (ImGui::DragInt(fieldmaterial.c_str(), &temp, 1))
+							{
+								if (material->hasFile)
+								{
+									material->GetProperties()->SetValue<int>(fieldmaterial, temp);
+									writed = true;
+								}
+							}
+						}
+					}
+				}
+				else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Bool)
+				{
+					bool temp = false;
+					if (auto t = material->GetProperties()->GetValue<bool>(fieldmaterial))
+					{
+						temp = *t;
+						if (ImGui::Checkbox(fieldmaterial.c_str(), &temp))
+						{
+							if (material->hasFile)
+							{
+								material->GetProperties()->SetValue<bool>(fieldmaterial, temp);
+								writed = true;
+							}
+						}
+					}
+				}
+				else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector4)
+				{
+					float color[4];
+					if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector4>(fieldmaterial))
+					{
+						color[0] = t->data[0];
+						color[1] = t->data[1];
+						color[2] = t->data[2];
+						color[3] = t->data[3];
+						if (fieldmaterialinfo->second.info.isColor)
+						{
+							if (fieldmaterialinfo->second.info.RGB)
+							{
+								if (ImGui::ColorEdit3(fieldmaterial.c_str(), color))
+								{
+									if (material->hasFile)
+									{
+										material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
+										writed = true;
+									}
+								}
+							}
+							else
+							{
+								if (ImGui::ColorEdit4(fieldmaterial.c_str(), color))
+								{
+									if (material->hasFile)
+									{
+										material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
+										writed = true;
+									}
+								}
+							}
+						}
+						else
+						{
+							if (ImGui::DragFloat4(fieldmaterial.c_str(), color, 0.1f))
+							{
+								if (material->hasFile)
+								{
+									material->GetProperties()->SetValue<GLSLParserMath::Vector4>(fieldmaterial, GLSLParserMath::Vector4::float4_to_vector4(color));
+									writed = true;
+								}
+							}
+						}
+					}
+				}
+				else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector3)
+				{
+					float color[3];
+					if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector3>(fieldmaterial))
+					{
+						color[0] = t->data[0];
+						color[1] = t->data[1];
+						color[2] = t->data[2];
+						if (ImGui::DragFloat3(fieldmaterial.c_str(), color, 0.1f))
+						{
+							if (material->hasFile)
+							{
+								material->GetProperties()->SetValue<GLSLParserMath::Vector3>(fieldmaterial, GLSLParserMath::Vector3::float3_to_vector3(color));
+								writed = true;
+							}
+						}
+					}
+				}
+				else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Vector2)
+				{
+					float color[2];
+					if (auto t = material->GetProperties()->GetValue<GLSLParserMath::Vector2>(fieldmaterial))
+					{
+						color[0] = t->data[0];
+						color[1] = t->data[1];
+						if (ImGui::DragFloat2(fieldmaterial.c_str(), color, 0.1f))
+						{
+							if (material->hasFile)
+							{
+								material->GetProperties()->SetValue<GLSLParserMath::Vector2>(fieldmaterial, GLSLParserMath::Vector2::float2_to_vector2(color));
+								writed = true;
+							}
+						}
+					}
+				}
+				else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::Sampler2D)
+				{
+					std::string comboId = fieldmaterial;
+					Texture* selectedTexture = material->GetTexture(fieldmaterial);
+					const char* preview = selectedTexture ? selectedTexture->path.c_str() : "None";
+					ImGui::BeginGroup();
+					if (ImGui::BeginCombo(comboId.c_str(), preview))
+					{
+						if (ImGui::Selectable("None"))
+						{
+							if (material->hasFile)
+							{
+								material->Set(fieldmaterial, (Texture*)nullptr);
+								writed = true;
+							}
+						}
+						for (auto& texture : AssetManager::GetTextures())
+						{
+							if (ImGui::Selectable(texture.first.c_str()))
+							{
+								if (material->hasFile)
+								{
+									material->Set(fieldmaterial, texture.second.get());
+									writed = true;
+								}
+							}
+						}
+						ImGui::EndCombo();
+					}
+					ImGui::EndGroup();
+
+					if (ImGui::BeginDragDropTarget())
+					{
+						if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
+						{
+							const char* relativePath = static_cast<const char*>(payload->Data);
+							std::filesystem::path fullpath = projectDirectory / relativePath;
+							std::string extension = fullpath.extension().string();
+
+							std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
+
+							if (extension == ".png" || extension == ".jpg")
+							{
+								Texture* newTexture = AssetManager::LoadTexture(fullpath.generic_string());
+								if (newTexture)
+									if (material->hasFile)
+									{
+										material->Set(fieldmaterial, newTexture);
+										writed = true;
+									}
+							}
+						}
+						ImGui::EndDragDropTarget();
+					}
+				}
+				else if (fieldmaterialinfo->second.info.typefield == PGLinfos::FieldType::SamplerCube)
+				{
+					std::string comboId = fieldmaterial;
+					Cubemap* selectedCubemap = material->GetCubemap(fieldmaterial);
+					const char* preview = selectedCubemap ? selectedCubemap->path.c_str() : "None";
+					ImGui::BeginGroup();
+					if (ImGui::BeginCombo(comboId.c_str(), preview))
+					{
+						if (ImGui::Selectable("None"))
+						{
+							if (material->hasFile)
+							{
+								material->Set(fieldmaterial, (Cubemap*)nullptr);
+								writed = true;
+							}
+						}
+						for (auto& texture : AssetManager::GetCubemaps())
+						{
+							if (ImGui::Selectable(texture.first.c_str()))
+							{
+								if (material->hasFile)
+								{
+									material->Set(fieldmaterial, texture.second.get());
+									writed = true;
+								}
+							}
+						}
+						ImGui::EndCombo();
+					}
+					ImGui::EndGroup();
+					if (ImGui::BeginDragDropTarget())
+					{
+						if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
+						{
+							const char* relativePath = static_cast<const char*>(payload->Data);
+							std::filesystem::path fullpath = projectDirectory / relativePath;
+							std::string extension = fullpath.extension().string();
+
+							std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
+
+							if (extension == ".aasset" && CubemapSerializer::IsCubemap(fullpath.generic_string()))
+							{
+								Cubemap* cubemap = AssetManager::LoadCubemap(fullpath.generic_string());
+								if (cubemap)
+									if (material->hasFile)
+									{
+										material->Set(fieldmaterial, cubemap);
+										writed = true;
+									}
+							}
+
+						}
+						ImGui::EndDragDropTarget();
+					}
+				}
+			}
+			ImGui::EndDisabled();
+			ImGui::TreePop();
+		}
+	}
 }

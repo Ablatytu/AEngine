@@ -41,9 +41,9 @@ namespace RenderSystem
 	 1.0f, -1.0f,  1.0f, 0.0f,
 	 1.0f,  1.0f,  1.0f, 1.0f
 	};
-	Shader* depthShaderDirectional = nullptr;
-	Shader* depthShaderPoint = nullptr;
-	Shader* depthScreenShader = nullptr;
+	std::unique_ptr<Shader> depthShaderDirectional = nullptr;
+	std::unique_ptr<Shader> depthShaderPoint = nullptr;
+	std::unique_ptr<Shader> depthScreenShader = nullptr;
 	Framebuffer* exposureA = nullptr;
 	Framebuffer* exposureB = nullptr;
 	Framebuffer* bloom = nullptr;
@@ -52,13 +52,19 @@ namespace RenderSystem
 	Framebuffer* GBuffer = nullptr;
 	Framebuffer* SSAO = nullptr;
 	Framebuffer* SSAOblur = nullptr;
-	Shader* EnviromentHDRShader = nullptr;
-	Shader* irradianceShader = nullptr;
-	Shader* LightingGBuffer = nullptr;
-	Shader* PointLightDeferred = nullptr;
-	Shader* SpotLightDeferred = nullptr;
-	Shader* prefilterShader = nullptr;
-	Shader* BRDFLUTShader = nullptr;
+	std::unique_ptr<Shader>EnviromentHDRShader = nullptr;
+	std::unique_ptr<Shader>irradianceShader = nullptr;
+	std::unique_ptr<Shader> LightingGBuffer = nullptr;
+	std::unique_ptr<Shader> PointLightDeferred = nullptr;
+	std::unique_ptr<Shader> SpotLightDeferred = nullptr;
+	std::unique_ptr<Shader> prefilterShader = nullptr;
+	std::unique_ptr<Shader> BRDFLUTShader = nullptr;
+	std::unique_ptr<Shader> exposureShader = nullptr;
+	std::unique_ptr<Shader> bloomShader = nullptr;
+	std::unique_ptr<Shader> BloomBlurShader = nullptr;
+	std::unique_ptr<Shader> GBufferShader = nullptr;
+	std::unique_ptr<Shader> SSAOShader = nullptr;
+	std::unique_ptr<Shader> SSAOBlurShader = nullptr;
 	Framebuffer* finalBloom = nullptr;
 	std::vector<glm::vec3> ssaoKernel;
 	std::unique_ptr<Texture> SSAONoise = nullptr;
@@ -208,11 +214,11 @@ namespace RenderSystem
 	void rs_RenderShadowMaps(RenderContext& context, std::vector<Batch>& batches)
 	{
 		if (!depthShaderDirectional)
-			depthShaderDirectional = AssetManager::LoadShader("Shaders/DepthShaderVS.glsl", "Shaders/DepthShaderFS.glsl");
+			depthShaderDirectional = std::make_unique<Shader>("Shaders/DepthShaderVS.glsl", "Shaders/DepthShaderFS.glsl");
 		if (!depthScreenShader)
-			depthScreenShader = AssetManager::LoadShader("Shaders/FramebufferVertexShader.glsl", "Shaders/DepthmapFS.glsl");
+			depthScreenShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/DepthmapFS.glsl");
 		if (!depthShaderPoint)
-			depthShaderPoint = AssetManager::LoadShader("Shaders/DepthShaderVS.glsl", "Shaders/DepthShaderPointFS.glsl", "Shaders/ShadowsPointGS.glsl");
+			depthShaderPoint = std::make_unique<Shader>("Shaders/DepthShaderVS.glsl", "Shaders/DepthShaderPointFS.glsl", "Shaders/ShadowsPointGS.glsl");
 		GLint prevFBO = 0;
 		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFBO);
 		glm::mat4 lightMatrixCamera = glm::mat4(1.0f);
@@ -246,17 +252,17 @@ namespace RenderSystem
 						depthShaderDirectional->setBool("GPUInstancing", *t);
 						if (*t)
 						{
-							rs_RenderMesh(batch, *t, depthShaderDirectional);
+							rs_RenderMesh(batch, *t, depthShaderDirectional.get());
 						}
 						else
 						{
-							rs_RenderMesh(batch, false, depthShaderDirectional);
+							rs_RenderMesh(batch, false, depthShaderDirectional.get());
 						}
 					}
 					else
 					{
 						depthShaderDirectional->setBool("GPUInstancing", false);
-						rs_RenderMesh(batch, false, depthShaderDirectional);
+						rs_RenderMesh(batch, false, depthShaderDirectional.get());
 					}
 					batch.rendertime = rendertime;
 				}
@@ -313,17 +319,17 @@ namespace RenderSystem
 						depthShaderPoint->setBool("GPUInstancing", *t);
 						if (*t)
 						{
-							rs_RenderMesh(batch, *t, depthShaderPoint);
+							rs_RenderMesh(batch, *t, depthShaderPoint.get());
 						}
 						else
 						{
-							rs_RenderMesh(batch, false, depthShaderPoint);
+							rs_RenderMesh(batch, false, depthShaderPoint.get());
 						}
 					}
 					else
 					{
 						depthShaderPoint->setBool("GPUInstancing", false);
-						rs_RenderMesh(batch, false, depthShaderPoint);
+						rs_RenderMesh(batch, false, depthShaderPoint.get());
 					}
 					batch.rendertime = rendertime;
 				}
@@ -642,24 +648,24 @@ namespace RenderSystem
 		glDisable(GL_DEPTH_TEST);
 
 		LightingGBuffer->Update();
-		rs_LoadGBufferInShader(context, LightingGBuffer, {1, 1, 1, 1});
+		rs_LoadGBufferInShader(context, LightingGBuffer.get(), {1, 1, 1, 1});
 		unsigned int slots = 4;
-		rs_SetEIPMap(context, LightingGBuffer, slots);
-		rs_LoadShadowsInShader(context, LightingGBuffer, slots);
+		rs_SetEIPMap(context, LightingGBuffer.get(), slots);
+		rs_LoadShadowsInShader(context, LightingGBuffer.get(), slots);
 		rs_RenderQuad();
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_FRONT);
 		PointLightDeferred->Update();
 		PointLightDeferred->setVec2("screenSize", context.width, context.height);
-		rs_LoadGBufferInShader(context, PointLightDeferred, { 1, 1, 1, 1 });
+		rs_LoadGBufferInShader(context, PointLightDeferred.get(), {1, 1, 1, 1});
 		slots = 4;
-		rs_LoadShadowsInShader(context, PointLightDeferred, slots);
+		rs_LoadShadowsInShader(context, PointLightDeferred.get(), slots);
 		if(!PointlightsMatrices.empty())
 			deferredLowPolySphere.DrawInstance(PointlightsMatrices.size(), PointlightsMatrices.data());
 		SpotLightDeferred->Update();
 		SpotLightDeferred->setVec2("screenSize", context.width, context.height);
-		rs_LoadGBufferInShader(context, SpotLightDeferred, { 1, 1, 1, 1 });
+		rs_LoadGBufferInShader(context, SpotLightDeferred.get(), {1, 1, 1, 1});
 		if (!SpotlightsMatrices.empty())
 			deferredCone.DrawInstance(SpotlightsMatrices.size(), SpotlightsMatrices.data());
 		glDepthMask(GL_TRUE);
@@ -828,23 +834,28 @@ namespace RenderSystem
 	{
 		std::cout << glGetString(GL_RENDERER) << std::endl;
 		//sceneHDR = FramebufferManager::Get().Add("defaultFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
-		exposureA = FramebufferManager::Get().Add("exposureAFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/ExposureFS.glsl", { Framebuffer::TypeFrameBuffer::R16F }, false, 1, 1);
-		exposureB = FramebufferManager::Get().Add("exposureBFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/ExposureFS.glsl", { Framebuffer::TypeFrameBuffer::R16F }, false, 1, 1);
-		bloom = FramebufferManager::Get().Add("bloomAFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/BloomFS.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
-		bloomPing = FramebufferManager::Get().Add("bloomPingFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/BlurFS.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
-		bloomPong = FramebufferManager::Get().Add("bloomPongFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/BlurFS.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
-		GBuffer = FramebufferManager::Get().Add("GBufferFramebuffer", "__NULL__", "__NULL__", { Framebuffer::TypeFrameBuffer::RGBA16F, Framebuffer::TypeFrameBuffer::RGBA16F, Framebuffer::TypeFrameBuffer::RGBA, Framebuffer::TypeFrameBuffer::RGBA }, true, -1, -1, { Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest });
-		LightingGBuffer = AssetManager::LoadShader("Shaders/FramebufferVertexShader.glsl", "Shaders/DeferredLightingFS.glsl");
-		PointLightDeferred = AssetManager::LoadShader("Shaders/DeferredLightingVS.glsl", "Shaders/DeferredPointLighting.glsl");
-		SpotLightDeferred = AssetManager::LoadShader("Shaders/DeferredLightingVS.glsl", "Shaders/DeferredSpotLighting.glsl");
+		exposureShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/ExposureFS.glsl");
+		exposureA = FramebufferManager::Get().Add("exposureAFramebuffer", exposureShader.get(), {Framebuffer::TypeFrameBuffer::R16F}, false, 1, 1);
+		exposureB = FramebufferManager::Get().Add("exposureBFramebuffer", exposureShader.get(), {Framebuffer::TypeFrameBuffer::R16F}, false, 1, 1);
+		bloomShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/BloomFS.glsl");
+		bloom = FramebufferManager::Get().Add("bloomAFramebuffer", bloomShader.get(), {Framebuffer::TypeFrameBuffer::HDR}, true);
+		BloomBlurShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/BlurFS.glsl");
+		bloomPing = FramebufferManager::Get().Add("bloomPingFramebuffer",BloomBlurShader.get(), {Framebuffer::TypeFrameBuffer::HDR}, true);
+		bloomPong = FramebufferManager::Get().Add("bloomPongFramebuffer", BloomBlurShader.get(), {Framebuffer::TypeFrameBuffer::HDR}, true);
+		GBuffer = FramebufferManager::Get().Add("GBufferFramebuffer", nullptr, { Framebuffer::TypeFrameBuffer::RGBA16F, Framebuffer::TypeFrameBuffer::RGBA16F, Framebuffer::TypeFrameBuffer::RGBA, Framebuffer::TypeFrameBuffer::RGBA }, true, -1, -1, { Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest });
+		LightingGBuffer = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/DeferredLightingFS.glsl");
+		PointLightDeferred = std::make_unique<Shader>("Shaders/DeferredLightingVS.glsl", "Shaders/DeferredPointLighting.glsl");
+		SpotLightDeferred = std::make_unique<Shader>("Shaders/DeferredLightingVS.glsl", "Shaders/DeferredSpotLighting.glsl");
 		deferredCone = AssetManager::LoadModel("Assets/Models/Cone.obj")->meshes[0];
 		deferredLowPolySphere = AssetManager::LoadModel("Assets/Models/SphereLowPoly.obj")->meshes[0];
-		SSAO = FramebufferManager::Get().Add("SSAOFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/SSAOFS.glsl", { Framebuffer::TypeFrameBuffer::RED }, true, -1, -1, { Framebuffer::TypeFilter::Nearest });
-		SSAOblur = FramebufferManager::Get().Add("SSAOblurFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/SSAOblurFS.glsl", { Framebuffer::TypeFrameBuffer::RED }, true, -1, -1, { Framebuffer::TypeFilter::Nearest });
-		EnviromentHDRShader = AssetManager::LoadShader("Shaders/HDRToCubemapVS.glsl", "Shaders/HDRToCubemapFS.glsl");
-		irradianceShader = AssetManager::LoadShader("Shaders/HDRToCubemapVS.glsl", "Shaders/IrradianceShaderFS.glsl");
-		prefilterShader = AssetManager::LoadShader("Shaders/HDRToCubemapVS.glsl", "Shaders/PrefilterHDRMapFS.glsl");
-		BRDFLUTShader = AssetManager::LoadShader("Shaders/IntegrateBRDFVS.glsl", "Shaders/IntegrateBRDFFS.glsl");
+		SSAOShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/SSAOFS.glsl");
+		SSAO = FramebufferManager::Get().Add("SSAOFramebuffer", SSAOShader.get(), {Framebuffer::TypeFrameBuffer::RED}, true, -1, -1, {Framebuffer::TypeFilter::Nearest});
+		SSAOBlurShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/SSAOblurFS.glsl");
+		SSAOblur = FramebufferManager::Get().Add("SSAOblurFramebuffer", SSAOBlurShader.get(), {Framebuffer::TypeFrameBuffer::RED}, true, -1, -1, {Framebuffer::TypeFilter::Nearest});
+		EnviromentHDRShader = std::make_unique<Shader>("Shaders/HDRToCubemapVS.glsl", "Shaders/HDRToCubemapFS.glsl");
+		irradianceShader = std::make_unique<Shader>("Shaders/HDRToCubemapVS.glsl", "Shaders/IrradianceShaderFS.glsl");
+		prefilterShader = std::make_unique<Shader>("Shaders/HDRToCubemapVS.glsl", "Shaders/PrefilterHDRMapFS.glsl");
+		BRDFLUTShader = std::make_unique<Shader>("Shaders/IntegrateBRDFVS.glsl", "Shaders/IntegrateBRDFFS.glsl");
 		Cube = AssetManager::LoadModel("Assets/Models/Cube.obj")->meshes[0];
 		whiteTexture = std::make_unique<Texture>();
 		whiteTexture->CreateColorTexture("white");

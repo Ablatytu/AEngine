@@ -1,0 +1,9 @@
+Type: Cubemap
+Size: 512
+Textures:
+  Right: ""
+  Left: ""
+  Top: ""
+  Bottom: ""
+  Front: ""
+  Back: ""

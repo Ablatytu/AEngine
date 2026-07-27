@@ -100,7 +100,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;AENGINE_BUILD_DLL;GLFW_DLL</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;AENGINE_BUILD_DLL;GLFW_DLL;YAML_CPP_STATIC_DEFINE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -110,7 +110,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;user32.lib;
 gdi32.lib
-;shell32.lib</AdditionalDependencies>
+;shell32.lib;yaml-cppd.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -119,7 +119,7 @@ gdi32.lib
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;AENGINE_BUILD_DLL;GLFW_DLL</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;AENGINE_BUILD_DLL;GLFW_DLL;YAML_CPP_STATIC_DEFINE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -129,14 +129,14 @@ gdi32.lib
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;user32.lib;
 gdi32.lib
-;shell32.lib</AdditionalDependencies>
+;shell32.lib;yaml-cpp.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;AENGINE_BUILD_DLL;GLFW_DLL</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;AENGINE_BUILD_DLL;GLFW_DLL;YAML_CPP_STATIC_DEFINE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -146,7 +146,7 @@ gdi32.lib
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;user32.lib;
 gdi32.lib
-;shell32.lib</AdditionalDependencies>
+;shell32.lib;yaml-cppd.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,7 +155,7 @@ gdi32.lib
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;AENGINE_BUILD_DLL;GLFW_DLL</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;AENGINE_BUILD_DLL;GLFW_DLL;YAML_CPP_STATIC_DEFINE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\lib</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -165,7 +165,7 @@ gdi32.lib
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3dll.lib;opengl32.lib;assimp-vc143-mtd.lib;user32.lib;
 gdi32.lib
-;shell32.lib</AdditionalDependencies>
+;shell32.lib;yaml-cpp.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -197,9 +197,12 @@ gdi32.lib
     <ClCompile Include="Renderer\Shader.cpp" />
     <ClCompile Include="Renderer\Texture.cpp" />
     <ClCompile Include="scene\AssetManager.cpp" />
+    <ClCompile Include="scene\CubemapSerializer.cpp" />
     <ClCompile Include="scene\LightManager.cpp" />
+    <ClCompile Include="scene\MaterialSerializer.cpp" />
     <ClCompile Include="scene\Scene.cpp" />
     <ClCompile Include="scene\SceneManager.cpp" />
+    <ClCompile Include="scene\SceneSerializer.cpp" />
     <ClCompile Include="scene\Skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -233,9 +236,12 @@ gdi32.lib
     <ClInclude Include="Renderer\Shader.h" />
     <ClInclude Include="Renderer\Texture.h" />
     <ClInclude Include="scene\AssetManager.h" />
+    <ClInclude Include="scene\CubemapSerializer.h" />
     <ClInclude Include="scene\LightManager.h" />
+    <ClInclude Include="scene\MaterialSerializer.h" />
     <ClInclude Include="scene\Scene.h" />
     <ClInclude Include="scene\SceneManager.h" />
+    <ClInclude Include="scene\SceneSerializer.h" />
     <ClInclude Include="scene\Skybox.h" />
   </ItemGroup>
   <ItemGroup>

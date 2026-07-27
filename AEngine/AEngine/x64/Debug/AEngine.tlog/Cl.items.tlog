@@ -26,7 +26,10 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.c
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\Shader.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Texture.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\Texture.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\scene\AssetManager.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\AssetManager.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\scene\CubemapSerializer.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\CubemapSerializer.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\scene\LightManager.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\LightManager.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\scene\MaterialSerializer.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\MaterialSerializer.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\scene\Scene.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\Scene.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\scene\SceneManager.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\SceneManager.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\scene\SceneSerializer.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\SceneSerializer.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\scene\Skybox.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Debug\Skybox.obj

@@ -8,15 +8,18 @@
 #include "../Renderer/Cubemap.h"
 #include "../Renderer/HDRTexture.h"
 #include "../Renderer/Material.h"
+#include "CubemapSerializer.h"
+#include "MaterialSerializer.h"
 #include <memory>
 #include <optional>
+#include <filesystem>
 
 std::unordered_map<std::string, std::unique_ptr<Model>> models;
 std::unordered_map<std::string, std::unique_ptr<Shader>> shaders;
 std::unordered_map<std::string, std::unique_ptr<Texture>> textures;
 std::unordered_map<std::string, std::unique_ptr<HDRTexture>> HDRtextures;
 std::unordered_map<std::string, std::unique_ptr<Cubemap>> cubemaps;
-std::vector<std::unique_ptr<Material>> materials;
+std::unordered_map<std::string, std::unique_ptr<Material>> materials;
 
 const std::unordered_map<std::string, std::unique_ptr<Texture>>& AssetManager::GetTextures()
 {
@@ -26,12 +29,26 @@ const std::unordered_map<std::string, std::unique_ptr<Cubemap>>& AssetManager::G
 {
 	return cubemaps;
 }
-Material* AssetManager::CreateMaterial(Shader* shader)
+const std::unordered_map<std::string, std::unique_ptr<Shader>>& AssetManager::GetShaders()
 {
+	return shaders;
+}
+
+Material* AssetManager::CreateMaterial(const std::string& path, Shader* shader, bool CreateAsset)
+{
+	auto finded = materials.find(path);
+	if (finded != materials.end())
+		return finded->second.get();
 	std::unique_ptr<Material> newmaterial = std::make_unique<Material>();
 	newmaterial->SetShader(shader);
 	Material* result = newmaterial.get();
-	materials.push_back(std::move(newmaterial));
+	result->path = path;
+	if (CreateAsset)
+	{
+		result->hasFile = true;
+		MaterialSerializer::Serialize(*result, path);
+	}
+	materials[path] = std::move(newmaterial);
 
 	return result;
 }
@@ -79,12 +96,36 @@ Texture* AssetManager::LoadTexture(const std::string& textureName, bool linear, 
 #endif
 	return returnTexture;
 }
-Cubemap* AssetManager::LoadCubemap(const std::string& path, unsigned int size)
+Cubemap* AssetManager::CreateCubemap(const std::string& path, unsigned int size, bool CreateAsset)
 {
 	auto it = cubemaps.find(path);
 	if (it != cubemaps.end())
 		return it->second.get();
 	std::unique_ptr<Cubemap> cubemap = std::make_unique<Cubemap>(size);
+	cubemap->path = path;
+	if (CreateAsset)
+		CubemapSerializer::Serialize(*cubemap.get(), path);
+	Cubemap* returnCubemap = cubemap.get();
+	cubemaps[path] = std::move(cubemap);
+#ifdef _DEBUG
+	std::cout << path << " has been sucñsessfully loaded" << std::endl;
+#endif
+	return returnCubemap;
+}
+Cubemap* AssetManager::LoadCubemap(const std::string& path)
+{
+	if (std::filesystem::path(path).extension() != ".aasset")
+	{
+		std::cerr << "Invalid cubemap extension: " << path << '\n';
+		return nullptr;
+	}
+	auto it = cubemaps.find(path);
+	if (it != cubemaps.end())
+		return it->second.get();
+	std::unique_ptr<Cubemap> cubemap = CubemapSerializer::Deserialize(path);
+	if (!cubemap)
+		return nullptr;
+	cubemap->path = path;
 	Cubemap* returnCubemap = cubemap.get();
 	cubemaps[path] = std::move(cubemap);
 #ifdef _DEBUG
@@ -93,6 +134,44 @@ Cubemap* AssetManager::LoadCubemap(const std::string& path, unsigned int size)
 	return returnCubemap;
 }
 
+Material* AssetManager::LoadMaterial(const std::string& path)
+{
+	if (std::filesystem::path(path).extension() != ".aasset")
+	{
+		std::cerr << "Invalid material extension: " << path << '\n';
+		return nullptr;
+	}
+	auto it = materials.find(path);
+	if (it != materials.end())
+		return it->second.get();
+	std::unique_ptr<Material> material = MaterialSerializer::Deserialize(path);
+	if (!material)
+		return nullptr;
+	material->path = path;
+	material->hasFile = true;
+	Material* returnMaterial = material.get();
+	materials[path] = std::move(material);
+#ifdef _DEBUG
+	std::cout << path << " has been sucñsessfully loaded" << std::endl;
+#endif
+	return returnMaterial;
+}
+void AssetManager::SaveMaterial(Material* material, const std::string& path)
+{
+	if (!material) return;
+
+	material->hasFile = true;
+	material->path = path;
+	MaterialSerializer::Serialize(*material, path);
+}
+
+void AssetManager::SaveCubemap(Cubemap* cubemap, const std::string& path)
+{
+	if (!cubemap) return;
+	
+	cubemap->path = path;
+	CubemapSerializer::Serialize(*cubemap, cubemap->path);
+}
 HDRTexture* AssetManager::LoadHDRTexture(const std::string& textureName)
 {
 	auto it = HDRtextures.find(textureName);

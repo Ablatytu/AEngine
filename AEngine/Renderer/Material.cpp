@@ -47,6 +47,13 @@ Texture* Material::GetTexture(const std::string& name)
 		return t->second;
 	return nullptr;
 }
+Cubemap* Material::GetCubemap(const std::string& name)
+{
+	auto t = cubemaps.find(name);
+	if (t != cubemaps.end())
+		return t->second;
+	return nullptr;
+}
 void Material::Set(std::string name, float value)
 {
 	if (shader)
@@ -124,7 +131,10 @@ void Material::Set(std::string name, Cubemap* texture)
 {
 	if (shader)
 	{
-		cubemaps[name] = texture;
+		if (texture)
+			cubemaps[name] = texture;
+		else
+			cubemaps.erase(name);
 	}
 }
 PropertiesWithUniforms* Material::GetProperties()
@@ -228,6 +238,11 @@ void Material::UpdateMaterial()
 				glActiveTexture(GL_TEXTURE0 + slotTexture);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, cubemaps.find(field.first)->second->GetTextureID());
 			}
+			else
+			{
+				glActiveTexture(GL_TEXTURE0 + slotTexture);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, GetBlackCubemap()->GetTextureID());
+			}
 			slotTexture++;
 			break;
 		}
@@ -277,6 +292,15 @@ Texture* Material::GetBlackTexture()
 		BlackTexture->CreateColorTexture("black");
 	}
 	return BlackTexture.get();
+}
+Cubemap* Material::GetBlackCubemap()
+{
+	static std::unique_ptr<Cubemap> BlackCubemap;
+	if (!BlackCubemap)
+	{
+		BlackCubemap = std::make_unique<Cubemap>(1, false, false);
+	}
+	return BlackCubemap.get();
 }
 const Material::RenderPath& Material::GetRenderPath() const
 {

@@ -1,6 +1,8 @@
 #pragma once
 #include <unordered_map>
 #include "../core/AEngineAPI.h"
+#include <memory>
+#include <string>
 enum class TypeTexture
 {
 	right = 0,
@@ -18,8 +20,12 @@ private:
 	unsigned int textureID;
 public:
 	unsigned int size;
+	bool HDR = false;
+	bool mipmap = false;
+	std::string path;
 	std::unordered_map<TypeTexture, Texture*> textures;
-	Cubemap(unsigned int size, bool HDR = false, bool mipmap = false);
+	Cubemap(unsigned int size, bool _HDR = false, bool _mipmap = false);
+	void ChangeSize(unsigned int _size);
 	void CreateMipmap();
 	unsigned int GetTextureID();
 	void ChangeTexture(TypeTexture, Texture*);

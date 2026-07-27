@@ -5,20 +5,28 @@
 #include <glm/glm/gtc/type_ptr.hpp>
 #include "Buffer.h"
 
-std::string Shader::GetPathFragmentShader()
+const std::string& Shader::GetPathFragmentShader() const
 {
 	return pathFragmentShader;
+}
+const std::string& Shader::GetPathVertexShader() const
+{
+	return pathVertexShader;
+}
+const std::string& Shader::GetPathGeometryShader() const
+{
+	return pathGeometryShader;
 }
 unsigned int Shader::GetShaderID()
 {
 	return ID;
 }
-Shader::Shader(std::string pathVertexShader, std::string pathShaderFragment, std::optional<std::string> pathGeometryShader)
+Shader::Shader(std::string pathShaderVertex, std::string pathShaderFragment, std::optional<std::string> pathShaderGeometry)
 {
-	std::ifstream fileVertex(pathVertexShader);
+	std::ifstream fileVertex(pathShaderVertex);
 	if (!fileVertex.is_open())
 	{
-		std::string error = std::string("Shader file not found: ") + pathVertexShader;
+		std::string error = std::string("Shader file not found: ") + pathShaderVertex;
 		CriticalGameError(error.c_str());
 		return;
 	}
@@ -65,12 +73,12 @@ Shader::Shader(std::string pathVertexShader, std::string pathShaderFragment, std
 		return;
 	}
 	unsigned int CreatedGeometryShader;
-	if (pathGeometryShader)
+	if (pathShaderGeometry)
 	{
-		std::ifstream fileGeometry(*pathGeometryShader);
+		std::ifstream fileGeometry(*pathShaderGeometry);
 		if (!fileGeometry.is_open())
 		{
-			std::string error = std::string("Shader file not found: ") + *pathGeometryShader;
+			std::string error = std::string("Shader file not found: ") + *pathShaderGeometry;
 			CriticalGameError(error.c_str());
 			return;
 		}
@@ -95,7 +103,7 @@ Shader::Shader(std::string pathVertexShader, std::string pathShaderFragment, std
 	ID = glCreateProgram();
 	glAttachShader(ID, CreatedVertexShader);
 	glAttachShader(ID, CreatedFragmentShader);
-	if (pathGeometryShader)
+	if (pathShaderGeometry)
 		glAttachShader(ID, CreatedGeometryShader);
 	glLinkProgram(ID);
 	glGetProgramiv(ID, GL_LINK_STATUS, &success);
@@ -108,6 +116,8 @@ Shader::Shader(std::string pathVertexShader, std::string pathShaderFragment, std
 		return;
 	}
 	pathFragmentShader = pathShaderFragment;
+	pathVertexShader = pathShaderVertex;
+	pathGeometryShader = pathShaderGeometry? *pathShaderGeometry : "";
 	UBOReflection = GLSLUBOUniforms(ID);
 	for (auto& t : UBOReflection.GetUBOs())
 	{
@@ -134,7 +144,7 @@ Shader::Shader(std::string pathVertexShader, std::string pathShaderFragment, std
 
 	glDeleteShader(CreatedVertexShader);
 	glDeleteShader(CreatedFragmentShader);
-	if (pathGeometryShader)
+	if (pathShaderGeometry)
 		glDeleteShader(CreatedGeometryShader);
 }
 void Shader::Update()

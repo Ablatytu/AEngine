@@ -12,7 +12,7 @@
 Skybox::Skybox(Cubemap* cubemap)
 {
 	skybox = cubemap;
-	skyboxShader = AssetManager::LoadShader("Shaders/SkyboxVertexShader.glsl", "Shaders/SkyboxFragmentShader.glsl");
+	skyboxShader = std::make_unique<Shader>("Shaders/SkyboxVertexShader.glsl", "Shaders/SkyboxFragmentShader.glsl");
 	unsigned int VBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -42,3 +42,5 @@ void Skybox::ChangeSkyBox(Cubemap* cubemap)
 {
 	skybox = cubemap;
 }
+
+Skybox::~Skybox() = default;

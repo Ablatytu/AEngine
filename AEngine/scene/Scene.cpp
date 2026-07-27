@@ -37,7 +37,7 @@ GameObject* Scene::CreateGameObject()
 Scene::Scene()
 {
 	A_LightManager = std::make_unique<LightManager>();
-	Cubemap* defaultSkybox = AssetManager::LoadCubemap("defaultSkyBox", 2048);
+	Cubemap* defaultSkybox = AssetManager::CreateCubemap("defaultSkyBox", 2048);
 	Texture* textureRight = AssetManager::LoadTexture("Assets/Textures/skybox/right.jpg");
 	Texture* textureLeft = AssetManager::LoadTexture("Assets/Textures/skybox/left.jpg");
 	Texture* textureTop = AssetManager::LoadTexture("Assets/Textures/skybox/top.jpg");

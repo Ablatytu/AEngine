@@ -8,6 +8,8 @@ class Render;
 class Framebuffer;
 class Texture;
 class Shader;
+class Cubemap;
+class Material;
 
 class EditorGUI
 {
@@ -17,14 +19,25 @@ public:
 		Render* selectedObjectRender = nullptr;
 		GameObject* selectedObject = nullptr;
 	};
+	enum class SelectedAsset
+	{
+		None,
+		Texture,
+		Cubemap,
+		Material
+	};
 	SelectedObject selectedObject;
-	Framebuffer* viewport = nullptr;
-	Framebuffer* sceneHDR = nullptr;
+	SelectedAsset selectedAsset = SelectedAsset::None;
 	Texture* selectedTexture = nullptr;
+	Cubemap* selectedCubemap = nullptr;
+	Material* selectedMaterial = nullptr;
+	Framebuffer* sceneHDR = nullptr;
+	Framebuffer* viewport = nullptr;
 	int sizeviewport[2] = { 800, 600 };
 	float viewportBounds[2][2];
 	bool viewportHovered = false;
 	void BeginDockspace();
+	void RenderMaterialPart(Material* material, bool& writed);
 	void ShowInspectorWindow();
 	void ShowHierarchyWindow();
 	void RenderEditorParts();
@@ -40,7 +53,10 @@ private:
 	std::filesystem::path currentDirectory = "Assets";
 	std::unique_ptr<Texture> folderIcon = nullptr;
 	std::unique_ptr<Texture> ModelIcon;
+	std::unique_ptr<Texture> CubemapIcon;
+	std::unique_ptr<Texture> MaterialIcon;
+	std::unique_ptr<Shader> sceneHDRShader = nullptr;
 	Transform* transform = nullptr;
-	Shader* OutlineShader = nullptr;
+	std::unique_ptr<Shader> OutlineShader = nullptr;
 	bool showLightingMenu = false;
 };

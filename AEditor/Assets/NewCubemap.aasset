@@ -1,0 +1,9 @@
+Type: Cubemap
+Size: 2048
+Textures:
+  Right: Assets/Textures/skybox/right.jpg
+  Left: Assets/Textures/skybox/left.jpg
+  Top: Assets/Textures/skybox/top.jpg
+  Bottom: Assets/Textures/skybox/bottom.jpg
+  Front: Assets/Textures/skybox/front.jpg
+  Back: Assets/Textures/skybox/back.jpg

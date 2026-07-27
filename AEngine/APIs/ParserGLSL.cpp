@@ -74,6 +74,20 @@ PGLinfos::FieldType PropertiesWithUniforms::GPUTypeToCPU(const GLenum& type)
 	std::cout << "unknown type" << std::endl;
 	throw std::runtime_error("Unsupported GLType");
 }
+const PGLinfos::ShaderInfo* PropertiesWithUniforms::GetInfo(std::string name)
+{
+	auto finded = infoes.find(name);
+	if(finded != infoes.end())
+		return &finded->second;
+	return nullptr;
+}
+const PGLinfos::FieldType PropertiesWithUniforms::GetType(std::string name)
+{
+	auto finded = infoes.find(name);
+	if (finded != infoes.end())
+		return finded->second.info.typefield;
+	return PGLinfos::FieldType::Unknown;
+}
 PropertiesWithUniforms::PropertiesWithUniforms(std::string path, unsigned int shaderID)
 {
 	GLSLInfo infoProperties = ParserGLSL::Parser(path);

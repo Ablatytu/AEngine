@@ -15,8 +15,12 @@
 class AENGINE_API Shader
 {
 public:
-    Shader(std::string pathShaderFragment, std::string pathVertexShader, std::optional<std::string> pathGeometryShader = std::nullopt);
-    std::string GetPathFragmentShader();
+    Shader(std::string pathFragmentShader, std::string pathVertexShader, std::optional<std::string> pathGeometryShader = std::nullopt);
+
+    const std::string& GetPathFragmentShader() const;
+    const std::string& GetPathVertexShader() const;
+    const std::string& GetPathGeometryShader() const;
+
     unsigned int GetShaderID();
 	void Update();
 	void setBool(const std::string& name, bool value) const;
@@ -46,7 +50,9 @@ public:
     const GLSLUBOUniforms* GetUBOReflection() const;
 private:
     unsigned int ID;
-    std::string pathFragmentShader;
+    std::string pathFragmentShader = "";
+    std::string pathVertexShader = "";
+    std::string pathGeometryShader = "";
     GLSLUBOUniforms UBOReflection;
 };
 #endif 
