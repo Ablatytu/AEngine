@@ -17,6 +17,7 @@ class GameObject
 public:
 	std::string name = "New GameObject";
 	std::vector<std::unique_ptr<AComponent>> components;
+	Transform* transform;
 	template<typename T> T* GetComponent()
 	{
 		for (auto& _component : components)
@@ -74,7 +75,7 @@ public:
 	}
 	AENGINE_API GameObject()
 	{
-		AddComponent<Transform>();
+		transform = AddComponent<Transform>();
 	}
 };
 #endif

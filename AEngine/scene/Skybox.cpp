@@ -42,5 +42,8 @@ void Skybox::ChangeSkyBox(Cubemap* cubemap)
 {
 	skybox = cubemap;
 }
-
-Skybox::~Skybox() = default;
+Cubemap* Skybox::GetSkyboxCubemap()
+{
+	return skybox;
+}
+Skybox::~Skybox() = default; 

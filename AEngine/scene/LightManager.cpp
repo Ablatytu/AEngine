@@ -10,6 +10,10 @@ void LightManager::RemoveLight(Light* light)
 {
 	lights.erase(std::remove(lights.begin(), lights.end(), light), lights.end());
 }
+void LightManager::EraseLights()
+{
+	lights.clear();
+}
 const std::vector<Light*>& LightManager::GetLights() const
 {
 	return lights;

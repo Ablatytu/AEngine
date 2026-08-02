@@ -8,6 +8,7 @@
 #include "../Renderer/RenderSystem.h"
 #include "LightManager.h"
 #include "../components/PostProcess.h"
+#include "../Renderer/HDRTexture.h"
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
@@ -37,20 +38,19 @@ GameObject* Scene::CreateGameObject()
 Scene::Scene()
 {
 	A_LightManager = std::make_unique<LightManager>();
-	Cubemap* defaultSkybox = AssetManager::CreateCubemap("defaultSkyBox", 2048);
-	Texture* textureRight = AssetManager::LoadTexture("Assets/Textures/skybox/right.jpg");
-	Texture* textureLeft = AssetManager::LoadTexture("Assets/Textures/skybox/left.jpg");
-	Texture* textureTop = AssetManager::LoadTexture("Assets/Textures/skybox/top.jpg");
-	Texture* texturebottom = AssetManager::LoadTexture("Assets/Textures/skybox/bottom.jpg");
-	Texture* textureFront = AssetManager::LoadTexture("Assets/Textures/skybox/front.jpg");
-	Texture* textureBack = AssetManager::LoadTexture("Assets/Textures/skybox/back.jpg");
-	defaultSkybox->ChangeTexture(TypeTexture::right, textureRight);
-	defaultSkybox->ChangeTexture(TypeTexture::left, textureLeft);
-	defaultSkybox->ChangeTexture(TypeTexture::top, textureTop);
-	defaultSkybox->ChangeTexture(TypeTexture::bottom, texturebottom);
-	defaultSkybox->ChangeTexture(TypeTexture::front, textureFront);
-	defaultSkybox->ChangeTexture(TypeTexture::back, textureBack);
+	HDRTexture* defaultSkybox = AssetManager::LoadHDRTexture("Assets/Textures/HDR/citrus_orchard_road_puresky_2k.hdr");
 	SetSkyBox(defaultSkybox);
+}
+void Scene::EraseScene()
+{
+	AComponents.clear();
+	AwakeAComponents.clear();
+	StartAComponents.clear();
+	renders.clear();
+	objects.clear();
+	postProcess = nullptr;
+	activeCamera = nullptr;
+	A_LightManager->EraseLights();
 }
 void Scene::SetSkyBox(Cubemap* cubemap)
 {
@@ -70,6 +70,7 @@ void Scene::SetSkyBox(Cubemap* cubemap)
 void Scene::SetSkyBox(HDRTexture* texture)
 {
 	environmentcubemap = std::make_unique<Cubemap>(512, true);
+	environmentcubemap->path = texture->path;
 	RenderSystem::rs_RenderEnvironmentHDR(*environmentcubemap, *texture, 512, 512);
 	SetSkyBox(environmentcubemap.get());
 }

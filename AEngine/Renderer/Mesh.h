@@ -27,6 +27,8 @@ public:
 	unsigned int VAO;
 	unsigned int EBO;
     unsigned int instanceBuffer;
+    int IDMesh = 0;
+    std::string basepathModel = "";
     size_t instancebuffersize = 1;
 	void CreateMesh();
     void Draw();

@@ -14,8 +14,12 @@ public:
 	glm::vec3 position = glm::vec3(0.0f);
 	glm::quat rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
 	glm::vec3 scale = glm::vec3(1.0f);
+	Transform* parent = nullptr;
+	std::vector<Transform*> children;
 	glm::mat4 GetModelMatrix();
+	void SetParent(Transform* newParent);
 	void UpdateMatrices();
+	void Awake() override;
 	void OnInspector() override;
 	glm::vec3 forward();
 	glm::vec3 right();

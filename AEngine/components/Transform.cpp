@@ -1,11 +1,35 @@
 #include "Transform.h"
 
+void Transform::Awake()
+{
+	UpdateMatrices();
+}
+void Transform::SetParent(Transform* newParent)
+{
+	parent = newParent;
+	if (parent)
+	{
+		parent->children.push_back(this);
+	}
+	UpdateMatrices();
+}
 void Transform::UpdateMatrices()
 {
 	glm::mat4 pos = glm::translate(glm::mat4(1.0f), position);
 	glm::mat4 rot = glm::toMat4(rotation);
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), this->scale);
-	matrixModel = pos * rot * scale;
+	glm::mat4 localMatrix = pos * rot * scale;
+	if (parent)
+	{
+		matrixModel = parent->GetModelMatrix() * localMatrix;
+	}
+	else
+		matrixModel = localMatrix;
+
+	for (auto child : children)
+	{
+		child->UpdateMatrices();
+	}
 }
 void Transform::OnInspector()
 {

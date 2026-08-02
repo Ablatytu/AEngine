@@ -1,0 +1,16 @@
+Type: Material
+Shader_vertex: Shaders/VertexShader.glsl
+Shader_fragment: Shaders/FragmentShaderDeferredGeometryTest.glsl
+Shader_geometry: ""
+Properties:
+  GPUInstancing: false
+  roughness: 0.5
+  InvertNormalY: false
+  ao: 1
+  coefficientNormal: 0
+  heightMap: ""
+  normalMap: ""
+  height_scale: 0
+  metallic: 0
+  objectColor: [1, 1, 1, 1]
+  texture_diffuse1: Assets/Textures/cutie_cl_uv_bocchi_001.png

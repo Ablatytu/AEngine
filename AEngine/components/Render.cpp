@@ -7,3 +7,8 @@ void Render::Start()
 {
 	transform = gameObject->GetComponent<Transform>();
 }
+void Render::OnInspector()
+{
+	RegisterField(material);
+	RegisterField(mesh);
+}

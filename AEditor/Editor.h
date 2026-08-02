@@ -40,6 +40,7 @@ public:
 	void RenderMaterialPart(Material* material, bool& writed);
 	void ShowInspectorWindow();
 	void ShowHierarchyWindow();
+	void DrawHierarchyObject(GameObject* object);
 	void RenderEditorParts();
 	void RenderGizmo();
 	void RenderViewport();

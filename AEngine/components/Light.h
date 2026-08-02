@@ -13,11 +13,12 @@ class AENGINE_API Light : public AComponent
 {
 	RegisterComponent(Light)
 public:
+	~Light() override;
 	enum class Type
 	{
-		Directional,
-		Point,
-		Spot
+		Directional = 0,
+		Point = 1,
+		Spot = 2
 	};
 	struct ShadowMap
 	{

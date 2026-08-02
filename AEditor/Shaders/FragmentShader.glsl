@@ -1,6 +1,5 @@
 Properties
 {
-    uambient = (Vector3, (0.2, 0.2, 0.2))
     [Range(0.0, 1.0)] metallic = (Float, 0.0)
 	[Range(0.0, 1.0)] roughness = (Float, 0.5)
 	[Range(0.0, 1.0)] ao = (Float, 1.0)
@@ -22,7 +21,6 @@ GLSLPROGRAM
 #include "Shaders/Core.glsl"
 
 out vec4 FragColor;
-uniform vec3 uambient;
 uniform vec3 udiffuse;
 uniform vec3 uspecular;
 uniform float ushininess;
@@ -121,7 +119,6 @@ void main()
     geominfo.camPos = camPos;
     geominfo.shadowCoord = fs_in.FragPosLightSpace;
     SurfaceInfo surfinfo;
-    surfinfo.uambient = uambient;
     surfinfo.albedo = _texture.rgb * vec3(objectColor);
     surfinfo.metallic = metallic;
     surfinfo.roughness = roughness;

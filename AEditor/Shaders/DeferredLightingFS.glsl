@@ -44,7 +44,6 @@ void main()
     geominfo.camPos = camPos;
     geominfo.shadowCoord = GetShadowCoord(vec4(fragPos, 1.0));
     SurfaceInfo surfinfo;
-    surfinfo.uambient = vec3(0.03);
     surfinfo.albedo = albedo.rgb;
     surfinfo.metallic = material.r;
     surfinfo.roughness = material.g;

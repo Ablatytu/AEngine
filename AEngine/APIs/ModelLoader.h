@@ -9,13 +9,13 @@ class AENGINE_API  Model
 {
 public:
     std::vector<Mesh> meshes;
-    Model(const std::string& path)
+    Model(const std::string& _path)
     {
-        loadModel(path);
+        loadModel(_path);
     }
 private:
     std::string directory;
-
+    std::string path;
     void loadModel(std::string path);
     void processNode(aiNode* node, const aiScene* scene);
     Mesh processMesh(aiMesh* mesh, const aiScene* scene);

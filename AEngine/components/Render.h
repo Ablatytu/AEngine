@@ -19,10 +19,11 @@ class AENGINE_API Render : public AComponent
 	RegisterComponent(Render)
 public:
 	RenderLayer renderLayer = RenderLayer::defaultRender;
-	Material* material;
+	Material* material = nullptr;
 	Mesh* mesh;
 	Transform* transform;
 	void Start() override;
+	void OnInspector() override;
 };
 
 #endif

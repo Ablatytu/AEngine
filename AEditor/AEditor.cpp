@@ -112,167 +112,12 @@ void AEditor::OnInit()
 	rs_Init();
 	editorGUI->EDITOR_INIT();
 	std::cout << "LOAD SCENE AND GAMEOBJECTS...";
-	SceneManager::Get().CreateScene();
-	SceneManager::Get().LoadScene(0);
-	SceneManager::Get().GetActiveScene().SetSkyBox(enviromentTexture);
-	GameObject* Plush_rei = SceneManager::Get().CreateGameObject();
-	GameObject* Plush_rei1 = SceneManager::Get().CreateGameObject();
-	GameObject* Plush_rei2 = SceneManager::Get().CreateGameObject();
+	SceneManager::Get().LoadScene("Assets/TestScene.ascene");
+}
+void AEditor::OnSceneLoaded()
+{
 	GameObject* camera = SceneManager::Get().CreateGameObject();
-	GameObject* directionalLight = SceneManager::Get().CreateGameObject();
-	GameObject* pointLight = SceneManager::Get().CreateGameObject();
-	GameObject* pointLightR = SceneManager::Get().CreateGameObject();
-	GameObject* pointLightG = SceneManager::Get().CreateGameObject();
-	GameObject* spotLight = SceneManager::Get().CreateGameObject();
-	GameObject* terrain = SceneManager::Get().CreateGameObject();
-	GameObject* Cube3D = SceneManager::Get().CreateGameObject();
-	GameObject* plane = SceneManager::Get().CreateGameObject();
-	std::cout << "COMPLITE\n";
-	unsigned int amount = 1000;
-	unsigned int maxLights = 192;
-	unsigned int step = amount / maxLights;
-	unsigned int createdLights = 0;
-	srand(glfwGetTime());
-	float radius = 15;
-	float offset = 2.5f;
-	for (unsigned int i = 0; i < amount; i++)
-	{
-		std::cout << "CREATE REI INSANCE: " << i << "\n";
-		GameObject* Plush_reiInstancing = SceneManager::Get().CreateGameObject();
-		float angle = (float)i / (float)amount * 360.0f;
-		float displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
-		float x = sin(angle) * radius + displacement;
-		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
-		float y = displacement * 0.4f;
-		displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
-		float z = cos(angle) * radius + displacement;
-		Plush_reiInstancing->GetComponent<Transform>()->position = glm::vec3(x, y, z);
-		float scale = (rand() % 20) / 100.0f + 0.05;
-		Plush_reiInstancing->GetComponent<Transform>()->scale = glm::vec3(scale);
-		float rotAngle = (rand() % 360);
-		Plush_reiInstancing->GetComponent<Transform>()->rotation = Quaternion::Euler(rotAngle, rotAngle, rotAngle);
-		if (createdLights < maxLights && i % step == 0)
-		{
-			float t = (float)createdLights / (float)maxLights;
-			Plush_reiInstancing->AddComponent<Light>();
-			Plush_reiInstancing->GetComponent<Light>()->typeLight = Light::Type::Point;
-			Plush_reiInstancing->GetComponent<Light>()->lightColor = glm::vec3(0.5f + 0.5f * sin(t * 6.28318f), 0.5f + 0.5f * sin(t * 6.28318f + 2.094f), 0.5f + 0.5f * sin(t * 6.28318f + 4.188f));
-			Plush_reiInstancing->GetComponent<Light>()->intensive = 3.0f;
-			createdLights++;
-		}
-		Plush_reiInstancing->name = std::string("PlushReiInstance ") + std::to_string(i);
-		Plush_reiInstancing->AddComponent<Render>();
-		Plush_reiInstancing->AddComponent<Cube>();
-		Plush_reiInstancing->GetComponent<Cube>()->rotate = true;
-		Plush_reiInstancing->GetComponent<Render>()->mesh = &rei->meshes[0];
-		Plush_reiInstancing->GetComponent<Render>()->material = material;
-		Plush_reiInstancing->GetComponent<Transform>()->UpdateMatrices();
-	}
-
-	GameObject* newSphere = SceneManager::Get().CreateGameObject();
-	newSphere->AddComponent<Render>();
-	newSphere->GetComponent<Render>()->mesh = &sphere->meshes[0];
-	newSphere->GetComponent<Render>()->material = spherePBRMaterial;
-	newSphere->GetComponent<Transform>()->position = glm::vec3(2.0f, 2.0f, 5.0f);
-	newSphere->GetComponent<Transform>()->scale = glm::vec3(0.5f);
-	newSphere->GetComponent<Transform>()->UpdateMatrices();
-
-	Plush_rei->name = "PlushRei";
-	Plush_rei1->name = "PlushRei1";
-	Plush_rei2->name = "PlushRei2";
-	camera->name = "Camera";
-	directionalLight->name = "directionalLight";
-	pointLight->name = "pointLightB";
-	pointLightG->name = "pointLightG";
-	spotLight->name = "spotLight";
-	terrain->name = "Terrain";
-	Cube3D->name = "Cube";
-	pointLightR->name = "pointLightR";
-	plane->AddComponent<Render>();
-	plane->GetComponent<Render>()->mesh = &planeModel->meshes[0];
-	plane->GetComponent<Render>()->material = planeMaterial;
-	plane->GetComponent<Transform>()->position = glm::vec3(0.0f, 0.0f, 0.0f);
-	plane->GetComponent<Transform>()->scale = glm::vec3(5.0f, 1.0f, 5.0f);
-	plane->GetComponent<Transform>()->UpdateMatrices();
-	Cube3D->AddComponent<Render>();
-	Cube3D->GetComponent<Render>()->mesh = &cube->meshes[0];
-	Cube3D->GetComponent<Render>()->material = CubemapMaterial;
-	Cube3D->GetComponent<Transform>()->position = glm::vec3(5.0f, 1.0f, -3.0f);
-	Cube3D->GetComponent<Transform>()->UpdateMatrices();
-	terrain->AddComponent<Render>();
-	terrain->GetComponent<Render>()->mesh = &terrainModel->meshes[0];
-	terrain->GetComponent<Render>()->material = terrainMaterial;
-	terrain->GetComponent<Transform>()->scale = glm::vec3(0.005f, 0.005f, 0.005f);
-	terrain->GetComponent<Transform>()->position = glm::vec3(5.0f, 0.0f, 3.0f);
-	terrain->GetComponent<Transform>()->UpdateMatrices();
-	spotLight->AddComponent<Light>();
-	spotLight->GetComponent<Light>()->typeLight = Light::Type::Spot;
-	spotLight->GetComponent<Transform>()->position = glm::vec3(0.0f, 2.0f, 3.0f);
-	spotLight->GetComponent<Light>()->intensive = 1.0f;
-	spotLight->GetComponent<Light>()->lightColor = glm::vec3(1.0f, 0.5f, 1.0f);
-	spotLight->AddComponent<Cube>();
-	spotLight->AddComponent<Render>();
-	spotLight->GetComponent<Render>()->mesh = &cube->meshes[0];
-	spotLight->GetComponent<Render>()->material = cubeMaterial;
-	spotLight->GetComponent<Transform>()->UpdateMatrices();
-	pointLight->AddComponent<Light>();
-	pointLight->GetComponent<Light>()->typeLight = Light::Type::Point;
-	pointLight->GetComponent<Light>()->lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
-	pointLight->GetComponent<Transform>()->position = glm::vec3(4.0f, 1.0f, 1.5f);
-	pointLight->GetComponent<Light>()->intensive = 1.0f;
-	pointLight->GetComponent<Light>()->shadow = true;
-	pointLight->AddComponent<LightMoving>();
-	pointLight->AddComponent<Render>();
-	//pointLight->GetComponent<Render>()->mesh = &cube->meshes[0];
-	//pointLight->GetComponent<Render>()->material = &cubeMaterial;
-	pointLightR->AddComponent<Render>();
-	pointLightR->GetComponent<Render>()->mesh = &cube->meshes[0];
-	pointLightR->GetComponent<Render>()->material = cubeMaterial;
-	pointLightR->GetComponent<Transform>()->position = glm::vec3(0.0f, 3.0f, 1.5f);
-	pointLightR->AddComponent<Light>();
-	pointLightR->GetComponent<Light>()->typeLight = Light::Type::Point;
-	pointLightR->GetComponent<Light>()->lightColor = glm::vec3(1.0f, 0.0f, 1.0f);
-	pointLightR->GetComponent<Light>()->intensive = 1.0f;
-	pointLightR->AddComponent<LightMoving>();
-	pointLightR->GetComponent<LightMoving>()->rigntPos = true;
-	pointLightG->AddComponent<Render>();
-	pointLightG->GetComponent<Render>()->mesh = &cube->meshes[0];
-	pointLightG->GetComponent<Render>()->material = cubeMaterial;
-	pointLightG->GetComponent<Transform>()->position = glm::vec3(0.0f, 2.0f, -45.5f);
-	pointLightG->AddComponent<Light>();
-	pointLightG->GetComponent<Light>()->typeLight = Light::Type::Point;
-	pointLightG->GetComponent<Light>()->lightColor = glm::vec3(0.0f, 1.0f, 0.0f);
-	pointLightG->GetComponent<Light>()->intensive = 0.0f;
-	pointLightG->AddComponent<LightMoving>();
-	pointLightG->GetComponent<LightMoving>()->CanUp = true;
-	pointLight->GetComponent<Transform>()->UpdateMatrices();
-	pointLightR->GetComponent<Transform>()->UpdateMatrices();
-	pointLightG->GetComponent<Transform>()->UpdateMatrices();
-	directionalLight->AddComponent<Light>();
-	directionalLight->GetComponent<Light>()->typeLight = Light::Type::Directional;
-	directionalLight->GetComponent<Light>()->intensive = 1.0f;
-	directionalLight->GetComponent<Light>()->shadow = true;
-	directionalLight->GetComponent<Transform>()->position = glm::vec3(-1.0f, 6.0f, 0.5f);
-	directionalLight->GetComponent<Transform>()->rotation = Quaternion::Euler(-45.0f, 45.0f, 45.0f);
-	Plush_rei->AddComponent<Render>();
-	Plush_rei->AddComponent<Rei>();
-	Plush_rei->GetComponent<Render>()->mesh = &rei->meshes[0];
-	Plush_rei->GetComponent<Render>()->material = ToonMaterial;
-	Plush_rei->GetComponent<Transform>()->position = glm::vec3(-2.0f, -0.2f, 0.5f);
-	Plush_rei->GetComponent<Transform>()->UpdateMatrices();
-	Plush_rei->AddComponent<Cube>();
-	Plush_rei1->AddComponent<Render>();
-	Plush_rei1->GetComponent<Render>()->mesh = &rei->meshes[0];
-	Plush_rei1->GetComponent<Render>()->material = material;
-	Plush_rei1->GetComponent<Transform>()->position = glm::vec3(2.0f, -0.2f, 0.5f);
-	Plush_rei1->GetComponent<Transform>()->UpdateMatrices();
-	//Plush_rei1.AddComponent<Cube>();
-	Plush_rei2->AddComponent<Render>();
-	Plush_rei2->GetComponent<Render>()->mesh = &rei->meshes[0];
-	Plush_rei2->GetComponent<Render>()->material = material;
-	Plush_rei2->GetComponent<Transform>()->position = glm::vec3(0.0f, -0.2f, 0.5f);
-	Plush_rei2->GetComponent<Transform>()->UpdateMatrices();
-	//Plush_rei2.AddComponent<Cube>();
+	camera->name = "!##@@AENGINECAMERAEDITOR@@##!";
 	camera->AddComponent<Camera>();
 	camera->GetComponent<Transform>()->position = glm::vec3(2.0f, 2.0f, 7.0f);
 	camera->GetComponent<Transform>()->rotation = Quaternion::Euler(0.0f, 0.0f, 0.0f);
@@ -283,16 +128,34 @@ void AEditor::OnInit()
 	std::cout << "CREATE EDITOR CAMERA...";
 	editorCamera = std::make_unique<EditorCamera>(camera, editorGUI.get());
 	std::cout << "COMPLITE\n";
-	SceneManager::Get().GetActiveScene().HDR = true;
-	auto renderContext = RenderContext{};
-	std::cout << "END INI";
 }
-
 void AEditor::OnBeforeSceneUpdate()
 {
 	//frame++;
 	//if (frame > 10)
 	//	close();
+	if (SceneManager::Get().CheckChangeScenePathState())
+	{
+		glm::vec3 pos = glm::vec3(2.0f, 2.0f, 7.0f);
+		glm::quat rot = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+		float yaw = 0.0f, pitch = 0.0f;
+
+		if (editorCamera)
+		{
+			pos = editorCamera->transform->position;
+			rot = editorCamera->transform->rotation;
+			yaw = editorCamera->yaw;
+			pitch = editorCamera->pitch;
+			editorCamera.reset();
+		}
+		SceneManager::Get().ChangeScene();
+		OnSceneLoaded();
+		editorCamera->transform->position = pos;
+		editorCamera->transform->rotation = rot;
+		editorCamera->yaw = yaw;
+		editorCamera->pitch = pitch;
+		editorCamera->transform->UpdateMatrices();
+	}
 	Input::SetViewport(editorGUI->viewportBounds[0][0], editorGUI->viewportBounds[0][1], editorGUI->sizeviewport[0], editorGUI->sizeviewport[1]);
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();

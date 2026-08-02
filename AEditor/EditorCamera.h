@@ -16,7 +16,7 @@ public:
 	Camera* camera;
 	glm::vec3 direction;
 	float sens = 0.2f;
-	float pitch, yaw = 0.0f;
+	float pitch = 0.0f, yaw = 0.0f;
 	void Update();
 	glm::vec3 CalcMouseRay();
 	GameObject* FindClosestObject();

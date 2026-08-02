@@ -60,7 +60,6 @@ layout (std140) uniform u_Fog
 };
 struct SurfaceInfo
 {
-vec3 uambient;
 vec3 albedo;
 float metallic;
 float roughness;

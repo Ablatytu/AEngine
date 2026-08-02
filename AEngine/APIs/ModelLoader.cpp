@@ -2,17 +2,19 @@
 #include "../core/ErrorManager.h"
 #include "../Renderer/Mesh.h"
 
-void Model::loadModel(std::string path)
+void Model::loadModel(std::string _path)
 {
     Assimp::Importer import;
-    const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+    const aiScene* scene = import.ReadFile(_path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {
         CriticalGameError("Failed to load 3D model");
         return;
     }
-    directory = path.substr(0, path.find_last_of('/'));
+
+    directory = _path.substr(0, _path.find_last_of('/'));
+    path = _path;
 
     processNode(scene->mRootNode, scene);
 }
@@ -115,5 +117,8 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
         pos2.Tangent.w = w;
         pos3.Tangent.w = w;
     }
-    return Mesh(vertices, indices);
+    Mesh newmesh(vertices, indices);
+    newmesh.IDMesh = meshes.size();
+    newmesh.basepathModel = path;
+    return newmesh;
 }

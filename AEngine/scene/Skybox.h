@@ -10,6 +10,7 @@ public:
     ~Skybox();
 	void RenderSkyBox();
 	void ChangeSkyBox(Cubemap* cubemap);
+    Cubemap* GetSkyboxCubemap();
 private:
 	Cubemap* skybox = nullptr;
 	std::unique_ptr<Shader> skyboxShader = nullptr;

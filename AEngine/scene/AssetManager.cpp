@@ -114,7 +114,7 @@ Cubemap* AssetManager::CreateCubemap(const std::string& path, unsigned int size,
 }
 Cubemap* AssetManager::LoadCubemap(const std::string& path)
 {
-	if (std::filesystem::path(path).extension() != ".aasset")
+	if (std::filesystem::path(path).extension() != ".acubemap")
 	{
 		std::cerr << "Invalid cubemap extension: " << path << '\n';
 		return nullptr;
@@ -136,8 +136,11 @@ Cubemap* AssetManager::LoadCubemap(const std::string& path)
 
 Material* AssetManager::LoadMaterial(const std::string& path)
 {
-	if (std::filesystem::path(path).extension() != ".aasset")
+	if (std::filesystem::path(path).extension() != ".amat")
 	{
+		auto it = materials.find(path);
+		if (it != materials.end())
+			return it->second.get();
 		std::cerr << "Invalid material extension: " << path << '\n';
 		return nullptr;
 	}
@@ -180,6 +183,7 @@ HDRTexture* AssetManager::LoadHDRTexture(const std::string& textureName)
 	std::unique_ptr<HDRTexture> texture = std::make_unique<HDRTexture>();
 	HDRTexture* returnTexture = texture.get();
 	texture->LoadTexture(textureName.c_str());
+	texture->path = textureName;
 	HDRtextures[textureName] = std::move(texture);
 #ifdef _DEBUG
 	std::cout << textureName << " has been sucñsessfully loaded" << std::endl;

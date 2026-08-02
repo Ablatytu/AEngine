@@ -1,0 +1,207 @@
+SceneSettings:
+  Skybox: Assets/Textures/HDR/citrus_orchard_road_puresky_2k.hdr
+GameObjects:
+  - Name: PlushRei
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [-2, -0.2, 0.5]
+          rotation: [1.7552742e-05, 54.289803, 20.3396]
+          scale: [0.99999857, 0.99999756, 0.9999974]
+      - ComponentName: Render
+        Fields:
+          material: ToonMaterial
+          mesh: Assets/Models/ReiPlush.obj@@##AENGINENUMBERMESH##@@0
+      - ComponentName: Rei
+        Fields:
+          speedRange: 0
+          speedWithoutRange: 0
+          flag: false
+          countRange: 0
+          countWithoutRange: 0
+      - ComponentName: Cube
+        Fields:
+          rotate: false
+  - Name: PlushRei1
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [2.2799304, 1.4183784, 0.5]
+          rotation: [45.77509, 88.449844, -161.68996]
+          scale: [0.16999999, 0.16999994, 0.16999996]
+      - ComponentName: Render
+        Fields:
+          material: StandartMaterial
+          mesh: Assets/Models/ReiPlush.obj@@##AENGINENUMBERMESH##@@0
+      - ComponentName: Cube
+        Fields:
+          rotate: true
+  - Name: PlushRei2
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [3.3011465, 2.2505984, 0.009112587]
+          rotation: [-169.66602, -77.31102, -157.28947]
+          scale: [0.6799962, 0.679998, 0.679997]
+      - ComponentName: Render
+        Fields:
+          material: Assets/NewMaterial1.amat
+          mesh: Assets/Models/ReiPlush.obj@@##AENGINENUMBERMESH##@@0
+      - ComponentName: Cube
+        Fields:
+          rotate: false
+  - Name: directionalLight
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [-1, 6, 0.5]
+          rotation: [-45.000004, 45.000004, 45.000008]
+          scale: [1, 1, 1]
+      - ComponentName: Light
+        Fields:
+          intensive: 1
+          Radius: 5
+          lightColor: [1, 1, 1]
+          typeLight: 0
+          shadow: true
+  - Name: pointLightB
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [3.118064, 1, 1.5]
+          rotation: [0, -0, 0]
+          scale: [1, 1, 1]
+      - ComponentName: Light
+        Fields:
+          intensive: 1
+          Radius: 5
+          lightColor: [1, 1, 1]
+          typeLight: 1
+          shadow: true
+      - ComponentName: LightMoving
+        Fields:
+          rigntPos: false
+          CanMoving: true
+      - ComponentName: Render
+        Fields:
+          material: ""
+          mesh: ""
+  - Name: pointLightR
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [0.88199204, 3, 1.5]
+          rotation: [0, -0, 0]
+          scale: [1, 1, 1]
+      - ComponentName: Render
+        Fields:
+          material: CubeMaterial
+          mesh: Assets/Models/Untitled.obj@@##AENGINENUMBERMESH##@@0
+      - ComponentName: Light
+        Fields:
+          intensive: 1
+          Radius: 5
+          lightColor: [1, 0, 1]
+          typeLight: 1
+          shadow: false
+      - ComponentName: LightMoving
+        Fields:
+          rigntPos: true
+          CanMoving: true
+  - Name: pointLightG
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [-3.4379327, 1.6819851, -45.5]
+          rotation: [0, -0, 0]
+          scale: [1, 1, 1]
+      - ComponentName: Render
+        Fields:
+          material: CubeMaterial
+          mesh: Assets/Models/Untitled.obj@@##AENGINENUMBERMESH##@@0
+      - ComponentName: Light
+        Fields:
+          intensive: 0
+          Radius: 5
+          lightColor: [0, 1, 0]
+          typeLight: 1
+          shadow: false
+      - ComponentName: LightMoving
+        Fields:
+          rigntPos: true
+          CanMoving: true
+  - Name: spotLight
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [0, 2, 3]
+          rotation: [0, -0, 0]
+          scale: [1, 1, 1]
+      - ComponentName: Light
+        Fields:
+          intensive: 1
+          Radius: 5
+          lightColor: [1, 0.5, 1]
+          typeLight: 2
+          shadow: false
+      - ComponentName: Cube
+        Fields:
+          rotate: false
+      - ComponentName: Render
+        Fields:
+          material: CubeMaterial
+          mesh: Assets/Models/Untitled.obj@@##AENGINENUMBERMESH##@@0
+  - Name: Terrain
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [5, 0, 3]
+          rotation: [0, -0, 0]
+          scale: [0.005, 0.005, 0.005]
+      - ComponentName: Render
+        Fields:
+          material: TerrainMaterial
+          mesh: Assets/Models/8842eed260aa4dad81773d51ca9066fb.obj@@##AENGINENUMBERMESH##@@0
+  - Name: Cube
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [5, 1, -3]
+          rotation: [0, -0, 0]
+          scale: [1, 1, 1]
+      - ComponentName: Render
+        Fields:
+          material: CubemapMaterial
+          mesh: Assets/Models/Untitled.obj@@##AENGINENUMBERMESH##@@0
+  - Name: New GameObject
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [0, 0, 0]
+          rotation: [0, -0, 0]
+          scale: [5, 1, 5]
+      - ComponentName: Render
+        Fields:
+          material: PlaneMaterial
+          mesh: Assets/Models/Plane.obj@@##AENGINENUMBERMESH##@@0
+  - Name: PlushReiInstance 0
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [-2.09, 0.86800003, 15.84]
+          rotation: [45.77509, 88.449844, -161.68996]
+          scale: [0.05, 0.05, 0.05]
+      - ComponentName: Light
+        Fields:
+          intensive: 3
+          Radius: 5
+          lightColor: [0.5, 0.9331114, 0.067184925]
+          typeLight: 1
+          shadow: false
+      - ComponentName: Render
+        Fields:
+          material: StandartMaterial
+          mesh: Assets/Models/ReiPlush.obj@@##AENGINENUMBERMESH##@@0
+      - ComponentName: Cube
+        Fields:
+          rotate: true

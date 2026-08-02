@@ -1,16 +1,17 @@
 #pragma once
 #include <core/Application.h>
-#include "../AEngine/Renderer/Material.h"
 class EditorGUI;
 class EditorCamera;
 class Material; 
 class RenderContext;
+class Scene;
 
 class AEditor : public Application
 {
 public:
 	AEditor();
 	~AEditor();
+	void OnSceneLoaded() override;
 private:
 	void OnInit() override;
 	void OnShutdown() override;

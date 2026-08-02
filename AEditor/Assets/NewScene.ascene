@@ -1,0 +1,39 @@
+SceneSettings:
+  Skybox: Assets/Textures/HDR/glasshouse_interior_2k.hdr
+GameObjects:
+  - Name: stoneBocchi
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [-0.14965934, 3.0776143, 0]
+          rotation: [-164.33757, -58.235943, -179.9999]
+          scale: [1.4399992, 1.4399965, 1.4399983]
+      - ComponentName: Render
+        Fields:
+          material: Assets/NewMaterial3.amat
+          mesh: Assets\Models/stoneBocchi.obj@@##AENGINENUMBERMESH##@@0
+  - Name: New GameObject
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [0, 0, 0]
+          rotation: [-75.648155, 4.322229e-06, -1.3079692]
+          scale: [0.9999985, 0.99998254, 0.9999813]
+      - ComponentName: Light
+        Fields:
+          intensive: 1
+          Radius: 5
+          lightColor: [1, 1, 1]
+          typeLight: 0
+          shadow: true
+  - Name: Quad
+    Components:
+      - ComponentName: Transform
+        Fields:
+          position: [0, 2.0019226, 0]
+          rotation: [0, -0, 86.453514]
+          scale: [3.0499766, 3.0499766, 3.05]
+      - ComponentName: Render
+        Fields:
+          material: Assets/NewMaterial.amat
+          mesh: Assets\Models/Quad.obj@@##AENGINENUMBERMESH##@@0

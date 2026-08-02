@@ -1,0 +1,8 @@
+Type: Material
+Shader_vertex: Assets/ToonshaderVS.glsl
+Shader_fragment: Assets/ToonshaderFS.glsl
+Shader_geometry: ""
+Properties:
+  _Color: [1, 1, 1, 1]
+  _Threshold: 0.5
+  _MainTexture: Assets/Textures/Bocchi_Base_Color.png

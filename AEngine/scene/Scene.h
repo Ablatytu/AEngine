@@ -4,6 +4,7 @@
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
+#include <string>
 #include "../core/AEngineAPI.h"
 
 class GameObject;
@@ -33,10 +34,11 @@ class Scene
 			glm::vec3 FogColor = glm::vec3(1.0f);
 		};
 		FogSettings fogSettings;
-		bool HDR = false;
+		bool HDR = true;
 		Camera* activeCamera = nullptr;
 		AENGINE_API GameObject* CreateGameObject();
 		AENGINE_API RenderContext CollectRenderContext();
+		void EraseScene();
 		std::unique_ptr<Skybox> skyBox;
 		std::unique_ptr<LightManager> A_LightManager;
 		std::unique_ptr<Cubemap> irradianceMap;
@@ -46,4 +48,5 @@ class Scene
 		AENGINE_API void SetSkyBox(HDRTexture* texture);
 		AENGINE_API Scene();
 		AENGINE_API ~Scene();
+		std::string pathScene = "";
 };

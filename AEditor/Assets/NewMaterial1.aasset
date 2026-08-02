@@ -1,7 +1,0 @@
-Type: Material
-Shader_vertex: Shaders/VertexShader.glsl
-Shader_fragment: Shaders/CubemapShader.glsl
-Shader_geometry: ""
-Properties:
-  GPUInstancing: false
-  cubemap: Assets/NewCubemap.aasset

@@ -4,12 +4,14 @@
 #include <string>
 #include "AEngineAPI.h"
 
+
 class AENGINE_API Application
 {
 public:
 	Application();
 	static Application& Get();
 	virtual ~Application() = default;
+	virtual void OnSceneLoaded() {};
 	int run();
 	void close();
 

@@ -29,7 +29,6 @@ void main()
     geominfo.FragPos = fragPos;
     geominfo.camPos = camPos;
     SurfaceInfo surfinfo;
-    surfinfo.uambient = vec3(0.03);
     surfinfo.albedo = albedo.rgb;
     surfinfo.metallic = material.r;
     surfinfo.roughness = material.g;

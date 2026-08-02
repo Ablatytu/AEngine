@@ -52,8 +52,8 @@ namespace RenderSystem
 	Framebuffer* GBuffer = nullptr;
 	Framebuffer* SSAO = nullptr;
 	Framebuffer* SSAOblur = nullptr;
-	std::unique_ptr<Shader>EnviromentHDRShader = nullptr;
-	std::unique_ptr<Shader>irradianceShader = nullptr;
+	std::unique_ptr<Shader> EnviromentHDRShader = nullptr;
+	std::unique_ptr<Shader> irradianceShader = nullptr;
 	std::unique_ptr<Shader> LightingGBuffer = nullptr;
 	std::unique_ptr<Shader> PointLightDeferred = nullptr;
 	std::unique_ptr<Shader> SpotLightDeferred = nullptr;
@@ -73,6 +73,7 @@ namespace RenderSystem
 	Mesh deferredCone;
 	Mesh Cube;
 	std::unique_ptr<Texture> whiteTexture = nullptr;
+	unsigned int WhiteDepthCubemap = 0;
 	bool exposurePing = false;
 
 	void rs_CollectBatches(RenderContext& context, std::vector<Batch>& batches)
@@ -531,6 +532,8 @@ namespace RenderSystem
 	}
 	void rs_LoadShadowsInShader(RenderContext& context, Shader* shader, unsigned int& slotTextureShadow)
 	{
+		bool ShadowDirectional = false;
+		bool ShadowPoint = false;
 		for (auto light : context.lights)
 		{
 			if (!light->shadow)
@@ -541,6 +544,7 @@ namespace RenderSystem
 				glBindTexture(GL_TEXTURE_2D, light->shadowMap.ID);
 				shader->setInt("shadowMap", slotTextureShadow);
 				slotTextureShadow += 1;
+				ShadowDirectional = true;
 			}
 			else if (light->typeLight == Light::Type::Point)
 			{
@@ -548,7 +552,22 @@ namespace RenderSystem
 				glBindTexture(GL_TEXTURE_CUBE_MAP, light->shadowMap.ID);
 				shader->setInt("shadowMapCube", slotTextureShadow);
 				slotTextureShadow += 1;
+				ShadowPoint = true;
 			}
+		}
+		if (!ShadowDirectional)
+		{
+			glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
+			glBindTexture(GL_TEXTURE_2D, whiteTexture->GetTexturePixels());
+			shader->setInt("shadowMap", slotTextureShadow);
+			slotTextureShadow += 1;
+		}
+		if (!ShadowPoint)
+		{
+			glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, WhiteDepthCubemap);
+			shader->setInt("shadowMapCube", slotTextureShadow);
+			slotTextureShadow += 1;
 		}
 		if (context.postProcess && context.postProcess->SSAO && context.postProcess->camera == context.camera)
 		{
@@ -859,6 +878,22 @@ namespace RenderSystem
 		Cube = AssetManager::LoadModel("Assets/Models/Cube.obj")->meshes[0];
 		whiteTexture = std::make_unique<Texture>();
 		whiteTexture->CreateColorTexture("white");
+		glGenTextures(1, &WhiteDepthCubemap);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, WhiteDepthCubemap);
+
+		float depthValue = 1.0f;
+
+		for (int i = 0; i < 6; i++)
+		{
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT, 1, 1, 0, GL_DEPTH_COMPONENT, GL_FLOAT, &depthValue);
+		}
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		SSAO->GetShader()->Update();
 		SSAO->GetShader()->setInt("gPosition", 0);
 		SSAO->GetShader()->setInt("gNormal", 1);

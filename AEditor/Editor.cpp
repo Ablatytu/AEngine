@@ -31,6 +31,7 @@
 #include "imgui_internal.h"
 #include "../AEngine/scene/CubemapSerializer.h"
 #include "../AEngine/scene/MaterialSerializer.h"
+#include "../AEngine/scene/SceneSerializer.h"
 #include <ImGuizmo.h>
 
 void EditorGUI::RenderOutline(Render* mesh)
@@ -85,25 +86,44 @@ void EditorGUI::RenderViewport()
 			std::filesystem::path fullPath = projectDirectory / relativePath;
 			std::string extension = fullPath.extension().string();
 			std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char symbol) {return static_cast<char>(std::tolower(symbol)); });
-			if (extension == ".obj")
+			if (extension == ".obj" || extension == ".fbx")
 			{
 				Model* model = AssetManager::LoadModel(fullPath.string());
 				if (model)
 				{
-					GameObject* newObject = SceneManager::Get().GetActiveScene().CreateGameObject();
-					newObject->name = fullPath.stem().string();
-					Render* render = newObject->AddComponent<Render>();
-
-					render->mesh = &model->meshes[0];
-					Material* material = AssetManager::CreateMaterial("StandartMaterial", AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl"));
-
-					render->material = material;
 					selectedTexture = nullptr;
 					selectedCubemap = nullptr;
 					selectedMaterial = nullptr;
-					selectedObject.selectedObject = newObject;
-					selectedObject.selectedObjectRender = render;
-					selectedAsset = SelectedAsset::None;
+					GameObject* newObject = SceneManager::Get().GetActiveScene().CreateGameObject();
+					newObject->name = fullPath.stem().string();
+					if (model->meshes.size() == 1)
+					{
+						Material* material = AssetManager::CreateMaterial("StandartMaterial", AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl"));
+						Render* render = newObject->AddComponent<Render>();
+						render->mesh = &model->meshes[0];
+						render->material = material;
+						selectedObject.selectedObject = newObject;
+						selectedObject.selectedObjectRender = render;
+						selectedAsset = SelectedAsset::None;
+					}
+					else if(model->meshes.size() > 1)
+					{
+						for (auto& mesh : model->meshes)
+						{
+							GameObject* childObject = SceneManager::Get().GetActiveScene().CreateGameObject();
+							childObject->name = fullPath.stem().string();
+							Render* render = childObject->AddComponent<Render>();
+
+							render->mesh = &mesh;
+							Material* material = AssetManager::CreateMaterial("StandartMaterial", AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl"));
+
+							childObject->GetComponent<Transform>()->SetParent(newObject->GetComponent<Transform>());
+							render->material = material;
+						}
+						selectedObject.selectedObject = newObject;
+						selectedObject.selectedObjectRender = nullptr;
+						selectedAsset = SelectedAsset::None;
+					}
 				}
 			}
 		}
@@ -127,9 +147,9 @@ void EditorGUI::DrawDockspaceMenuBar()
 			{
 
 			}
-			if (ImGui::MenuItem("Save Scene(Not working now)", "Ctrl+S"), false, false)
+			if (ImGui::MenuItem("Save Scene", "Ctrl+S"))
 			{
-
+				SceneSerializer::Serialize(SceneManager::Get().GetActiveScene(), SceneManager::Get().GetActiveScene().pathScene);
 			}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Exit"))
@@ -154,10 +174,27 @@ void EditorGUI::DrawDockspaceMenuBar()
 			{
 				if (ImGui::MenuItem("Directional Light"))
 				{
-
+					GameObject* newObject = SceneManager::Get().CreateGameObject();
+					newObject->AddComponent<Light>();
+					newObject->GetComponent<Light>()->typeLight = Light::Type::Directional;
+					selectedTexture = nullptr;
+					selectedCubemap = nullptr;
+					selectedMaterial = nullptr;
+					selectedAsset = SelectedAsset::None;
+					selectedObject.selectedObject = newObject;
+					selectedObject.selectedObjectRender = nullptr;
 				}
 				if (ImGui::MenuItem("Point Light"))
 				{
+					GameObject* newObject = SceneManager::Get().CreateGameObject();
+					newObject->AddComponent<Light>();
+					newObject->GetComponent<Light>()->typeLight = Light::Type::Point;
+					selectedTexture = nullptr;
+					selectedCubemap = nullptr;
+					selectedMaterial = nullptr;
+					selectedAsset = SelectedAsset::None;
+					selectedObject.selectedObject = newObject;
+					selectedObject.selectedObjectRender = nullptr;
 
 				}
 				if (ImGui::MenuItem("Spot Light"))
@@ -257,7 +294,7 @@ void EditorGUI::ShowProject()
 			std::string extension = path.extension().string();
 			std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char symbol) { return static_cast<char>(std::tolower(symbol));});
 			float iconSize = ImGui::GetTextLineHeight();
-			if (extension == ".obj")
+			if (extension == ".obj" || extension == ".fbx")
 			{
 				ImGui::Image((ImTextureID)(uintptr_t)ModelIcon->GetTexturePixels(), ImVec2(iconSize, iconSize), ImVec2(0, 0), ImVec2(1, 1));
 				ImGui::SameLine();
@@ -272,20 +309,23 @@ void EditorGUI::ShowProject()
 				}
 
 			}
-			else if (extension == ".aasset")
+			else if (extension == ".acubemap")
 			{
 				if (AssetManager::LoadCubemap(path.generic_string()))
 				{
 					ImGui::Image((ImTextureID)(uintptr_t)CubemapIcon->GetTexturePixels(), ImVec2(iconSize, iconSize), ImVec2(0, 0), ImVec2(1, 1));
 					ImGui::SameLine();
 				}
-				else if (AssetManager::LoadMaterial(path.generic_string()))
+			}
+			else if (extension == ".amat")
+			{
+				if(AssetManager::LoadMaterial(path.generic_string()))
 				{
 					ImGui::Image((ImTextureID)(uintptr_t)MaterialIcon->GetTexturePixels(), ImVec2(iconSize, iconSize), ImVec2(0, 0), ImVec2(1, 1));
 					ImGui::SameLine();
 				}
 			}
-			bool clicked = ImGui::Selectable(filename.c_str());
+			bool clicked = ImGui::Selectable(filename.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
 			if (clicked)
 			{
 				selectedTexture = nullptr;
@@ -299,18 +339,28 @@ void EditorGUI::ShowProject()
 					selectedAsset = SelectedAsset::Texture;
 					selectedTexture = AssetManager::LoadTexture(path.generic_string());
 				}
-				else if (extension == ".aasset")
+				else if (extension == ".acubemap")
 				{
 					if (CubemapSerializer::IsCubemap(path.generic_string()))
 					{
 						selectedCubemap = AssetManager::LoadCubemap(path.generic_string());
 						selectedAsset = SelectedAsset::Cubemap;
 					}
-					else if (MaterialSerializer::IsMaterial(path.generic_string()))
+				}
+				else if (extension == ".amat")
+				{
+					if (MaterialSerializer::IsMaterial(path.generic_string()))
 					{
 						selectedAsset = SelectedAsset::Material;
 						selectedMaterial = AssetManager::LoadMaterial(path.generic_string());
 					}
+				}
+			}
+			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+			{
+				if (extension == ".ascene")
+				{
+					SceneManager::Get().LoadScene(path.generic_string());
 				}
 			}
 			if (ImGui::BeginDragDropSource())
@@ -332,10 +382,10 @@ void EditorGUI::ShowProject()
 		if (ImGui::MenuItem("Create new cubemap"))
 		{
 			int index = 1;
-			std::filesystem::path path = currentDirectory / "NewCubemap.aasset";
+			std::filesystem::path path = currentDirectory / "NewCubemap.acubemap";
 			while (std::filesystem::exists(path))
 			{
-				path = currentDirectory / ("NewCubemap" + std::to_string(index) + ".aasset");
+				path = currentDirectory / ("NewCubemap" + std::to_string(index) + ".acubemap");
 				index++;
 			}
 			AssetManager::CreateCubemap(path.generic_string(), 512, true);
@@ -343,13 +393,24 @@ void EditorGUI::ShowProject()
 		if (ImGui::MenuItem("Create new material"))
 		{
 			int index = 1;
-			std::filesystem::path path = currentDirectory / "NewMaterial.aasset";
+			std::filesystem::path path = currentDirectory / "NewMaterial.amat";
 			while (std::filesystem::exists(path))
 			{
-				path = currentDirectory / ("NewMaterial" + std::to_string(index) + ".aasset");
+				path = currentDirectory / ("NewMaterial" + std::to_string(index) + ".amat");
 				index++;
 			}
 			AssetManager::CreateMaterial(path.generic_string(), AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShaderDeferredGeometryTest.glsl"), true);
+		}
+		if (ImGui::MenuItem("Create new scene"))
+		{
+			int index = 1;
+			std::filesystem::path path = currentDirectory / "NewScene.ascene";
+			while (std::filesystem::exists(path)) 
+			{
+				path = currentDirectory / ("NewScene" + std::to_string(index) + ".ascene");
+				index++;
+			}
+			SceneManager::Get().CreateScene(path.generic_string());
 		}
 		ImGui::EndPopup();
 	}
@@ -423,8 +484,14 @@ void EditorGUI::RenderGizmo()
 	glm::mat4 view = SceneManager::Get().GetActiveScene().activeCamera->viewMatrix;
 	glm::mat4 proj = SceneManager::Get().GetActiveScene().activeCamera->projection;
 
-	glm::mat4 modelMatrix = transform->GetModelMatrix();
+	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
+	if (transform->parent)
+	{
+		modelMatrix = glm::inverse(transform->parent->GetModelMatrix()) * transform->GetModelMatrix();
+	}
+	else
+		modelMatrix = transform->GetModelMatrix();
 	static ImGuizmo::OPERATION operation = ImGuizmo::TRANSLATE;
 	if (ImGui::IsKeyPressed(ImGuiKey_W))
 		operation = ImGuizmo::TRANSLATE;
@@ -477,21 +544,50 @@ void EditorGUI::RenderEditorParts()
 		prevObjOutline = nullptr;
 	}
 }
+void EditorGUI::DrawHierarchyObject(GameObject* object)
+{
+	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_FramePadding;
+	if (object->transform->children.empty())
+		flags |= ImGuiTreeNodeFlags_Leaf;
+	bool selected = (selectedObject.selectedObject == object);
+	if (selected)
+		flags |= ImGuiTreeNodeFlags_Selected;
+	ImGui::PushID(object);
+	bool opened = ImGui::TreeNodeEx(object->name.c_str(), flags);
+	if(ImGui::IsItemClicked())
+	{
+		selectedTexture = nullptr;
+		selectedCubemap = nullptr;
+		selectedMaterial = nullptr;
+		selectedAsset = SelectedAsset::None;
+		selectedObject.selectedObject = object;
+		selectedObject.selectedObjectRender = object->GetComponent<Render>();
+	}
+
+	if (opened)
+	{
+		for (Transform* child : object->transform->children)
+		{
+			if (child->gameObject)
+			{
+				DrawHierarchyObject(child->gameObject);
+			}
+		}
+		ImGui::TreePop();
+	}
+
+	ImGui::PopID();
+}
 void EditorGUI::ShowHierarchyWindow()
 {
 
 	ImGui::Begin("Hierarchy");
 	for (std::unique_ptr<GameObject>& object : SceneManager::Get().GetActiveScene().objects)
 	{
-		bool selected = (selectedObject.selectedObject == object.get());
-		if (ImGui::Selectable((std::string(object->name) + "##" + std::to_string((uintptr_t)object.get())).c_str(), selected))
+		if (object->name == "!##@@AENGINECAMERAEDITOR@@##!") continue;
+		if (!object->transform->parent)
 		{
-			selectedTexture = nullptr;
-			selectedCubemap = nullptr;
-			selectedMaterial = nullptr;
-			selectedAsset = SelectedAsset::None;
-			selectedObject.selectedObject = object.get();
-			selectedObject.selectedObjectRender = object.get()->GetComponent<Render>();
+			DrawHierarchyObject(object.get());
 		}
 	}
 	ImGui::End();
@@ -737,7 +833,10 @@ void EditorGUI::ShowInspectorWindow()
 							case FieldType::VEC3:
 							{
 								auto* value3 = static_cast<glm::vec3*>(field.ptr);
-								ImGui::DragFloat3(field.name, glm::value_ptr(*value3), 0.1f);
+								if (field.isColor)
+									ImGui::ColorEdit3(field.name, glm::value_ptr(*value3));
+								else
+									ImGui::DragFloat3(field.name, glm::value_ptr(*value3), 0.1f);
 								break;
 							}
 							case FieldType::QUAT:
@@ -749,6 +848,15 @@ void EditorGUI::ShowInspectorWindow()
 								{
 									*valueq = Quaternion::Euler(data[0], data[1], data[2]);
 								}
+								break;
+							}
+							case FieldType::VEC4:
+							{
+								auto* value4 = static_cast<glm::vec4*>(field.ptr);
+								if (field.isColor)
+									ImGui::ColorEdit4(field.name, glm::value_ptr(*value4));
+								else
+									ImGui::DragFloat4(field.name, glm::value_ptr(*value4), 0.1f);
 								break;
 							}
 							}
@@ -787,7 +895,7 @@ void EditorGUI::ShowInspectorWindow()
 							std::filesystem::path fullpath = projectDirectory / relativePath;
 							std::string extension = fullpath.extension().string();
 							std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
-							if (extension == ".aasset" && MaterialSerializer::IsMaterial(fullpath.generic_string()))
+							if (extension == ".amat" && MaterialSerializer::IsMaterial(fullpath.generic_string()))
 							{
 								renderComponent->material = AssetManager::LoadMaterial(fullpath.generic_string());
 							}
@@ -1116,7 +1224,7 @@ void EditorGUI::RenderMaterialPart(Material* material, bool &writed)
 
 							std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
 
-							if (extension == ".aasset" && CubemapSerializer::IsCubemap(fullpath.generic_string()))
+							if (extension == ".acubemap" && CubemapSerializer::IsCubemap(fullpath.generic_string()))
 							{
 								Cubemap* cubemap = AssetManager::LoadCubemap(fullpath.generic_string());
 								if (cubemap)
