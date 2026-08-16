@@ -18,6 +18,8 @@
 #include "FramebufferManager.h"
 #include "Texture.h"
 #include "../components/PostProcess.h"
+#include "../components/Transform.h"
+#include "../components/Light.h"
 #include <AMath.h>
 #include <algorithm>
 #include <map>

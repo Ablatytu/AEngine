@@ -8,7 +8,7 @@
 #include "../core/AEngineAPI.h"
 
 class GameObject;
-class AComponent;
+class AEngineComponent;
 class Render;
 class Camera;
 class Skybox;
@@ -23,9 +23,9 @@ class Scene
 {
 	public:
 		std::vector<std::unique_ptr<GameObject>> objects;
-		std::vector<AComponent*> AComponents;
-		std::vector<AComponent*> AwakeAComponents;
-		std::vector<AComponent*> StartAComponents;
+		std::vector<AEngineComponent*> AComponents;
+		std::vector<AEngineComponent*> AwakeAComponents;
+		std::vector<AEngineComponent*> StartAComponents;
 		std::vector<Render*> renders;
 		PostProcess* postProcess = nullptr;
 		struct FogSettings

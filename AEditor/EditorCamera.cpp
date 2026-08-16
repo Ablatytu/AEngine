@@ -3,9 +3,12 @@
 #include <glm/glm/gtc/type_ptr.hpp>
 #include "EditorCamera.h"
 #include "../AEngine/components/Render.h"
+#include "../AEngine/components/Camera.h"
 #include "../AEngine/Renderer/GameObject.h"
 #include "../AEngine/core/Window.h"
 #include "../AEngine/Renderer/Mesh.h"
+#include "../AEngine/scene/SceneManager.h"
+#include "../AEngine/scene/Scene.h"
 #include "Editor.h"
 #include <AMath.h>
 #include "../AEngine/core/Application.h"

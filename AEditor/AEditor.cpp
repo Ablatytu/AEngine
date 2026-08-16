@@ -25,15 +25,20 @@
 #include "../AEngine/Renderer/RenderSystem.h"
 #include "../AEngine/Renderer/RenderContext.h"
 #include "../AEngine/components/PostProcess.h"
+#include "../AEngine/components/Camera.h"
+#include "../AEngine/scene/SceneManager.h"
+#include "../AEngine/scene/Scene.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "../AEngine/components/GameModule.h"
 #include "Editor.h"
 
 using namespace RenderSystem;
 
 void AEditor::OnInit()
 {
+	GameModule::Load("Game.dll");
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
@@ -132,8 +137,9 @@ void AEditor::OnSceneLoaded()
 void AEditor::OnBeforeSceneUpdate()
 {
 	//frame++;
-	//if (frame > 10)
+	//if (frame > 30)
 	//	close();
+	//GameModule::CheckForChanges();
 	if (SceneManager::Get().CheckChangeScenePathState())
 	{
 		glm::vec3 pos = glm::vec3(2.0f, 2.0f, 7.0f);
@@ -148,6 +154,8 @@ void AEditor::OnBeforeSceneUpdate()
 			pitch = editorCamera->pitch;
 			editorCamera.reset();
 		}
+		editorGUI->selectedObject.selectedObject = nullptr;
+		editorGUI->selectedObject.selectedObjectRender = nullptr;
 		SceneManager::Get().ChangeScene();
 		OnSceneLoaded();
 		editorCamera->transform->position = pos;
@@ -193,6 +201,7 @@ void AEditor::OnRender()
 }
 void AEditor::OnShutdown()
 {
+	GameModule::Unload();
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();

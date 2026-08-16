@@ -12,6 +12,7 @@ public:
 	static Application& Get();
 	virtual ~Application() = default;
 	virtual void OnSceneLoaded() {};
+	void UpdateGameModule(bool update);
 	int run();
 	void close();
 
@@ -30,6 +31,7 @@ private:
 private: 
 	static Application* app;
 	Window window;
+	bool UpdateGameModuleComponents = false;
 };
 #endif
 

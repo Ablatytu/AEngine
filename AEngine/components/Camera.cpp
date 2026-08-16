@@ -1,8 +1,8 @@
+#include "../Renderer/GameObject.h"
 #include "Camera.h"
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
-#include "../Renderer/GameObject.h"
 #include "../scene/SceneManager.h"
 #include "../core/Application.h"
 #include "../Renderer/Shader.h"
@@ -27,3 +27,5 @@ void Camera::Update()
 {
 	viewMatrix = glm::lookAt(transform->position, transform->position + transform->forward(), transform->up());
 }
+
+AE_REGISTER_COMPONENT(Camera)

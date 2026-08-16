@@ -1,10 +1,10 @@
 #pragma once
-#include "AComponent.h"
+#include "AEngineComponent.h"
 #include "../core/AEngineAPI.h"
 
-class AENGINE_API Rei : public AComponent
+class AENGINE_API Rei : public AEngineComponent
 {
-	RegisterComponent(Rei)
+	AE_REGISTER_CLASS(Rei);
 public:
 	float speedRange = 0.0f;
 	float speedWithoutRange = 0.0f;

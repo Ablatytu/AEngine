@@ -4,6 +4,9 @@
 #include <map>
 #include <cmath>
 #include "../Renderer/RenderSystem.h"
+#include "../components/GameModule.h"
+#include "../scene/SceneManager.h"
+#include "../scene/Scene.h"
 using namespace RenderSystem;
 Application* Application::app = nullptr;
 
@@ -23,6 +26,10 @@ Application& Application::Get()
 Window& Application::GetWindow()
 {
 	return window;
+}
+void Application::UpdateGameModule(bool update)
+{
+	UpdateGameModuleComponents = update;
 }
 int Application::run()
 {
@@ -45,10 +52,14 @@ int Application::run()
 				component->Start();
 			SceneManager::Get().GetActiveScene().StartAComponents.clear();
 		}
+		if(UpdateGameModuleComponents)
+			GameModule::Start();
 		for (auto& component : SceneManager::Get().GetActiveScene().AComponents)
 		{
 			component->Update();
 		}
+		if (UpdateGameModuleComponents)
+			GameModule::Update(Time::deltaTime);
 		OnAfterSceneUpdate();
 
 		OnRender();

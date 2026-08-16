@@ -1,11 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.8.11912.234 insiders
+VisualStudioVersion = 18.8.11912.234
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AEngine", "AEngine.vcxproj", "{3285865C-F509-42DD-989E-86CFC782EBC4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AEditor", "..\AEditor\AEditor.vcxproj", "{0712D09A-F2AC-4611-A75A-900819433BC8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "..\Game\Game.vcxproj", "{C0F9B447-9D01-4E92-95E6-2B1D23282B3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameAPI", "GameAPI", "{7BDB2D0C-BB69-458F-9FFF-730276309618}"
+	ProjectSection(SolutionItems) = preProject
+		..\GameAPI\GameABI.h = ..\GameAPI\GameABI.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +38,14 @@ Global
 		{0712D09A-F2AC-4611-A75A-900819433BC8}.Release|x64.Build.0 = Release|x64
 		{0712D09A-F2AC-4611-A75A-900819433BC8}.Release|x86.ActiveCfg = Release|Win32
 		{0712D09A-F2AC-4611-A75A-900819433BC8}.Release|x86.Build.0 = Release|Win32
+		{C0F9B447-9D01-4E92-95E6-2B1D23282B3A}.Debug|x64.ActiveCfg = Debug|x64
+		{C0F9B447-9D01-4E92-95E6-2B1D23282B3A}.Debug|x64.Build.0 = Debug|x64
+		{C0F9B447-9D01-4E92-95E6-2B1D23282B3A}.Debug|x86.ActiveCfg = Debug|Win32
+		{C0F9B447-9D01-4E92-95E6-2B1D23282B3A}.Debug|x86.Build.0 = Debug|Win32
+		{C0F9B447-9D01-4E92-95E6-2B1D23282B3A}.Release|x64.ActiveCfg = Release|x64
+		{C0F9B447-9D01-4E92-95E6-2B1D23282B3A}.Release|x64.Build.0 = Release|x64
+		{C0F9B447-9D01-4E92-95E6-2B1D23282B3A}.Release|x86.ActiveCfg = Release|Win32
+		{C0F9B447-9D01-4E92-95E6-2B1D23282B3A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,10 +2,11 @@
 #include "Transform.h"
 #include <memory>
 #include "../core/AEngineAPI.h"
+#include "AEngineComponent.h"
 
-class AENGINE_API Cube : public AComponent
+class AENGINE_API Cube : public AEngineComponent
 {
-	RegisterComponent(Cube)
+	AE_REGISTER_CLASS(Cube);
 public:
 	Transform* transform;
 	bool rotate = false;

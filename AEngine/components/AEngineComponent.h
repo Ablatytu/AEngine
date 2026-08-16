@@ -6,12 +6,25 @@
 #include <glm/glm/gtc/type_ptr.hpp>
 #include "../core/ComponentSystem.h"
 #include "../core/AEngineAPI.h"
+#include "../components/ComponentHandle.h"
 #include <type_traits>
-#define RegisterComponent(className) \
-public:                                                              \
+#define AE_REGISTER_CLASS(className) \
+public: \
 const char* GetComponentName() const override \
 { \
 	return #className; \
+}\
+private:\
+struct RegisterClassFunc\
+{\
+  RegisterClassFunc();  \
+};\
+static RegisterClassFunc registerClassFunc;
+#define AE_REGISTER_COMPONENT(className) \
+className::RegisterClassFunc className::registerClassFunc{}; \
+className::RegisterClassFunc::RegisterClassFunc() \
+{\
+	ComponentSystem::Register(#className, [](GameObject* object){return object->AddComponent<className>();}); \
 }
 #define Range(var, minValue, maxValue) \
 SetRangeFieldInInspector(#var, minValue, maxValue);
@@ -19,6 +32,7 @@ SetRangeFieldInInspector(#var, minValue, maxValue);
 RegisterFieldInInspector(#var, &var, fieldTypeInitial<decltype(var)>());
 #define SetColor(var) \
 SetColorFieldInInspector(#var);
+
 class GameObject;
 class Material;
 class Mesh;
@@ -45,19 +59,21 @@ struct FieldInfo
 	float maxValue = 0.0f;
 	bool isColor = false;
 };
-class AENGINE_API AComponent
+class AENGINE_API AEngineComponent
 {
 public:
 	GameObject* gameObject;
+	ComponentHandle handle;
 	std::vector<FieldInfo> fields;
-	AComponent() = default;
-	virtual ~AComponent() {};
+	static constexpr bool AlwaysWorksComponent = false;
+	AEngineComponent() = default;
+	virtual ~AEngineComponent() {};
 	virtual void Update() {}
 	virtual void Start() {}
 	virtual void Awake() {}
 	virtual void OnInspector() {}
 	virtual void OnDestroy() {}
-	virtual const char* GetComponentName() const { return "New AComponent"; }
+	virtual const char* GetComponentName() const { return "New AEngineComponent"; }
 	template<typename t> inline FieldType fieldTypeInitial()
 	{
 		if constexpr (std::is_enum_v<t>)

@@ -1,17 +1,16 @@
 #pragma once
-#include "AComponent.h"
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
 #include <memory>
 #include "../core/AEngineAPI.h"
-
+#include "AEngineComponent.h"
 class Transform;
 class Material;
 class Texture;
-class AENGINE_API Light : public AComponent
+class AENGINE_API Light : public AEngineComponent
 {
-	RegisterComponent(Light)
+	AE_REGISTER_CLASS(Light);
 public:
 	~Light() override;
 	enum class Type

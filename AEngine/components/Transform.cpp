@@ -1,3 +1,4 @@
+#include "../Renderer/GameObject.h"
 #include "Transform.h"
 
 void Transform::Awake()
@@ -57,3 +58,5 @@ glm::quat Quaternion::Euler(float x, float y, float z)
 {
 	return glm::quat(glm::radians(glm::vec3(x, y, z)));
 }
+
+AE_REGISTER_COMPONENT(Transform)

@@ -7,9 +7,14 @@
 #include "../Renderer/GameObject.h"
 #include "../components/cube.h"
 #include "../components/LightMoving.h"
-#include "../components/AComponent.h"
+#include "../components/AEngineComponent.h"
+#include "../components/Render.h"
+#include "../components/Camera.h"
+#include "../components/Light.h"
 #include "../components/Rei.h"
 #include "../APIs/ModelLoader.h"
+#include "../core/ComponentSystem.h"
+#include "../components/GameModule.h"
 #include "AssetManager.h"
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
@@ -54,7 +59,23 @@ bool SceneSerializer::SerializeEmpty(const std::string& path)
 	return savefile.good();
 
 }
+
 bool SceneSerializer::Serialize(Scene& scene, const std::string& path)
+{
+	std::string data = SerializeToString(scene);
+
+	std::ofstream saveFile(path);
+
+	if (!saveFile)
+	{
+		std::cout << "FAILED TO CREATE SCENE FILE\n";
+		return false;
+	}
+	saveFile << data;
+
+	return true;
+}
+std::string SceneSerializer::SerializeToString(Scene& scene)
 {
 	YAML::Emitter out;
 
@@ -154,6 +175,54 @@ bool SceneSerializer::Serialize(Scene& scene, const std::string& path)
 			out << YAML::EndMap;
 			
 		}
+		int countComponents = GameModule::GETGAMECONTEXT().getAComponentsCountFromGameObject(gameobject->getHandle());
+		std::vector<AE_COMPONENT_INFO> componentsInfo(countComponents);
+		GameModule::GETGAMECONTEXT().getAComponentsFromGameObject(gameobject->getHandle(), componentsInfo.data(), countComponents);
+		for (int i = 0; i < countComponents; i++)
+		{
+			out << YAML::BeginMap;
+			out << YAML::Key << "ComponentName"; out << YAML::Value << componentsInfo[i].name;
+			out << YAML::Key << "Fields"; out << YAML::Value << YAML::BeginMap;
+			for (int x = 0; x < componentsInfo[i].countFieldsInfo; x++)
+			{
+				AE_GAME_FIELD_INFO::FieldInfo field = componentsInfo[i].fieldsInfo[x];
+				AE_GAME_FIELD_INFO::FieldType type = field.typeValue;
+				out << YAML::Key << field.nameField;
+				switch (type)
+				{
+					case AE_GAME_FIELD_INFO::FieldType::BOOL:
+					{
+						out << YAML::Value << *static_cast<bool*>(field.ptr);
+						break;
+					}
+					case AE_GAME_FIELD_INFO::FieldType::FLOAT:
+					{
+						out << YAML::Value << *static_cast<float*>(field.ptr);
+						break;
+					}
+					case AE_GAME_FIELD_INFO::FieldType::VEC3:
+					{
+						AE_VEC3 vec3 = *static_cast<AE_VEC3*>(field.ptr);
+						out << YAML::Value << YAML::Flow << YAML::BeginSeq; out << vec3.x << vec3.y << vec3.z; out << YAML::EndSeq;
+						break;
+					}
+					case AE_GAME_FIELD_INFO::FieldType::VEC4:
+					{
+						AE_VEC4 vec4 = *static_cast<AE_VEC4*>(field.ptr);
+						out << YAML::Value << YAML::Flow << YAML::BeginSeq; out << vec4.x << vec4.y << vec4.z << vec4.w; out << YAML::EndSeq;
+						break;
+					}
+					case AE_GAME_FIELD_INFO::FieldType::INT:
+					{
+						out << YAML::Value << *static_cast<int*>(field.ptr);
+						break;
+					}
+				}
+			}
+			out << YAML::EndMap;
+			out << YAML::EndMap;
+
+		}
 		out << YAML::EndSeq;
 		out << YAML::EndMap;
 	}
@@ -162,23 +231,17 @@ bool SceneSerializer::Serialize(Scene& scene, const std::string& path)
 
 	out << YAML::EndMap;
 
-	std::ofstream savefile(path);
 
-	if (!savefile)
-	{
-		std::cerr << "Cannot save scene: " << path << '\n';
-
-		return false;
-	}
-
-	savefile << out.c_str();
-
-	return savefile.good();
+	return std::string(out.c_str());
 
 }
-std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path)
+std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path, bool fromString)
 {
-	YAML::Node root = YAML::LoadFile(path);
+	YAML::Node root;
+	if (fromString)
+		root = YAML::Load(path);
+	else
+		root = YAML::LoadFile(path);
 
 	std::unique_ptr<Scene> newScene = std::make_unique<Scene>();
 
@@ -205,7 +268,6 @@ std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path)
 			}
 		}
 	}
-	AComponent* NewComponent = nullptr;
 	YAML::Node gameobjectsNode = root["GameObjects"];
 	if (gameobjectsNode && gameobjectsNode.IsSequence())
 	{
@@ -222,7 +284,9 @@ std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path)
 			{
 				for (auto component : componentsNode)
 				{
+					AEngineComponent* NewComponent = nullptr;
 					std::string nameComponent = component["ComponentName"].as<std::string>();
+					int indexNewGameComponent = -1;
 #ifdef _DEBUG
 					std::cout << "Loading component: " << nameComponent << "\n";
 #endif 
@@ -230,159 +294,256 @@ std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path)
 					{
 						NewComponent = newGameObject->GetComponent<Transform>();
 					}
-					else if (nameComponent == "Render")
-					{
-						NewComponent = newGameObject->AddComponent<Render>();
-					}
-					else if (nameComponent == "Camera")
-					{
-						NewComponent = newGameObject->AddComponent<Camera>();
-					}
-					else if (nameComponent == "Cube")
-					{
-						NewComponent = newGameObject->AddComponent<Cube>();
-					}
-					else if (nameComponent == "LightMoving")
-					{
-						NewComponent = newGameObject->AddComponent<LightMoving>();
-					}
-					else if (nameComponent == "Rei")
-					{
-						NewComponent = newGameObject->AddComponent<Rei>();
-					}
-					else if (nameComponent == "Light")
-					{
-						NewComponent = newGameObject->AddComponent<Light>();
-					}
 					else
-						continue;
-					NewComponent->OnInspector();
-					auto fieldsNode = component["Fields"];
-
-					if (fieldsNode && fieldsNode.IsMap())
 					{
-						for (auto field : fieldsNode)
+						auto _newcomponent = ComponentSystem::GetComponentsFabric().find(nameComponent);
+						if (_newcomponent != ComponentSystem::GetComponentsFabric().end())
+							NewComponent = _newcomponent->second(newGameObject);
+						else
 						{
-							std::string fieldName = field.first.as<std::string>();
-							YAML::Node value = field.second;
-#ifdef _DEBUG
-							std::cout << "field name: " << fieldName << "\n";
-#endif
-							for (FieldInfo& infoComponent : NewComponent->fields)
+							int countRegisteredGameComponents = GameModule::GETGAMECONTEXT().getRegisteredAComponentsCount();
+							for (int i = 0; i < countRegisteredGameComponents; i++)
 							{
-								if (std::string(infoComponent.name) == fieldName)
+								const char* nameGameComponent = GameModule::GETGAMECONTEXT().getRegisteredAComponentName(i);
+								if (nameGameComponent == nameComponent)
 								{
-									FieldType type = infoComponent.type;
-									switch (type)
-									{
-									case FieldType::BOOL:
-									{
-										bool* valueb = static_cast<bool*>(infoComponent.ptr);
-#ifdef _DEBUG
-										if(valueb)
-											std::cout << "field value: " << *valueb << "\n";
-#endif
-										if (valueb)
-											*valueb = value.as<bool>();
-										break;
-									}
-									case FieldType::FLOAT:
-									{
-										float* valuef = static_cast<float*>(infoComponent.ptr);
-#ifdef _DEBUG
-										if (valuef)
-											std::cout << "field value: " << *valuef << "\n";
-#endif
-										if (valuef)
-											*valuef = value.as<float>();
-										break;
-									}
-									case FieldType::VEC3:
-									{
-										glm::vec3* value3 = static_cast<glm::vec3*>(infoComponent.ptr);
-										if (value3 && value.IsSequence())
-											*value3 = glm::vec3(value[0].as<float>(), value[1].as<float>(), value[2].as<float>());
-#ifdef _DEBUG
-										if (value3)
-											std::cout << "field value: " << value3->r << " " << value3->g << " " << value3->b << " " << "\n";
-#endif
-										break;
-									}
-									case FieldType::VEC4:
-									{
-										glm::vec4* value4 = static_cast<glm::vec4*>(infoComponent.ptr);
-#ifdef _DEBUG
-										if (value4)
-											std::cout << "field value: " << value4->r << " " << value4->g << " " << value4->b << " " << value4->a << "\n";
-#endif
-										if (value4 && value.IsSequence())
-											*value4 = glm::vec4(value[0].as<float>(), value[1].as<float>(), value[2].as<float>(), value[3].as<float>());
-										break;
-									}
-									case FieldType::INT:
-									{
-										int* valuei = static_cast<int*>(infoComponent.ptr);
-#ifdef _DEBUG
-										if (valuei)
-											std::cout << "field value: " << *valuei << "\n";
-#endif _DEBUG
-										if (valuei)
-											*valuei = value.as<int>();
-										break;
-									}
-									case FieldType::QUAT:
-									{
-										glm::quat* valueq = static_cast<glm::quat*>(infoComponent.ptr);
-										if (valueq && value.IsSequence())
-											*valueq = glm::quat(glm::radians(glm::vec3(value[0].as<float>(), value[1].as<float>(), value[2].as<float>())));
-#ifdef _DEBUG
-										if (valueq)
-										{
-											glm::vec3 degrees = glm::degrees(glm::eulerAngles(*valueq));
-											std::cout << "field value: " << degrees.r << " " << degrees.g << " " << degrees.b << " " << "\n";
-										}
-#endif
-										break;
-									}
-									case FieldType::MATERIAL:
-									{
-										Material** valueml = static_cast<Material**>(infoComponent.ptr);
-										if (valueml && !value.as<std::string>().empty())
-											*valueml = AssetManager::LoadMaterial(value.as<std::string>());
-										break;
-									}
-									case FieldType::MESH:
-									{
-										Mesh** valuemh = static_cast<Mesh**>(infoComponent.ptr);
-										if (valuemh && !value.as<std::string>().empty())
-										{
-											std::string nameMesh = value.as<std::string>();
-											size_t NumberMesh = nameMesh.rfind("@@##AENGINENUMBERMESH##@@");
-											std::string numberMeshstr = nameMesh.substr(NumberMesh + std::string("@@##AENGINENUMBERMESH##@@").length());
-											unsigned int numberMeshint = std::stoi(numberMeshstr);
-											std::string cleanPath = nameMesh.substr(0, NumberMesh);
-											*valuemh = &AssetManager::LoadModel(cleanPath)->meshes[numberMeshint];
-										}
-										break;
-									}
-									case FieldType::ENUM:
-									{
-										int* valuee = static_cast<int*>(infoComponent.ptr);
-										if (valuee)
-											*valuee = value.as<int>();
-										break;
-									}
-									}
+									indexNewGameComponent = i;
+									GameModule::GETGAMECONTEXT().addAComponent(indexNewGameComponent, newGameObject->getHandle());
+									break;
 								}
-
 							}
 						}
-						NewComponent->fields.clear();
-						NewComponent = nullptr;
-
 					}
-				}
+					if (NewComponent)
+					{
+						NewComponent->OnInspector();
+						auto fieldsNode = component["Fields"];
 
+						if (fieldsNode && fieldsNode.IsMap())
+						{
+							for (auto field : fieldsNode)
+							{
+								std::string fieldName = field.first.as<std::string>();
+								YAML::Node value = field.second;
+#ifdef _DEBUG
+								std::cout << "field name: " << fieldName << "\n";
+#endif
+								for (FieldInfo& infoComponent : NewComponent->fields)
+								{
+									if (std::string(infoComponent.name) == fieldName)
+									{
+										FieldType type = infoComponent.type;
+										switch (type)
+										{
+										case FieldType::BOOL:
+										{
+											bool* valueb = static_cast<bool*>(infoComponent.ptr);
+#ifdef _DEBUG
+											if (valueb)
+												std::cout << "field value: " << *valueb << "\n";
+#endif
+											if (valueb)
+												*valueb = value.as<bool>();
+											break;
+										}
+										case FieldType::FLOAT:
+										{
+											float* valuef = static_cast<float*>(infoComponent.ptr);
+#ifdef _DEBUG
+											if (valuef)
+												std::cout << "field value: " << *valuef << "\n";
+#endif
+											if (valuef)
+												*valuef = value.as<float>();
+											break;
+										}
+										case FieldType::VEC3:
+										{
+											glm::vec3* value3 = static_cast<glm::vec3*>(infoComponent.ptr);
+											if (value3 && value.IsSequence())
+												*value3 = glm::vec3(value[0].as<float>(), value[1].as<float>(), value[2].as<float>());
+#ifdef _DEBUG
+											if (value3)
+												std::cout << "field value: " << value3->r << " " << value3->g << " " << value3->b << " " << "\n";
+#endif
+											break;
+										}
+										case FieldType::VEC4:
+										{
+											glm::vec4* value4 = static_cast<glm::vec4*>(infoComponent.ptr);
+#ifdef _DEBUG
+											if (value4)
+												std::cout << "field value: " << value4->r << " " << value4->g << " " << value4->b << " " << value4->a << "\n";
+#endif
+											if (value4 && value.IsSequence())
+												*value4 = glm::vec4(value[0].as<float>(), value[1].as<float>(), value[2].as<float>(), value[3].as<float>());
+											break;
+										}
+										case FieldType::INT:
+										{
+											int* valuei = static_cast<int*>(infoComponent.ptr);
+#ifdef _DEBUG
+											if (valuei)
+												std::cout << "field value: " << *valuei << "\n";
+#endif _DEBUG
+											if (valuei)
+												*valuei = value.as<int>();
+											break;
+										}
+										case FieldType::QUAT:
+										{
+											glm::quat* valueq = static_cast<glm::quat*>(infoComponent.ptr);
+											if (valueq && value.IsSequence())
+												*valueq = glm::quat(glm::radians(glm::vec3(value[0].as<float>(), value[1].as<float>(), value[2].as<float>())));
+#ifdef _DEBUG
+											if (valueq)
+											{
+												glm::vec3 degrees = glm::degrees(glm::eulerAngles(*valueq));
+												std::cout << "field value: " << degrees.r << " " << degrees.g << " " << degrees.b << " " << "\n";
+											}
+#endif
+											break;
+										}
+										case FieldType::MATERIAL:
+										{
+											Material** valueml = static_cast<Material**>(infoComponent.ptr);
+											if (valueml && !value.as<std::string>().empty())
+												*valueml = AssetManager::LoadMaterial(value.as<std::string>());
+											break;
+										}
+										case FieldType::MESH:
+										{
+											Mesh** valuemh = static_cast<Mesh**>(infoComponent.ptr);
+											if (valuemh && !value.as<std::string>().empty())
+											{
+												std::string nameMesh = value.as<std::string>();
+												size_t NumberMesh = nameMesh.rfind("@@##AENGINENUMBERMESH##@@");
+												std::string numberMeshstr = nameMesh.substr(NumberMesh + std::string("@@##AENGINENUMBERMESH##@@").length());
+												unsigned int numberMeshint = std::stoi(numberMeshstr);
+												std::string cleanPath = nameMesh.substr(0, NumberMesh);
+												*valuemh = &AssetManager::LoadModel(cleanPath)->meshes[numberMeshint];
+											}
+											break;
+										}
+										case FieldType::ENUM:
+										{
+											int* valuee = static_cast<int*>(infoComponent.ptr);
+											if (valuee)
+												*valuee = value.as<int>();
+											break;
+										}
+										}
+									}
+
+								}
+							}
+							NewComponent->fields.clear();
+							NewComponent = nullptr;
+
+						}
+					}
+					else if (indexNewGameComponent != -1)
+					{
+						int countNewGameComponentsInfo = GameModule::GETGAMECONTEXT().getAComponentsCountFromGameObject(newGameObject->getHandle());
+						std::vector<AE_COMPONENT_INFO> NewGameComponents(countNewGameComponentsInfo);
+						GameModule::GETGAMECONTEXT().getAComponentsFromGameObject(newGameObject->getHandle(), NewGameComponents.data(), countNewGameComponentsInfo);
+
+						AE_COMPONENT_INFO* newGameComponent = nullptr;
+						for (AE_COMPONENT_INFO& newGameComponentInfo : NewGameComponents)
+						{
+							if (!newGameComponentInfo.name) continue;
+
+							if (newGameComponentInfo.name != nameComponent) continue;
+
+							newGameComponent = &newGameComponentInfo;
+							break;
+						}
+						if (!newGameComponent) continue;
+
+						auto fieldsNode = component["Fields"];
+
+						if (fieldsNode && fieldsNode.IsMap())
+						{
+							for (auto field : fieldsNode)
+							{
+								std::string fieldName = field.first.as<std::string>();
+								YAML::Node value = field.second;
+#ifdef _DEBUG
+								std::cout << "field name: " << fieldName << "\n";
+#endif
+								for (int i = 0; i < newGameComponent->countFieldsInfo; i++)
+								{
+									if (!newGameComponent->fieldsInfo[i].nameField) continue;
+
+									if (newGameComponent->fieldsInfo[i].nameField == fieldName)
+									{
+										AE_GAME_FIELD_INFO::FieldType type = newGameComponent->fieldsInfo[i].typeValue;
+										switch (type)
+										{
+										case AE_GAME_FIELD_INFO::FieldType::BOOL:
+										{
+											bool* valueb = static_cast<bool*>(newGameComponent->fieldsInfo[i].ptr);
+#ifdef _DEBUG
+											if (valueb)
+												std::cout << "field value: " << *valueb << "\n";
+#endif
+											if (valueb)
+												*valueb = value.as<bool>();
+											break;
+										}
+										case AE_GAME_FIELD_INFO::FieldType::FLOAT:
+										{
+											float* valuef = static_cast<float*>(newGameComponent->fieldsInfo[i].ptr);
+#ifdef _DEBUG
+											if (valuef)
+												std::cout << "field value: " << *valuef << "\n";
+#endif
+											if (valuef)
+												*valuef = value.as<float>();
+											break;
+										}
+										case AE_GAME_FIELD_INFO::FieldType::VEC3:
+										{
+											AE_VEC3* value3 = static_cast<AE_VEC3*>(newGameComponent->fieldsInfo[i].ptr);
+											if (value3 && value.IsSequence())
+												*value3 = AE_VEC3{ value[0].as<float>(), value[1].as<float>(), value[2].as<float>() };
+#ifdef _DEBUG
+											if (value3)
+												std::cout << "field value: " << value3->r << " " << value3->g << " " << value3->b << " " << "\n";
+#endif
+											break;
+										}
+										case AE_GAME_FIELD_INFO::FieldType::VEC4:
+										{
+											AE_VEC4* value4 = static_cast<AE_VEC4*>(newGameComponent->fieldsInfo[i].ptr);
+#ifdef _DEBUG
+											if (value4)
+												std::cout << "field value: " << value4->r << " " << value4->g << " " << value4->b << " " << value4->a << "\n";
+#endif
+											if (value4 && value.IsSequence())
+												*value4 = AE_VEC4{ value[0].as<float>(), value[1].as<float>(), value[2].as<float>(), value[3].as<float>() };
+											break;
+										}
+										case AE_GAME_FIELD_INFO::FieldType::INT:
+										{
+											int* valuei = static_cast<int*>(newGameComponent->fieldsInfo[i].ptr);
+#ifdef _DEBUG
+											if (valuei)
+												std::cout << "field value: " << *valuei << "\n";
+#endif _DEBUG
+											if (valuei)
+												*valuei = value.as<int>();
+											break;
+										}
+										}
+									}
+
+								}
+							}
+						}
+					}
+
+				}
 			}
 		}
 		SceneManager::Get().SwapActiveScene(oldActiveScene);

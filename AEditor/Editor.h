@@ -44,10 +44,13 @@ public:
 	void RenderEditorParts();
 	void RenderGizmo();
 	void RenderViewport();
+	void DrawToolbar();
 	void DrawDockspaceMenuBar();
 	void ShowProject();
 	void EDITOR_INIT();
 	void ShowLightingMenu();
+	void SetGameMode();
+	void SetEditMode();
 	void RenderOutline(Render* mesh);
 private:
 	std::filesystem::path projectDirectory = "Assets";
@@ -56,8 +59,18 @@ private:
 	std::unique_ptr<Texture> ModelIcon;
 	std::unique_ptr<Texture> CubemapIcon;
 	std::unique_ptr<Texture> MaterialIcon;
+	std::unique_ptr<Texture> PlayIcon;
+	std::unique_ptr<Texture> StopIcon;
 	std::unique_ptr<Shader> sceneHDRShader = nullptr;
 	Transform* transform = nullptr;
 	std::unique_ptr<Shader> OutlineShader = nullptr;
 	bool showLightingMenu = false;
+	std::string snapshotScene = "";
+	std::string pastScenePathBeforePlayMode = "";
+	enum class SceneMode
+	{
+		Edit,
+		Play
+	};
+	SceneMode sceneMode = SceneMode::Edit;
 };

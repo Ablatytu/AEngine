@@ -1,9 +1,12 @@
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\glad.c;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\glad.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\ModelLoader.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\ParserGLSL.obj
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AComponent.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\AComponent.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\AEngineComponent.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Camera.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Camera.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\ComponentStorage.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\ComponentStorage.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\cube.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\cube.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\EngineEntry.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\EngineEntry.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\GameModule.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\GameModule.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Light.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\LightMoving.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\LightMoving.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\PostProcess.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\PostProcess.obj
@@ -19,6 +22,7 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Cubemap.cpp;C:
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Framebuffer.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\FramebufferManager.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\FramebufferManager.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\GameObject.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\GameObject.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\GameObjectStorage.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\GameObjectStorage.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\HDRTexture.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\HDRTexture.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Material.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Mesh.obj

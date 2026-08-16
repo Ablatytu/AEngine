@@ -9,6 +9,9 @@
 #include "LightManager.h"
 #include "../components/PostProcess.h"
 #include "../Renderer/HDRTexture.h"
+#include "../components/GameModule.h"
+#include <unordered_set>
+#include <algorithm>
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
@@ -46,6 +49,7 @@ void Scene::EraseScene()
 	AComponents.clear();
 	AwakeAComponents.clear();
 	StartAComponents.clear();
+	GameModule::GETGAMECONTEXT().clearGameAComponents();
 	renders.clear();
 	objects.clear();
 	postProcess = nullptr;

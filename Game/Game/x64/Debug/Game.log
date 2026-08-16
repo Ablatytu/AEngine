@@ -1,0 +1,41 @@
+﻿C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(537,5): warning MSB8004: каталог Output заканчивается не косой чертой.  Этот экземпляр сборки добавит косую черту, поскольку она необходима для правильного определения каталога Output.
+  TestComponent.cpp
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AComponent.h(67,25): warning C4251: "AComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AComponent"
+  (компиляция исходного файла "TestComponent.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<FieldInfo,std::allocator<FieldInfo>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2): warning C4251: "Transform::registerClassFunc": "Transform::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "TestComponent.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2):
+       см. объявление "Transform::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(15,12): warning C4251: "Transform::position": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "TestComponent.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(16,12): warning C4251: "Transform::rotation": "glm::qua<float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "TestComponent.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_quat.hpp(33,9):
+       см. объявление "glm::qua<float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(17,12): warning C4251: "Transform::scale": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "TestComponent.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(19,26): warning C4251: "Transform::children": "std::vector<Transform *,std::allocator<Transform *>>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "TestComponent.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Transform *,std::allocator<Transform *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(29,12): warning C4251: "Transform::matrixModel": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "TestComponent.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+  
+TestComponent.obj : error LNK2019: ссылка на неразрешенный внешний символ "__declspec(dllimport) public: static void __cdecl ComponentSystem::Register(char const *,class std::function<class AComponent * __cdecl(class GameObject *)>)" (__imp_?Register@ComponentSystem@@SAXPEBDV?$function@$$A6APEAVAComponent@@PEAVGameObject@@@Z@std@@@Z) в функции "public: __cdecl TestComponent::RegisterClassFunc::RegisterClassFunc(void)" (??0RegisterClassFunc@TestComponent@@QEAA@XZ).
+TestComponent.obj : error LNK2019: ссылка на неразрешенный внешний символ "__declspec(dllimport) public: class AComponent * __cdecl GameObject::AttachComponent(class std::unique_ptr<class AComponent,struct std::default_delete<class AComponent> >)" (__imp_?AttachComponent@GameObject@@QEAAPEAVAComponent@@V?$unique_ptr@VAComponent@@U?$default_delete@VAComponent@@@std@@@std@@@Z) в функции "public: class TestComponent * __cdecl GameObject::AddComponent<class TestComponent>(void)" (??$AddComponent@VTestComponent@@$$V@GameObject@@QEAAPEAVTestComponent@@XZ).
+MSVCRTD.lib(exe_main.obj) : error LNK2019: ссылка на неразрешенный внешний символ main в функции "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ).
+..\bin\Debug\Game.exe : fatal error LNK1120: неразрешенных внешних элементов: 3

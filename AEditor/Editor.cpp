@@ -10,7 +10,7 @@
 #include <cctype>
 #include "../AEngine/components/Transform.h"
 #include "../AEngine/Renderer/GameObject.h"
-#include "../AEngine/components/AComponent.h"
+#include "../AEngine/components/AEngineComponent.h"
 #include <string>
 #include "../AEngine/components/Cube.h"
 #include "../AEngine/components/Light.h"
@@ -32,6 +32,11 @@
 #include "../AEngine/scene/CubemapSerializer.h"
 #include "../AEngine/scene/MaterialSerializer.h"
 #include "../AEngine/scene/SceneSerializer.h"
+#include "../AEngine/scene/SceneManager.h"
+#include "../AEngine/scene/Scene.h"
+#include "../AEngine/components/Camera.h"
+#include "../AEngine/components/GameModule.h"
+#include "../GameAPI/GameABI.h"
 #include <ImGuizmo.h>
 
 void EditorGUI::RenderOutline(Render* mesh)
@@ -55,6 +60,10 @@ void EditorGUI::EDITOR_INIT()
 	CubemapIcon->LoadTexture("EditorAssets/CubemapIconAEngine.png");
 	MaterialIcon = std::make_unique<Texture>();
 	MaterialIcon->LoadTexture("EditorAssets/MaterialIconAEngine.png");
+	StopIcon = std::make_unique<Texture>();
+	StopIcon->LoadTexture("EditorAssets/StopIconAEngine.png");
+	PlayIcon = std::make_unique<Texture>();
+	PlayIcon->LoadTexture("EditorAssets/PlayIconAEngine.png");
 	ImGuiIO& io = ImGui::GetIO();
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
@@ -137,6 +146,74 @@ void EditorGUI::RenderViewport()
 	ImGui::End();
 	ImGui::PopStyleVar();
 }
+
+void EditorGUI::SetGameMode()
+{
+	sceneMode = SceneMode::Play;
+	pastScenePathBeforePlayMode = SceneManager::Get().GetActiveScene().pathScene;
+	snapshotScene = SceneSerializer::SerializeToString(SceneManager::Get().GetActiveScene());
+	Application::Get().UpdateGameModule(true);
+}
+void EditorGUI::SetEditMode()
+{
+	sceneMode = SceneMode::Edit;
+	SceneManager::Get().LoadSceneFromString(snapshotScene, pastScenePathBeforePlayMode);
+	pastScenePathBeforePlayMode = "";
+	Application::Get().UpdateGameModule(false);
+}
+void EditorGUI::DrawToolbar()
+{
+	const float toolbarHeight = 36.0f;
+
+	ImGui::BeginChild("##ToolbarEditor", ImVec2(0.0f, toolbarHeight), false, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+
+	const float buttonWidth = 26.0f;
+	const float buttonHeight = 26.0f;
+
+	float betweenSpace = ImGui::GetStyle().ItemSpacing.x;
+
+	float totalWidth = buttonWidth * 2.0f + betweenSpace;
+
+	float startX = (ImGui::GetWindowWidth() - totalWidth) * 0.5f;
+	ImGui::SetCursorPosX(startX);
+
+	if (sceneMode == SceneMode::Play)
+	{
+		ImGui::BeginDisabled();
+		if (ImGui::ImageButton("##PlayButton", PlayIcon->GetTexturePixels(), ImVec2(buttonWidth, buttonHeight)))
+		{
+			//something;
+		}
+		ImGui::EndDisabled();
+	}
+	else
+	{
+		if (ImGui::ImageButton("##PlayButton", PlayIcon->GetTexturePixels(), ImVec2(buttonWidth, buttonHeight)))
+		{
+			SetGameMode();
+		}
+	}
+	ImGui::SameLine();
+	if (sceneMode == SceneMode::Play)
+	{
+		if (ImGui::ImageButton("##StopButton", StopIcon->GetTexturePixels(), ImVec2(buttonWidth, buttonHeight)))
+		{
+			SetEditMode();
+		}
+	}
+	else
+	{
+		ImGui::BeginDisabled();
+		if (ImGui::ImageButton("##StopButton", StopIcon->GetTexturePixels(), ImVec2(buttonWidth, buttonHeight)))
+		{
+			//something;
+		}
+		ImGui::EndDisabled();
+	}
+
+	ImGui::EndChild();
+}
+
 void EditorGUI::DrawDockspaceMenuBar()
 {
 	if (ImGui::BeginMenuBar())
@@ -150,6 +227,10 @@ void EditorGUI::DrawDockspaceMenuBar()
 			if (ImGui::MenuItem("Save Scene", "Ctrl+S"))
 			{
 				SceneSerializer::Serialize(SceneManager::Get().GetActiveScene(), SceneManager::Get().GetActiveScene().pathScene);
+			}
+			if (ImGui::MenuItem("Reload scripts", "Ctrl+Shift+R"))
+			{
+				GameModule::Reload();
 			}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Exit"))
@@ -444,6 +525,9 @@ void EditorGUI::BeginDockspace()
 
 	ImGui::PopStyleVar(2);
 
+	DrawDockspaceMenuBar();
+	DrawToolbar();
+
 	ImGuiID dockspaceID = ImGui::GetID("MainDockspace");
 
 	ImGui::DockSpace(dockspaceID, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
@@ -473,7 +557,6 @@ void EditorGUI::BeginDockspace()
 
 		ImGui::DockBuilderFinish(dockspaceID);
 	}
-	DrawDockspaceMenuBar();
 	ImGui::End();
 }
 void EditorGUI::RenderGizmo()
@@ -784,7 +867,8 @@ void EditorGUI::ShowInspectorWindow()
 		{
 			if (selectedObject.selectedObject)
 			{
-				AComponent* removedComponent = nullptr;
+				AEngineComponent* removedComponent = nullptr;
+				AE_COMPONENT_HANDLE removedComponentHandle = {};
 				for (auto& component : selectedObject.selectedObject->components)
 				{
 					component->fields.clear();
@@ -865,10 +949,88 @@ void EditorGUI::ShowInspectorWindow()
 						ImGui::TreePop();
 					}
 				}
+				int size = GameModule::GETGAMECONTEXT().getAComponentsCountFromGameObject(selectedObject.selectedObject->getHandle());
+				std::vector<AE_COMPONENT_INFO> componentsinfo(size);
+				GameModule::GETGAMECONTEXT().getAComponentsFromGameObject(selectedObject.selectedObject->getHandle(), componentsinfo.data(), size);
+
+				for (unsigned int i = 0; i < size; i++)
+				{
+					ImGuiTreeNodeFlags flags =
+						ImGuiTreeNodeFlags_DefaultOpen |
+						ImGuiTreeNodeFlags_Framed |
+						ImGuiTreeNodeFlags_SpanAvailWidth |
+						ImGuiTreeNodeFlags_FramePadding;
+					ImGui::PushID(i);
+					bool opened = ImGui::TreeNodeEx("##GameComponent", flags, "%s", componentsinfo[i].name);
+					if (ImGui::BeginPopupContextItem())
+					{
+						if (ImGui::MenuItem("RemoveComponent"))
+						{
+							removedComponentHandle = componentsinfo[i].ae_component_handle;
+						}
+						ImGui::MenuItem("Reset");
+						ImGui::MenuItem("Duplicate");
+
+						ImGui::EndPopup();
+					}
+					if (opened)
+					{
+					
+						for (int x = 0; x < componentsinfo[i].countFieldsInfo; x++)
+						{
+							AE_GAME_FIELD_INFO::FieldInfo& field = componentsinfo[i].fieldsInfo[x];
+							switch (componentsinfo[i].fieldsInfo[x].typeValue)
+							{
+								case AE_GAME_FIELD_INFO::FieldType::BOOL:
+								{
+									ImGui::Checkbox(field.nameField, (bool*)field.ptr);
+									break;
+								}
+								case AE_GAME_FIELD_INFO::FieldType::FLOAT:
+								{
+									if (field.maxValue > field.minValue)
+										ImGui::SliderFloat(field.nameField, (float*)field.ptr, field.minValue, field.maxValue);
+									else
+										ImGui::DragFloat(field.nameField, (float*)field.ptr, 0.1f);
+									break;
+								}
+								case AE_GAME_FIELD_INFO::FieldType::INT:
+								{
+									if ((int)field.maxValue > (int)field.minValue)
+										ImGui::SliderInt(field.nameField, (int*)field.ptr, (int)field.minValue, (int)field.maxValue);
+									else
+										ImGui::DragInt(field.nameField, (int*)field.ptr, 1.0f);
+									break;
+								}
+								case AE_GAME_FIELD_INFO::FieldType::VEC3:
+								{
+									auto* value3 = static_cast<AE_VEC3*>(field.ptr);
+									if (field.isColor)
+										ImGui::ColorEdit3(field.nameField, &value3->x);
+									else
+										ImGui::DragFloat3(field.nameField, &value3->x, 0.1f);
+									break;
+								}
+								case AE_GAME_FIELD_INFO::FieldType::VEC4:
+								{
+									auto* value4 = static_cast<AE_VEC4*>(field.ptr);
+									if (field.isColor)
+										ImGui::ColorEdit4(field.nameField, &value4->x);
+									else
+										ImGui::DragFloat4(field.nameField, &value4->x, 0.1f);
+									break;
+								}
+							}
+						}
+						ImGui::TreePop();
+					}
+					ImGui::PopID();
+				}
 				if (auto* selectedTransform = selectedObject.selectedObject->GetComponent<Transform>())
 				{
 					selectedTransform->UpdateMatrices();
 				}
+				GameModule::GETGAMECONTEXT().removeAComponent(selectedObject.selectedObject->getHandle(), removedComponentHandle);
 				if (removedComponent)
 				{
 					selectedObject.selectedObject->RemoveComponent(removedComponent);
@@ -905,17 +1067,23 @@ void EditorGUI::ShowInspectorWindow()
 				}
 				if (ImGui::BeginCombo("AddComponent", "Select"))
 				{
-					if (ImGui::Selectable("Cube"))
+					for (auto& component : ComponentSystem::GetComponentsFabric())
 					{
-						selectedObject.selectedObject->AddComponent<Cube>();
+						if (component.first == "Transform" || component.first == "Camera") continue;
+						if (ImGui::Selectable(component.first.c_str()))
+						{
+							component.second(selectedObject.selectedObject);
+						}
 					}
-					if (ImGui::Selectable("Light"))
+					if (GameModule::GETGAMECONTEXT().getRegisteredAComponentsCount)
 					{
-						selectedObject.selectedObject->AddComponent<Light>();
-					}
-					if (ImGui::Selectable("Rei"))
-					{
-						selectedObject.selectedObject->AddComponent<Rei>();
+						for (unsigned int i = 0; i < GameModule::GETGAMECONTEXT().getRegisteredAComponentsCount(); i++)
+						{
+							if (ImGui::Selectable(GameModule::GETGAMECONTEXT().getRegisteredAComponentName(i)))
+							{
+								GameModule::GETGAMECONTEXT().addAComponent(i, selectedObject.selectedObject->getHandle());
+							}
+						}
 					}
 					ImGui::EndCombo();
 				}

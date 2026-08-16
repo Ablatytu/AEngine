@@ -80,9 +80,6 @@
     <ClCompile Include="components\LightMoving.cpp">
       <Filter>Файлы ресурсов\components</Filter>
     </ClCompile>
-    <ClCompile Include="components\AComponent.cpp">
-      <Filter>Файлы ресурсов\components</Filter>
-    </ClCompile>
     <ClCompile Include="components\Rei.cpp">
       <Filter>Файлы ресурсов\components</Filter>
     </ClCompile>
@@ -134,6 +131,21 @@
     <ClCompile Include="scene\CubemapSerializer.cpp">
       <Filter>Файлы ресурсов\scene</Filter>
     </ClCompile>
+    <ClCompile Include="components\GameModule.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\ComponentStorage.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\EngineEntry.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="components\AEngineComponent.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\GameObjectStorage.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h">
@@ -150,9 +162,6 @@
     </ClInclude>
     <ClInclude Include="Renderer\Mesh.h">
       <Filter>Файлы ресурсов\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="components\AComponent.h">
-      <Filter>Файлы ресурсов\components</Filter>
     </ClInclude>
     <ClInclude Include="components\Render.h">
       <Filter>Файлы ресурсов\components</Filter>
@@ -246,6 +255,27 @@
     </ClInclude>
     <ClInclude Include="scene\CubemapSerializer.h">
       <Filter>Файлы ресурсов\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="components\GameModule.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\ComponentStorage.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\ComponentHandle.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\EngineEntry.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="components\AEngineComponent.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\GameObjectHandle.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\GameObjectStorage.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

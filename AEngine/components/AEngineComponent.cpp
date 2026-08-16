@@ -1,11 +1,11 @@
-#include "AComponent.h"
+#include "AEngineComponent.h"
 
 
-void AComponent::RegisterFieldInInspector(const char* name, void* ptr, FieldType type)
+void AEngineComponent::RegisterFieldInInspector(const char* name, void* ptr, FieldType type)
 {
 	fields.push_back({ name, type, ptr });
 }
-void AComponent::SetRangeFieldInInspector(const char* name, float minValue, float maxValue)
+void AEngineComponent::SetRangeFieldInInspector(const char* name, float minValue, float maxValue)
 {
 	for (FieldInfo& field : fields)
 	{
@@ -17,7 +17,7 @@ void AComponent::SetRangeFieldInInspector(const char* name, float minValue, floa
 		}
 	}
 }
-void AComponent::SetColorFieldInInspector(const char* name)
+void AEngineComponent::SetColorFieldInInspector(const char* name)
 {
 	for (FieldInfo& field : fields)
 	{

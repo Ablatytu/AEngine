@@ -1,3 +1,4 @@
+#include "../Renderer/GameObject.h"
 #include "Rei.h"
 
 void Rei::OnInspector()
@@ -10,3 +11,5 @@ void Rei::OnInspector()
 	Range(countRange, 0, 5);
 	RegisterField(countWithoutRange)
 }
+
+AE_REGISTER_COMPONENT(Rei);

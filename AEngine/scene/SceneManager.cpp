@@ -24,21 +24,23 @@ Scene* SceneManager::SwapActiveScene(Scene* newScene)
 void SceneManager::ChangeScene()
 {
 	if (ChangeScenePath.empty()) return;
-	std::unique_ptr newScene = SceneSerializer::Deserialize(ChangeScenePath);
+	if (activeScene)
+	{
+		activeScene->EraseScene();
+		scenes.clear();
+		activeScene = nullptr;
+	}
+	std::unique_ptr newScene = SceneSerializer::Deserialize(ChangeScenePath, FromString);
 	if (newScene)
 	{
-		newScene->pathScene = ChangeScenePath;
-		if (activeScene)
-		{
-			activeScene->EraseScene();
-			scenes.clear();
-		}
+		newScene->pathScene = ScenePathAfterLoad;
 		scenes.push_back(std::move(newScene));
 		activeScene = scenes.back().get();
 	}
 	else
 		std::cout << "Scene not found!\n";
 	ChangeScenePath = "";
+	FromString = false;
 }
 bool SceneManager::CheckChangeScenePathState()
 {
@@ -49,6 +51,14 @@ bool SceneManager::CheckChangeScenePathState()
 void SceneManager::LoadScene(const std::string& path)
 {
 	ChangeScenePath = path;
+	ScenePathAfterLoad = path;
+	FromString = false;
+}
+void SceneManager::LoadSceneFromString(const std::string& data, const std::string& originalPath)
+{
+	ChangeScenePath = data;
+	ScenePathAfterLoad = originalPath;
+	FromString = true;
 }
 void SceneManager::CreateScene(const std::string& path)
 {

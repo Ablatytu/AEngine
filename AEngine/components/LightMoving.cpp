@@ -1,5 +1,6 @@
-#include "LightMoving.h"
 #include "../Renderer/GameObject.h"
+#include "../components/Transform.h"
+#include "LightMoving.h"
 void LightMoving::Start()
 {
 	transform = gameObject->GetComponent<Transform>();
@@ -46,3 +47,5 @@ void LightMoving::OnInspector()
 	RegisterField(rigntPos);
 	RegisterField(CanMoving);
 }
+
+AE_REGISTER_COMPONENT(LightMoving)

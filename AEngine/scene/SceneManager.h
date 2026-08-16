@@ -18,12 +18,15 @@ public:
 	AENGINE_API void CreateScene(const std::string& path);
 	AENGINE_API GameObject* CreateGameObject();
 	AENGINE_API void LoadScene(const std::string& path);
+	AENGINE_API void LoadSceneFromString(const std::string& data, const std::string& originalPath);
 	AENGINE_API void ChangeScene();
 	AENGINE_API bool CheckChangeScenePathState();
 	AENGINE_API ~SceneManager();
 
 private:
 	std::string ChangeScenePath = "";
+	std::string ScenePathAfterLoad = "";
+	bool FromString = false;
 	Scene* activeScene = nullptr;
 	std::vector<std::unique_ptr<Scene>> scenes;
 };

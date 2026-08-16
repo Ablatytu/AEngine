@@ -1,5 +1,5 @@
 #pragma once
-#include "AComponent.h"
+#include "AEngineComponent.h"
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
@@ -10,9 +10,9 @@
 
 class Material;
 
-class AENGINE_API Camera : public AComponent
+class AENGINE_API Camera : public AEngineComponent
 {
-	RegisterComponent(Camera)
+	AE_REGISTER_CLASS(Camera);
 public:
 	float fieldOView = 60.0f;
 	Transform* transform;

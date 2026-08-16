@@ -1,5 +1,5 @@
-#include "cube.h"
 #include "../Renderer/GameObject.h"	
+#include "cube.h"
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
@@ -21,3 +21,5 @@ void Cube::OnInspector()
 {
 	RegisterField(rotate)
 }
+
+AE_REGISTER_COMPONENT(Cube)

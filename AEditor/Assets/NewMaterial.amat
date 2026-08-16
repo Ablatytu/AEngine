@@ -7,10 +7,10 @@ Properties:
   roughness: 0.503
   InvertNormalY: false
   ao: 1
-  coefficientNormal: 0
-  heightMap: ""
-  normalMap: ""
-  height_scale: 0
+  coefficientNormal: 1
+  heightMap: Assets/Textures/bricks2_disp.jpg
+  normalMap: Assets/Textures/bricks2_normal.jpg
+  height_scale: 0.1
   metallic: 0
   objectColor: [1, 1, 1, 1]
-  texture_diffuse1: ""
+  texture_diffuse1: Assets/Textures/bricks2.jpg

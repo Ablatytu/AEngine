@@ -1,13 +1,13 @@
 #pragma once
-#include "AComponent.h"
+#include "AEngineComponent.h"
 #include <memory>
 #include "../core/AEngineAPI.h"
 
 class Transform;
 
-class AENGINE_API LightMoving : public AComponent
+class AENGINE_API LightMoving : public AEngineComponent
 {
-	RegisterComponent(LightMoving)
+	AE_REGISTER_CLASS(LightMoving);
 	public:
 		bool rigntPos = false;
 		bool CanUp = false;

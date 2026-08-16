@@ -1,20 +1,24 @@
 #pragma once
 #include <vector>
-#include "../components/AComponent.h"
 #include <memory>
-struct ComponentEntry
+#include <string>
+#include <unordered_map>
+#include <functional>
+#include "../core/AEngineAPI.h"
+
+class GameObject; 
+class AEngineComponent;
+
+struct ComponentRegistry
 {
-	const char* name;
-	//std::function<std::shared_ptr<AComponent>()> create;
+	std::unordered_map<std::string, std::function<AEngineComponent*(GameObject* gameobject)>> addComponent;
 };
-//inline std::vector<ComponentEntry>& GetComponentRegistry() \
-{\
-	static std::vector<ComponentEntry> registry;\
-	return registry;\
-}
 class ComponentSystem
 {
 public:
-	//static std::vector<AComponent*> componentsList;
-	//static void RegisterComponentInList(AComponent* component);
+
+	AENGINE_API static void Register(const char* name, std::function<AEngineComponent* (GameObject*)> addFunc);
+	AENGINE_API static std::unordered_map<std::string, std::function<AEngineComponent*(GameObject* gameobject)>>& GetComponentsFabric();
+private:
+	static ComponentRegistry& GetRegistry();
 };

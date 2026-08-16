@@ -1,12 +1,12 @@
 #pragma once
-#include "AComponent.h"
+#include "AEngineComponent.h"
 #include "../core/AEngineAPI.h"
 
 class Camera;
 
-class AENGINE_API PostProcess : public AComponent
+class AENGINE_API PostProcess : public AEngineComponent
 {
-	RegisterComponent(PostProcess)
+	AE_REGISTER_CLASS(PostProcess);
 public:
 	bool enabled = true;
 	float exposure = 1.0f;

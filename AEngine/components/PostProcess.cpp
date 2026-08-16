@@ -1,6 +1,7 @@
-#include "PostProcess.h"
 #include "../Renderer/GameObject.h"
+#include "PostProcess.h"
 #include "../scene/SceneManager.h"
+#include "../components/Camera.h"
 #include "../scene/Scene.h"
 void PostProcess::OnInspector()
 {
@@ -29,3 +30,5 @@ void PostProcess::OnDestroy()
 	if(this == SceneManager::Get().GetActiveScene().postProcess)
 		SceneManager::Get().GetActiveScene().postProcess = nullptr;
 }
+
+AE_REGISTER_COMPONENT(PostProcess)

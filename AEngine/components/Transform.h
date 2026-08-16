@@ -4,12 +4,12 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
 #include <glm/glm/gtx/quaternion.hpp>
-#include "AComponent.h"
+#include "AEngineComponent.h"
 #include "../core/AEngineAPI.h"
 
-class AENGINE_API Transform : public AComponent
+class AENGINE_API Transform : public AEngineComponent
 {
-	RegisterComponent(Transform)
+	AE_REGISTER_CLASS(Transform);
 public:
 	glm::vec3 position = glm::vec3(0.0f);
 	glm::quat rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);

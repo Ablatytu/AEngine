@@ -1,10 +1,13 @@
-#include "Light.h"
 #include "../Renderer/GameObject.h"
+#include "Light.h"
 #include "Transform.h"
 #include "../scene/SceneManager.h"
 #include "../scene/LightManager.h"
+#include "../scene/Scene.h"
 #include <glad/glad.h>
 #include <iostream>
+
+
 void Light::Awake()
 {
 	transform = gameObject->GetComponent<Transform>();
@@ -35,3 +38,5 @@ void Light::OnDestroy()
 {
 	SceneManager::Get().GetActiveScene().A_LightManager->RemoveLight(this);
 }
+
+AE_REGISTER_COMPONENT(Light)

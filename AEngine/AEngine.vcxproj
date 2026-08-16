@@ -172,9 +172,12 @@ gdi32.lib
     <ClCompile Include="APIs\glad.c" />
     <ClCompile Include="APIs\ModelLoader.cpp" />
     <ClCompile Include="APIs\ParserGLSL.cpp" />
-    <ClCompile Include="components\AComponent.cpp" />
+    <ClCompile Include="components\AEngineComponent.cpp" />
     <ClCompile Include="components\Camera.cpp" />
+    <ClCompile Include="components\ComponentStorage.cpp" />
     <ClCompile Include="components\cube.cpp" />
+    <ClCompile Include="components\EngineEntry.cpp" />
+    <ClCompile Include="components\GameModule.cpp" />
     <ClCompile Include="components\Light.cpp" />
     <ClCompile Include="components\LightMoving.cpp" />
     <ClCompile Include="components\PostProcess.cpp" />
@@ -190,6 +193,7 @@ gdi32.lib
     <ClCompile Include="Renderer\Framebuffer.cpp" />
     <ClCompile Include="Renderer\FramebufferManager.cpp" />
     <ClCompile Include="Renderer\GameObject.cpp" />
+    <ClCompile Include="Renderer\GameObjectStorage.cpp" />
     <ClCompile Include="Renderer\HDRTexture.cpp" />
     <ClCompile Include="Renderer\Material.cpp" />
     <ClCompile Include="Renderer\Mesh.cpp" />
@@ -209,9 +213,13 @@ gdi32.lib
     <ClInclude Include="APIs\ModelLoader.h" />
     <ClInclude Include="APIs\ParserGLSL.h" />
     <ClInclude Include="APIs\stb_image.h" />
+    <ClInclude Include="components\AEngineComponent.h" />
     <ClInclude Include="components\Camera.h" />
-    <ClInclude Include="components\AComponent.h" />
+    <ClInclude Include="components\ComponentHandle.h" />
+    <ClInclude Include="components\ComponentStorage.h" />
     <ClInclude Include="components\cube.h" />
+    <ClInclude Include="components\EngineEntry.h" />
+    <ClInclude Include="components\GameModule.h" />
     <ClInclude Include="components\Light.h" />
     <ClInclude Include="components\LightMoving.h" />
     <ClInclude Include="components\PostProcess.h" />
@@ -228,6 +236,8 @@ gdi32.lib
     <ClInclude Include="Renderer\Framebuffer.h" />
     <ClInclude Include="Renderer\FramebufferManager.h" />
     <ClInclude Include="Renderer\GameObject.h" />
+    <ClInclude Include="Renderer\GameObjectHandle.h" />
+    <ClInclude Include="Renderer\GameObjectStorage.h" />
     <ClInclude Include="Renderer\HDRTexture.h" />
     <ClInclude Include="Renderer\Material.h" />
     <ClInclude Include="Renderer\Mesh.h" />

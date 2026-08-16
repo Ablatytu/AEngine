@@ -27,7 +27,7 @@ GameObjects:
       - ComponentName: Transform
         Fields:
           position: [2.2799304, 1.4183784, 0.5]
-          rotation: [45.77509, 88.449844, -161.68996]
+          rotation: [116.43971, -52.879436, -61.424103]
           scale: [0.16999999, 0.16999994, 0.16999996]
       - ComponentName: Render
         Fields:
@@ -41,7 +41,7 @@ GameObjects:
       - ComponentName: Transform
         Fields:
           position: [3.3011465, 2.2505984, 0.009112587]
-          rotation: [-169.66602, -77.31102, -157.28947]
+          rotation: [-98.0134, -76.98096, 139.30673]
           scale: [0.6799962, 0.679998, 0.679997]
       - ComponentName: Render
         Fields:
@@ -50,12 +50,19 @@ GameObjects:
       - ComponentName: Cube
         Fields:
           rotate: false
+      - ComponentName: TestComponent
+        Fields:
+          move: true
+          DLLCPLUSPLUSSCRIPTING: true
+          speed: 0
+          testInt: 0
+          testVec3: [0, 0, 0]
   - Name: directionalLight
     Components:
       - ComponentName: Transform
         Fields:
           position: [-1, 6, 0.5]
-          rotation: [-45.000004, 45.000004, 45.000008]
+          rotation: [-45.000004, 45.000004, 45.000004]
           scale: [1, 1, 1]
       - ComponentName: Light
         Fields:
@@ -68,7 +75,7 @@ GameObjects:
     Components:
       - ComponentName: Transform
         Fields:
-          position: [3.118064, 1, 1.5]
+          position: [4.884936, 1, 1.5]
           rotation: [0, -0, 0]
           scale: [1, 1, 1]
       - ComponentName: Light
@@ -80,7 +87,7 @@ GameObjects:
           shadow: true
       - ComponentName: LightMoving
         Fields:
-          rigntPos: false
+          rigntPos: true
           CanMoving: true
       - ComponentName: Render
         Fields:
@@ -90,7 +97,7 @@ GameObjects:
     Components:
       - ComponentName: Transform
         Fields:
-          position: [0.88199204, 3, 1.5]
+          position: [-1.1169963, 3, 1.5]
           rotation: [0, -0, 0]
           scale: [1, 1, 1]
       - ComponentName: Render
@@ -112,7 +119,7 @@ GameObjects:
     Components:
       - ComponentName: Transform
         Fields:
-          position: [-3.4379327, 1.6819851, -45.5]
+          position: [-4.5648513, 1.6819851, -45.5]
           rotation: [0, -0, 0]
           scale: [1, 1, 1]
       - ComponentName: Render
@@ -128,7 +135,7 @@ GameObjects:
           shadow: false
       - ComponentName: LightMoving
         Fields:
-          rigntPos: true
+          rigntPos: false
           CanMoving: true
   - Name: spotLight
     Components:
@@ -189,7 +196,7 @@ GameObjects:
       - ComponentName: Transform
         Fields:
           position: [-2.09, 0.86800003, 15.84]
-          rotation: [45.77509, 88.449844, -161.68996]
+          rotation: [116.43974, -52.87949, -61.42409]
           scale: [0.05, 0.05, 0.05]
       - ComponentName: Light
         Fields:
