@@ -36,7 +36,11 @@ class Scene
 		FogSettings fogSettings;
 		bool HDR = true;
 		Camera* activeCamera = nullptr;
+		std::vector<Camera*> cameras;
+		void RegisterCamera(Camera* newCamera);
+		AENGINE_API void UnregisterCamera(Camera* oldCamera);
 		AENGINE_API GameObject* CreateGameObject();
+		AENGINE_API RenderContext CollectRenderContext(Camera* camera);
 		AENGINE_API RenderContext CollectRenderContext();
 		void EraseScene();
 		std::unique_ptr<Skybox> skyBox;

@@ -47,7 +47,7 @@ void GameObjectStorage::UnRegister(GameObjectHandle handle)
 
 GameObject* GameObjectStorage::Get(GameObjectHandle handle)
 {
-	if (handle.index > slots.size())
+	if (handle.index >= slots.size())
 		return nullptr;
 
 	Slot& slot = slots[handle.index];

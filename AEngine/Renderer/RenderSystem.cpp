@@ -15,7 +15,6 @@
 #include "../Renderer/RenderContext.h"
 #include "../scene/AssetManager.h"
 #include "../core/Window.h"
-#include "FramebufferManager.h"
 #include "Texture.h"
 #include "../components/PostProcess.h"
 #include "../components/Transform.h"
@@ -67,6 +66,7 @@ namespace RenderSystem
 	std::unique_ptr<Shader> GBufferShader = nullptr;
 	std::unique_ptr<Shader> SSAOShader = nullptr;
 	std::unique_ptr<Shader> SSAOBlurShader = nullptr;
+	std::unique_ptr<Shader> sceneHDRShader = nullptr;
 	Framebuffer* finalBloom = nullptr;
 	std::vector<glm::vec3> ssaoKernel;
 	std::unique_ptr<Texture> SSAONoise = nullptr;
@@ -76,7 +76,6 @@ namespace RenderSystem
 	Mesh Cube;
 	std::unique_ptr<Texture> whiteTexture = nullptr;
 	unsigned int WhiteDepthCubemap = 0;
-	bool exposurePing = false;
 
 	void rs_CollectBatches(RenderContext& context, std::vector<Batch>& batches)
 	{
@@ -467,7 +466,7 @@ namespace RenderSystem
 	void rs_RenderSkyBox(RenderContext& context)
 	{
 		if (context.skybox)
-			context.skybox->RenderSkyBox();
+			context.skybox->RenderSkyBox(context.camera);
 	}
 	void rs_RenderBatchTransparent(RenderContext& context, std::vector<Batch>& batches)
 	{
@@ -536,25 +535,28 @@ namespace RenderSystem
 	{
 		bool ShadowDirectional = false;
 		bool ShadowPoint = false;
-		for (auto light : context.lights)
+		if (context.Shadows)
 		{
-			if (!light->shadow)
-				continue;
-			if (light->typeLight == Light::Type::Directional)
+			for (auto light : context.lights)
 			{
-				glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
-				glBindTexture(GL_TEXTURE_2D, light->shadowMap.ID);
-				shader->setInt("shadowMap", slotTextureShadow);
-				slotTextureShadow += 1;
-				ShadowDirectional = true;
-			}
-			else if (light->typeLight == Light::Type::Point)
-			{
-				glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
-				glBindTexture(GL_TEXTURE_CUBE_MAP, light->shadowMap.ID);
-				shader->setInt("shadowMapCube", slotTextureShadow);
-				slotTextureShadow += 1;
-				ShadowPoint = true;
+				if (!light->shadow)
+					continue;
+				if (light->typeLight == Light::Type::Directional)
+				{
+					glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
+					glBindTexture(GL_TEXTURE_2D, light->shadowMap.ID);
+					shader->setInt("shadowMap", slotTextureShadow);
+					slotTextureShadow += 1;
+					ShadowDirectional = true;
+				}
+				else if (light->typeLight == Light::Type::Point)
+				{
+					glActiveTexture(GL_TEXTURE0 + slotTextureShadow);
+					glBindTexture(GL_TEXTURE_CUBE_MAP, light->shadowMap.ID);
+					shader->setInt("shadowMapCube", slotTextureShadow);
+					slotTextureShadow += 1;
+					ShadowPoint = true;
+				}
 			}
 		}
 		if (!ShadowDirectional)
@@ -851,28 +853,44 @@ namespace RenderSystem
 		if (auto t = UBOBuffer::existBuffer("u_Fog"))
 			UBOBuffer::ChangeInfoBuffer("u_Fog", t->size, &fogsettings, 0);
 	}
+	void rs_CreateCameraFramebuffers(Camera& camera)
+	{
+		camera.Add("defaultFramebuffer", sceneHDRShader.get(), { Framebuffer::TypeFrameBuffer::HDR }, true);
+		camera.Add("ViewportFramebuffer", nullptr, { Framebuffer::TypeFrameBuffer::HDR }, true);
+		camera.Add("exposureAFramebuffer", exposureShader.get(), { Framebuffer::TypeFrameBuffer::R16F }, false, 1, 1);
+		camera.Add("exposureBFramebuffer", exposureShader.get(), { Framebuffer::TypeFrameBuffer::R16F }, false, 1, 1);
+		camera.Add("bloomAFramebuffer", bloomShader.get(), { Framebuffer::TypeFrameBuffer::HDR }, true);
+		camera.Add("bloomPingFramebuffer", BloomBlurShader.get(), { Framebuffer::TypeFrameBuffer::HDR }, true);
+		camera.Add("bloomPongFramebuffer", BloomBlurShader.get(), { Framebuffer::TypeFrameBuffer::HDR }, true);
+		camera.Add("GBufferFramebuffer", nullptr, { Framebuffer::TypeFrameBuffer::RGBA16F, Framebuffer::TypeFrameBuffer::RGBA16F, Framebuffer::TypeFrameBuffer::RGBA, Framebuffer::TypeFrameBuffer::RGBA }, true, -1, -1, { Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest });
+		camera.Add("SSAOFramebuffer", SSAOShader.get(), { Framebuffer::TypeFrameBuffer::RED }, true, -1, -1, { Framebuffer::TypeFilter::Nearest });
+		camera.Add("SSAOblurFramebuffer", SSAOBlurShader.get(), { Framebuffer::TypeFrameBuffer::RED }, true, -1, -1, { Framebuffer::TypeFilter::Nearest });
+	}
+	void rs_CollectbuffersFromCamera(Camera& camera)
+	{
+		exposureA = camera.GetFramebuffer("exposureAFramebuffer");
+		exposureB = camera.GetFramebuffer("exposureBFramebuffer");
+		bloom = camera.GetFramebuffer("bloomAFramebuffer");
+		bloomPing = camera.GetFramebuffer("bloomPingFramebuffer");
+		bloomPong = camera.GetFramebuffer("bloomPongFramebuffer");
+		GBuffer = camera.GetFramebuffer("GBufferFramebuffer");
+		SSAO = camera.GetFramebuffer("SSAOFramebuffer");
+		SSAOblur = camera.GetFramebuffer("SSAOblurFramebuffer");
+	}
 	void rs_Init()
 	{
 		std::cout << glGetString(GL_RENDERER) << std::endl;
-		//sceneHDR = FramebufferManager::Get().Add("defaultFramebuffer", "Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl", { Framebuffer::TypeFrameBuffer::HDR }, true);
+		sceneHDRShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl");
 		exposureShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/ExposureFS.glsl");
-		exposureA = FramebufferManager::Get().Add("exposureAFramebuffer", exposureShader.get(), {Framebuffer::TypeFrameBuffer::R16F}, false, 1, 1);
-		exposureB = FramebufferManager::Get().Add("exposureBFramebuffer", exposureShader.get(), {Framebuffer::TypeFrameBuffer::R16F}, false, 1, 1);
 		bloomShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/BloomFS.glsl");
-		bloom = FramebufferManager::Get().Add("bloomAFramebuffer", bloomShader.get(), {Framebuffer::TypeFrameBuffer::HDR}, true);
 		BloomBlurShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/BlurFS.glsl");
-		bloomPing = FramebufferManager::Get().Add("bloomPingFramebuffer",BloomBlurShader.get(), {Framebuffer::TypeFrameBuffer::HDR}, true);
-		bloomPong = FramebufferManager::Get().Add("bloomPongFramebuffer", BloomBlurShader.get(), {Framebuffer::TypeFrameBuffer::HDR}, true);
-		GBuffer = FramebufferManager::Get().Add("GBufferFramebuffer", nullptr, { Framebuffer::TypeFrameBuffer::RGBA16F, Framebuffer::TypeFrameBuffer::RGBA16F, Framebuffer::TypeFrameBuffer::RGBA, Framebuffer::TypeFrameBuffer::RGBA }, true, -1, -1, { Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest, Framebuffer::TypeFilter::Nearest });
 		LightingGBuffer = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/DeferredLightingFS.glsl");
 		PointLightDeferred = std::make_unique<Shader>("Shaders/DeferredLightingVS.glsl", "Shaders/DeferredPointLighting.glsl");
 		SpotLightDeferred = std::make_unique<Shader>("Shaders/DeferredLightingVS.glsl", "Shaders/DeferredSpotLighting.glsl");
 		deferredCone = AssetManager::LoadModel("Assets/Models/Cone.obj")->meshes[0];
 		deferredLowPolySphere = AssetManager::LoadModel("Assets/Models/SphereLowPoly.obj")->meshes[0];
 		SSAOShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/SSAOFS.glsl");
-		SSAO = FramebufferManager::Get().Add("SSAOFramebuffer", SSAOShader.get(), {Framebuffer::TypeFrameBuffer::RED}, true, -1, -1, {Framebuffer::TypeFilter::Nearest});
 		SSAOBlurShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/SSAOblurFS.glsl");
-		SSAOblur = FramebufferManager::Get().Add("SSAOblurFramebuffer", SSAOBlurShader.get(), {Framebuffer::TypeFrameBuffer::RED}, true, -1, -1, {Framebuffer::TypeFilter::Nearest});
 		EnviromentHDRShader = std::make_unique<Shader>("Shaders/HDRToCubemapVS.glsl", "Shaders/HDRToCubemapFS.glsl");
 		irradianceShader = std::make_unique<Shader>("Shaders/HDRToCubemapVS.glsl", "Shaders/IrradianceShaderFS.glsl");
 		prefilterShader = std::make_unique<Shader>("Shaders/HDRToCubemapVS.glsl", "Shaders/PrefilterHDRMapFS.glsl");
@@ -896,10 +914,10 @@ namespace RenderSystem
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-		SSAO->GetShader()->Update();
-		SSAO->GetShader()->setInt("gPosition", 0);
-		SSAO->GetShader()->setInt("gNormal", 1);
-		SSAO->GetShader()->setInt("texNoise", 2);
+		SSAOShader->Update();
+		SSAOShader->setInt("gPosition", 0);
+		SSAOShader->setInt("gNormal", 1);
+		SSAOShader->setInt("texNoise", 2);
 		std::uniform_real_distribution<float> randomFloats(0.0, 1.0);
 		std::default_random_engine generator;
 		for (unsigned int i = 0; i < 64; ++i)
@@ -975,8 +993,8 @@ namespace RenderSystem
 		if (context.postProcess->AutoExposure && context.postProcess->camera == context.camera)
 		{
 
-			Framebuffer* oldFrameBuffer = exposurePing ? exposureA : exposureB;
-			Framebuffer* currectFrameBuffer = exposurePing ? exposureB : exposureA;
+			Framebuffer* oldFrameBuffer = context.camera->exposurePing ? exposureA : exposureB;
+			Framebuffer* currectFrameBuffer = context.camera->exposurePing ? exposureB : exposureA;
 
 			currectFrameBuffer->Bind();
 
@@ -1007,7 +1025,7 @@ namespace RenderSystem
 			currectFrameBuffer->UnBind();
 
 			glViewport(0, 0, context.width, context.height);
-			exposurePing = !exposurePing;
+			context.camera->exposurePing = !context.camera->exposurePing;
 		}
 		if (context.postProcess->Bloom && context.postProcess->camera == context.camera)
 		{
@@ -1076,7 +1094,7 @@ namespace RenderSystem
 		sceneHDR->GetShader()->setInt("ExposureTexture", 1);
 		sceneHDR->GetShader()->setInt("BloomTexture", 2);
 
-		Framebuffer* currentExposure = exposurePing ? exposureB : exposureA;
+		Framebuffer* currentExposure = context.camera->exposurePing ? exposureB : exposureA;
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, sceneHDR->GetColorBuffer(0));
@@ -1252,11 +1270,24 @@ namespace RenderSystem
 		glBindTexture(GL_TEXTURE_2D, BRDFLUTTexture->GetTexturePixels());
 		slot += 1;
 	}
+	void rs_ClearFramebuffer(Framebuffer* ClearFramebuffer, float width, float height)
+	{
+		ClearFramebuffer->Bind();
+
+		glViewport(0, 0, width, height);
+
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		ClearFramebuffer->UnBind();
+	}
 	void rs_Render(RenderContext& context, Framebuffer* sceneHDR)
 	{
+		rs_CollectbuffersFromCamera(*context.camera);
 		std::vector<Batch> batches;
 		rs_CollectBatches(context, batches);
-		rs_RenderShadowMaps(context, batches);
+		if(context.Shadows)
+			rs_RenderShadowMaps(context, batches);
 		rs_UploadCamera(context);
 		rs_UploadLighting(context);
 		UBOBuffer::UpdateAll();

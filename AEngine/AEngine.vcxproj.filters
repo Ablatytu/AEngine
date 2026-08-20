@@ -92,9 +92,6 @@
     <ClCompile Include="Renderer\Framebuffer.cpp">
       <Filter>Файлы ресурсов\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\FramebufferManager.cpp">
-      <Filter>Файлы ресурсов\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="scene\Scene.cpp">
       <Filter>Файлы ресурсов\scene</Filter>
     </ClCompile>
@@ -209,9 +206,6 @@
       <Filter>Файлы ресурсов\scene</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Framebuffer.h">
-      <Filter>Файлы ресурсов\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\FramebufferManager.h">
       <Filter>Файлы ресурсов\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="scene\Scene.h">

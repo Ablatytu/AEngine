@@ -1,6 +1,5 @@
 #include "Window.h"
 #include "ErrorManager.h"
-#include "../Renderer/FramebufferManager.h"
 #include "../Renderer/Buffer.h"
 
 Window* Window::GlobalWindow = nullptr;

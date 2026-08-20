@@ -16,6 +16,7 @@ class Framebuffer;
 class HDRTexture;
 class Cubemap;
 class Texture;
+class Camera;
 
 namespace RenderSystem
 {
@@ -73,5 +74,8 @@ namespace RenderSystem
 	void rs_CreateBRDFTexture();
 	void rs_RenderQuad();
 	void rs_SetEIPMap(RenderContext& context, Shader* shader, unsigned int& slot);
+	void rs_CreateCameraFramebuffers(Camera& camera);
+	void rs_CollectbuffersFromCamera(Camera& camera);
 	AENGINE_API void rs_Present(RenderContext& context, Framebuffer* sceneHDR, Framebuffer* targetHDR = nullptr);
+	AENGINE_API void rs_ClearFramebuffer(Framebuffer* ClearFramebuffer, float width, float height);
 };

@@ -23,15 +23,15 @@ Skybox::Skybox(Cubemap* cubemap)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glBindVertexArray(0);
 }
-void Skybox::RenderSkyBox()
+void Skybox::RenderSkyBox(Camera* camera)
 {
 	glDepthMask(false);
 	glDepthFunc(GL_LEQUAL);
 	glActiveTexture(GL_TEXTURE0);
 	skyboxShader->Update();
 	skyboxShader->setInt("cubemap", 0);
-	skyboxShader->setMat4("proj", SceneManager::Get().GetActiveScene().activeCamera->projection);
-	skyboxShader->setMat4("view", glm::mat4(glm::mat3(SceneManager::Get().GetActiveScene().activeCamera->viewMatrix)));
+	skyboxShader->setMat4("proj", camera->projection);
+	skyboxShader->setMat4("view", glm::mat4(glm::mat3(camera->viewMatrix)));
 	glBindVertexArray(VAO);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->GetTextureID());
 	glDrawArrays(GL_TRIANGLES, 0, 36);

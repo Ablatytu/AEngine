@@ -18,7 +18,6 @@
 #include <map>
 #include <cmath>
 #include "../AEngine/Renderer/Framebuffer.h"
-#include "../AEngine/Renderer/FramebufferManager.h"
 #include "../AEngine/scene/Skybox.h"
 #include "../AEngine/Renderer/Cubemap.h"
 #include "../AEngine/Renderer/Buffer.h"
@@ -130,6 +129,7 @@ void AEditor::OnSceneLoaded()
 	camera->AddComponent<PostProcess>();
 	camera->GetComponent<PostProcess>()->exposure = 1.0f;
 	camera->GetComponent<PostProcess>()->AutoExposure = true;
+	SceneManager::Get().GetActiveScene().UnregisterCamera(camera->GetComponent<Camera>());
 	std::cout << "CREATE EDITOR CAMERA...";
 	editorCamera = std::make_unique<EditorCamera>(camera, editorGUI.get());
 	std::cout << "COMPLITE\n";
@@ -137,7 +137,7 @@ void AEditor::OnSceneLoaded()
 void AEditor::OnBeforeSceneUpdate()
 {
 	//frame++;
-	//if (frame > 30)
+	//if (frame > 10)
 	//	close();
 	//GameModule::CheckForChanges();
 	if (SceneManager::Get().CheckChangeScenePathState())
@@ -173,9 +173,8 @@ void AEditor::OnBeforeSceneUpdate()
 }
 void AEditor::OnRender()
 {
-	FramebufferManager::Get().Resize(editorGUI->sizeviewport[0], editorGUI->sizeviewport[1]);
 	//std::cout << editorGUI->sizeviewport[0] << " " << editorGUI->sizeviewport[1] << "\n";
-	RenderContext renderContext = SceneManager::Get().GetActiveScene().CollectRenderContext();
+	RenderContext renderContext = SceneManager::Get().GetActiveScene().CollectRenderContext(editorCamera->camera);
 	renderContext.width = editorGUI->sizeviewport[0];
 	renderContext.height = editorGUI->sizeviewport[1];
 	if (editorGUI && editorGUI->selectedObject.selectedObjectRender)
@@ -183,18 +182,39 @@ void AEditor::OnRender()
 	else
 		renderContext.selectedObject = nullptr;
 	if (renderContext.camera)
+	{
 		renderContext.camera->SetViewport(renderContext.width, renderContext.height);
-	rs_Start(editorGUI->sceneHDR);
-	rs_Render(renderContext, editorGUI->sceneHDR);
+		renderContext.camera->Resize(renderContext.width, renderContext.height);
+	}
+	Framebuffer* sceneHDR = renderContext.camera->GetFramebuffer("defaultFramebuffer");
+	Framebuffer* output = renderContext.camera->GetFramebuffer("ViewportFramebuffer");
+	rs_Start(sceneHDR);
+	rs_Render(renderContext, sceneHDR);
 	editorGUI->RenderEditorParts();
 	rs_End();
-	rs_PostProcess(renderContext, editorGUI->sceneHDR);
-	rs_Present(renderContext, editorGUI->sceneHDR, editorGUI->viewport);
+	rs_PostProcess(renderContext, sceneHDR);
+	rs_Present(renderContext, sceneHDR, output);
+	renderContext = SceneManager::Get().GetActiveScene().CollectRenderContext();
+	renderContext.width = editorGUI->sizegameport[0];
+	renderContext.height = editorGUI->sizegameport[1];
+	if (renderContext.camera)
+	{
+		renderContext.camera->SetViewport(renderContext.width, renderContext.height);
+		renderContext.camera->Resize(renderContext.width, renderContext.height);
+		Framebuffer* sceneHDR = renderContext.camera->GetFramebuffer("defaultFramebuffer");
+		Framebuffer* output = renderContext.camera->GetFramebuffer("ViewportFramebuffer");
+		rs_Start(sceneHDR);
+		rs_Render(renderContext, sceneHDR);
+		rs_End();
+		rs_PostProcess(renderContext, sceneHDR);
+		rs_Present(renderContext, sceneHDR, output);
+	}
 	editorGUI->BeginDockspace();
 	editorGUI->ShowInspectorWindow();
 	editorGUI->ShowHierarchyWindow();
 	editorGUI->ShowProject();
-	editorGUI->RenderViewport();
+	editorGUI->RenderGameViewport(renderContext.camera);
+	editorGUI->RenderViewport(editorCamera->camera);
 	editorGUI->ShowLightingMenu();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

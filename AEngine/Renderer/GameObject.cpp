@@ -21,7 +21,7 @@ AEngineComponent* GameObject::AttachComponent(std::unique_ptr<AEngineComponent> 
 {
 	component->gameObject = this;
 	if (auto* camera = dynamic_cast<Camera*>(component.get()))
-		SceneManager::Get().GetActiveScene().activeCamera = camera;
+		SceneManager::Get().GetActiveScene().RegisterCamera(camera);
 	if (auto* render = dynamic_cast<Render*>(component.get()))
 		SceneManager::Get().GetActiveScene().renders.push_back(render);
 	SceneManager::Get().GetActiveScene().AwakeAComponents.push_back(component.get());
@@ -43,7 +43,7 @@ void GameObject::RemoveComponent(AEngineComponent* component)
 			component->OnDestroy();
 			ComponentStorage::Get().UnRegister(component->handle);
 			if (auto d = dynamic_cast<Camera*>(component))
-				SceneManager::Get().GetActiveScene().activeCamera = nullptr;
+				SceneManager::Get().GetActiveScene().UnregisterCamera(d);
 			if (auto d = dynamic_cast<Render*>(component))
 				ClearComponentsVector(SceneManager::Get().GetActiveScene().renders, d);
 			ClearComponentsVector(SceneManager::Get().GetActiveScene().AComponents, component);

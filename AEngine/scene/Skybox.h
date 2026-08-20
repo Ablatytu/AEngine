@@ -2,13 +2,14 @@
 #include <memory>
 class Cubemap;
 class Shader;
+class Camera;
 
 class Skybox
 {
 public:
 	Skybox(Cubemap* cubemap);
     ~Skybox();
-	void RenderSkyBox();
+	void RenderSkyBox(Camera* camera);
 	void ChangeSkyBox(Cubemap* cubemap);
     Cubemap* GetSkyboxCubemap();
 private:

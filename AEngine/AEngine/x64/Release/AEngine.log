@@ -1,158 +1,297 @@
 ﻿C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(537,5): warning MSB8004: каталог Output заканчивается не косой чертой.  Этот экземпляр сборки добавит косую черту, поскольку она необходима для правильного определения каталога Output.
-  ModelLoader.cpp
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(103,27): warning C4251: "PropertiesWithUniforms::propertiesNames": "std::vector<std::string,std::allocator<std::string>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
+  GameObject.cpp
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.h(67,25): warning C4251: "AEngineComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AEngineComponent"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
-       см. объявление "std::vector<std::string,std::allocator<std::string>>"
+       см. объявление "std::vector<FieldInfo,std::allocator<FieldInfo>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(105,56): warning C4251: "PropertiesWithUniforms::infoes": "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
-       см. объявление "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2): warning C4251: "Transform::registerClassFunc": "Transform::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2):
+       см. объявление "Transform::RegisterClassFunc"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(64,14): warning C4251: "Material::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Material"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
-       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(14,12): warning C4251: "Transform::position": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(70,42): warning C4251: "Material::properties": "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>" должен иметь dll-интерфейс для использования клиентами "Material"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\memory(3376,7):
-       см. объявление "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(15,12): warning C4251: "Transform::rotation": "glm::qua<float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_quat.hpp(33,9):
+       см. объявление "glm::qua<float,glm::packed_highp>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(71,44): warning C4251: "Material::textures": "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
-       см. объявление "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(16,12): warning C4251: "Transform::scale": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(72,44): warning C4251: "Material::cubemaps": "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
-       см. объявление "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>"
-  
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.h(22,31): warning C4251: "Mesh::vertices": "std::vector<Vertex,std::allocator<Vertex>>" должен иметь dll-интерфейс для использования клиентами "Mesh"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(18,26): warning C4251: "Transform::children": "std::vector<Transform *,std::allocator<Transform *>>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
-       см. объявление "std::vector<Vertex,std::allocator<Vertex>>"
+       см. объявление "std::vector<Transform *,std::allocator<Transform *>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.h(23,31): warning C4251: "Mesh::indices": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Mesh"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
-       см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(28,12): warning C4251: "Transform::matrixModel": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.h(31,17): warning C4251: "Mesh::basepathModel": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Mesh"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
-       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
-  
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.h(11,23): warning C4251: "Model::meshes": "std::vector<Mesh,std::allocator<Mesh>>" должен иметь dll-интерфейс для использования клиентами "Model"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
-       см. объявление "std::vector<Mesh,std::allocator<Mesh>>"
-  
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.h(17,17): warning C4251: "Model::directory": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Model"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
-       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
-  
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.h(18,17): warning C4251: "Model::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Model"
-  (компиляция исходного файла "APIs/ModelLoader.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
-       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
-  
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.cpp(121,33): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-  Framebuffer.cpp
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(37,31): warning C4251: "Framebuffer::ColorBuffer": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
-  (компиляция исходного файла "Renderer/Framebuffer.cpp")
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(38,31): warning C4251: "Framebuffer::ColorBuffer": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(38,29): warning C4251: "Framebuffer::typeFilter": "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
-  (компиляция исходного файла "Renderer/Framebuffer.cpp")
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(39,29): warning C4251: "Framebuffer::typeFilter": "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(39,34): warning C4251: "Framebuffer::typeFrameBuffer": "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
-  (компиляция исходного файла "Renderer/Framebuffer.cpp")
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(40,34): warning C4251: "Framebuffer::typeFrameBuffer": "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>"
   
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(103,27): warning C4251: "PropertiesWithUniforms::propertiesNames": "std::vector<std::string,std::allocator<std::string>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
-  (компиляция исходного файла "Renderer/Framebuffer.cpp")
+  (компиляция исходного файла "Renderer/GameObject.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<std::string,std::allocator<std::string>>"
   
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(105,56): warning C4251: "PropertiesWithUniforms::infoes": "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
-  (компиляция исходного файла "Renderer/Framebuffer.cpp")
+  (компиляция исходного файла "Renderer/GameObject.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
        см. объявление "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(53,17): warning C4251: "Shader::pathFragmentShader": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Shader"
-  (компиляция исходного файла "Renderer/Framebuffer.cpp")
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(64,14): warning C4251: "Material::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
        см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(54,17): warning C4251: "Shader::pathVertexShader": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Shader"
-  (компиляция исходного файла "Renderer/Framebuffer.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
-       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(70,42): warning C4251: "Material::properties": "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\memory(3376,7):
+       см. объявление "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(55,17): warning C4251: "Shader::pathGeometryShader": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Shader"
-  (компиляция исходного файла "Renderer/Framebuffer.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
-       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(71,44): warning C4251: "Material::textures": "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(56,21): warning C4251: "Shader::UBOReflection": "GLSLUBOUniforms" должен иметь dll-интерфейс для использования клиентами "Shader"
-  (компиляция исходного файла "Renderer/Framebuffer.cpp")
-      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(158,7):
-       см. объявление "GLSLUBOUniforms"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(72,44): warning C4251: "Material::cubemaps": "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.cpp(71,22): warning C4244: инициализация: преобразование "float" в "unsigned int", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.cpp(72,23): warning C4244: инициализация: преобразование "float" в "unsigned int", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.cpp(100,36): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
-  HDRTexture.cpp
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\HDRTexture.h(12,14): warning C4251: "HDRTexture::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "HDRTexture"
-  (компиляция исходного файла "Renderer/HDRTexture.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
-       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Render.h(19,2): warning C4251: "Render::registerClassFunc": "Render::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Render"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Render.h(19,2):
+       см. объявление "Render::RegisterClassFunc"
   
-  Shader.cpp
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\ComponentStorage.h(26,20): warning C4251: "ComponentStorage::slots": "std::vector<ComponentStorage::Slot,std::allocator<ComponentStorage::Slot>>" должен иметь dll-интерфейс для использования клиентами "ComponentStorage"
+  (компиляция исходного файла "Renderer/GameObject.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<ComponentStorage::Slot,std::allocator<ComponentStorage::Slot>>"
+  
+  RenderSystem.cpp
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.h(67,25): warning C4251: "AEngineComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AEngineComponent"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<FieldInfo,std::allocator<FieldInfo>>"
+  
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(103,27): warning C4251: "PropertiesWithUniforms::propertiesNames": "std::vector<std::string,std::allocator<std::string>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
-  (компиляция исходного файла "Renderer/Shader.cpp")
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<std::string,std::allocator<std::string>>"
   
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(105,56): warning C4251: "PropertiesWithUniforms::infoes": "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
-  (компиляция исходного файла "Renderer/Shader.cpp")
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
        см. объявление "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>"
   
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(64,14): warning C4251: "Material::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(70,42): warning C4251: "Material::properties": "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\memory(3376,7):
+       см. объявление "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(71,44): warning C4251: "Material::textures": "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(72,44): warning C4251: "Material::cubemaps": "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2): warning C4251: "Transform::registerClassFunc": "Transform::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2):
+       см. объявление "Transform::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(14,12): warning C4251: "Transform::position": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(15,12): warning C4251: "Transform::rotation": "glm::qua<float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_quat.hpp(33,9):
+       см. объявление "glm::qua<float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(16,12): warning C4251: "Transform::scale": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(18,26): warning C4251: "Transform::children": "std::vector<Transform *,std::allocator<Transform *>>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Transform *,std::allocator<Transform *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(28,12): warning C4251: "Transform::matrixModel": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Render.h(19,2): warning C4251: "Render::registerClassFunc": "Render::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Render"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Render.h(19,2):
+       см. объявление "Render::RegisterClassFunc"
+  
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(53,17): warning C4251: "Shader::pathFragmentShader": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Shader"
-  (компиляция исходного файла "Renderer/Shader.cpp")
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
        см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
   
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(54,17): warning C4251: "Shader::pathVertexShader": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Shader"
-  (компиляция исходного файла "Renderer/Shader.cpp")
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
        см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
   
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(55,17): warning C4251: "Shader::pathGeometryShader": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Shader"
-  (компиляция исходного файла "Renderer/Shader.cpp")
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
        см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
   
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(56,21): warning C4251: "Shader::UBOReflection": "GLSLUBOUniforms" должен иметь dll-интерфейс для использования клиентами "Shader"
-  (компиляция исходного файла "Renderer/Shader.cpp")
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
       C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(158,7):
        см. объявление "GLSLUBOUniforms"
   
-  Texture.cpp
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Texture.h(33,14): warning C4251: "Texture::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Texture"
-  (компиляция исходного файла "Renderer/Texture.cpp")
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.h(22,31): warning C4251: "Mesh::vertices": "std::vector<Vertex,std::allocator<Vertex>>" должен иметь dll-интерфейс для использования клиентами "Mesh"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Vertex,std::allocator<Vertex>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.h(23,31): warning C4251: "Mesh::indices": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Mesh"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.h(31,17): warning C4251: "Mesh::basepathModel": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Mesh"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
        см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
   
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(38,31): warning C4251: "Framebuffer::ColorBuffer": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(39,29): warning C4251: "Framebuffer::typeFilter": "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(40,34): warning C4251: "Framebuffer::typeFrameBuffer": "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.h(11,23): warning C4251: "Model::meshes": "std::vector<Mesh,std::allocator<Mesh>>" должен иметь dll-интерфейс для использования клиентами "Model"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Mesh,std::allocator<Mesh>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.h(17,17): warning C4251: "Model::directory": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Model"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.h(18,17): warning C4251: "Model::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Model"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\HDRTexture.h(12,14): warning C4251: "HDRTexture::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "HDRTexture"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Cubemap.h(25,14): warning C4251: "Cubemap::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Cubemap"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Cubemap.h(26,44): warning C4251: "Cubemap::textures": "std::unordered_map<TypeTexture,Texture *,std::hash<TypeTexture>,std::equal_to<TypeTexture>,std::allocator<std::pair<const TypeTexture,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Cubemap"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<TypeTexture,Texture *,std::hash<TypeTexture>,std::equal_to<TypeTexture>,std::allocator<std::pair<const TypeTexture,Texture *>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderContext.h(27,23): warning C4251: "RenderContext::renders": "std::vector<Render *,std::allocator<Render *>>" должен иметь dll-интерфейс для использования клиентами "RenderContext"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Render *,std::allocator<Render *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderContext.h(29,22): warning C4251: "RenderContext::lights": "std::vector<Light *,std::allocator<Light *>>" должен иметь dll-интерфейс для использования клиентами "RenderContext"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Light *,std::allocator<Light *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Texture.h(33,14): warning C4251: "Texture::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Texture"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\PostProcess.h(9,2): warning C4251: "PostProcess::registerClassFunc": "PostProcess::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "PostProcess"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\PostProcess.h(9,2):
+       см. объявление "PostProcess::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(13,2): warning C4251: "Light::registerClassFunc": "Light::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Light"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(13,2):
+       см. объявление "Light::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(35,12): warning C4251: "Light::lightColor": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Light"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(41,12): warning C4251: "Light::lightSpaceMatrix": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Light"
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\AMath.h(33,16): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+  (компиляция исходного файла "Renderer/RenderSystem.cpp")
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(407,45): warning C4267: аргумент: преобразование из "size_t" в "unsigned int"; возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(683,67): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(683,52): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(688,63): warning C4267: аргумент: преобразование из "size_t" в "unsigned int"; возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(690,66): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(690,51): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(693,53): warning C4267: аргумент: преобразование из "size_t" в "unsigned int"; возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(928,16): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(1009,19): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(1216,26): warning C4244: инициализация: преобразование "double" в "unsigned int", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(1217,27): warning C4244: инициализация: преобразование "double" в "unsigned int", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(1277,27): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp(1277,20): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
   Camera.cpp
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.h(67,25): warning C4251: "AEngineComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AEngineComponent"
   (компиляция исходного файла "components/Camera.cpp")
@@ -189,25 +328,20 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(
       C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
        см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Camera.h(15,2): warning C4251: "Camera::registerClassFunc": "Camera::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Camera"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(38,31): warning C4251: "Framebuffer::ColorBuffer": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
   (компиляция исходного файла "components/Camera.cpp")
-      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Camera.h(15,2):
-       см. объявление "Camera::RegisterClassFunc"
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Camera.h(19,12): warning C4251: "Camera::viewMatrix": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Camera"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(39,29): warning C4251: "Framebuffer::typeFilter": "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
   (компиляция исходного файла "components/Camera.cpp")
-      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
-       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Camera.h(20,12): warning C4251: "Camera::projection": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Camera"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(40,34): warning C4251: "Framebuffer::typeFrameBuffer": "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
   (компиляция исходного файла "components/Camera.cpp")
-      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
-       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
-  
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Camera.h(21,12): warning C4251: "Camera::camFront": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Camera"
-  (компиляция исходного файла "components/Camera.cpp")
-      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
-       см. объявление "glm::vec<3,float,glm::packed_highp>"
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>"
   
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(103,27): warning C4251: "PropertiesWithUniforms::propertiesNames": "std::vector<std::string,std::allocator<std::string>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
   (компиляция исходного файла "components/Camera.cpp")
@@ -239,64 +373,419 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(56,21
       C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(158,7):
        см. объявление "GLSLUBOUniforms"
   
-  GameModule.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: APIENTRY: изменение макроопределения
-  (компиляция исходного файла "components/GameModule.cpp")
-      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glad\glad.h(32,9):
-      см. предыдущее определение "APIENTRY"
-  
-  Application.cpp
+  EngineEntry.cpp
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.h(67,25): warning C4251: "AEngineComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AEngineComponent"
-  (компиляция исходного файла "core/Application.cpp")
+  (компиляция исходного файла "components/EngineEntry.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<FieldInfo,std::allocator<FieldInfo>>"
   
-  ErrorManager.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: APIENTRY: изменение макроопределения
-  (компиляция исходного файла "core/ErrorManager.cpp")
-      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glad\glad.h(32,9):
-      см. предыдущее определение "APIENTRY"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\ComponentStorage.h(26,20): warning C4251: "ComponentStorage::slots": "std::vector<ComponentStorage::Slot,std::allocator<ComponentStorage::Slot>>" должен иметь dll-интерфейс для использования клиентами "ComponentStorage"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<ComponentStorage::Slot,std::allocator<ComponentStorage::Slot>>"
   
-  Window.cpp
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(37,31): warning C4251: "Framebuffer::ColorBuffer": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
-  (компиляция исходного файла "core/Window.cpp")
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2): warning C4251: "Transform::registerClassFunc": "Transform::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2):
+       см. объявление "Transform::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(14,12): warning C4251: "Transform::position": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(15,12): warning C4251: "Transform::rotation": "glm::qua<float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_quat.hpp(33,9):
+       см. объявление "glm::qua<float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(16,12): warning C4251: "Transform::scale": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(18,26): warning C4251: "Transform::children": "std::vector<Transform *,std::allocator<Transform *>>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Transform *,std::allocator<Transform *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(28,12): warning C4251: "Transform::matrixModel": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(103,27): warning C4251: "PropertiesWithUniforms::propertiesNames": "std::vector<std::string,std::allocator<std::string>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<std::string,std::allocator<std::string>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(105,56): warning C4251: "PropertiesWithUniforms::infoes": "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(64,14): warning C4251: "Material::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(70,42): warning C4251: "Material::properties": "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\memory(3376,7):
+       см. объявление "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(71,44): warning C4251: "Material::textures": "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(72,44): warning C4251: "Material::cubemaps": "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Render.h(19,2): warning C4251: "Render::registerClassFunc": "Render::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Render"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Render.h(19,2):
+       см. объявление "Render::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(13,2): warning C4251: "Light::registerClassFunc": "Light::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Light"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(13,2):
+       см. объявление "Light::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(35,12): warning C4251: "Light::lightColor": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Light"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(41,12): warning C4251: "Light::lightSpaceMatrix": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Light"
+  (компиляция исходного файла "components/EngineEntry.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(38,31): warning C4251: "Framebuffer::ColorBuffer": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "components/EngineEntry.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(38,29): warning C4251: "Framebuffer::typeFilter": "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
-  (компиляция исходного файла "core/Window.cpp")
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(39,29): warning C4251: "Framebuffer::typeFilter": "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "components/EngineEntry.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(39,34): warning C4251: "Framebuffer::typeFrameBuffer": "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
-  (компиляция исходного файла "core/Window.cpp")
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(40,34): warning C4251: "Framebuffer::typeFrameBuffer": "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "components/EngineEntry.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(29,18): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(38,14): warning C4244: return: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(42,14): warning C4244: return: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(50,11): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(51,11): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(54,18): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(55,17): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(56,10): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(57,10): warning C4244: =: преобразование "double" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(119,37): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(119,28): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(135,28): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(135,19): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Window.cpp(236,20): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-  SceneManager.cpp
+  PostProcess.cpp
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.h(67,25): warning C4251: "AEngineComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AEngineComponent"
-  (компиляция исходного файла "scene/SceneManager.cpp")
+  (компиляция исходного файла "components/PostProcess.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<FieldInfo,std::allocator<FieldInfo>>"
   
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\PostProcess.h(9,2): warning C4251: "PostProcess::registerClassFunc": "PostProcess::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "PostProcess"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\PostProcess.h(9,2):
+       см. объявление "PostProcess::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2): warning C4251: "Transform::registerClassFunc": "Transform::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2):
+       см. объявление "Transform::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(14,12): warning C4251: "Transform::position": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(15,12): warning C4251: "Transform::rotation": "glm::qua<float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_quat.hpp(33,9):
+       см. объявление "glm::qua<float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(16,12): warning C4251: "Transform::scale": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(18,26): warning C4251: "Transform::children": "std::vector<Transform *,std::allocator<Transform *>>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Transform *,std::allocator<Transform *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(28,12): warning C4251: "Transform::matrixModel": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(38,31): warning C4251: "Framebuffer::ColorBuffer": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(39,29): warning C4251: "Framebuffer::typeFilter": "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(40,34): warning C4251: "Framebuffer::typeFrameBuffer": "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "components/PostProcess.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>"
+  
+  SceneSerializer.cpp
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Cubemap.h(25,14): warning C4251: "Cubemap::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Cubemap"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Cubemap.h(26,44): warning C4251: "Cubemap::textures": "std::unordered_map<TypeTexture,Texture *,std::hash<TypeTexture>,std::equal_to<TypeTexture>,std::allocator<std::pair<const TypeTexture,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Cubemap"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<TypeTexture,Texture *,std::hash<TypeTexture>,std::equal_to<TypeTexture>,std::allocator<std::pair<const TypeTexture,Texture *>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(103,27): warning C4251: "PropertiesWithUniforms::propertiesNames": "std::vector<std::string,std::allocator<std::string>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<std::string,std::allocator<std::string>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(105,56): warning C4251: "PropertiesWithUniforms::infoes": "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(64,14): warning C4251: "Material::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(70,42): warning C4251: "Material::properties": "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\memory(3376,7):
+       см. объявление "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(71,44): warning C4251: "Material::textures": "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(72,44): warning C4251: "Material::cubemaps": "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.h(22,31): warning C4251: "Mesh::vertices": "std::vector<Vertex,std::allocator<Vertex>>" должен иметь dll-интерфейс для использования клиентами "Mesh"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Vertex,std::allocator<Vertex>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.h(23,31): warning C4251: "Mesh::indices": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Mesh"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.h(31,17): warning C4251: "Mesh::basepathModel": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Mesh"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.h(67,25): warning C4251: "AEngineComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AEngineComponent"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<FieldInfo,std::allocator<FieldInfo>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2): warning C4251: "Transform::registerClassFunc": "Transform::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2):
+       см. объявление "Transform::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(14,12): warning C4251: "Transform::position": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(15,12): warning C4251: "Transform::rotation": "glm::qua<float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_quat.hpp(33,9):
+       см. объявление "glm::qua<float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(16,12): warning C4251: "Transform::scale": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(18,26): warning C4251: "Transform::children": "std::vector<Transform *,std::allocator<Transform *>>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Transform *,std::allocator<Transform *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(28,12): warning C4251: "Transform::matrixModel": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\cube.h(9,2): warning C4251: "Cube::registerClassFunc": "Cube::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Cube"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\cube.h(9,2):
+       см. объявление "Cube::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\LightMoving.h(10,2): warning C4251: "LightMoving::registerClassFunc": "LightMoving::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "LightMoving"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\LightMoving.h(10,2):
+       см. объявление "LightMoving::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Render.h(19,2): warning C4251: "Render::registerClassFunc": "Render::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Render"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Render.h(19,2):
+       см. объявление "Render::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(38,31): warning C4251: "Framebuffer::ColorBuffer": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(39,29): warning C4251: "Framebuffer::typeFilter": "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(40,34): warning C4251: "Framebuffer::typeFrameBuffer": "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(13,2): warning C4251: "Light::registerClassFunc": "Light::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Light"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(13,2):
+       см. объявление "Light::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(35,12): warning C4251: "Light::lightColor": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Light"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.h(41,12): warning C4251: "Light::lightSpaceMatrix": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Light"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Rei.h(7,2): warning C4251: "Rei::registerClassFunc": "Rei::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Rei"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Rei.h(7,2):
+       см. объявление "Rei::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.h(11,23): warning C4251: "Model::meshes": "std::vector<Mesh,std::allocator<Mesh>>" должен иметь dll-интерфейс для использования клиентами "Model"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Mesh,std::allocator<Mesh>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.h(17,17): warning C4251: "Model::directory": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Model"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ModelLoader.h(18,17): warning C4251: "Model::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Model"
+  (компиляция исходного файла "scene/SceneSerializer.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+  Skybox.cpp
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Cubemap.h(25,14): warning C4251: "Cubemap::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Cubemap"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Cubemap.h(26,44): warning C4251: "Cubemap::textures": "std::unordered_map<TypeTexture,Texture *,std::hash<TypeTexture>,std::equal_to<TypeTexture>,std::allocator<std::pair<const TypeTexture,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Cubemap"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<TypeTexture,Texture *,std::hash<TypeTexture>,std::equal_to<TypeTexture>,std::allocator<std::pair<const TypeTexture,Texture *>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(103,27): warning C4251: "PropertiesWithUniforms::propertiesNames": "std::vector<std::string,std::allocator<std::string>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<std::string,std::allocator<std::string>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(105,56): warning C4251: "PropertiesWithUniforms::infoes": "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(53,17): warning C4251: "Shader::pathFragmentShader": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Shader"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(54,17): warning C4251: "Shader::pathVertexShader": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Shader"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(55,17): warning C4251: "Shader::pathGeometryShader": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Shader"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(56,21): warning C4251: "Shader::UBOReflection": "GLSLUBOUniforms" должен иметь dll-интерфейс для использования клиентами "Shader"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(158,7):
+       см. объявление "GLSLUBOUniforms"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.h(67,25): warning C4251: "AEngineComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AEngineComponent"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<FieldInfo,std::allocator<FieldInfo>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2): warning C4251: "Transform::registerClassFunc": "Transform::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(12,2):
+       см. объявление "Transform::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(14,12): warning C4251: "Transform::position": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(15,12): warning C4251: "Transform::rotation": "glm::qua<float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_quat.hpp(33,9):
+       см. объявление "glm::qua<float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(16,12): warning C4251: "Transform::scale": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(18,26): warning C4251: "Transform::children": "std::vector<Transform *,std::allocator<Transform *>>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Transform *,std::allocator<Transform *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.h(28,12): warning C4251: "Transform::matrixModel": "glm::mat<4,4,glm::f32,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "Transform"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_mat4x4.hpp(13,9):
+       см. объявление "glm::mat<4,4,glm::f32,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(38,31): warning C4251: "Framebuffer::ColorBuffer": "std::vector<unsigned int,std::allocator<unsigned int>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<unsigned int,std::allocator<unsigned int>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(39,29): warning C4251: "Framebuffer::typeFilter": "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFilter,std::allocator<Framebuffer::TypeFilter>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Framebuffer.h(40,34): warning C4251: "Framebuffer::typeFrameBuffer": "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>" должен иметь dll-интерфейс для использования клиентами "Framebuffer"
+  (компиляция исходного файла "scene/Skybox.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<Framebuffer::TypeFrameBuffer,std::allocator<Framebuffer::TypeFrameBuffer>>"
+  
      Создается библиотека ..\bin\Release\AEngine.lib и объект ..\bin\Release\AEngine.exp
   Создание кода
-  6 of 7916 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 7972 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     1 functions were new in current compilation
-    26 functions had inline decision re-evaluated but remain unchanged
+    28 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   AEngine.vcxproj -> C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\Release\AEngine.dll

@@ -10,6 +10,7 @@ class Texture;
 class Shader;
 class Cubemap;
 class Material;
+class Camera;
 
 class EditorGUI
 {
@@ -31,9 +32,9 @@ public:
 	Texture* selectedTexture = nullptr;
 	Cubemap* selectedCubemap = nullptr;
 	Material* selectedMaterial = nullptr;
-	Framebuffer* sceneHDR = nullptr;
-	Framebuffer* viewport = nullptr;
 	int sizeviewport[2] = { 800, 600 };
+	int sizegameport[2] = { 800, 600 };
+	float gameportBounds[2][2];
 	float viewportBounds[2][2];
 	bool viewportHovered = false;
 	void BeginDockspace();
@@ -42,8 +43,9 @@ public:
 	void ShowHierarchyWindow();
 	void DrawHierarchyObject(GameObject* object);
 	void RenderEditorParts();
-	void RenderGizmo();
-	void RenderViewport();
+	void RenderGizmo(Camera* camera);
+	void RenderViewport(Camera* camera);
+	void RenderGameViewport(Camera* camera);
 	void DrawToolbar();
 	void DrawDockspaceMenuBar();
 	void ShowProject();
@@ -61,7 +63,6 @@ private:
 	std::unique_ptr<Texture> MaterialIcon;
 	std::unique_ptr<Texture> PlayIcon;
 	std::unique_ptr<Texture> StopIcon;
-	std::unique_ptr<Shader> sceneHDRShader = nullptr;
 	Transform* transform = nullptr;
 	std::unique_ptr<Shader> OutlineShader = nullptr;
 	bool showLightingMenu = false;

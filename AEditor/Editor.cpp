@@ -24,7 +24,6 @@
 #include "../AEngine/APIs/ParserGLSL.h"
 #include "../AEngine/Renderer/Cubemap.h"
 #include "../AEngine/Renderer/RenderSystem.h"
-#include "../AEngine/Renderer/FramebufferManager.h"
 #include "../AEngine/Renderer/Framebuffer.h"
 #include "../AEngine/APIs/ModelLoader.h"
 #include "../AEngine/core/Application.h"
@@ -49,9 +48,6 @@ void EditorGUI::RenderOutline(Render* mesh)
 }
 void EditorGUI::EDITOR_INIT()
 {
-	sceneHDRShader = std::make_unique<Shader>("Shaders/FramebufferVertexShader.glsl", "Shaders/FramebufferFragmentShader.glsl");
-	sceneHDR = FramebufferManager::Get().Add("defaultFramebuffer", sceneHDRShader.get(), {Framebuffer::TypeFrameBuffer::HDR}, true);
-	viewport = FramebufferManager::Get().Add("ViewportFramebuffer", nullptr, { Framebuffer::TypeFrameBuffer::HDR }, true);
 	folderIcon = std::make_unique<Texture>();
 	folderIcon->LoadTexture("EditorAssets/FolderIconAEngine.png");
 	ModelIcon = std::make_unique<Texture>();
@@ -68,7 +64,32 @@ void EditorGUI::EDITOR_INIT()
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 }
-void EditorGUI::RenderViewport()
+void EditorGUI::RenderGameViewport(Camera* camera)
+{
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
+	ImGui::Begin("Game");
+	auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
+	auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+	auto viewportOffset = ImGui::GetWindowPos();
+	gameportBounds[0][0] = viewportMinRegion.x + viewportOffset.x;
+	gameportBounds[0][1] = viewportMinRegion.y + viewportOffset.y;
+
+	gameportBounds[1][0] = viewportMaxRegion.x + viewportOffset.x;
+	gameportBounds[1][1] = viewportMaxRegion.y + viewportOffset.y;
+
+	float sizeviewportWidth = gameportBounds[1][0] - gameportBounds[0][0];
+	float sizeviewportHeight = gameportBounds[1][1] - gameportBounds[0][1];
+	sizegameport[0] = std::max(1, (int)sizeviewportWidth);
+	sizegameport[1] = std::max(1, (int)sizeviewportHeight);
+
+	if (camera)
+		ImGui::Image((ImTextureID)(uintptr_t)camera->GetFramebuffer("ViewportFramebuffer")->GetColorBuffer(0), ImVec2(sizeviewportWidth, sizeviewportHeight), ImVec2(0, 1), ImVec2(1, 0));
+	else
+		ImGui::ColorButton("##Nonecamera", ImVec4(0.0f, 0.0f, 0.0f, 1.0f), 0, ImVec2(sizeviewportWidth, sizeviewportHeight));
+	ImGui::End();
+	ImGui::PopStyleVar();
+}
+void EditorGUI::RenderViewport(Camera* camera)
 {
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 	ImGui::Begin("Viewport");
@@ -86,7 +107,7 @@ void EditorGUI::RenderViewport()
 	sizeviewport[0] = std::max(1, (int)sizeviewportWidth);
 	sizeviewport[1] = std::max(1, (int)sizeviewportHeight);
 	viewportHovered = ImGui::IsWindowHovered();
-	ImGui::Image((ImTextureID)(uintptr_t)viewport->GetColorBuffer(0), ImVec2(sizeviewportWidth, sizeviewportHeight), ImVec2(0, 1), ImVec2(1, 0)	);
+	ImGui::Image((ImTextureID)(uintptr_t)camera->GetFramebuffer("ViewportFramebuffer")->GetColorBuffer(0), ImVec2(sizeviewportWidth, sizeviewportHeight), ImVec2(0, 1), ImVec2(1, 0)	);
 	if (ImGui::BeginDragDropTarget())
 	{
 		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
@@ -142,7 +163,7 @@ void EditorGUI::RenderViewport()
 	ImGuizmo::SetOrthographic(false);
 	ImGuizmo::SetDrawlist();
 	ImGuizmo::SetRect(viewportBounds[0][0], viewportBounds[0][1], sizeviewportWidth, sizeviewportHeight);
-	RenderGizmo();
+	RenderGizmo(camera);
 	ImGui::End();
 	ImGui::PopStyleVar();
 }
@@ -553,19 +574,20 @@ void EditorGUI::BeginDockspace()
 		ImGui::DockBuilderDockWindow("Hierarchy", dockLeft);
 		ImGui::DockBuilderDockWindow("Inspector", dockRight);
 		ImGui::DockBuilderDockWindow("Viewport", dockMain);
+		ImGui::DockBuilderDockWindow("Game", dockMain);
 		ImGui::DockBuilderDockWindow("Project", dockDown);
 
 		ImGui::DockBuilderFinish(dockspaceID);
 	}
 	ImGui::End();
 }
-void EditorGUI::RenderGizmo()
+void EditorGUI::RenderGizmo(Camera* camera)
 {
 	if (!selectedObject.selectedObject)
 		return;
 	Transform* transform = selectedObject.selectedObject->GetComponent<Transform>();
-	glm::mat4 view = SceneManager::Get().GetActiveScene().activeCamera->viewMatrix;
-	glm::mat4 proj = SceneManager::Get().GetActiveScene().activeCamera->projection;
+	glm::mat4 view = camera->viewMatrix;
+	glm::mat4 proj = camera->projection;
 
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
@@ -1069,7 +1091,7 @@ void EditorGUI::ShowInspectorWindow()
 				{
 					for (auto& component : ComponentSystem::GetComponentsFabric())
 					{
-						if (component.first == "Transform" || component.first == "Camera") continue;
+						if (component.first == "Transform") continue;
 						if (ImGui::Selectable(component.first.c_str()))
 						{
 							component.second(selectedObject.selectedObject);

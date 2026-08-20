@@ -16,10 +16,10 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include <glm/glm/gtc/type_ptr.hpp>
 
-RenderContext Scene::CollectRenderContext()
+RenderContext Scene::CollectRenderContext(Camera* camera)
 {
 	RenderContext context;
-	context.camera = activeCamera;
+	context.camera = camera;
 	context.fog.enabled = fogSettings.Fog;
 	context.fog.fogColor = fogSettings.FogColor;
 	context.skybox = skyBox.get();
@@ -30,6 +30,22 @@ RenderContext Scene::CollectRenderContext()
 	context.irradianceMap = irradianceMap.get();
 	context.prefilterMap = preilterCubemap.get();
 	return context;
+}
+
+RenderContext Scene::CollectRenderContext()
+{
+	return CollectRenderContext(activeCamera);
+}
+void Scene::RegisterCamera(Camera* newCamera)
+{
+	cameras.push_back(newCamera);
+	activeCamera = newCamera;
+}
+void Scene::UnregisterCamera(Camera* oldCamera)
+{
+	cameras.erase(std::remove(cameras.begin(), cameras.end(), oldCamera), cameras.end());
+	if (oldCamera == activeCamera)
+		activeCamera = cameras.empty() ? nullptr : cameras.back();
 }
 GameObject* Scene::CreateGameObject()
 {
@@ -54,6 +70,7 @@ void Scene::EraseScene()
 	objects.clear();
 	postProcess = nullptr;
 	activeCamera = nullptr;
+	cameras.clear();
 	A_LightManager->EraseLights();
 }
 void Scene::SetSkyBox(Cubemap* cubemap)

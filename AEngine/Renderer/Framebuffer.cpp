@@ -192,3 +192,11 @@ unsigned int Framebuffer::GetColorBuffer(unsigned int MCBNumber)
 {
 	return ColorBuffer[MCBNumber];
 }
+
+Framebuffer::~Framebuffer()
+{
+	glDeleteFramebuffers(1, &framebuffer);
+	for (auto texture : ColorBuffer)
+		glDeleteTextures(1, &texture);
+	glDeleteRenderbuffers(1, &rbo);
+}

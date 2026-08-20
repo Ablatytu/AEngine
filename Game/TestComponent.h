@@ -12,9 +12,9 @@ public:
 	void Start() override;
 private:
 	bool move = true;
-	bool DLLCPLUSPLUSSCRIPTING = true;
 	float speed = 0.0f;
-	//int testInt = 0;
-	Vector3 testVec3 = { 0.0f, 0.0f, 0.0f };
+	bool CPLUSPLUS = true;
+	int testInt = 5;
+	Vector3 vec3Test = {2.0f, 0.0f, 5.0f};
 	AComponentRef<Transform> transform;
 };

@@ -21,6 +21,7 @@ public:
         Nearest
     };
     Framebuffer(Shader* shader, const std::vector<TypeFrameBuffer>& typeFrameBuffer = {TypeFrameBuffer::LDR}, bool resizable = true, int width = -1, int height = -1, const std::vector<TypeFilter>& typeFilter = {TypeFilter::Liner});
+    ~Framebuffer();
     void UseShader();
     void Bind();
     void UnBind();
@@ -33,11 +34,11 @@ public:
     Shader* GetShader();
 private:
     int width = 0, height = 0;
-    unsigned int framebuffer;
+    unsigned int framebuffer = 0;
     std::vector<unsigned int> ColorBuffer;
     std::vector<TypeFilter> typeFilter = { TypeFilter::Liner };
     std::vector<TypeFrameBuffer> typeFrameBuffer = {TypeFrameBuffer::LDR};
-    unsigned int rbo;
+    unsigned int rbo = 0;
     bool resizable = true;
     Shader* screenShader;
 };

@@ -34,4 +34,5 @@ public:
 	Cubemap* irradianceMap;
 	Cubemap* prefilterMap;
 	bool HDR = false;
+	bool Shadows = true;
 };
