@@ -43,23 +43,46 @@ int Application::run()
 		if (!SceneManager::Get().GetActiveScene().AwakeAComponents.empty())
 		{
 			for (auto& component : SceneManager::Get().GetActiveScene().AwakeAComponents)
+			{
+				if (!component)
+					continue;
+				if (!component->gameObject)
+					continue;
+				if (component->gameObject->isDestroying)
+					continue;
 				component->Awake();
+			}
 			SceneManager::Get().GetActiveScene().AwakeAComponents.clear();
 		}
 		if (!SceneManager::Get().GetActiveScene().StartAComponents.empty())
 		{
 			for (auto& component : SceneManager::Get().GetActiveScene().StartAComponents)
+			{
+				if (!component)
+					continue;
+				if (!component->gameObject)
+					continue;
+				if (component->gameObject->isDestroying)
+					continue;
 				component->Start();
+			}
 			SceneManager::Get().GetActiveScene().StartAComponents.clear();
 		}
 		if(UpdateGameModuleComponents)
 			GameModule::Start();
 		for (auto& component : SceneManager::Get().GetActiveScene().AComponents)
 		{
+			if (!component)
+				continue;
+			if (!component->gameObject)
+				continue;
+			if (component->gameObject->isDestroying)
+				continue;
 			component->Update();
 		}
 		if (UpdateGameModuleComponents)
 			GameModule::Update(Time::deltaTime);
+		SceneManager::Get().GetActiveScene().DestroyDestroyingObjects();
 		OnAfterSceneUpdate();
 
 		OnRender();

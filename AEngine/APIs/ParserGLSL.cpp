@@ -91,6 +91,7 @@ const PGLinfos::FieldType PropertiesWithUniforms::GetType(std::string name)
 PropertiesWithUniforms::PropertiesWithUniforms(std::string path, unsigned int shaderID)
 {
 	GLSLInfo infoProperties = ParserGLSL::Parser(path);
+	VertexLayout = infoProperties.VertexLayout;
 	RenderPath = infoProperties.RenderPath;
 	GLSLUniforms infoGPU(shaderID);
 	auto& namesuniforms = infoProperties.returnAllFieldsName();
@@ -368,6 +369,36 @@ GLSLInfo ParserGLSL::Parser(std::string path)
 						}
 						else
 							info.RenderPath = 0;
+					}
+					else
+					{
+						std::cout << "SYNTAXERROR:" << std::endl;
+						fileCorrect = false;
+						continue;
+					}
+				}
+				size_t VertexType = trim.rfind("VERTEX_LAYOUT");
+				if (VertexType != std::string::npos)
+				{
+					size_t FirstVertexTypePos = trim.find("\"");
+					if (FirstVertexTypePos == std::string::npos)
+					{
+						std::cout << "MISSING: \"" << std::endl;
+						fileCorrect = false;
+						continue;
+					}
+					if (emptyline(trim, VertexType + std::string("VERTEX_LAYOUT").size(), FirstVertexTypePos))
+					{
+						size_t secondVertexTypePos = trim.rfind("\"");
+						if(secondVertexTypePos == std::string::npos)
+						{
+							std::cout << "MISSING: \"" << std::endl;
+							fileCorrect = false;
+							continue;
+						}
+						trim = trim.substr(FirstVertexTypePos + 1, secondVertexTypePos - FirstVertexTypePos - 1);
+						trim.erase(std::remove_if(trim.begin(), trim.end(), [](char c) {return std::isspace((unsigned char)c); }), trim.end());
+						info.VertexLayout = trim;
 					}
 					else
 					{

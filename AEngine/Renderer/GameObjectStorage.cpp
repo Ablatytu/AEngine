@@ -54,5 +54,12 @@ GameObject* GameObjectStorage::Get(GameObjectHandle handle)
 
 	if (slot.generation != handle.generation)
 		return nullptr;
+
+	if (!slot.ptr)
+		return nullptr;
+
+	if (slot.ptr->isDestroying)
+		return nullptr;
+
 	return slot.ptr;
 }

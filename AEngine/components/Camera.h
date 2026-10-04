@@ -18,6 +18,16 @@ class Camera : public AEngineComponent
 {
 	AE_REGISTER_CLASS(Camera);
 public:
+	enum class ProjectionType
+	{
+		Perspective,
+		Orthographic
+	};
+
+	ProjectionType projectionType = ProjectionType::Perspective;
+
+	float orthographicSize = 4.0f;
+
 	float fieldOView = 60.0f;
 	Transform* transform;
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
@@ -34,6 +44,7 @@ public:
 	AENGINE_API std::vector<Framebuffer*> GetFramebuffers();
 
 	AENGINE_API void Start() override;
+	AENGINE_API void OnInspector() override;
 	void RecultivateProjection(); 
 	AENGINE_API void SetViewport(int width, int height);
 	AENGINE_API void Update() override;

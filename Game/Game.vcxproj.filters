@@ -39,6 +39,51 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Исходные файлы\GameSDK</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakoutLevelManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer2D.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="UIContoller.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakoutPlayer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakoutBall.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestComponent.h">
@@ -78,6 +123,51 @@
       <Filter>Исходные файлы\GameSDK</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakoutLevelManager.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer2D.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="UIContoller.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakoutPlayer.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="InputKeys.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakoutBall.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Исходные файлы\GameSDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
       <Filter>Исходные файлы\GameSDK</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,6 +8,7 @@
 #include "../components/cube.h"
 #include "../components/LightMoving.h"
 #include "../components/AEngineComponent.h"
+#include "../Renderer/Texture.h"
 #include "../components/Render.h"
 #include "../components/Camera.h"
 #include "../components/Light.h"
@@ -160,6 +161,15 @@ std::string SceneSerializer::SerializeToString(Scene& scene)
 						Mesh* mesh = *static_cast<Mesh**>(field.ptr);
 						if (mesh)
 							out << YAML::Value << mesh->basepathModel + "@@##AENGINENUMBERMESH##@@" + std::to_string(mesh->IDMesh);
+						else
+							out << YAML::Value << "";
+						break;
+					}
+					case FieldType::TEXTURE2D:
+					{
+						Texture* texture = *static_cast<Texture**>(field.ptr);
+						if (texture)
+							out << YAML::Value << texture->path;
 						else
 							out << YAML::Value << "";
 						break;
@@ -425,6 +435,15 @@ std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path, boo
 											}
 											break;
 										}
+										case FieldType::TEXTURE2D:
+										{
+											Texture** texture = static_cast<Texture**>(infoComponent.ptr);
+											if (texture && !value.as<std::string>().empty())
+											{
+												*texture = AssetManager::LoadTexture(value.as<std::string>());
+											}
+											break;
+										}
 										case FieldType::ENUM:
 										{
 											int* valuee = static_cast<int*>(infoComponent.ptr);
@@ -509,7 +528,7 @@ std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path, boo
 												*value3 = AE_VEC3{ value[0].as<float>(), value[1].as<float>(), value[2].as<float>() };
 #ifdef _DEBUG
 											if (value3)
-												std::cout << "field value: " << value3->r << " " << value3->g << " " << value3->b << " " << "\n";
+												std::cout << "field value: " << value3->x << " " << value3->y << " " << value3->z << " " << "\n";
 #endif
 											break;
 										}
@@ -518,7 +537,7 @@ std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path, boo
 											AE_VEC4* value4 = static_cast<AE_VEC4*>(newGameComponent->fieldsInfo[i].ptr);
 #ifdef _DEBUG
 											if (value4)
-												std::cout << "field value: " << value4->r << " " << value4->g << " " << value4->b << " " << value4->a << "\n";
+												std::cout << "field value: " << value4->x << " " << value4->y << " " << value4->z << " " << value4->w << "\n";
 #endif
 											if (value4 && value.IsSequence())
 												*value4 = AE_VEC4{ value[0].as<float>(), value[1].as<float>(), value[2].as<float>(), value[3].as<float>() };

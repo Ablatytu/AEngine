@@ -143,6 +143,15 @@
     <ClCompile Include="Renderer\GameObjectStorage.cpp">
       <Filter>Файлы ресурсов\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="components\SpriteRenderer2D.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderSystem2D.cpp">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="components\ParticleSystem.cpp">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Application.h">
@@ -271,6 +280,18 @@
     <ClInclude Include="Renderer\GameObjectStorage.h">
       <Filter>Файлы ресурсов\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="components\SpriteRenderer2D.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderSystem2D.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderContext2D.h">
+      <Filter>Файлы ресурсов\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="components\ParticleSystem.h">
+      <Filter>Файлы ресурсов\components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\FragmentShader.glsl">
@@ -388,6 +409,18 @@
       <Filter>Файлы ресурсов\Shaders</Filter>
     </None>
     <None Include="Shaders\IntegrateBRDFVS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="VertexShader2D.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="FragmentShader2D.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="..\AEditor\Shaders\ParticleShaderFS.glsl">
+      <Filter>Файлы ресурсов\Shaders</Filter>
+    </None>
+    <None Include="..\AEditor\Shaders\ParticleShaderVS.glsl">
       <Filter>Файлы ресурсов\Shaders</Filter>
     </None>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include "ComponentStorage.h"
 #include "AComponent.h"
+#include "EngineAPIContext.h"
 
 ComponentStorage& ComponentStorage::Get()
 {
@@ -14,32 +15,69 @@ AE_COMPONENT_HANDLE ComponentStorage::ReturnComponentHandle(AComponent* componen
 
 void ComponentStorage::UpdateComponents(float deltaTime)
 {
+	const AE_API* ae_api = ENGINEAPICONTEXT::Get();
+	if (!ae_api)
+		return;
+
 	for (ComponentSlot& slot : slots)
 	{
-		if (slot.component)
-			slot.component->Update(deltaTime);
+		if (!slot.component) continue;
+		if (!ae_api->isGameObject(slot.component->owner)) continue;
+
+		slot.component->Update(deltaTime);
 	}
 }
 void ComponentStorage::StartComponents()
 {
-	std::vector<AE_COMPONENT_HANDLE> currentComponentsHandles{};
-	currentComponentsHandles.swap(startComponents);
-	for (AE_COMPONENT_HANDLE& startslot : currentComponentsHandles)
+	const AE_API* ae_api = ENGINEAPICONTEXT::Get();
+	if (!ae_api)
+		return;
+	while (!startComponents.empty())
 	{
-		std::cout << "FINDEDCOMPONENTSTORAGE\n";
-		if (startslot.index >= slots.size()) continue;
-		ComponentSlot& slot = slots[startslot.index];
-		if (startslot.generation != slot.generation) continue;
-		std::cout << "FINALYCOMPONENTSTORAGE\n";
-		if(!slot.component) std::cout << "YALOXCOMPONENTSTORAGE\n";
-		if (slot.component)
-			slot.component->Start();
+		std::vector<AE_COMPONENT_HANDLE> currentComponentsHandles{};
+		currentComponentsHandles.swap(startComponents);
+		for (AE_COMPONENT_HANDLE& startslot : currentComponentsHandles)
+		{
+			if (startslot.index >= slots.size()) continue;
+			ComponentSlot& slot = slots[startslot.index];
+			if (startslot.generation != slot.generation) continue;
+			if (!slot.component) continue;
+
+			if(!ae_api->isGameObject(slot.component->owner)) continue;
+
+ 			slot.component->Start();
+		}
 	}
 }
 
+bool ComponentStorage::ComponentHasGameObject(AComponent* component)
+{
+	const AE_API* api = ENGINEAPICONTEXT::Get();
+	if (!api)
+		return false;
+
+	if (!api->isGameObject(component->owner))
+		return false;
+	return true;
+}
 bool ComponentStorage::CheckGameObjectHandle(AE_GAMEOBJECT_HANDLE handle, ComponentSlot& slot)
 {
 	return (slot.component->owner.index != handle.index || slot.component->owner.generation != handle.generation);
+}
+
+void ComponentStorage::RemoveAllFromGameObject(AE_GAMEOBJECT_HANDLE ae_gameobject_handle)
+{
+	for (ComponentSlot& slot : slots)
+	{
+		if (!slot.component) continue;
+
+		if (!CheckGameObjectHandle(ae_gameobject_handle, slot))
+		{
+			slot.generation++;
+			slot.component.reset();
+			slot.component = nullptr;
+		}
+	}
 }
 
 int ComponentStorage::ReturnComponentCountFromGameObject(AE_GAMEOBJECT_HANDLE gameObject_handle)
@@ -104,8 +142,10 @@ void ComponentStorage::Remove(AE_GAMEOBJECT_HANDLE ae_gameobject_handle, AE_COMP
 
 	if (slot.generation == ae_component_handle.generation)
 	{
-		slot.generation++;
+		slot.component->OnDestroy();
+
 		slot.component.reset();
+		slot.generation++;
 	}
 }
 int ComponentStorage::GetAComponentCount()
@@ -115,6 +155,12 @@ int ComponentStorage::GetAComponentCount()
 
 void ComponentStorage::RemoveAllGameComponents()
 {
-	slots.clear();
+	for (ComponentSlot& slot : slots)
+	{
+		if (!slot.component) continue;
+
+		slot.component.reset();
+		++slot.generation;
+	}
 	startComponents.clear();
 }

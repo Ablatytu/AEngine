@@ -180,9 +180,11 @@ gdi32.lib
     <ClCompile Include="components\GameModule.cpp" />
     <ClCompile Include="components\Light.cpp" />
     <ClCompile Include="components\LightMoving.cpp" />
+    <ClCompile Include="components\ParticleSystem.cpp" />
     <ClCompile Include="components\PostProcess.cpp" />
     <ClCompile Include="components\Rei.cpp" />
     <ClCompile Include="components\Render.cpp" />
+    <ClCompile Include="components\SpriteRenderer2D.cpp" />
     <ClCompile Include="components\Transform.cpp" />
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\ComponentSystem.cpp" />
@@ -197,6 +199,7 @@ gdi32.lib
     <ClCompile Include="Renderer\Material.cpp" />
     <ClCompile Include="Renderer\Mesh.cpp" />
     <ClCompile Include="Renderer\RenderSystem.cpp" />
+    <ClCompile Include="Renderer\RenderSystem2D.cpp" />
     <ClCompile Include="Renderer\Shader.cpp" />
     <ClCompile Include="Renderer\Texture.cpp" />
     <ClCompile Include="scene\AssetManager.cpp" />
@@ -221,9 +224,11 @@ gdi32.lib
     <ClInclude Include="components\GameModule.h" />
     <ClInclude Include="components\Light.h" />
     <ClInclude Include="components\LightMoving.h" />
+    <ClInclude Include="components\ParticleSystem.h" />
     <ClInclude Include="components\PostProcess.h" />
     <ClInclude Include="components\Rei.h" />
     <ClInclude Include="components\Render.h" />
+    <ClInclude Include="components\SpriteRenderer2D.h" />
     <ClInclude Include="components\Transform.h" />
     <ClInclude Include="core\AEngineAPI.h" />
     <ClInclude Include="core\Application.h" />
@@ -240,7 +245,9 @@ gdi32.lib
     <ClInclude Include="Renderer\Material.h" />
     <ClInclude Include="Renderer\Mesh.h" />
     <ClInclude Include="Renderer\RenderContext.h" />
+    <ClInclude Include="Renderer\RenderContext2D.h" />
     <ClInclude Include="Renderer\RenderSystem.h" />
+    <ClInclude Include="Renderer\RenderSystem2D.h" />
     <ClInclude Include="Renderer\Shader.h" />
     <ClInclude Include="Renderer\Texture.h" />
     <ClInclude Include="scene\AssetManager.h" />
@@ -253,8 +260,11 @@ gdi32.lib
     <ClInclude Include="scene\Skybox.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\AEditor\Shaders\ParticleShaderFS.glsl" />
+    <None Include="..\AEditor\Shaders\ParticleShaderVS.glsl" />
     <None Include="Assets\ToonshaderFS.glsl" />
     <None Include="Assets\ToonshaderVS.glsl" />
+    <None Include="FragmentShader2D.glsl" />
     <None Include="Shaders\AEngineGBufferFS.glsl" />
     <None Include="Shaders\BloomFS.glsl" />
     <None Include="Shaders\BlurFS.glsl" />
@@ -292,6 +302,7 @@ gdi32.lib
     <None Include="Shaders\SSAOFS.glsl" />
     <None Include="Shaders\VertexSelectedObjectEditor.glsl" />
     <None Include="Shaders\VertexShader.glsl" />
+    <None Include="VertexShader2D.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

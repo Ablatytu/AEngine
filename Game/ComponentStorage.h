@@ -3,6 +3,7 @@
 #include <vector>
 #include <unordered_map>
 #include "../GameAPI/GameABI.h"
+#include "EngineAPIContext.h"
 
 class AComponent;
 
@@ -20,6 +21,13 @@ public:
 	bool CheckGameObjectHandle(AE_GAMEOBJECT_HANDLE handle, ComponentSlot& slot);
 	template<typename T> AE_COMPONENT_HANDLE FindComponentHandle(AE_GAMEOBJECT_HANDLE handle)
 	{
+		const AE_API* api = ENGINEAPICONTEXT::Get();
+		if (!api)
+			return {};
+
+		if (!api->isGameObject(handle))
+			return {};
+
 		for (int i = 0; i < slots.size(); i++)
 		{
 			ComponentSlot& slot = slots[i];
@@ -31,11 +39,12 @@ public:
 
 			auto casted = dynamic_cast<T*>(slot.component.get());
 			if (casted)
-				return AE_COMPONENT_HANDLE{ i, slot.generation };
+				return AE_COMPONENT_HANDLE{ static_cast<uint32_t>(i), slot.generation };
 		}
 
 		return {};
 	}
+	bool ComponentHasGameObject(AComponent* component);
 	template<typename T> T* ComponentIs(AE_COMPONENT_HANDLE handle)
 	{
 		if (handle.index >= slots.size()) return nullptr;
@@ -46,10 +55,20 @@ public:
 
 		if (!slot.component) return nullptr;
 
+		if (!ComponentHasGameObject(slot.component.get()))
+			return nullptr;
+
 		return static_cast<T*>(slot.component.get());
 	}
 	template<typename T, typename... Args> AE_COMPONENT_HANDLE Add(AE_GAMEOBJECT_HANDLE owner, Args&&... args)
 	{
+
+		const AE_API* ae_api = ENGINEAPICONTEXT::Get();
+		if (!ae_api)
+			return {};
+
+		if (!ae_api->isGameObject(owner))
+			return {};
 		uint32_t index = UINT32_MAX;
 
 		for (uint32_t i = 0; i < slots.size(); ++i)
@@ -82,6 +101,7 @@ public:
 	}
 
 	void Remove(AE_GAMEOBJECT_HANDLE ae_gameobject_handle, AE_COMPONENT_HANDLE ae_component_handle);
+	void RemoveAllFromGameObject(AE_GAMEOBJECT_HANDLE ae_gameobject_handle);
 	void RemoveAllGameComponents();
 	void UpdateComponents(float deltaTime);
 	void StartComponents();

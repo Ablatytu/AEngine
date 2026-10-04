@@ -7,6 +7,7 @@ void TestComponent::Start()
 {
 	std::cout << "TESTCOMPONENTSTART\n";
 	transform = GetGameObject().GetAComponent<Transform>();
+
 }
 void TestComponent::Update(float deltaTime)
 {

@@ -28,10 +28,18 @@ void Skybox::RenderSkyBox(Camera* camera)
 	glDepthMask(false);
 	glDepthFunc(GL_LEQUAL);
 	glActiveTexture(GL_TEXTURE0);
+	glm::mat4 skyView = glm::mat4(glm::mat3(camera->viewMatrix));
+	glm::mat4 skyProjection;
+	if (camera->projectionType == Camera::ProjectionType::Orthographic)
+	{
+		skyProjection = glm::perspective(glm::radians(90.0f), camera->ratio, 0.1f, 10.0f);
+	}
+	else
+		skyProjection = camera->projection;
 	skyboxShader->Update();
 	skyboxShader->setInt("cubemap", 0);
-	skyboxShader->setMat4("proj", camera->projection);
-	skyboxShader->setMat4("view", glm::mat4(glm::mat3(camera->viewMatrix)));
+	skyboxShader->setMat4("proj", skyProjection);
+	skyboxShader->setMat4("view", skyView);
 	glBindVertexArray(VAO);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, skybox->GetTextureID());
 	glDrawArrays(GL_TRIANGLES, 0, 36);

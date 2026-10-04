@@ -102,6 +102,7 @@ class AENGINE_API PropertiesWithUniforms
 public:
 	std::vector<std::string> propertiesNames;
 	unsigned int RenderPath = 0;
+	std::string VertexLayout = "";
 	std::unordered_map<std::string, PGLinfos::ShaderInfo> infoes;
 	PropertiesWithUniforms(std::string path, unsigned int shader);
 
@@ -139,6 +140,7 @@ class GLSLInfo
 public:
 	bool valid = false;
 	unsigned int RenderPath = 0;
+	std::string VertexLayout = "";
 	const std::unordered_map<std::string, PGLinfos::FieldInfo>& returnAllFields() const;
 	void AddField(const std::string& name, const PGLinfos::FieldInfo& info);
 	std::vector<std::string>& returnAllFieldsName();

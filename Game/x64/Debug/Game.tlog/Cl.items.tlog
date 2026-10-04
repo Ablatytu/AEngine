@@ -1,0 +1,17 @@
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\AComponent.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\AComponent.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\Block.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\Block.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\BreakoutBall.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\BreakoutBall.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\BreakoutLevelManager.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\BreakoutLevelManager.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\BreakoutPlayer.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\BreakoutPlayer.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\ComponentStorage.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\ComponentStorage.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\ComponentSystem.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\ComponentSystem.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\EngineAPIContext.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\EngineAPIContext.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\GameEntry.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\GameEntry.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\GameObject.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\GameObject.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\Input.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\Input.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\ResourceManager.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\ResourceManager.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\SpriteRenderer2D.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\SpriteRenderer2D.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\TestComponent.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\TestComponent.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\Texture.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\Texture.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\Transform.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\Transform.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\UIContoller.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\Game\x64\Debug\UIContoller.obj

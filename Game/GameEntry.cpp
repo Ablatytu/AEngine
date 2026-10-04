@@ -60,6 +60,10 @@ static void AE_CALL GameRemoveAllAComponents()
 {
 	ComponentStorage::Get().RemoveAllGameComponents();
 }
+static void AE_CALL GameRemoveAComponentsFromGameObject(AE_GAMEOBJECT_HANDLE ae_gameobject_handle)
+{
+	ComponentStorage::Get().RemoveAllFromGameObject(ae_gameobject_handle);
+}
 AE_EXPORT bool AE_CALL AE_GAME_API(const AE_API* AEngineAPI, AE_GAMEAPI* GameAPI)
 {
 	if (!AEngineAPI || !GameAPI)
@@ -83,6 +87,7 @@ AE_EXPORT bool AE_CALL AE_GAME_API(const AE_API* AEngineAPI, AE_GAMEAPI* GameAPI
 	GameAPI->addAComponent = &GameAddAComponent;
 	GameAPI->clearGameAComponents = &GameRemoveAllAComponents;
 	GameAPI->removeAComponent = &GameRemoveAComponent;
+	GameAPI->removeAComponentsFromGameObject = &GameRemoveAComponentsFromGameObject;
 
 	ENGINEAPICONTEXT::Get()->log("Hello, bitch");
 	return true;

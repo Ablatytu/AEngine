@@ -14,11 +14,13 @@
 #include "Buffer.h"
 #include "../Renderer/RenderContext.h"
 #include "../scene/AssetManager.h"
+#include "../components/SpriteRenderer2D.h"
 #include "../core/Window.h"
 #include "Texture.h"
 #include "../components/PostProcess.h"
 #include "../components/Transform.h"
 #include "../components/Light.h"
+#include "../components/ParticleSystem.h"
 #include <AMath.h>
 #include <algorithm>
 #include <map>
@@ -41,6 +43,18 @@ namespace RenderSystem
 	-1.0f,  1.0f,  0.0f, 1.0f,
 	 1.0f, -1.0f,  1.0f, 0.0f,
 	 1.0f,  1.0f,  1.0f, 1.0f
+	};
+	struct InstanceParticle
+	{
+		glm::vec4 pos = glm::vec4(0.0f);
+		glm::vec4 color = glm::vec4(0.0f);
+		float rotation = 0.0f;
+	};
+
+	struct ParticleWillSorted
+	{
+		const Particle* instanceInfo;
+		float depth = 0.0f;
 	};
 	std::unique_ptr<Shader> depthShaderDirectional = nullptr;
 	std::unique_ptr<Shader> depthShaderPoint = nullptr;
@@ -76,6 +90,8 @@ namespace RenderSystem
 	Mesh Cube;
 	std::unique_ptr<Texture> whiteTexture = nullptr;
 	unsigned int WhiteDepthCubemap = 0;
+	QuadParticleMesh particleMesh = {};
+	Quad spriteMesh{};
 
 	void rs_CollectBatches(RenderContext& context, std::vector<Batch>& batches)
 	{
@@ -157,6 +173,35 @@ namespace RenderSystem
 			}
 		}
 		std::sort(batches.begin(), batches.end(), [](const Batch& batch1, const Batch& batch2) {return static_cast<int>(batch1.renderqueue) < static_cast<int>(batch2.renderqueue); });
+	}
+	void rs_CollectBatches2DIn3D(RenderContext& context, std::vector<Batch2DIn3D>& batches2D)
+	{
+		std::map<Batch2DIn3D, size_t> newbatches2D;
+		for (SpriteRenderer2D* sprite : context.sprites)
+		{
+			if (sprite->material && sprite->material->GetShader())
+			{
+				Batch2DIn3D newBatch{};
+				newBatch.material = sprite->material;
+				newBatch.texture = sprite->texture;
+				newBatch.layerZ = static_cast<int>(sprite->transform->position.z);
+				auto findedBatch2D = newbatches2D.find(newBatch);
+				Batch2DIn3D* pushedBatch = nullptr;
+				if (findedBatch2D == newbatches2D.end())
+				{
+					batches2D.push_back(newBatch);
+					pushedBatch = &batches2D.back();
+					newbatches2D[newBatch] = batches2D.size() - 1;
+				}
+				else
+				{
+					pushedBatch = &batches2D[findedBatch2D->second];
+				}
+				pushedBatch->models.push_back(sprite->transform->GetModelMatrix());
+				pushedBatch->colors.push_back(glm::vec4(sprite->color.r, sprite->color.g, sprite->color.b, 1.0f));
+			}
+		}
+		std::sort(batches2D.begin(), batches2D.end(), [](const Batch2DIn3D& b1, const Batch2DIn3D& b2) {return b1.layerZ < b2.layerZ; });
 	}
 	void rs_CreateShadowMap(Light* light)
 	{
@@ -393,6 +438,126 @@ namespace RenderSystem
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_STENCIL_TEST);
 	}
+
+	void rs_CreateParticleMesh(QuadParticleMesh& particleMesh)
+	{
+		float vertices[] = {
+			-0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+			0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+
+			-0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+			0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
+			0.5f, -0.5f, 0.0f, 1.0f, 0.0f
+		};
+		glGenBuffers(1, &particleMesh.VBO);
+		glGenVertexArrays(1, &particleMesh.VAO);
+
+		glBindBuffer(GL_ARRAY_BUFFER, particleMesh.VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		glBindVertexArray(particleMesh.VAO);
+
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+
+		glGenBuffers(1, &particleMesh.InstanceBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, particleMesh.InstanceBuffer);
+
+		glBufferData(GL_ARRAY_BUFFER, 50000 * sizeof(InstanceParticle), NULL, GL_DYNAMIC_DRAW);
+
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(InstanceParticle), (void*)offsetof(InstanceParticle, pos));
+		glVertexAttribDivisor(2, 1);
+
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(InstanceParticle), (void*)offsetof(InstanceParticle, color));
+		glVertexAttribDivisor(3, 1);
+
+		glEnableVertexAttribArray(4);
+		glVertexAttribPointer(4, 1, GL_FLOAT, GL_FALSE, sizeof(InstanceParticle), (void*)offsetof(InstanceParticle, rotation));
+		glVertexAttribDivisor(4, 1);
+
+		glBindVertexArray(0);
+	}
+	void rs_CreateSpriteMesh(Quad& quadMesh)
+	{
+		float vertices[] = {
+		  -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+		  0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+		  -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+
+		  -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+		  0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
+		  0.5f, -0.5f, 0.0f, 1.0f, 0.0f
+		};
+
+		glGenBuffers(1, &quadMesh.VBO);
+		glGenVertexArrays(1, &quadMesh.VAO);
+
+		glBindBuffer(GL_ARRAY_BUFFER, quadMesh.VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		glBindVertexArray(quadMesh.VAO);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+
+		glBindVertexArray(0);
+	}
+	void rs_RenderParticles(RenderContext& context)
+	{
+		if (!context.camera || !context.camera->transform) return;
+		for (ParticleSystem* particleSys : context.ParticleSystems)
+		{
+			if (!particleSys) continue;
+			if (!particleSys->material) continue;
+			if (particleSys->material->GetVertexLayout() != "PARTICLE")	continue;
+
+			std::vector<ParticleWillSorted> particlesWillSorted;
+			std::vector<InstanceParticle> ParticlesVAOInfo;
+			for (const Particle& particle : particleSys->GetParticles())
+			{
+				if (particle.life <= 0.0f)
+					continue;
+
+				particlesWillSorted.push_back({&particle, Vector3_Distance(particle.Position, context.camera->transform->position)});
+			}
+
+			if(particleSys->alphaBlending == ParticleSystem::Alpha::MINUS_SRC_ALPHA)
+				std::sort(particlesWillSorted.begin(), particlesWillSorted.end(), [context](const ParticleWillSorted& p1, const ParticleWillSorted& p2) {return p1.depth > p2.depth; });
+
+			for (ParticleWillSorted& sort : particlesWillSorted)
+				ParticlesVAOInfo.push_back({ glm::vec4(sort.instanceInfo->Position, sort.instanceInfo->size), sort.instanceInfo->color, glm::radians(sort.instanceInfo->rotation) });
+
+			glEnable(GL_BLEND);
+			if (particleSys->alphaBlending == ParticleSystem::Alpha::MINUS_SRC_ALPHA)
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			else
+			{
+				glDepthMask(GL_FALSE);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			}
+			particleSys->material->GetShader()->Update();
+			particleSys->material->UpdateMaterial();
+
+			glBindVertexArray(particleMesh.VAO);
+
+			glBindBuffer(GL_ARRAY_BUFFER, particleMesh.InstanceBuffer);
+
+			glBufferSubData(GL_ARRAY_BUFFER, 0, ParticlesVAOInfo.size() * sizeof(InstanceParticle), ParticlesVAOInfo.data());
+
+			glDrawArraysInstanced(GL_TRIANGLES, 0, 6, static_cast<GLsizei>(ParticlesVAOInfo.size()));
+			
+		}
+		glDisable(GL_BLEND);
+		glDepthMask(GL_TRUE);
+	}
+
 	void rs_RenderMesh(Batch& batch, bool instance, Shader* shader, glm::mat4* modelMatrix)
 	{
 		if (batch.rendertime == RenderTime::stencilRender)
@@ -455,6 +620,29 @@ namespace RenderSystem
 			}
 		}
 	}
+	void rs_RenderBatchSprites2DIn3DOpaque(RenderContext& context, std::vector<Batch2DIn3D>& batches2D)
+	{
+		for (Batch2DIn3D& batch : batches2D)
+		{
+			batch.material->GetShader()->Update();
+			batch.material->UpdateMaterial();
+			if (batch.texture)
+			{
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, batch.texture->GetTexturePixels());
+				batch.material->GetShader()->setInt("SpriteImage", 0);
+			}
+			batch.material->GetShader()->setMat4("proj", context.camera->projection * context.camera->viewMatrix);
+			for (size_t i = 0; i < batch.models.size(); i++)
+			{
+				batch.material->GetShader()->setVec4("SpriteColor", batch.colors[i]);
+				batch.material->GetShader()->setMat4("model", batch.models[i]);
+				glBindVertexArray(spriteMesh.VAO);
+				glDrawArrays(GL_TRIANGLES, 0, 6);
+				glBindVertexArray(0);
+			}
+		}
+	}
 	void rs_CopyDepthBufferFromGBuffer(RenderContext& context, Framebuffer* buffer)
 	{
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, GBuffer->GetFBO());
@@ -487,6 +675,7 @@ namespace RenderSystem
 		}
 		std::sort(batchesSort.begin(), batchesSort.end(), [](const TransparentBatch& batch1, const TransparentBatch& batch2) {return batch1.dist > batch2.dist; });
 		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		for (auto& batch : batchesSort)
 		{
 			auto& b = batches[batch.batchindex];
@@ -942,6 +1131,10 @@ namespace RenderSystem
 		BRDFLUTTexture = std::make_unique<Texture>();
 		std::vector<float> emptyBRDF(512 * 512 * 2, 0.0f);
 		BRDFLUTTexture->CreateTexture(512, 512, Texture::DataFormat::RG16F, Texture::DataFormat::RG, Texture::FilterType::LINEAR, Texture::FilterType::CLAMP_TO_EDGE, emptyBRDF.data());
+
+		rs_CreateSpriteMesh(spriteMesh);
+		rs_CreateParticleMesh(particleMesh);
+
 		std::cout << "Complited" << std::endl;
 	}
 	void rs_InitAfterFirstFrame()
@@ -1298,7 +1491,11 @@ namespace RenderSystem
 		rs_CopyDepthBufferFromGBuffer(context, sceneHDR);
 		sceneHDR->Bind();
 		rs_RenderBatchOpaque(context, batches);
+		std::vector<Batch2DIn3D> batches2DIn3D;
+		rs_CollectBatches2DIn3D(context, batches2DIn3D);
+		rs_RenderBatchSprites2DIn3DOpaque(context, batches2DIn3D);
 		rs_RenderSkyBox(context);
 		rs_RenderBatchTransparent(context, batches);
+		rs_RenderParticles(context);
 	}
 }

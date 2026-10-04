@@ -1,0 +1,6 @@
+Type: Material
+Shader_vertex: Shaders/ParticleShaderVS.glsl
+Shader_fragment: Shaders/ParticleShaderFS.glsl
+Shader_geometry: ""
+Properties:
+  particleTexture: Assets/BreakoutGame/toppng.com-realistic-smoke-texture-with-soft-particle-edges-png-399x385.png

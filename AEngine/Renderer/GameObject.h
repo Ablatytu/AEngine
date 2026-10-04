@@ -16,7 +16,8 @@ class GameObject
 public:
 	std::string name = "New GameObject";
 	std::vector<std::unique_ptr<AEngineComponent>> components;
-	Transform* transform;
+	Transform* transform = nullptr;
+	bool isDestroying = false;
 	template<typename T, typename... Args> T* AddComponent(Args&&... args)
 	{
 		auto component = std::make_unique<T>(std::forward<Args>(args)...);
@@ -46,6 +47,7 @@ public:
 	AENGINE_API GameObject();
 	AENGINE_API ~GameObject();
 	AENGINE_API GameObjectHandle getHandle() const;
+	AENGINE_API void WillDestroy();
 
 private:
 	GameObjectHandle handle{};

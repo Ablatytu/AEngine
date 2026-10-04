@@ -9,9 +9,11 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\EngineEntry.
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\GameModule.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\GameModule.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Light.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Light.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\LightMoving.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\LightMoving.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\ParticleSystem.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\ParticleSystem.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\PostProcess.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\PostProcess.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Rei.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Rei.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Render.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Render.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\SpriteRenderer2D.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\SpriteRenderer2D.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\Transform.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Transform.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\Application.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Application.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\core\ComponentSystem.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\ComponentSystem.obj
@@ -26,6 +28,7 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\HDRTexture.cpp
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Material.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Mesh.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Mesh.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\RenderSystem.obj
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderSystem2D.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\RenderSystem2D.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Shader.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Texture.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\Texture.obj
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\scene\AssetManager.cpp;C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\AEngine\x64\Release\AssetManager.obj

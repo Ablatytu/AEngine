@@ -47,14 +47,44 @@ namespace RenderSystem
 		SurfaceType surfacetype = SurfaceType::opaque;
 		RenderQueue renderqueue = RenderQueue::ForwardOpaque;
 	};
+	struct Batch2DIn3D
+	{
+		std::vector<glm::mat4> models;
+		std::vector<glm::vec4> colors;
+		Texture* texture;
+		Material* material;
+		int layerZ = 0;
+
+		bool operator<(const Batch2DIn3D& other) const
+		{
+			if (material != other.material) return material < other.material;
+			if (layerZ != other.layerZ) return layerZ < other.layerZ;
+			return texture < other.texture;
+		}
+	};
+	struct Quad
+	{
+		unsigned int VAO = 0;
+		unsigned int VBO = 0;
+	};
+	struct QuadParticleMesh
+	{
+		unsigned int VAO = 0;
+		unsigned int VBO = 0;
+
+		unsigned int InstanceBuffer = 0;
+	};
+
 	AENGINE_API void rs_Render(RenderContext& context, Framebuffer* sceneHDR);
 	AENGINE_API void rs_Init();
 	void rs_InitAfterFirstFrame();
 	AENGINE_API void rs_Start(Framebuffer* sceneHDR);
 	AENGINE_API void rs_End();
 	void rs_CollectBatches(RenderContext& context, std::vector<Batch>& batches);
+	void rs_CollectBatches2DIn3D(RenderContext& context, std::vector<Batch2DIn3D>& batches2D);
 	void rs_CreateShadowMap(Light* light);
 	void rs_RenderBatchOpaque(RenderContext& context, std::vector<Batch>& batches);
+	void rs_RenderBatchSprites2DIn3DOpaque(RenderContext& context, std::vector<Batch2DIn3D>& batches2D);
 	void rs_RenderSkyBox(RenderContext& context);
 	void rs_RenderShadowMaps(RenderContext& context, std::vector<Batch>& batches);
 	void rs_CopyDepthBufferFromGBuffer(RenderContext& context, Framebuffer* buffer);
@@ -75,7 +105,10 @@ namespace RenderSystem
 	void rs_RenderQuad();
 	void rs_SetEIPMap(RenderContext& context, Shader* shader, unsigned int& slot);
 	void rs_CreateCameraFramebuffers(Camera& camera);
+	void rs_CreateSpriteMesh(Quad& quadMesh);
 	void rs_CollectbuffersFromCamera(Camera& camera);
+	void rs_RenderParticles(RenderContext& context);
+	void rs_CreateParticleMesh(QuadParticleMesh& particleMesh);
 	AENGINE_API void rs_Present(RenderContext& context, Framebuffer* sceneHDR, Framebuffer* targetHDR = nullptr);
 	AENGINE_API void rs_ClearFramebuffer(Framebuffer* ClearFramebuffer, float width, float height);
 };

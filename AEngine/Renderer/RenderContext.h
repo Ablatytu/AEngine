@@ -13,6 +13,7 @@ class Editor;
 class Window;
 class PostProcess;
 class Cubemap;
+class ParticleSystem;
 
 struct FogSettings
 {
@@ -24,7 +25,9 @@ class AENGINE_API RenderContext
 {
 public:
 	Camera* camera = nullptr;
+	std::vector<ParticleSystem*> ParticleSystems;
 	std::vector<Render*> renders;
+	std::vector<SpriteRenderer2D*> sprites;
 	FogSettings fog{};
 	std::vector<Light*> lights;
 	Skybox* skybox = nullptr;

@@ -1,5 +1,6 @@
 #include "ComponentStorage.h"
 #include "AEngineComponent.h"
+#include "../Renderer/GameObject.h"
 
 ComponentStorage& ComponentStorage::Get()
 {
@@ -47,6 +48,15 @@ AEngineComponent* ComponentStorage::Get(ComponentHandle handle)
 	const Slot& slot = slots[handle.index];
 
 	if (slot.generation != handle.generation)
+		return nullptr;
+		
+	if (!slot.ptr)
+		return nullptr;
+
+	if (!slot.ptr->gameObject)
+		return nullptr;
+
+	if (slot.ptr->gameObject->isDestroying)
 		return nullptr;
 
 	return slot.ptr;

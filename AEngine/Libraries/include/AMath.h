@@ -28,9 +28,19 @@ inline float triangle_intersection(const glm::vec3& orig, const glm::vec3& dir, 
     }
     return dot(e2, qvec) * inv_det;
 }
-inline float Vector3_Distance(glm::vec3 point1, glm::vec3(point2))
+inline float Vector3_Distance(const glm::vec3& point1, glm::vec3 point2)
 {
-    return sqrt(pow(point2.x - point1.x, 2) + pow(point2.y - point1.y, 2) + pow(point2.z - point1.z, 2));
+    float x = point2.x - point1.x;
+    float y = point2.y - point1.y;
+    float z = point2.z - point1.z;
+    return sqrt(x * x + y * y + z * z);
+}
+inline float Vector3_DistanceWithoutSQRT(const glm::vec3& point1, glm::vec3 point2)
+{
+    float x = point2.x - point1.x;
+    float y = point2.y - point1.y;
+    float z = point2.z - point1.z;
+    return x * x + y * y + z * z;
 }
 inline float lerp(float a, float b, float f)
 {

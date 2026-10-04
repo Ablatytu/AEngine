@@ -45,6 +45,7 @@ public:
 	void Set(std::string name, glm::vec3 value);
 	void Set(std::string name, glm::vec2 value);
 	const RenderPath& GetRenderPath() const;
+	const std::string& GetVertexLayout() const;
 	Texture* GetWhiteTexture();
 	Texture* GetBlueTexture();
 	Texture* GetNormalTexture();
@@ -67,6 +68,7 @@ private:
 	RenderPath renderPath = RenderPath::forward;
 	Shader* shader = nullptr;
 	unsigned int lastTextureSlot = 0;
+	std::string VertexLayout = "";
 	std::unique_ptr<PropertiesWithUniforms> properties;
 	std::unordered_map<std::string, Texture*> textures;
 	std::unordered_map<std::string, Cubemap*> cubemaps;

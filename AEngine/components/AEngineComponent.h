@@ -32,11 +32,13 @@ SetRangeFieldInInspector(#var, minValue, maxValue);
 RegisterFieldInInspector(#var, &var, fieldTypeInitial<decltype(var)>());
 #define SetColor(var) \
 SetColorFieldInInspector(#var);
+#define RegisterEnumNames(var, ...) \
+RegisterEnumNamesInInspector(#var, __VA_ARGS__);
 
 class GameObject;
 class Material;
 class Mesh;
-
+class Texture;
 enum class FieldType
 {
 	BOOL,
@@ -47,7 +49,8 @@ enum class FieldType
 	QUAT,
 	MATERIAL,
 	MESH,
-	ENUM
+	ENUM,
+	TEXTURE2D
 };
 
 struct FieldInfo
@@ -58,6 +61,8 @@ struct FieldInfo
 	float minValue = 0.0f;
 	float maxValue = 0.0f;
 	bool isColor = false;
+
+	std::vector<const char*> enumNames;
 };
 class AENGINE_API AEngineComponent
 {
@@ -77,7 +82,10 @@ public:
 	template<typename t> inline FieldType fieldTypeInitial()
 	{
 		if constexpr (std::is_enum_v<t>)
+		{
+			static_assert(std::is_same_v<std::underlying_type_t<t>, int>, "NOT SUPPORTED TYPE IN ENUM\n");
 			return FieldType::ENUM;
+		}
 		else if constexpr (std::is_same_v<t, glm::quat>)
 			return FieldType::QUAT;
 		else if constexpr (std::is_same_v<t, float>)
@@ -94,11 +102,24 @@ public:
 			return FieldType::MATERIAL;
 		else if constexpr (std::is_same_v<t, Mesh*>)
 			return FieldType::MESH;
+		else if constexpr (std::is_same_v<t, Texture*>)
+			return FieldType::TEXTURE2D;
 		else
 			static_assert(!std::is_same_v<t, t>, "UNKNOWN TYPE OF FIELD");
 	}
 	void RegisterFieldInInspector(const char* name, void* ptr, FieldType type);
 	void SetRangeFieldInInspector(const char* name, float minValue, float maxValue);
 	void SetColorFieldInInspector(const char* name);
+	template<typename... names> void RegisterEnumNamesInInspector(const char* name, names... enumNames)
+	{
+		for (FieldInfo& info : fields)
+		{
+			if (strcmp(info.name, name) == 0 && info.type == FieldType::ENUM)
+			{
+				info.enumNames = { enumNames... };
+				break;
+			}
+		}
+	}
 };
 #endif 

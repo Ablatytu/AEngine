@@ -8,8 +8,10 @@
 #include "../Renderer/RenderSystem.h"
 #include "LightManager.h"
 #include "../components/PostProcess.h"
+#include "../components/SpriteRenderer2D.h"
 #include "../Renderer/HDRTexture.h"
 #include "../components/GameModule.h"
+#include "../Renderer/RenderContext2D.h"
 #include <unordered_set>
 #include <algorithm>
 #include <glm/glm/glm.hpp>
@@ -29,12 +31,32 @@ RenderContext Scene::CollectRenderContext(Camera* camera)
 	context.postProcess = postProcess;
 	context.irradianceMap = irradianceMap.get();
 	context.prefilterMap = preilterCubemap.get();
+	context.ParticleSystems = ParticleSystems;
+	for (SpriteRenderer2D* sprite : sprites)
+	{
+		if (sprite && sprite->renderSpace == SpriteRenderer2D::RenderSpace::World)
+			context.sprites.push_back(sprite);
+	}
 	return context;
 }
-
+RenderContext2D Scene::CollectRender2DContext(Camera* camera)
+{
+	RenderContext2D context;
+	context.camera = camera;
+	for (SpriteRenderer2D* sprite : sprites)
+	{
+		if(sprite && sprite->renderSpace == SpriteRenderer2D::RenderSpace::Canvas)
+			context.sprites.push_back(sprite);
+	}
+	return context;
+}
 RenderContext Scene::CollectRenderContext()
 {
 	return CollectRenderContext(activeCamera);
+}
+RenderContext2D Scene::CollectRender2DContext()
+{
+	return CollectRender2DContext(activeCamera);
 }
 void Scene::RegisterCamera(Camera* newCamera)
 {
@@ -67,6 +89,8 @@ void Scene::EraseScene()
 	StartAComponents.clear();
 	GameModule::GETGAMECONTEXT().clearGameAComponents();
 	renders.clear();
+	sprites.clear();
+	ParticleSystems.clear();
 	objects.clear();
 	postProcess = nullptr;
 	activeCamera = nullptr;
@@ -87,7 +111,27 @@ void Scene::SetSkyBox(Cubemap* cubemap)
 	irradianceMap = std::move(irradianceCubeMap);
 	preilterCubemap = std::move(prefiltercubemap);
 }
-
+void Scene::DestroyDestroyingObjects()
+{
+	while (!destroyingObjects.empty())
+	{
+		std::vector<AE_GAMEOBJECT_HANDLE> savedDestroyingObjects{};
+		savedDestroyingObjects.swap(destroyingObjects);
+		for (AE_GAMEOBJECT_HANDLE& destroy : savedDestroyingObjects)
+		{
+			auto it = std::find_if(objects.begin(), objects.end(), [&](const std::unique_ptr<GameObject>& finded) {return finded && finded->getHandle().generation == destroy.generation && finded->getHandle().index == destroy.index; });
+			if (it != objects.end())
+			{
+				GameModule::GETGAMECONTEXT().removeAComponentsFromGameObject(destroy);
+				objects.erase(it);
+			}
+		}
+	}
+}
+void Scene::SetDestroyingObject(AE_GAMEOBJECT_HANDLE handle)
+{
+	destroyingObjects.push_back(handle);
+}
 void Scene::SetSkyBox(HDRTexture* texture)
 {
 	environmentcubemap = std::make_unique<Cubemap>(512, true);

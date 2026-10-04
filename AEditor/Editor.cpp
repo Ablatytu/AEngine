@@ -17,6 +17,7 @@
 #include "../AEngine/core/ComponentSystem.h"
 #include "../AEngine/components/Rei.h"
 #include "../AEngine/components/Render.h"
+#include "../AEngine/components/SpriteRenderer2D.h"
 #include "../AEngine/Renderer/Mesh.h"
 #include "../AEngine/scene/AssetManager.h"
 #include "../AEngine/Renderer/Shader.h"
@@ -83,7 +84,14 @@ void EditorGUI::RenderGameViewport(Camera* camera)
 	sizegameport[1] = std::max(1, (int)sizeviewportHeight);
 
 	if (camera)
-		ImGui::Image((ImTextureID)(uintptr_t)camera->GetFramebuffer("ViewportFramebuffer")->GetColorBuffer(0), ImVec2(sizeviewportWidth, sizeviewportHeight), ImVec2(0, 1), ImVec2(1, 0));
+	{
+		if (auto viewport = camera->GetFramebuffer("ViewportFramebuffer"))
+		{
+			ImGui::Image((ImTextureID)(uintptr_t)viewport->GetColorBuffer(0), ImVec2(sizeviewportWidth, sizeviewportHeight), ImVec2(0, 1), ImVec2(1, 0));
+		}
+		else
+			ImGui::ColorButton("##Nonecamera", ImVec4(0.0f, 0.0f, 0.0f, 1.0f), 0, ImVec2(sizeviewportWidth, sizeviewportHeight));
+	}
 	else
 		ImGui::ColorButton("##Nonecamera", ImVec4(0.0f, 0.0f, 0.0f, 1.0f), 0, ImVec2(sizeviewportWidth, sizeviewportHeight));
 	ImGui::End();
@@ -304,6 +312,19 @@ void EditorGUI::DrawDockspaceMenuBar()
 
 				}
 				ImGui::EndMenu();
+			}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("UI"))
+		{
+			if (ImGui::MenuItem("Image"))
+			{
+				GameObject* newObject = SceneManager::Get().CreateGameObject();
+				SpriteRenderer2D* NewSpriteRendererComponent = newObject->AddComponent<SpriteRenderer2D>();
+				NewSpriteRendererComponent->material = AssetManager::LoadMaterial("standartUIMaterial");
+				Transform* TransformComponent = newObject->GetComponent<Transform>();
+				TransformComponent->scale = glm::vec3(100.0f, 100.0f, 1.0f);
+				TransformComponent->UpdateMatrices();
 			}
 			ImGui::EndMenu();
 		}
@@ -891,6 +912,7 @@ void EditorGUI::ShowInspectorWindow()
 			{
 				AEngineComponent* removedComponent = nullptr;
 				AE_COMPONENT_HANDLE removedComponentHandle = {};
+				Material** findedMaterial = nullptr;
 				for (auto& component : selectedObject.selectedObject->components)
 				{
 					component->fields.clear();
@@ -963,6 +985,89 @@ void EditorGUI::ShowInspectorWindow()
 									ImGui::ColorEdit4(field.name, glm::value_ptr(*value4));
 								else
 									ImGui::DragFloat4(field.name, glm::value_ptr(*value4), 0.1f);
+								break;
+							}
+							case FieldType::TEXTURE2D:
+							{
+								Texture** texture = static_cast<Texture**>(field.ptr);
+								std::string name = field.name + std::string(" : ");
+								if (*texture)
+								{
+									Texture* currentTexture = *texture;
+									name += currentTexture->path;
+								}
+								else
+									name += "None";
+								ImGui::Button(name.c_str(), ImVec2(250.0f, 30.0f));
+								if (ImGui::BeginDragDropTarget())
+								{
+									if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
+									{
+										const char* relativePath = static_cast<const char*>(payload->Data);
+										std::filesystem::path fullpath = projectDirectory / relativePath;
+										std::string extension = fullpath.extension().string();
+										std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
+										if (extension == ".png" || extension == ".jpg")
+										{
+											*texture = AssetManager::LoadTexture(fullpath.generic_string());
+										}
+									}
+									ImGui::EndDragDropTarget();
+								}
+								break;
+							}
+							case FieldType::MATERIAL:
+							{
+								Material** valuem = static_cast<Material**>(field.ptr);
+								std::string name = field.name + std::string(" : ");
+								if (*valuem)
+								{
+									findedMaterial = valuem;
+									name += (*findedMaterial)->path;
+								}
+								else
+									name += "None";
+
+								ImGui::Button(name.c_str(), ImVec2(250.0f, 30.0f));
+								if (ImGui::BeginDragDropTarget())
+								{
+									if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("PROJECT_ASSET"))
+									{
+										const char* relativePath = static_cast<const char*>(payload->Data);
+										std::filesystem::path fullpath = projectDirectory / relativePath;
+										std::string extension = fullpath.extension().string();
+										std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
+										if (extension == ".amat")
+										{
+											*valuem = AssetManager::LoadMaterial(fullpath.generic_string());
+											findedMaterial = valuem;
+										}
+									}
+									ImGui::EndDragDropTarget();
+								}
+								break;
+							}
+							case FieldType::ENUM:
+							{
+								int* valuee = static_cast<int*>(field.ptr);
+								std::string name = field.name + std::string(" : ");
+								if(*valuee < field.enumNames.size())
+									name += field.enumNames[*valuee];
+								if (ImGui::BeginCombo(field.name, name.c_str()))
+								{
+									for (int i = 0; i < static_cast<int>(field.enumNames.size()); ++i)
+									{
+										bool selected = (*valuee == i);
+										if (ImGui::Selectable(field.enumNames[i], selected))
+										{
+											*valuee = i;
+										}
+										if (selected)
+											ImGui::SetItemDefaultFocus();
+									}
+									ImGui::EndCombo();
+								}
+
 								break;
 							}
 							}
@@ -1052,23 +1157,17 @@ void EditorGUI::ShowInspectorWindow()
 				{
 					selectedTransform->UpdateMatrices();
 				}
-				GameModule::GETGAMECONTEXT().removeAComponent(selectedObject.selectedObject->getHandle(), removedComponentHandle);
-				if (removedComponent)
-				{
-					selectedObject.selectedObject->RemoveComponent(removedComponent);
-					removedComponent = nullptr;
-				}
-				Render* renderComponent = selectedObject.selectedObject->GetComponent<Render>();
-				if (renderComponent && renderComponent->material)
+				if (findedMaterial)
 				{
 					bool writed = false;
-					RenderMaterialPart(renderComponent->material, writed);
-					if (writed)
-						AssetManager::SaveMaterial(renderComponent->material, renderComponent->material->path);
+					if(*findedMaterial)
+						RenderMaterialPart(*findedMaterial, writed);
+					if (writed && *findedMaterial)
+						AssetManager::SaveMaterial(*findedMaterial, (*findedMaterial)->path);
 					ImGui::Text("Select material");
 					std::string materialName = "None";
-					if (renderComponent && renderComponent->material)
-						materialName = renderComponent->material->path;
+					if (*findedMaterial)
+						materialName = (*findedMaterial)->path;
 					ImGui::Button(materialName.c_str(), ImVec2(200, 30));
 
 					if (ImGui::BeginDragDropTarget())
@@ -1081,11 +1180,18 @@ void EditorGUI::ShowInspectorWindow()
 							std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c) {return static_cast<char>(std::tolower(c)); });
 							if (extension == ".amat" && MaterialSerializer::IsMaterial(fullpath.generic_string()))
 							{
-								renderComponent->material = AssetManager::LoadMaterial(fullpath.generic_string());
+								*findedMaterial = AssetManager::LoadMaterial(fullpath.generic_string());
 							}
 						}
 						ImGui::EndDragDropTarget();
 					}
+				}
+				findedMaterial = nullptr;
+				GameModule::GETGAMECONTEXT().removeAComponent(selectedObject.selectedObject->getHandle(), removedComponentHandle);
+				if (removedComponent)
+				{
+					selectedObject.selectedObject->RemoveComponent(removedComponent);
+					removedComponent = nullptr;
 				}
 				if (ImGui::BeginCombo("AddComponent", "Select"))
 				{

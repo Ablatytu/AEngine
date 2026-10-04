@@ -6,6 +6,8 @@
 #include "Camera.h"
 #include "Light.h"
 #include "Render.h"
+#include "SpriteRenderer2D.h"
+#include "ParticleSystem.h"
 
 template<typename T>
 struct EngineComponentWrapper
@@ -19,6 +21,22 @@ struct EngineComponentWrapper<Transform>
 	static constexpr bool supported = true;
 
 	static constexpr AE_COMPONENT_TYPE type = AE_COMPONENT_TYPE::AE_TRANSFORM;
+};
+
+template<> 
+struct EngineComponentWrapper<SpriteRenderer2D>
+{
+	static constexpr bool supported = true;
+
+	static constexpr AE_COMPONENT_TYPE type = AE_COMPONENT_TYPE::AE_SPRITERENDERER2D;
+};
+
+template<>
+struct EngineComponentWrapper<ParticleSystem>
+{
+	static constexpr bool supported = true;
+
+	static constexpr AE_COMPONENT_TYPE type = AE_COMPONENT_TYPE::AE_PARTICLESYSTEM;
 };
 
 template<>

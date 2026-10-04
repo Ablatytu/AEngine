@@ -1,0 +1,7 @@
+Type: Material
+Shader_vertex: Shaders/VertexShader2D.glsl
+Shader_fragment: Shaders/FragmentShader2D.glsl
+Shader_geometry: ""
+Properties:
+  SpriteColor: [1, 1, 1, 1]
+  SpriteImage: Assets/Textures/brickwall.jpg

@@ -6,27 +6,37 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(103,2
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<std::string,std::allocator<std::string>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(105,56): warning C4251: "PropertiesWithUniforms::infoes": "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
-  (компиляция исходного файла "AEditor.cpp")
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
-       см. объявление "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>"
-  
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(64,14): warning C4251: "Material::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Material"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(105,14): warning C4251: "PropertiesWithUniforms::VertexLayout": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
   (компиляция исходного файла "AEditor.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
        см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(70,42): warning C4251: "Material::properties": "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>" должен иметь dll-интерфейс для использования клиентами "Material"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(106,56): warning C4251: "PropertiesWithUniforms::infoes": "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>" должен иметь dll-интерфейс для использования клиентами "PropertiesWithUniforms"
+  (компиляция исходного файла "AEditor.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
+       см. объявление "std::unordered_map<std::string,PGLinfos::ShaderInfo,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,PGLinfos::ShaderInfo>>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(65,14): warning C4251: "Material::path": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "AEditor.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(71,14): warning C4251: "Material::VertexLayout": "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" должен иметь dll-интерфейс для использования клиентами "Material"
+  (компиляция исходного файла "AEditor.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\xstring(589,7):
+       см. объявление "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(72,42): warning C4251: "Material::properties": "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>" должен иметь dll-интерфейс для использования клиентами "Material"
   (компиляция исходного файла "AEditor.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\memory(3376,7):
        см. объявление "std::unique_ptr<PropertiesWithUniforms,std::default_delete<PropertiesWithUniforms>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(71,44): warning C4251: "Material::textures": "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(73,44): warning C4251: "Material::textures": "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
   (компиляция исходного файла "AEditor.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
        см. объявление "std::unordered_map<std::string,Texture *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Texture *>>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(72,44): warning C4251: "Material::cubemaps": "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Material.h(74,44): warning C4251: "Material::cubemaps": "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>" должен иметь dll-интерфейс для использования клиентами "Material"
   (компиляция исходного файла "AEditor.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
        см. объявление "std::unordered_map<std::string,Cubemap *,std::hash<std::string>,std::equal_to<std::string>,std::allocator<std::pair<const std::string,Cubemap *>>>"
@@ -63,10 +73,10 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(55,17
   
 C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Shader.h(56,21): warning C4251: "Shader::UBOReflection": "GLSLUBOUniforms" должен иметь dll-интерфейс для использования клиентами "Shader"
   (компиляция исходного файла "AEditor.cpp")
-      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(158,7):
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\APIs\ParserGLSL.h(160,7):
        см. объявление "GLSLUBOUniforms"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.h(67,25): warning C4251: "AEngineComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AEngineComponent"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\AEngineComponent.h(72,25): warning C4251: "AEngineComponent::fields": "std::vector<FieldInfo,std::allocator<FieldInfo>>" должен иметь dll-интерфейс для использования клиентами "AEngineComponent"
   (компиляция исходного файла "AEditor.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<FieldInfo,std::allocator<FieldInfo>>"
@@ -166,12 +176,27 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\Cubemap.h(26,4
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\unordered_map(58,7):
        см. объявление "std::unordered_map<TypeTexture,Texture *,std::hash<TypeTexture>,std::equal_to<TypeTexture>,std::allocator<std::pair<const TypeTexture,Texture *>>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderContext.h(27,23): warning C4251: "RenderContext::renders": "std::vector<Render *,std::allocator<Render *>>" должен иметь dll-интерфейс для использования клиентами "RenderContext"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderContext2D.h(10,33): warning C4251: "RenderContext2D::sprites": "std::vector<SpriteRenderer2D *,std::allocator<SpriteRenderer2D *>>" должен иметь dll-интерфейс для использования клиентами "RenderContext2D"
+  (компиляция исходного файла "AEditor.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<SpriteRenderer2D *,std::allocator<SpriteRenderer2D *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderContext.h(28,31): warning C4251: "RenderContext::ParticleSystems": "std::vector<ParticleSystem *,std::allocator<ParticleSystem *>>" должен иметь dll-интерфейс для использования клиентами "RenderContext"
+  (компиляция исходного файла "AEditor.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<ParticleSystem *,std::allocator<ParticleSystem *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderContext.h(29,23): warning C4251: "RenderContext::renders": "std::vector<Render *,std::allocator<Render *>>" должен иметь dll-интерфейс для использования клиентами "RenderContext"
   (компиляция исходного файла "AEditor.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<Render *,std::allocator<Render *>>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderContext.h(29,22): warning C4251: "RenderContext::lights": "std::vector<Light *,std::allocator<Light *>>" должен иметь dll-интерфейс для использования клиентами "RenderContext"
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderContext.h(30,33): warning C4251: "RenderContext::sprites": "std::vector<SpriteRenderer2D *,std::allocator<SpriteRenderer2D *>>" должен иметь dll-интерфейс для использования клиентами "RenderContext"
+  (компиляция исходного файла "AEditor.cpp")
+      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
+       см. объявление "std::vector<SpriteRenderer2D *,std::allocator<SpriteRenderer2D *>>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Renderer\RenderContext.h(32,22): warning C4251: "RenderContext::lights": "std::vector<Light *,std::allocator<Light *>>" должен иметь dll-интерфейс для использования клиентами "RenderContext"
   (компиляция исходного файла "AEditor.cpp")
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.51.36231\include\vector(459,7):
        см. объявление "std::vector<Light *,std::allocator<Light *>>"
@@ -181,10 +206,20 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\PostProcess.
       C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\PostProcess.h(9,2):
        см. объявление "PostProcess::RegisterClassFunc"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\AEditor.cpp(167,140): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\AEditor.cpp(167,112): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\SpriteRenderer2D.h(11,2): warning C4251: "SpriteRenderer2D::registerClassFunc": "SpriteRenderer2D::RegisterClassFunc" должен иметь dll-интерфейс для использования клиентами "SpriteRenderer2D"
+  (компиляция исходного файла "AEditor.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\SpriteRenderer2D.h(11,2):
+       см. объявление "SpriteRenderer2D::RegisterClassFunc"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\SpriteRenderer2D.h(20,12): warning C4251: "SpriteRenderer2D::color": "glm::vec<3,float,glm::packed_highp>" должен иметь dll-интерфейс для использования клиентами "SpriteRenderer2D"
+  (компиляция исходного файла "AEditor.cpp")
+      C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
+       см. объявление "glm::vec<3,float,glm::packed_highp>"
+  
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\AEditor.cpp(201,140): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\AEditor.cpp(201,112): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
   Создание кода
-  1 of 4033 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 4071 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     77 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено

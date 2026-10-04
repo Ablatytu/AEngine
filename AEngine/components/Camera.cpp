@@ -23,13 +23,29 @@ void Camera::SetViewport(int width, int height)
 }
 void Camera::RecultivateProjection()
 {
-	projection = glm::perspective(glm::radians(fieldOView), ratio, near, far);
+	if (projectionType == ProjectionType::Perspective)
+	{
+		projection = glm::perspective(glm::radians(fieldOView), ratio, near, far);
+	}
+	else
+	{
+		float halfHeight = orthographicSize;
+		float halfWidth = orthographicSize * ratio;
+
+		projection = glm::ortho(-halfWidth, halfWidth, -halfHeight, halfHeight, near, far);
+	}
 }
 void Camera::Update()
 {
 	viewMatrix = glm::lookAt(transform->position, transform->position + transform->forward(), transform->up());
 }
-
+void Camera::OnInspector()
+{
+	RegisterField(projectionType);
+	RegisterEnumNames(projectionType, "Perspective", "Orthographic");
+	RegisterField(orthographicSize);
+	Range(orthographicSize, 1.0f, 10.0f)
+}
 Framebuffer* Camera::Add(std::string name, Shader* frameshader, const std::vector<Framebuffer::TypeFrameBuffer>& typeFrameBuffer, bool resizable, int width, int height, const std::vector<Framebuffer::TypeFilter>& typeFilter)
 {
 	std::unique_ptr<Framebuffer> framebuffer = std::make_unique<Framebuffer>(frameshader, typeFrameBuffer, resizable, width, height, typeFilter);

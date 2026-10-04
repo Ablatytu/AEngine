@@ -11,4 +11,6 @@ struct Vector3 : AE_VEC3
 		this->y = y;
 		this->z = z;
 	}
+
+	float length();
 };

@@ -26,6 +26,8 @@ public:
 		return handle;
 	}
 
+	void Destroy();
+
 	template<typename t> AComponentRef<t> GetAComponent() const
 	{
 		if constexpr (EngineComponentWrapper<t>::supported)
@@ -80,6 +82,19 @@ public:
 
 			return AComponentRef<t>(ComponentStorage::Get().Add<t>(handle, std::forward<Args>(args)...));
 		}
+	}
+
+	static GameObject Create(const char* name = nullptr)
+	{
+		const AE_API* ae_api = ENGINEAPICONTEXT::Get();
+		if (!ae_api)
+			return {};
+
+		AE_GAMEOBJECT_HANDLE ae_gameobject_handle{};
+		if (!ae_api->createGameObject(name, &ae_gameobject_handle))
+			return {};
+
+		return GameObject(ae_gameobject_handle);
 	}
 private:
 	AE_GAMEOBJECT_HANDLE handle{};

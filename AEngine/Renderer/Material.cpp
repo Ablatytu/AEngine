@@ -12,6 +12,7 @@ void Material::SetShader(Shader* newshader)
 		return;
 	properties = std::make_unique<PropertiesWithUniforms>(shader->GetPathFragmentShader(), shader->GetShaderID());
 	renderPath = static_cast<RenderPath>(properties->RenderPath);
+	VertexLayout = properties->VertexLayout;
 	std::cout << static_cast<int>(renderPath) << std::endl;
 #ifdef _DEBUG
 	std::cout << "Create properties for material of shader. Pathshader: " << newshader->GetPathFragmentShader() << std::endl;
@@ -305,6 +306,10 @@ Cubemap* Material::GetBlackCubemap()
 const Material::RenderPath& Material::GetRenderPath() const
 {
 	return renderPath;
+}
+const std::string& Material::GetVertexLayout() const
+{
+	return VertexLayout;
 }
 Material::Material() = default;
 Material::~Material() = default;
