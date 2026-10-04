@@ -1,0 +1,21 @@
+# ninja log v7
+3	42	8128240236839241	assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-mkdir	bc732cacdeaa8712
+3	42	8128240236839241	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-mkdir	bc732cacdeaa8712
+42	94505	8128241181478192	assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-download	b8b6feff04a35ee2
+42	94505	8128241181478192	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-download	b8b6feff04a35ee2
+94506	94597	8128241181518209	assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-update	68a91ec17b1cae38
+94506	94597	8128241181518209	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-update	68a91ec17b1cae38
+94597	94633	8128241182758501	assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-patch	f331109c24c31ec9
+94597	94633	8128241182758501	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-patch	f331109c24c31ec9
+94633	94667	8128241183088576	assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-configure	6a6fed39a628b368
+94633	94667	8128241183088576	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-configure	6a6fed39a628b368
+94667	94702	8128241183438654	assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-build	681368d340c8c830
+94667	94702	8128241183438654	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-build	681368d340c8c830
+94702	94736	8128241183788739	assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-install	e2b58b6e4e28b464
+94702	94736	8128241183788739	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-install	e2b58b6e4e28b464
+94736	94770	8128241184138828	assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-test	955b3309c1c495cd
+94736	94770	8128241184138828	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-test	955b3309c1c495cd
+94771	94818	8128241184608936	CMakeFiles/assimp-populate-complete	8e37098ed38984a1
+94771	94818	8128241184608936	assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-done	8e37098ed38984a1
+94771	94818	8128241184608936	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/CMakeFiles/assimp-populate-complete	8e37098ed38984a1
+94771	94818	8128241184608936	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/assimp-subbuild/assimp-populate-prefix/src/assimp-populate-stamp/assimp-populate-done	8e37098ed38984a1

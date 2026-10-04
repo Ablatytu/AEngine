@@ -1,0 +1,21 @@
+# ninja log v7
+3	40	8128240192500212	yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-mkdir	57dc76b8b42cc9be
+3	40	8128240192500212	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-mkdir	57dc76b8b42cc9be
+40	3916	8128240231262967	yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-download	58d1002db0be9ca0
+40	3916	8128240231262967	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-download	58d1002db0be9ca0
+3917	4001	8128240231302983	yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-update	e84235382f65ddd5
+3917	4001	8128240231302983	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-update	e84235382f65ddd5
+4001	4037	8128240232473257	yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-patch	e350dec8713ecc01
+4001	4037	8128240232473257	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-patch	e350dec8713ecc01
+4037	4073	8128240232843350	yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-configure	286964df4671b44c
+4037	4073	8128240232843350	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-configure	286964df4671b44c
+4073	4108	8128240233193425	yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-build	9e5383d3106ae281
+4073	4108	8128240233193425	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-build	9e5383d3106ae281
+4108	4142	8128240233533508	yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-install	227c756f463b8aa8
+4108	4142	8128240233533508	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-install	227c756f463b8aa8
+4143	4177	8128240233883585	yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-test	6fb47c931bdfc629
+4143	4177	8128240233883585	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-test	6fb47c931bdfc629
+4178	4225	8128240234353702	CMakeFiles/yaml_cpp-populate-complete	75c3ddda4d659792
+4178	4225	8128240234353702	yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-done	75c3ddda4d659792
+4178	4225	8128240234353702	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/CMakeFiles/yaml_cpp-populate-complete	75c3ddda4d659792
+4178	4225	8128240234353702	C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Debug/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/yaml_cpp-populate-done	75c3ddda4d659792

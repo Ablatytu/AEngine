@@ -42,6 +42,7 @@ using namespace RenderSystem2D;
 
 void AEditor::OnInit()
 {
+	std::filesystem::current_path(AEDITOR_WORKING_DIR);
 	GameModule::Load("Game.dll");
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -164,13 +165,13 @@ void AEditor::OnSceneLoaded()
 }
 void AEditor::OnBeforeSceneUpdate()
 {	
-	//frame++;
+	frame++;
 	//if (frame == 4)
 	//	SceneManager::Get().LoadScene("Assets/NewScene.ascene");
 	//if (frame == 15)
 	//	SceneManager::Get().LoadScene("Assets/TestScene.ascene");
-	//if (frame > 20)
-	//	close();
+	if (frame > 20)
+		close();
 
 	//GameModule::CheckForChanges();
 	if (SceneManager::Get().CheckChangeScenePathState())

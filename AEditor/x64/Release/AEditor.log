@@ -216,11 +216,11 @@ C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\components\SpriteRender
       C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEngine\Libraries\include\glm\glm\detail\type_vec3.hpp(17,9):
        см. объявление "glm::vec<3,float,glm::packed_highp>"
   
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\AEditor.cpp(201,140): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
-C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\AEditor.cpp(201,112): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\AEditor.cpp(202,140): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\AEditor\AEditor.cpp(202,112): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
   Создание кода
-  1 of 4071 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 4071 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    77 functions had inline decision re-evaluated but remain unchanged
+    79 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   AEditor.vcxproj -> C:\Users\Stanislav\Desktop\AEngineGitHub\AEngine\bin\Release\AEditor.exe

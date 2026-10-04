@@ -6,18 +6,29 @@
 #include "../../GameAPI/GameABI.h"
 #include "../Renderer/GameObjectHandle.h"
 #include "EngineEntry.h"
-#include <Windows.h>
+#ifdef __APPLE__
+	#include <dlfcn.h>
+	#include <unistd.h>
+	#include <mach-o/dyld.h>
+#endif
+
+#ifdef _WIN32
+	#include <Windows.h>
+#endif
+
+#include "../Platform/DynamicLibrary.h"
+
 #include <iostream>
 
 namespace GameModule
 {
-	static HMODULE module = nullptr;
+	static void* module = nullptr;
 	static std::filesystem::path loadedDll;
 	static std::filesystem::path sourceDll;
 	static unsigned generation = 0;
 	static bool hasWriteTime = false;
 	static std::filesystem::file_time_type lastWriteTime;
-	const DWORD processID = GetCurrentProcessId();
+	const uint64_t processID = Platform::DynamicLibrary::GetProcessId();
 	static AE_API ae_api{};
 	static AE_GAMEAPI game_api{};
 
@@ -27,7 +38,7 @@ namespace GameModule
 		float valuef = 0.0f;
 		AE_VEC3 value3;
 		AE_VEC4 value4;
-		bool valueb;
+		bool valueb = false;
 
 		AE_GAME_FIELD_INFO::FieldType typeValue = AE_GAME_FIELD_INFO::FieldType::INT;
 		std::string name = "";
@@ -58,9 +69,17 @@ namespace GameModule
 			}
 			if (!entry.is_regular_file())
 				continue;
-			const std::wstring filename = entry.path().filename().wstring();
+			const std::string filename = entry.path().filename().string();
 
-			const bool isShadowGameDll = filename.rfind(L"Game_SHADOW_", 0) == 0 && entry.path().extension() == L".dll";
+	#ifdef _WIN32
+			const std::string extension = ".dll";
+	#endif
+
+	#ifdef __APPLE__
+			const std::string extension = ".dylib";
+	#endif
+
+			const bool isShadowGameDll = filename.rfind("Game_SHADOW_", 0) == 0 && entry.path().extension() == extension;
 
 			if (!isShadowGameDll)
 				continue;
@@ -198,7 +217,7 @@ namespace GameModule
 	}
 	bool LoadGameAPI()
 	{
-		AE_GAME_API_FN gameAPI = reinterpret_cast<AE_GAME_API_FN>(GetProcAddress(module, "AE_GAME_API"));
+		AE_GAME_API_FN gameAPI = reinterpret_cast<AE_GAME_API_FN>(Platform::DynamicLibrary::GetSymbol(module, "AE_GAME_API"));
 
 		if (!gameAPI)
 		{
@@ -229,6 +248,17 @@ namespace GameModule
 		if (module)
 			return true;
 
+	#ifdef __APPLE__
+		uint32_t size = 0;
+
+		_NSGetExecutablePath(nullptr, &size);
+
+		std::string buffer(size, '\0');
+
+		loadedDll = std::filesystem::weakly_canonical(buffer).parent_path / ("Game_" + std::string("SHADOW_") + std::to_string(processID) + "_" + std::to_string(++generation) + ".dylib");
+	#endif
+
+	#ifdef _WIN32
 		wchar_t path[MAX_PATH];
 
 		GetModuleFileNameW(nullptr, path, MAX_PATH);
@@ -240,7 +270,10 @@ namespace GameModule
 		}
 
 		sourceDll = dllPath.is_absolute() ? dllPath : exeDirectory / dllPath;
+
 		loadedDll = exeDirectory / ("Game_" + std::string("SHADOW_") + std::to_string(processID) + "_" + std::to_string(++generation) + ".dll");
+	#endif
+
 		std::error_code error;
 		std::filesystem::copy_file(sourceDll, loadedDll, std::filesystem::copy_options::overwrite_existing, error);
 		if (error)
@@ -248,7 +281,7 @@ namespace GameModule
 			CriticalGameError((std::string("FAILED TO CREATE COPY GAME.DLL: ") + error.message()).c_str());
 			return false;
 		}
-		module = LoadLibraryW(loadedDll.c_str());
+		module = Platform::DynamicLibrary::Load(loadedDll.c_str());
 		if (!module)
 		{
 			CriticalGameError("FAILED TO LOAD GAME.DLL");
@@ -259,7 +292,7 @@ namespace GameModule
 			game_api = {};
 			ae_api = {};
 
-			FreeLibrary(module);
+			Platform::DynamicLibrary::UnloadLibrary(module);
 			module = nullptr;
 
 			return false;
@@ -280,7 +313,7 @@ namespace GameModule
 
 		game_api = {};
 
-		if (!FreeLibrary(module))
+		if (!Platform::DynamicLibrary::UnloadLibrary(module))
 		{
 			CriticalGameError("FAILED TO UNLOAD GAME.DLL");
 			return false;

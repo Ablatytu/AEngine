@@ -1,0 +1,635 @@
+{
+	"globsDependent" : 
+	[
+		{
+			"expression" : "C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/*.cpp",
+			"listDirectories" : true,
+			"paths" : 
+			[
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/binary.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/convert.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/depthguard.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/directives.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/emit.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/emitfromevents.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/emitter.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/emitterstate.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/emitterutils.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/exceptions.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/exp.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/memory.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/node.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/node_data.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/nodebuilder.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/nodeevents.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/null.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/ostream_wrapper.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/parse.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/parser.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/regex_yaml.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/scanner.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/scanscalar.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/scantag.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/scantoken.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/simplekey.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/singledocparser.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/stream.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/tag.cpp"
+			]
+		},
+		{
+			"expression" : "C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/contrib/*.cpp",
+			"listDirectories" : true,
+			"paths" : 
+			[
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/contrib/graphbuilder.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/yaml_cpp-src/src/contrib/graphbuilderadapter.cpp"
+			]
+		},
+		{
+			"expression" : "C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/*.cpp",
+			"paths" : 
+			[
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/AEditor.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/Editor.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/EditorCamera.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/imGUI/ImGuizmo.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/imGUI/imgui.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/imGUI/imgui_demo.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/imGUI/imgui_draw.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/imGUI/imgui_impl_glfw.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/imGUI/imgui_impl_opengl3.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/imGUI/imgui_tables.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/imGUI/imgui_widgets.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEditor/main.cpp"
+			],
+			"recurse" : true
+		},
+		{
+			"expression" : "C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/*.cpp",
+			"paths" : 
+			[
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/APIs/ModelLoader.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/APIs/ParserGLSL.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Libraries/include/glm/glm/detail/glm.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Platform/DynamicLibraryMac.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Platform/DynamicLibraryWin.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/Buffer.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/Cubemap.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/Framebuffer.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/GameObject.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/GameObjectStorage.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/HDRTexture.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/Material.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/Mesh.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/RenderSystem.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/RenderSystem2D.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/Shader.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/Renderer/Texture.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/AEngineComponent.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/Camera.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/ComponentStorage.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/EngineEntry.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/GameModule.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/Light.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/LightMoving.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/ParticleSystem.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/PostProcess.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/Rei.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/Render.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/SpriteRenderer2D.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/Transform.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/components/cube.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/core/Application.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/core/ComponentSystem.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/core/ErrorManager.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/core/Window.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/scene/AssetManager.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/scene/CubemapSerializer.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/scene/LightManager.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/scene/MaterialSerializer.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/scene/Scene.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/scene/SceneManager.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/scene/SceneSerializer.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/AEngine/scene/Skybox.cpp"
+			],
+			"recurse" : true
+		},
+		{
+			"expression" : "C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/*.c",
+			"paths" : [],
+			"recurse" : true
+		},
+		{
+			"expression" : "C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/*.cpp",
+			"paths" : 
+			[
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/AComponent.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/Block.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/BreakoutBall.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/BreakoutLevelManager.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/BreakoutPlayer.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/ComponentStorage.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/ComponentSystem.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/EngineAPIContext.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/GameEntry.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/GameObject.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/Input.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/Material.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/ParticleSystem.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/ResourceManager.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/Shader.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/SpriteRenderer2D.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/TestComponent.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/Texture.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/Transform.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/UIContoller.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/Vector2.cpp",
+				"C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/Game/Vector3.cpp"
+			],
+			"recurse" : true
+		}
+	],
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/CMakeFiles/4.3.1-msvc1/CMakeSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Windows-Initialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/CMakeFiles/4.3.1-msvc1/CMakeCCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/CMakeFiles/4.3.1-msvc1/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Windows.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/WindowsPaths.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Compiler/MSVC-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Compiler/MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Windows-MSVC-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Windows-MSVC.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/CMakeFiles/4.3.1-msvc1/CMakeRCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeRCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CMakeCLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CMakeCommonLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Linker/MSVC-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Linker/MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Linker/Windows-MSVC-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Linker/Windows-MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Compiler/MSVC-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Compiler/MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Windows-MSVC-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Windows-MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CMakeCXXLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CMakeCommonLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Linker/MSVC-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Linker/MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Linker/Windows-MSVC-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Platform/Linker/Windows-MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FetchContent.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/ExternalProject/shared_internal_commands.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FindGit.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FetchContent/CMakeLists.cmake.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FindGit.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/FetchContent/CMakeLists.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/yaml_cpp-src/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakePackageConfigHelpers.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/WriteBasicConfigVersionFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeDependentOption.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckCXXCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CheckCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CheckFlagCommonConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckCXXSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/GNUInstallDirs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CTest.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CTestUseLaunchers.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CTestTargets.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/DartConfiguration.tcl.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Templates/CTestScript.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/yaml_cpp-src/yaml-cpp-config.cmake.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/yaml_cpp-src/yaml-cpp.pc.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/yaml_cpp-src/cmake_uninstall.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/cmake-modules/FindPkgMacros.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/cmake-modules/PrecompiledHeader.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CMakePackageConfigHelpers.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/WriteBasicConfigVersionFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/BasicConfigVersion-SameMajorVersion.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/cmake-modules/assimp-plain-config.cmake.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckTypeSize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckIncludeFileCXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckFunctionExists.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/assimp.pc.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/include/assimp/revision.h.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/include/assimp/config.h.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/contrib/zlib/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckTypeSize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckIncludeFileCXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckFunctionExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.3/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/contrib/zlib/zlib.pc.cmakein"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/contrib/zlib/zconf.h.cmakein"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "out/build/x64-Release/_deps/assimp-src/code/CMakeLists.txt"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release",
+		"source" : "C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 1
+	}
+}
