@@ -144,19 +144,26 @@ void Window::ChangeScreenSize(float width, float height)
 	screenX = width;
 	screenY = height;
 }
+
+void Input::Reset()
+{
+	xoffset = 0.0f;
+	yoffset = 0.0f;
+	scrollYOffset = 0.0f;
+	memset(&keysUp, 0, 512);
+	memset(&keysDown, 0, 512);
+	memset(&mouseButtonsUp, 0, 3);
+	memset(&mouseButtonsDown, 0, 3);
+}
 float Input::GetAxis(const char* axis)
 {
 	if (strcmp(axis, "Mouse X") == 0)
 	{
-		float temp = xoffset;
-		xoffset = 0.0f;
-		return temp;
+		return xoffset;
 	}
 	else if (strcmp(axis, "Mouse Y") == 0)
 	{
-		float temp = yoffset;
-		yoffset = 0.0f;
-		return temp;
+		return yoffset;
 	}
 	else if (strcmp(axis, "Horizontal") == 0)
 	{
@@ -174,9 +181,7 @@ float Input::GetAxis(const char* axis)
 	}
 	else if (strcmp(axis, "Mouse ScrollWheel") == 0)
 	{
-		float temp = scrollYOffset;
-		scrollYOffset = 0.0f;
-		return temp;
+		return scrollYOffset;
 	}
 	return 0.0f;
 }
@@ -190,25 +195,19 @@ bool Input::GetMouseButtonUp(int button)
 {
 	if (button < 0 || button > 2)
 		return false;
-	bool up = mouseButtonsUp[button];
-	mouseButtonsUp[button] = false;
-	return up;
+	return mouseButtonsUp[button];
 }
 bool Input::GetMouseButtonDown(int button)
 {
 	if (button < 0 || button > 2)
 		return false;
-	bool down = mouseButtonsDown[button];
-	mouseButtonsDown[button] = false;
-	return down;
+	return mouseButtonsDown[button];
 }
 bool Input::GetKeyUp(int button)
 {
 	if (button >= 0 && button < 512)
 	{
-		bool up = keysUp[button];
-		keysUp[button] = false;
-		return up;
+		return keysUp[button] ;
 	}
 	return false;
 }
@@ -222,9 +221,7 @@ bool Input::GetKeyDown(int button)
 {
 	if (button >= 0 && button < 512)
 	{
-		bool down = keysDown[button];
-		keysDown[button] = false;
-		return down;
+		return keysDown[button];
 	}
 	return false;
 }

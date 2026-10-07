@@ -37,4 +37,7 @@
 /.vs/
 /Debug/
 /Release/
+/build/
+/bin/
+/out/
 AEngine/.vs/AEngine/v18/Insiders/Browse.VC.db

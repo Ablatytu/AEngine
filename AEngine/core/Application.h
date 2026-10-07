@@ -23,6 +23,7 @@ private:
 	virtual void OnInit() {}
 	virtual void OnShutdown() {}
 
+	virtual void OnStartFrame() {};
 	virtual void OnBeforeSceneUpdate() {}
 	virtual void OnAfterSceneUpdate() {}
 

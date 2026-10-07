@@ -24,9 +24,9 @@
 #include <AMath.h>
 #include <algorithm>
 #include <map>
-#include <glm/glm/glm.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
-#include <glm/glm/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <random>
 
 #define MAXPOINTLIGHTS 192
@@ -119,7 +119,7 @@ namespace RenderSystem
 				BatchKey foundBatchKey{};
 				foundBatchKey.material = render->material;
 				foundBatchKey.mesh = render->mesh;
-				if (render == context.selectedObject)  //еще один костыль, пока не придумаю другой способ для обводки
+				if (render == context.selectedObject)  //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					foundBatchKey.rendertime = static_cast<int>(RenderTime::stencilRender);
 				else
 					foundBatchKey.rendertime = static_cast<int>(render->renderLayer);
@@ -161,7 +161,7 @@ namespace RenderSystem
 					}
 					else
 						newBatch->renderqueue = RenderQueue::ForwardTransparent;
-					if (render == context.selectedObject) { newBatch->rendertime = RenderTime::stencilRender; newBatch->pos.push_back(render->transform->position); newBatch->model.push_back(render->transform->GetModelMatrix());  continue; }  //Потом придумаю другой способ для selectedObject, пока что пусть будет "костыль"
+					if (render == context.selectedObject) { newBatch->rendertime = RenderTime::stencilRender; newBatch->pos.push_back(render->transform->position); newBatch->model.push_back(render->transform->GetModelMatrix());  continue; }  //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ selectedObject, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 						
 				}
 				else

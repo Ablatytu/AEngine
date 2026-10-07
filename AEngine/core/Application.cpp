@@ -36,6 +36,7 @@ int Application::run()
 	OnInit();
 	while (!glfwWindowShouldClose(window.window))
 	{
+		OnStartFrame();
 		glfwPollEvents();
 		Time::UpdateTime();
 		OnBeforeSceneUpdate();

@@ -51,6 +51,8 @@ set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE BOOL "" FORCE)
 set(ASSIMP_INSTALL OFF CACHE BOOL "" FORCE)
 set(ASSIMP_WARNINGS_AS_ERRORS OFF CACHE BOOL "" FORCE)
 
+set(GLM_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+
 FetchContent_Declare(
     assimp
     GIT_REPOSITORY https://github.com/assimp/assimp.git
@@ -59,37 +61,18 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(assimp)
 
-if(WIN32)
+FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw.git GIT_TAG 3.4)
 
-    add_library(glfw SHARED IMPORTED)
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
-    set_target_properties(glfw PROPERTIES
-        IMPORTED_IMPLIB
-            "${CMAKE_SOURCE_DIR}/AEngine/Libraries/lib/glfw3dll.lib"
+FetchContent_MakeAvailable(glfw)
 
-        IMPORTED_LOCATION
-            "${CMAKE_SOURCE_DIR}/bin/Release/glfw3.dll"
+FetchContent_Declare(glm GIT_REPOSITORY https://github.com/g-truc/glm GIT_TAG 1.0.2)
 
-        INTERFACE_INCLUDE_DIRECTORIES
-            "${CMAKE_SOURCE_DIR}/AEngine/Libraries/include"
-    )
-
-elseif(APPLE)
-
-    FetchContent_Declare(
-        glfw
-        GIT_REPOSITORY https://github.com/glfw/glfw.git
-        GIT_TAG 3.4
-    )
-
-    set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-    set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-    set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-    set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
-
-    FetchContent_MakeAvailable(glfw)
-
-endif()
+FetchContent_MakeAvailable(glm)
 
 add_library(glad STATIC
     "${CMAKE_SOURCE_DIR}/AEngine/APIs/glad.c"
@@ -176,6 +159,8 @@ target_include_directories(AEngine
 )
 
 target_link_libraries(AEngine
+    PUBLIC
+	glm::glm
     PRIVATE
         glfw
         glad

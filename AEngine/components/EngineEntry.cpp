@@ -411,6 +411,10 @@ namespace
 	{
 		return Input::GetKey(key);
 	}
+	bool AE_CALL EngineGetAxis(const char* AE_AXIS_NAME)
+	{
+		return Input::GetAxis(AE_AXIS_NAME);
+	}
 }
 
 namespace EngineAPI
@@ -441,6 +445,7 @@ namespace EngineAPI
 		ae_api.getParticleSystemMaterial = &EngineGetParticleSystemMaterial;
 		ae_api.setMaterialTexture = &EngineSetMaterialTexture;
 		ae_api.getKey = &EngineGetKey;
+		ae_api.getAxis = &EngineGetAxis;
 		ae_api.destroyGameObject = &EngineDestroyGameObject;
 		ae_api.isGameObject = &EngineIsGameObject;
 		ae_api.getShader = &EngineGetShader;

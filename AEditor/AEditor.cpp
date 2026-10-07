@@ -43,7 +43,13 @@ using namespace RenderSystem2D;
 void AEditor::OnInit()
 {
 	std::filesystem::current_path(AEDITOR_WORKING_DIR);
+#ifdef _WIN32
 	GameModule::Load("Game.dll");
+#endif
+
+#ifdef __APPLE__
+	GameModule::Load("Game.dylib");
+#endif
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
@@ -170,8 +176,8 @@ void AEditor::OnBeforeSceneUpdate()
 	//	SceneManager::Get().LoadScene("Assets/NewScene.ascene");
 	//if (frame == 15)
 	//	SceneManager::Get().LoadScene("Assets/TestScene.ascene");
-	if (frame > 20)
-		close();
+	//if (frame > 20)
+		//close();
 
 	//GameModule::CheckForChanges();
 	if (SceneManager::Get().CheckChangeScenePathState())
@@ -263,6 +269,10 @@ void AEditor::OnRender()
 	editorGUI->ShowLightingMenu();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+void AEditor::OnStartFrame()
+{
+	Input::Reset();
 }
 void AEditor::OnShutdown()
 {

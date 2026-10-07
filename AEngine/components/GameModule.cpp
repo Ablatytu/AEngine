@@ -255,7 +255,12 @@ namespace GameModule
 
 		std::string buffer(size, '\0');
 
-		loadedDll = std::filesystem::weakly_canonical(buffer).parent_path / ("Game_" + std::string("SHADOW_") + std::to_string(processID) + "_" + std::to_string(++generation) + ".dylib");
+		_NSGetExecutablePath(buffer.data(), &size);
+		
+		loadedDll = std::filesystem::weakly_canonical(buffer).parent_path() / ("Game_" + std::string("SHADOW_") + std::to_string(processID) + "_" + std::to_string(++generation) + ".dylib");
+
+		std::filesystem::path exeDirectory = std::filesystem::path(buffer).parent_path();
+		sourceDll = dllPath.is_absolute() ? dllPath : exeDirectory / dllPath;
 	#endif
 
 	#ifdef _WIN32

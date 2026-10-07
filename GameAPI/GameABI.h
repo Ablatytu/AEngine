@@ -10,6 +10,9 @@
 	#define AE_EXPORT extern "C" 
 #endif
 
+#ifdef __APPLE__
+	#define NULL 0
+#endif
 
 struct AE_GAMEOBJECT_HANDLE
 {
@@ -123,6 +126,7 @@ struct AE_VEC4
 };
 
 using AE_GET_KEY_FN = bool (AE_CALL*)(int32_t key);
+using AE_GET_AXIS_FN = bool (AE_CALL*)(const char* AE_AXIS_NAME);
 
 using AE_SET_SPRITE_TEXTURE_FN = bool (AE_CALL*)(const char* name, AE_COMPONENT_HANDLE ae_component_handle);
 using AE_SET_SPRITE_COLOR_FN = bool (AE_CALL*)(AE_VEC4 color, AE_COMPONENT_HANDLE ae_component_handle);
@@ -148,6 +152,7 @@ struct AE_API
 	AE_LOG_FN log = NULL;
 
 	AE_GET_KEY_FN getKey = NULL;
+	AE_GET_AXIS_FN getAxis = NULL;
 
 	AE_GETCOMPONENT_FN getComponent = NULL;
 	AE_ISENGINECOMPONENT_FN isEngineComponent = NULL;
