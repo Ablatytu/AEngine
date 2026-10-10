@@ -70,6 +70,9 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(glfw)
 
+set(GLM_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLM_BUILD_LIBRARY OFF CACHE BOOL "" FORCE)
+
 FetchContent_Declare(glm GIT_REPOSITORY https://github.com/g-truc/glm GIT_TAG 1.0.2)
 
 FetchContent_MakeAvailable(glm)
@@ -160,7 +163,7 @@ target_include_directories(AEngine
 
 target_link_libraries(AEngine
     PUBLIC
-	glm::glm
+	glm::glm-header-only
     PRIVATE
         glfw
         glad

@@ -171,13 +171,13 @@ void AEditor::OnSceneLoaded()
 }
 void AEditor::OnBeforeSceneUpdate()
 {	
-	frame++;
+	//frame++;
 	//if (frame == 4)
 	//	SceneManager::Get().LoadScene("Assets/NewScene.ascene");
 	//if (frame == 15)
 	//	SceneManager::Get().LoadScene("Assets/TestScene.ascene");
 	//if (frame > 20)
-		//close();
+	//	close();
 
 	//GameModule::CheckForChanges();
 	if (SceneManager::Get().CheckChangeScenePathState())
