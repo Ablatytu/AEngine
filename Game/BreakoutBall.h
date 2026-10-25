@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "AComponentRef.h"
 #include "Vector2.h"
+#include "SpriteRenderer2D.h"
 
 class BreakoutBall : public AComponent
 {
@@ -10,10 +11,12 @@ class BreakoutBall : public AComponent
 public:
 	float Radius = 0.125f;
 	bool Stuck = true;
+	bool Sticky = false, PassThrough = false;
 	Vector2 Velocity = Vector2(1.0f, 3.5f);
 	void Start() override;
 	Vector2 Move(float dt, unsigned int width, unsigned int height);
 	bool CheckReset();
 	void Reset(Vector2 posPlatform, Vector2 scalePlatform);
 	AComponentRef<Transform> transform;
+	AComponentRef<SpriteRenderer2D> spriteRenderer;
 };

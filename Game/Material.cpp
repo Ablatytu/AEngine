@@ -22,3 +22,15 @@ void Material::SetTexture(const char* nameField, Texture& texture)
 		return;
 	ae_api->setMaterialTexture(ABIMaterial, nameField, texture.ABITexture);
 }
+
+void Material::Set(const char* nameField, std::variant<int, float, bool> number)
+{
+	const AE_API* ae_api = ENGINEAPICONTEXT::Get();
+	if (!ae_api)
+		return;
+
+	if (std::holds_alternative<int>(number))
+		ae_api->setMaterialValueField(nameField, ABIMaterial, &std::get<int>(number), 0);
+	else if (std::holds_alternative<bool>(number))
+		ae_api->setMaterialValueField(nameField, ABIMaterial, &std::get<bool>(number), 1);
+}

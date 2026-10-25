@@ -12,5 +12,9 @@ struct Vector3 : AE_VEC3
 		this->z = z;
 	}
 
+	Vector3 operator*(const float value) const;
+	Vector3 operator+(const Vector3& vec3) const;
+
+	void Normalize();
 	float length();
 };

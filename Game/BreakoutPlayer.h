@@ -4,8 +4,12 @@
 #include "Transform.h"
 #include "GameObject.h"
 #include "BreakoutBall.h"
+#include "RenderImage.h"
+#include "Camera.h"
+#include "Material.h"
 
 class UIController;
+class SpriteRenderer2D;
 
 class BreakoutPlayer : public AComponent
 {
@@ -19,4 +23,6 @@ public:
 private:
 	AComponentRef<Transform> transform;
 	AComponentRef<BreakoutBall> ballPlayer;
+	AComponentRef<SpriteRenderer2D> spritePlayer;
+	Material breakoutEffects;
 };

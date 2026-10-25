@@ -116,6 +116,7 @@ target_link_libraries(imgui
 file(GLOB_RECURSE AENGINE_SOURCES
     CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/AEngine/*.cpp"
+    "${CMAKE_SOURCE_DIR}/AEngine/*.h"
 )
 
 add_library(AEngine SHARED
@@ -216,6 +217,7 @@ file(GLOB_RECURSE AEDITOR_SOURCES
     CONFIGURE_DEPENDS
 
     "${CMAKE_SOURCE_DIR}/AEditor/*.cpp"
+    "${CMAKE_SOURCE_DIR}/AEditor/*.h"
 )
 
 list(FILTER AEDITOR_SOURCES
@@ -255,6 +257,7 @@ file(
     CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/Game/*.cpp"
     "${CMAKE_SOURCE_DIR}/Game/*.c"
+    "${CMAKE_SOURCE_DIR}/Game/*.h"
 )
 
 add_library(Game

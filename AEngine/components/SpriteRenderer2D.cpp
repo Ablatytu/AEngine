@@ -11,7 +11,7 @@ void SpriteRenderer2D::OnInspector()
 	RegisterField(color);
 	SetColor(color);
 }
-void SpriteRenderer2D::Start()
+void SpriteRenderer2D::Awake()
 {
 	transform = gameObject->GetComponent<Transform>();
 	material = AssetManager::LoadMaterial("standartUIMaterial");

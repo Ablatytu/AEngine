@@ -27,6 +27,10 @@ Window& Application::GetWindow()
 {
 	return window;
 }
+const bool Application::GetUpdateGameModuleComponents() const
+{
+	return UpdateGameModuleComponents;
+}
 void Application::UpdateGameModule(bool update)
 {
 	UpdateGameModuleComponents = update;
@@ -40,21 +44,6 @@ int Application::run()
 		glfwPollEvents();
 		Time::UpdateTime();
 		OnBeforeSceneUpdate();
-
-		if (!SceneManager::Get().GetActiveScene().AwakeAComponents.empty())
-		{
-			for (auto& component : SceneManager::Get().GetActiveScene().AwakeAComponents)
-			{
-				if (!component)
-					continue;
-				if (!component->gameObject)
-					continue;
-				if (component->gameObject->isDestroying)
-					continue;
-				component->Awake();
-			}
-			SceneManager::Get().GetActiveScene().AwakeAComponents.clear();
-		}
 		if (!SceneManager::Get().GetActiveScene().StartAComponents.empty())
 		{
 			for (auto& component : SceneManager::Get().GetActiveScene().StartAComponents)

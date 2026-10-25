@@ -7,6 +7,7 @@
 #include "../Renderer/Texture.h"
 #include "../core/Window.h"
 #include "../Renderer/Material.h"
+#include "../Renderer/RenderSystem.h"
 #include "ComponentStorage.h"
 #include "Transform.h"
 #include "Render.h"
@@ -212,7 +213,44 @@ namespace
 
 		return true;
 	}
+	void AE_CALL EngineGetTransformForward(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3* ae_vec3)
+	{
+		if (!ae_vec3)
+			return;
 
+		AEngineComponent* FindedComponent = ComponentStorage::Get().Get(ae_transform_component);
+		if (!FindedComponent)
+			return;
+
+		Transform* FindedTransform = dynamic_cast<Transform*>(FindedComponent);
+		if (!FindedTransform)
+			return;
+
+		glm::vec3 ae_forward = FindedTransform->forward();
+
+		ae_vec3->x = ae_forward.x;
+		ae_vec3->y = ae_forward.y;
+		ae_vec3->z = ae_forward.z;
+	}
+	void AE_CALL EngineGetTransformRight(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3* ae_vec3)
+	{
+		if (!ae_vec3)
+			return;
+
+		AEngineComponent* FindedComponent = ComponentStorage::Get().Get(ae_transform_component);
+		if (!FindedComponent)
+			return;
+
+		Transform* FindedTransform = dynamic_cast<Transform*>(FindedComponent);
+		if (!FindedTransform)
+			return;
+
+		glm::vec3 ae_right = FindedTransform->right();
+
+		ae_vec3->x = ae_right.x;
+		ae_vec3->y = ae_right.y;
+		ae_vec3->z = ae_right.z;
+	}
 	bool AE_CALL EngineSetTransformScale(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3 ae_vec3)
 	{
 		AEngineComponent* findedComponent = ComponentStorage::Get().Get(ae_transform_component);
@@ -276,6 +314,21 @@ namespace
 
 	}
 
+	void AE_CALL EngineSetCameraProjection(AE_COMPONENT_HANDLE ae_camera_handle, uint8_t ae_type_projection)
+	{
+		if (ae_type_projection > 1)
+			return;
+
+		AEngineComponent* findedComponent = ComponentStorage::Get().Get(ae_camera_handle);
+		if (!findedComponent)
+			return;
+
+		Camera* findedCamera = dynamic_cast<Camera*>(findedComponent);
+		if (!findedCamera)
+			return;
+
+		findedCamera->projectionType = ae_type_projection == 0 ? Camera::ProjectionType::Perspective : Camera::ProjectionType::Orthographic;
+	}
 	bool AE_CALL EngineCreateGameObject(const char* name, AE_GAMEOBJECT_HANDLE* ae_gameobject_handle)
 	{
 		if (!ae_gameobject_handle)
@@ -339,6 +392,45 @@ namespace
 		ae_material->name = name;
 		return true;
 	}
+	bool AE_CALL EngineGetRenderImage(const char* name, AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE* ae_renderimage, AE_COMPONENT_HANDLE ae_camera_handle)
+	{
+		if (!name || !ae_renderimage)
+			return false;
+
+		AEngineComponent* FindedComponent = ComponentStorage::Get().Get(ae_camera_handle);
+		if (!FindedComponent)
+			return false;
+
+		Camera* FindedCamera = dynamic_cast<Camera*>(FindedComponent);
+		if (!FindedCamera)
+			return false;
+
+		if (FindedCamera->GetFramebuffer(name))
+		{
+			ae_renderimage->name = name;
+			return true;
+		}
+
+		return false;
+	}
+	bool AE_CALL EngineRenderFrameBufferCustomShader(AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE ae_renderimage_source, AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE ae_renderimage_destination, AE_COMPONENT_HANDLE ae_camera_hadle, AE_GAME_RESOURCES_INFO::AE_MATERIAL ae_material)
+	{
+		Camera* FindedCameraComponent = static_cast<Camera*>(ComponentStorage::Get().Get(ae_camera_hadle));
+		Framebuffer* source = FindedCameraComponent->GetFramebuffer(ae_renderimage_source.name);
+		Framebuffer* output = FindedCameraComponent->GetFramebuffer(ae_renderimage_destination.name);
+		if (!ae_material.name)
+		{
+			RenderSystem::rs_AddGameCommand({ nullptr, source, output });
+			return true;
+		}
+		Material* mat = AssetManager::LoadMaterial(ae_material.name);
+		if (source && output && mat)
+		{
+			RenderSystem::rs_AddGameCommand({ mat, source, output });
+			return true;
+		}
+		return false;
+	}
 	bool AE_CALL EngineGetParticleSystemMaterial(AE_COMPONENT_HANDLE ae_component_handle, AE_GAME_RESOURCES_INFO::AE_MATERIAL* ae_material)
 	{
 		if (!ae_material)
@@ -365,18 +457,43 @@ namespace
 		if (!FindedParticleSystem)
 			return false;
 
-		FindedParticleSystem->material = AssetManager::CreateMaterial(ae_material.name, nullptr);
+		FindedParticleSystem->material = AssetManager::LoadMaterial(ae_material.name);
 		return true;
 	}
 	bool AE_CALL EngineSetMaterialTexture(AE_GAME_RESOURCES_INFO::AE_MATERIAL ae_material, const char* nameField, AE_GAME_RESOURCES_INFO::AE_TEXTURE ae_texture)
 	{
-		Material* FindedMaterial = AssetManager::CreateMaterial(ae_material.name, nullptr);
+		Material* FindedMaterial = AssetManager::LoadMaterial(ae_material.name);
 		if (!FindedMaterial)
 			return false;
 		Texture* FindedTexture = AssetManager::LoadTexture(ae_texture.name);
 
 		FindedMaterial->Set(nameField, FindedTexture);
 		return true;
+	}
+	void AE_CALL EngineSetMateterialValue(const char* ae_name_field_of_material, AE_GAME_RESOURCES_INFO::AE_MATERIAL ae_material, const void* ae_value, int ae_type_material_field)
+	{
+		if (!ae_name_field_of_material || !ae_value)
+			return;
+
+		Material* FindedMaterial = AssetManager::LoadMaterial(ae_material.name);
+		if (!FindedMaterial)
+			return;
+
+		switch (ae_type_material_field)
+		{
+		case 0:
+		{
+			FindedMaterial->Set(ae_name_field_of_material, *static_cast<const int*>(ae_value));
+			break;
+		}
+		case 1:
+		{
+			FindedMaterial->Set(ae_name_field_of_material, *static_cast<const bool*>(ae_value));
+			break;
+		}
+		default:
+			break;
+		}
 	}
 	bool AE_CALL EngineSetSpriteTexture(const char* name, AE_COMPONENT_HANDLE ae_component_handle)
 	{
@@ -411,7 +528,7 @@ namespace
 	{
 		return Input::GetKey(key);
 	}
-	bool AE_CALL EngineGetAxis(const char* AE_AXIS_NAME)
+	float AE_CALL EngineGetAxis(const char* AE_AXIS_NAME)
 	{
 		return Input::GetAxis(AE_AXIS_NAME);
 	}
@@ -429,6 +546,8 @@ namespace EngineAPI
 		ae_api.getTransformPosition = &EngineGetTransformPosition;
 		ae_api.getTransformRotation = &EngineGetTransformRotation;
 		ae_api.getTransformScale = &EngineGetTransformScale;
+		ae_api.getTransformForward = &EngineGetTransformForward;
+		ae_api.getTransformRight = &EngineGetTransformRight;
 
 		ae_api.setTransformRotation = &EngineSetTransformRotation;
 		ae_api.setTransformPosition = &EngineSetTransformPosition;
@@ -444,11 +563,15 @@ namespace EngineAPI
 		ae_api.setParticleSystemMaterial = &EngineSetParticleSystemMaterial;
 		ae_api.getParticleSystemMaterial = &EngineGetParticleSystemMaterial;
 		ae_api.setMaterialTexture = &EngineSetMaterialTexture;
+		ae_api.setMaterialValueField = &EngineSetMateterialValue;
 		ae_api.getKey = &EngineGetKey;
 		ae_api.getAxis = &EngineGetAxis;
 		ae_api.destroyGameObject = &EngineDestroyGameObject;
 		ae_api.isGameObject = &EngineIsGameObject;
 		ae_api.getShader = &EngineGetShader;
 		ae_api.getMaterial = &EngineGetMaterial;
+		ae_api.getRenderImage = &EngineGetRenderImage;
+		ae_api.blitRenderFrame = &EngineRenderFrameBufferCustomShader;
+		ae_api.setCameraProjection = &EngineSetCameraProjection;
 	}
 }

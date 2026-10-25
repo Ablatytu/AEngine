@@ -2,9 +2,10 @@
 #include "EngineAPIContext.h"
 #include "ComponentStorage.h"
 #include "TestComponent.h"
+#include "Camera.h"
 #include "GameObject.h"
 #include "ComponentSystem.h"
-
+#include "RenderImage.h"
 
 static void AE_CALL GameUpdate(float deltaTime)
 {
@@ -13,6 +14,11 @@ static void AE_CALL GameUpdate(float deltaTime)
 static void AE_CALL GameStart()
 {
 	ComponentStorage::Get().StartComponents();
+}
+static bool AE_CALL GameOnRenderImage(AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE source, AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE destionation, AE_COMPONENT_HANDLE cam, AE_GAMEOBJECT_HANDLE ae_gameobject_handle)
+{
+	return ComponentStorage::Get().OnRenderImageComponents(RenderImage(source), RenderImage(destionation), cam, ae_gameobject_handle);
+
 }
 static void AE_CALL GameShutdown()
 {
@@ -23,6 +29,7 @@ static void AE_CALL GameShutdown()
 	ComponentSystem::Get().RemoveAllGameAComponents();
 	ENGINEAPICONTEXT::UnBind();
 }
+
 static const char* AE_CALL GameGetRegisteredAComponentName(unsigned int ID)
 {
 	return ComponentSystem::Get().GetAComponentName(ID);
@@ -64,6 +71,7 @@ static void AE_CALL GameRemoveAComponentsFromGameObject(AE_GAMEOBJECT_HANDLE ae_
 {
 	ComponentStorage::Get().RemoveAllFromGameObject(ae_gameobject_handle);
 }
+
 AE_EXPORT bool AE_CALL AE_GAME_API(const AE_API* AEngineAPI, AE_GAMEAPI* GameAPI)
 {
 	if (!AEngineAPI || !GameAPI)
@@ -88,6 +96,7 @@ AE_EXPORT bool AE_CALL AE_GAME_API(const AE_API* AEngineAPI, AE_GAMEAPI* GameAPI
 	GameAPI->clearGameAComponents = &GameRemoveAllAComponents;
 	GameAPI->removeAComponent = &GameRemoveAComponent;
 	GameAPI->removeAComponentsFromGameObject = &GameRemoveAComponentsFromGameObject;
+	GameAPI->onRenderImage = &GameOnRenderImage;
 
 	ENGINEAPICONTEXT::Get()->log("Hello, bitch");
 	return true;

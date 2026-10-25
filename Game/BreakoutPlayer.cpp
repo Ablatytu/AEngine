@@ -7,10 +7,12 @@
 #include "BreakoutLevelManager.h"
 #include "ParticleSystem.h"
 #include "Material.h"
+#include "GraphicsAPI.h"
 
 void BreakoutPlayer::Start()
 {
 	transform = GetGameObject().GetAComponent<Transform>();
+	spritePlayer = GetGameObject().GetAComponent<SpriteRenderer2D>();
 	GameObject ball = GameObject::Create("Ball");
 	AComponentRef<SpriteRenderer2D> ballSprite = ball.AddAComponent<SpriteRenderer2D>();
 	ballSprite->setTexture(ResourceManager::Load<Texture>("Assets/BreakoutGame/BreakoutPlayerTalisman.png"));
@@ -24,7 +26,6 @@ void BreakoutPlayer::Start()
 	Texture ParticleTexture = ResourceManager::Load<Texture>("Assets/BreakoutGame/particle.png");
 	ParticleMaterial.SetTexture("particleTexture", ParticleTexture);
 	BallParticle->SetMaterial(ParticleMaterial);
-
 }
 void BreakoutPlayer::Update(float deltaTime)
 {
@@ -65,10 +66,14 @@ void BreakoutPlayer::Update(float deltaTime)
 		Vector3 posPlatform = transform->GetPosition();
 		Vector3 scalePlatform = transform->GetScale();
 		ballPlayer->Reset(Vector2(posPlatform.x, posPlatform.y), Vector2(scalePlatform.x, scalePlatform.y));
+		spritePlayer->setColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		transform->SetScale(Vector3(1.0f, 0.2f, 1.0f));
 		return;
 	}
 	uiController->Levels[0]->DoCollision(ballPlayer->transform, ballPlayer);
+	uiController->Levels[0]->DoCollisionWithPowerUps(ballPlayer, transform);
 	uiController->Levels[0]->DoCollisionWithPaddle(ballPlayer->transform, transform, ballPlayer);
+	uiController->Levels[0]->UpdatePowerUps(ballPlayer, spritePlayer, deltaTime);
 }
 
 void BreakoutPlayer::OnInspector()

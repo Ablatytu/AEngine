@@ -47,6 +47,16 @@ namespace RenderSystem
 		SurfaceType surfacetype = SurfaceType::opaque;
 		RenderQueue renderqueue = RenderQueue::ForwardOpaque;
 	};
+	namespace GameCommands
+	{
+		struct RenderFramebufferWithCustomMaterial
+		{
+			Material* customMaterial;
+			Framebuffer* source;
+			Framebuffer* out;
+		};
+		extern RenderFramebufferWithCustomMaterial RFWCM;
+	};
 	struct Batch2DIn3D
 	{
 		std::vector<glm::mat4> models;
@@ -88,6 +98,7 @@ namespace RenderSystem
 	void rs_RenderSkyBox(RenderContext& context);
 	void rs_RenderShadowMaps(RenderContext& context, std::vector<Batch>& batches);
 	void rs_CopyDepthBufferFromGBuffer(RenderContext& context, Framebuffer* buffer);
+	AENGINE_API void rs_CopyColorBufferToOtherBuffer(Framebuffer* frameBufferFrom, Framebuffer* frameBufferTo, int width, int height);
 	void rs_RenderBatchTransparent(RenderContext& context, std::vector<Batch>& batches);
 	void rs_LoadShadowsInShader(RenderContext& context, Shader* shader, unsigned int& slotTextureShadow);
 	void rs_RenderSSAO(RenderContext& context);
@@ -109,6 +120,9 @@ namespace RenderSystem
 	void rs_CollectbuffersFromCamera(Camera& camera);
 	void rs_RenderParticles(RenderContext& context);
 	void rs_CreateParticleMesh(QuadParticleMesh& particleMesh);
+	void rs_AppendPostProcess(RenderContext& context, Framebuffer* sceneHDR);
+	AENGINE_API void rs_AddGameCommand(GameCommands::RenderFramebufferWithCustomMaterial newRFWCM);
+	AENGINE_API void rs_ExecuteGameCommands(RenderContext& context);
 	AENGINE_API void rs_Present(RenderContext& context, Framebuffer* sceneHDR, Framebuffer* targetHDR = nullptr);
-	AENGINE_API void rs_ClearFramebuffer(Framebuffer* ClearFramebuffer, float width, float height);
+	AENGINE_API void rs_ClearFramebuffer(Framebuffer* ClearFramebuffer, float width, float height, unsigned int mask);
 };

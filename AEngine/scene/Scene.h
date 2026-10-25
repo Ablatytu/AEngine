@@ -28,7 +28,6 @@ class Scene
 	public:
 		std::vector<std::unique_ptr<GameObject>> objects;
 		std::vector<AEngineComponent*> AComponents;
-		std::vector<AEngineComponent*> AwakeAComponents;
 		std::vector<AEngineComponent*> StartAComponents;
 		std::vector<Render*> renders;
 		std::vector<SpriteRenderer2D*> sprites;

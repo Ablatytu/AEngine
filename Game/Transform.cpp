@@ -66,3 +66,22 @@ void Transform::Rotate(const Vector3& rotate) const
 	if (api)
 		api->setTransformRotate(ae_component_handle, AE_VEC3{ rotate.x, rotate.y, rotate.z });
 }
+
+Vector3 Transform::GetForward() const
+{
+	AE_VEC3 returnedForward = {};
+	const AE_API* ae_api = ENGINEAPICONTEXT::Get();
+	if (ae_api)
+		ae_api->getTransformForward(ae_component_handle, &returnedForward);
+
+	return Vector3(returnedForward.x, returnedForward.y, returnedForward.z);
+}
+Vector3 Transform::GetRight() const
+{
+	AE_VEC3 returnedRight= {};
+	const AE_API* ae_api = ENGINEAPICONTEXT::Get();
+	if (ae_api)
+		ae_api->getTransformRight(ae_component_handle, &returnedRight);
+
+	return Vector3(returnedRight.x, returnedRight.y, returnedRight.z);
+}

@@ -460,6 +460,10 @@ std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path, boo
 							NewComponent = nullptr;
 
 						}
+						if (nameComponent == "Transform")
+						{
+							newGameObject->GetComponent<Transform>()->UpdateMatrices();
+						}
 					}
 					else if (indexNewGameComponent != -1)
 					{

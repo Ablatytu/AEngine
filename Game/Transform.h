@@ -11,6 +11,8 @@ public:
 	Vector3 GetPosition() const;
 	Vector3 GetRotation() const;
 	Vector3 GetScale() const;
+	Vector3 GetForward() const;
+	Vector3 GetRight() const;
 
 	void SetPosition(const Vector3& position) const;
 	void SetRotation(const Vector3& rotation) const;

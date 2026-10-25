@@ -1,6 +1,9 @@
 #include "ComponentStorage.h"
 #include "AComponent.h"
 #include "EngineAPIContext.h"
+#include "RenderImage.h"
+#include "AComponentRef.h"
+#include "Camera.h"
 
 ComponentStorage& ComponentStorage::Get()
 {
@@ -13,6 +16,29 @@ AE_COMPONENT_HANDLE ComponentStorage::ReturnComponentHandle(AComponent* componen
 	return component->GetHandle();
 }
 
+bool ComponentStorage::OnRenderImageComponents(RenderImage source, RenderImage destionation, AE_COMPONENT_HANDLE ae_camera_handle, AE_GAMEOBJECT_HANDLE ae_gameobject_handle)
+{
+	const AE_API* ae_api = ENGINEAPICONTEXT::Get();
+	if (!ae_api)
+		return false;
+
+	AComponent* findedComponent = nullptr;
+	AComponentRef<Camera> cam(ae_camera_handle);
+	if (!cam)
+		return false;
+	for (ComponentSlot& slot : slots)
+	{
+		if (!slot.component) continue;
+		if (!ae_api->isGameObject(slot.component->owner)) continue;
+		if (CheckGameObjectHandle(ae_gameobject_handle, slot))
+			continue;
+		if(slot.component->OnRenderImage(&source, &destionation, &*cam))
+			findedComponent = slot.component.get();
+	}
+	if (findedComponent)
+		return true;
+	return false;
+}
 void ComponentStorage::UpdateComponents(float deltaTime)
 {
 	const AE_API* ae_api = ENGINEAPICONTEXT::Get();

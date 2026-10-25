@@ -85,7 +85,6 @@ Scene::Scene()
 void Scene::EraseScene()
 {
 	AComponents.clear();
-	AwakeAComponents.clear();
 	StartAComponents.clear();
 	GameModule::GETGAMECONTEXT().clearGameAComponents();
 	renders.clear();

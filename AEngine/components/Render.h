@@ -22,7 +22,7 @@ public:
 	Material* material = nullptr;
 	Mesh* mesh;
 	Transform* transform;
-	void Start() override;
+	void Awake() override;
 	void OnInspector() override;
 };
 

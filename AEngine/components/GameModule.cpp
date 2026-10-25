@@ -5,6 +5,11 @@
 #include "../scene/Scene.h"
 #include "../../GameAPI/GameABI.h"
 #include "../Renderer/GameObjectHandle.h"
+#include "../Renderer/Framebuffer.h"
+#include "../Renderer/RenderContext.h"
+#include "../components/Camera.h"
+#include "../Renderer/GameObject.h"
+
 #include "EngineEntry.h"
 #ifdef __APPLE__
 	#include <dlfcn.h>
@@ -371,6 +376,11 @@ namespace GameModule
 			return;
 
 		game_api.update(deltaTime);
+	}
+	bool OnRenderImage(RenderContext& context, const char* source, const char* destionation)
+	{
+		if (!context.camera || !source || !destionation || !module || !game_api.onRenderImage) return false;
+		return game_api.onRenderImage({ source }, { destionation }, context.camera->handle, context.camera->gameObject->getHandle());
 	}
 	//void CheckForChanges()
 	//{

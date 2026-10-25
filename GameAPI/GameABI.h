@@ -72,6 +72,10 @@ namespace AE_GAME_RESOURCES_INFO
 	{
 		const char* name = nullptr;
 	};
+	struct AE_RENDERIMAGE
+	{
+		const char* name = nullptr;
+	};
 }
 
 inline bool AE_IsNull(AE_GAMEOBJECT_HANDLE ae_gameobject_handle)
@@ -94,15 +98,22 @@ enum AE_COMPONENT_TYPE : uint32_t
 	AE_PARTICLESYSTEM = 5
 };
 
+
+using AE_CUSTOMRENDERFRAME_FN = bool (AE_CALL*)(AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE ae_renderimage_source, AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE ae_renderimage_destination, AE_COMPONENT_HANDLE ae_camera_hadle, AE_GAME_RESOURCES_INFO::AE_MATERIAL ae_material);
+
 using AE_GET_TEXTURE_FN = bool (AE_CALL*)(const char* name, AE_GAME_RESOURCES_INFO::AE_TEXTURE* texture);
 using AE_GET_SHADER_FN = bool(AE_CALL*)(const char* vertexPath, const char* fragmentPath, AE_GAME_RESOURCES_INFO::AE_SHADER* infoShader);
 using AE_GET_MATERIAL_FN = bool(AE_CALL*)(const char* name, AE_GAME_RESOURCES_INFO::AE_MATERIAL* ae_material);
+using AE_GET_RENDERIMAGE_FN = bool (AE_CALL*)(const char* name, AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE* ae_renderimage, AE_COMPONENT_HANDLE ae_camera_handle);
 
 using AE_CREATE_GAMEOBJECT_FN = bool (AE_CALL*)(const char* name, AE_GAMEOBJECT_HANDLE* ae_gameobject_handle);
 using AE_DESTROY_GAMEOBJECT_FN = void (AE_CALL*)(AE_GAMEOBJECT_HANDLE ae_gameobject_handle);
 
 using AE_GETCOMPONENT_FN = bool (AE_CALL*)(AE_GAMEOBJECT_HANDLE ae_gameobject_handle, AE_COMPONENT_HANDLE* ae_component_handle, AE_COMPONENT_TYPE ae_component_type);
 using AE_ADDCOMPONENT_FN = bool (AE_CALL*)(AE_GAMEOBJECT_HANDLE ae_gameobject_handle, AE_COMPONENT_HANDLE* ae_component_handle, AE_COMPONENT_TYPE ae_component_type);
+
+using AE_SETCAMERAPROJECTION_FN = void (AE_CALL*)(AE_COMPONENT_HANDLE ae_camera_handle, uint8_t ae_type_projection);
+
 using AE_ISENGINECOMPONENT_FN = bool (AE_CALL*)(AE_COMPONENT_HANDLE ae_component_handle);
 using AE_ISGAMEOBJECT_FN = bool (AE_CALL*)(AE_GAMEOBJECT_HANDLE ae_gameobject_handle);
 
@@ -126,7 +137,7 @@ struct AE_VEC4
 };
 
 using AE_GET_KEY_FN = bool (AE_CALL*)(int32_t key);
-using AE_GET_AXIS_FN = bool (AE_CALL*)(const char* AE_AXIS_NAME);
+using AE_GET_AXIS_FN = float (AE_CALL*)(const char* AE_AXIS_NAME);
 
 using AE_SET_SPRITE_TEXTURE_FN = bool (AE_CALL*)(const char* name, AE_COMPONENT_HANDLE ae_component_handle);
 using AE_SET_SPRITE_COLOR_FN = bool (AE_CALL*)(AE_VEC4 color, AE_COMPONENT_HANDLE ae_component_handle);
@@ -135,10 +146,14 @@ using AE_GET_PARTICLE_SYSTEM_MATERIAL_FN = bool(AE_CALL*)(AE_COMPONENT_HANDLE ae
 using AE_SET_PARTICLE_SYSTEM_MATERIAL_FN = bool(AE_CALL*)(AE_COMPONENT_HANDLE ae_component_handle, AE_GAME_RESOURCES_INFO::AE_MATERIAL ae_material);
 
 using AE_SET_MATERIAL_TEXTURE = bool (AE_CALL*)(AE_GAME_RESOURCES_INFO::AE_MATERIAL ae_material, const char* nameField, AE_GAME_RESOURCES_INFO::AE_TEXTURE ae_texture);
+using AE_SET_MATERIAL_VALUE_FIELD = void (AE_CALL*)(const char* ae_name_field_of_material, AE_GAME_RESOURCES_INFO::AE_MATERIAL ae_material, const void* ae_value, int ae_type_material_field);
 
 using AE_GET_TRANSFORM_POSITION_FN = bool (AE_CALL*)(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3* ae_vec3);
 using AE_GET_TRANSFORM_ROTATION_FN = bool (AE_CALL*)(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3* ae_vec3);
 using AE_GET_TRANSFORM_SCALE_FN = bool (AE_CALL*)(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3* ae_vec3);
+using AE_GET_TRANSFORM_RIGHT_FN = void (AE_CALL*)(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3* ae_vec3);
+using AE_GET_TRANSFORM_FORWARD_FN = void (AE_CALL*)(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3* ae_vec3);
+
 using AE_SET_TRANSFORM_POSITION_FN = bool (AE_CALL*)(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3 ae_vec3);
 using AE_SET_TRANSFORM_ROTATION_FN = bool (AE_CALL*)(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3 ae_vec3);
 using AE_SET_TRANSFORM_SCALE_FN = bool (AE_CALL*)(AE_COMPONENT_HANDLE ae_transform_component, AE_VEC3 ae_vec3);
@@ -165,15 +180,20 @@ struct AE_API
 	AE_SET_PARTICLE_SYSTEM_MATERIAL_FN setParticleSystemMaterial = NULL;
 
 	AE_SET_MATERIAL_TEXTURE setMaterialTexture = NULL;
+	AE_SET_MATERIAL_VALUE_FIELD setMaterialValueField = NULL;
 
 	AE_GET_TRANSFORM_POSITION_FN getTransformPosition = NULL;
 	AE_GET_TRANSFORM_ROTATION_FN getTransformRotation = NULL;
 	AE_GET_TRANSFORM_SCALE_FN getTransformScale = NULL;
+	AE_GET_TRANSFORM_FORWARD_FN getTransformForward = NULL;
+	AE_GET_TRANSFORM_RIGHT_FN getTransformRight = NULL;
 
 	AE_SET_TRANSFORM_POSITION_FN setTransformPosition = NULL;
 	AE_SET_TRANSFORM_ROTATION_FN setTransformRotation = NULL;
 	AE_SET_TRANSFORM_SCALE_FN setTransformScale = NULL;
 	AE_SET_TRANSFORM_ROTATE_FN setTransformRotate = NULL;
+
+	AE_SETCAMERAPROJECTION_FN setCameraProjection = NULL;
 
 	AE_CREATE_GAMEOBJECT_FN createGameObject = NULL;
 	AE_DESTROY_GAMEOBJECT_FN destroyGameObject = NULL;
@@ -181,6 +201,10 @@ struct AE_API
 	AE_GET_TEXTURE_FN getTexture = NULL;
 	AE_GET_SHADER_FN getShader = NULL;
 	AE_GET_MATERIAL_FN getMaterial = NULL;
+	AE_GET_RENDERIMAGE_FN getRenderImage = NULL;
+
+
+	AE_CUSTOMRENDERFRAME_FN blitRenderFrame = NULL;
 };
 
 
@@ -188,6 +212,7 @@ struct AE_API
 using AE_GAME_SHUTDOWN_FN = void(AE_CALL*)();
 using AE_GAME_UPDATE_FN = void(AE_CALL*)(float deltaTime);
 using AE_GAME_START_FN = void(AE_CALL*)();
+using AE_GAME_RENDERIMAGE_FN = bool(AE_CALL*)(AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE source, AE_GAME_RESOURCES_INFO::AE_RENDERIMAGE destination, AE_COMPONENT_HANDLE ae_camera_handle, AE_GAMEOBJECT_HANDLE ae_gameobject_handle);
 
 using AE_GAME_GET_REGISTERED_ACOMPONENT_NAME_FN = const char*(AE_CALL*)(unsigned int ID);
 using AE_GAME_GET_REGISTERED_ACOMPONENTS_COUNT_FN = const int(AE_CALL*)();
@@ -206,6 +231,7 @@ struct AE_GAMEAPI
 	AE_GAME_SHUTDOWN_FN shutdown = NULL;
 	AE_GAME_UPDATE_FN update = NULL;
 	AE_GAME_START_FN start = NULL;
+	AE_GAME_RENDERIMAGE_FN onRenderImage = NULL;
 
 	AE_GAME_CLEAR_ACOMPONENTS clearGameAComponents = NULL;
 	AE_GAME_GET_REGISTERED_ACOMPONENTS_COUNT_FN getRegisteredAComponentsCount = NULL;

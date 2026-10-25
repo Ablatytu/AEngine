@@ -9,7 +9,7 @@
 #include "../Renderer/Buffer.h"
 #include "../Renderer/RenderSystem.h"
 
-void Camera::Start()
+void Camera::Awake()
 {
 	transform = gameObject->GetComponent<Transform>();
 	viewMatrix = glm::lookAt(transform->position, transform->position + transform->forward(), transform->up());

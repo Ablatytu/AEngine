@@ -11,8 +11,8 @@
 #include "../Renderer/GameObjectStorage.h"
 GameObject::GameObject()
 {
-	transform = AddComponent<Transform>();
 	handle = GameObjectStorage::Get().Register(this);
+	transform = AddComponent<Transform>();
 }
 void GameObject::WillDestroy()
 {
@@ -31,20 +31,20 @@ GameObject::~GameObject()
 AEngineComponent* GameObject::AttachComponent(std::unique_ptr<AEngineComponent> component)
 {
 	component->gameObject = this;
-	if (auto* camera = dynamic_cast<Camera*>(component.get()))
-		SceneManager::Get().GetActiveScene().RegisterCamera(camera);
-	if (auto* render = dynamic_cast<Render*>(component.get()))
-		SceneManager::Get().GetActiveScene().renders.push_back(render);
-	if (auto* sprite = dynamic_cast<SpriteRenderer2D*>(component.get()))
-		SceneManager::Get().GetActiveScene().sprites.push_back(sprite);
-	if (auto* particleSystem = dynamic_cast<ParticleSystem*>(component.get()))
-		SceneManager::Get().GetActiveScene().ParticleSystems.push_back(particleSystem);
-	SceneManager::Get().GetActiveScene().AwakeAComponents.push_back(component.get());
-	SceneManager::Get().GetActiveScene().StartAComponents.push_back(component.get());
-	SceneManager::Get().GetActiveScene().AComponents.push_back(component.get());
 	AEngineComponent* ptr = component.get();
 	ptr->handle = ComponentStorage::Get().Register(ptr);
 	components.push_back(std::move(component));
+	if (auto* camera = dynamic_cast<Camera*>(ptr))
+		SceneManager::Get().GetActiveScene().RegisterCamera(camera);
+	if (auto* render = dynamic_cast<Render*>(ptr))
+		SceneManager::Get().GetActiveScene().renders.push_back(render);
+	if (auto* sprite = dynamic_cast<SpriteRenderer2D*>(ptr))
+		SceneManager::Get().GetActiveScene().sprites.push_back(sprite);
+	if (auto* particleSystem = dynamic_cast<ParticleSystem*>(ptr))
+		SceneManager::Get().GetActiveScene().ParticleSystems.push_back(particleSystem);
+	SceneManager::Get().GetActiveScene().StartAComponents.push_back(ptr);
+	SceneManager::Get().GetActiveScene().AComponents.push_back(ptr);
+	ptr->Awake();
 	return ptr;
 }
 void GameObject::RemoveComponent(AEngineComponent* component)
@@ -64,7 +64,6 @@ void GameObject::RemoveComponent(AEngineComponent* component)
 			if (auto d = dynamic_cast<ParticleSystem*>(component))
 				ClearComponentsVector(SceneManager::Get().GetActiveScene().ParticleSystems, d);
 			ClearComponentsVector(SceneManager::Get().GetActiveScene().AComponents, component);
-			ClearComponentsVector(SceneManager::Get().GetActiveScene().AwakeAComponents, component);
 			ClearComponentsVector(SceneManager::Get().GetActiveScene().StartAComponents, component);
 			components.erase(components.begin() + i);
 			break;
