@@ -1,3 +1,0 @@
-C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/glfw-subbuild/CMakeFiles/glfw-populate.dir
-C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/glfw-subbuild/CMakeFiles/edit_cache.dir
-C:/Users/Stanislav/Desktop/AEngineGitHub/AEngine/out/build/x64-Release/_deps/glfw-subbuild/CMakeFiles/rebuild_cache.dir

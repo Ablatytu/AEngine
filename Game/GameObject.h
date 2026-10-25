@@ -47,7 +47,7 @@ public:
 			if (!found)
 				return {};
 
-			return AComponentRef<t>(componentHandle);
+			return AComponentRef<t>(componentHandle, handle);
 		}
 		else
 		{
@@ -74,7 +74,7 @@ public:
 
 			if (!found)
 				return {};
-			return AComponentRef<t>(componentHandle);
+			return AComponentRef<t>(componentHandle, handle);
 		}
 		else
 		{

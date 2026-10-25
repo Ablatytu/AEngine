@@ -3,7 +3,7 @@
 #include "../Renderer/Mesh.h"   
 #include "../Renderer/Shader.h"
 
-void Render::Start()
+void Render::Awake()
 {
 	transform = gameObject->GetComponent<Transform>();
 }

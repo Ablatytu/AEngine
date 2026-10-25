@@ -17,9 +17,9 @@
 #include "../core/ComponentSystem.h"
 #include "../components/GameModule.h"
 #include "AssetManager.h"
-#include <glm/glm/glm.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
-#include <glm/glm/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <yaml-cpp/yaml.h>
 #include <fstream>
 #include <iostream>
@@ -459,6 +459,10 @@ std::unique_ptr<Scene> SceneSerializer::Deserialize(const std::string& path, boo
 							NewComponent->fields.clear();
 							NewComponent = nullptr;
 
+						}
+						if (nameComponent == "Transform")
+						{
+							newGameObject->GetComponent<Transform>()->UpdateMatrices();
 						}
 					}
 					else if (indexNewGameComponent != -1)

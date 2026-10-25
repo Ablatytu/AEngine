@@ -24,9 +24,9 @@
 #include <AMath.h>
 #include <algorithm>
 #include <map>
-#include <glm/glm/glm.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
-#include <glm/glm/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <random>
 
 #define MAXPOINTLIGHTS 192
@@ -35,6 +35,10 @@
 
 namespace RenderSystem
 {
+	namespace GameCommands
+	{
+		RenderFramebufferWithCustomMaterial RFWCM = {};
+	}
 	float quadVertices[24] = {
 	-1.0f,  1.0f,  0.0f, 1.0f,
 	-1.0f, -1.0f,  0.0f, 0.0f,
@@ -119,7 +123,7 @@ namespace RenderSystem
 				BatchKey foundBatchKey{};
 				foundBatchKey.material = render->material;
 				foundBatchKey.mesh = render->mesh;
-				if (render == context.selectedObject)  //еще один костыль, пока не придумаю другой способ для обводки
+				if (render == context.selectedObject)  //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					foundBatchKey.rendertime = static_cast<int>(RenderTime::stencilRender);
 				else
 					foundBatchKey.rendertime = static_cast<int>(render->renderLayer);
@@ -161,7 +165,7 @@ namespace RenderSystem
 					}
 					else
 						newBatch->renderqueue = RenderQueue::ForwardTransparent;
-					if (render == context.selectedObject) { newBatch->rendertime = RenderTime::stencilRender; newBatch->pos.push_back(render->transform->position); newBatch->model.push_back(render->transform->GetModelMatrix());  continue; }  //Потом придумаю другой способ для selectedObject, пока что пусть будет "костыль"
+					if (render == context.selectedObject) { newBatch->rendertime = RenderTime::stencilRender; newBatch->pos.push_back(render->transform->position); newBatch->model.push_back(render->transform->GetModelMatrix());  continue; }  //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ selectedObject, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 						
 				}
 				else
@@ -642,6 +646,14 @@ namespace RenderSystem
 				glBindVertexArray(0);
 			}
 		}
+	}
+	void rs_CopyColorBufferToOtherBuffer(Framebuffer* frameBufferFrom, Framebuffer* frameBufferTo, int width, int height)
+	{
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, frameBufferFrom->GetFBO());
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frameBufferTo->GetFBO());
+
+		glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 	void rs_CopyDepthBufferFromGBuffer(RenderContext& context, Framebuffer* buffer)
 	{
@@ -1261,10 +1273,8 @@ namespace RenderSystem
 			finalBloom->UnBind();
 		}
 	}
-	void rs_Present(RenderContext& context, Framebuffer* sceneHDR, Framebuffer* targetHDR)
+	void rs_AppendPostProcess(RenderContext& context, Framebuffer* sceneHDR)
 	{
-		if (targetHDR)
-			targetHDR->Bind();
 		sceneHDR->UseShader();
 		sceneHDR->GetShader()->setBool("HDR", context.HDR);
 		float exposure = 1.0f;
@@ -1284,6 +1294,7 @@ namespace RenderSystem
 		sceneHDR->GetShader()->setBool("autoExposure", AutoExposure);
 		sceneHDR->GetShader()->setBool("Bloom", Bloom);
 
+		sceneHDR->GetShader()->setInt("ScreenTexture", 0);
 		sceneHDR->GetShader()->setInt("ExposureTexture", 1);
 		sceneHDR->GetShader()->setInt("BloomTexture", 2);
 
@@ -1298,9 +1309,45 @@ namespace RenderSystem
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, finalBloom->GetColorBuffer(0));
 		}
+	}
+	void rs_AddGameCommand(GameCommands::RenderFramebufferWithCustomMaterial newRFWCM)
+	{
+		GameCommands::RFWCM = newRFWCM;
+	}
+	void rs_Present(RenderContext& context, Framebuffer* sceneHDR, Framebuffer* targetHDR)
+	{
+		if (targetHDR)
+			targetHDR->Bind();
+		rs_AppendPostProcess(context, sceneHDR);
 		rs_RenderQuad();
 		if (targetHDR)
 			targetHDR->UnBind();
+	}
+	void rs_ExecuteGameCommands(RenderContext& context)
+	{
+		if (!GameCommands::RFWCM.out || !GameCommands::RFWCM.source)
+		{
+			GameCommands::RFWCM = {};
+			return;
+		}
+		if (GameCommands::RFWCM.customMaterial && GameCommands::RFWCM.customMaterial->GetShader())
+		{
+			GameCommands::RFWCM.out->Bind();
+			GameCommands::RFWCM.customMaterial->GetShader()->Update();
+			GameCommands::RFWCM.customMaterial->UpdateMaterial();
+			GameCommands::RFWCM.customMaterial->GetShader()->setInt("ScreenTexture", 0);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, GameCommands::RFWCM.source->GetColorBuffer(0));
+
+			rs_RenderQuad();
+
+			GameCommands::RFWCM.out->UnBind();
+		}
+		else
+		{
+			rs_CopyColorBufferToOtherBuffer(GameCommands::RFWCM.source, GameCommands::RFWCM.out, GameCommands::RFWCM.out->GetWidth(), GameCommands::RFWCM.out->GetHeight());
+		}
+		GameCommands::RFWCM = {};
 	}
 	void rs_RenderEnvironmentHDR(Cubemap& cubemap, HDRTexture& hdrTexture, int width, int height)
 	{
@@ -1463,14 +1510,14 @@ namespace RenderSystem
 		glBindTexture(GL_TEXTURE_2D, BRDFLUTTexture->GetTexturePixels());
 		slot += 1;
 	}
-	void rs_ClearFramebuffer(Framebuffer* ClearFramebuffer, float width, float height)
+	void rs_ClearFramebuffer(Framebuffer* ClearFramebuffer, float width, float height, unsigned int mask)
 	{
 		ClearFramebuffer->Bind();
 
 		glViewport(0, 0, width, height);
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(mask);
 
 		ClearFramebuffer->UnBind();
 	}

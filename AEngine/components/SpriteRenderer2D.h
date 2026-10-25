@@ -21,6 +21,6 @@ public:
 	Texture* texture = nullptr;
 	Transform* transform = nullptr;
 	Material* material = nullptr;
-	void Start() override;
+	void Awake() override;
 	void OnInspector() override;
 };

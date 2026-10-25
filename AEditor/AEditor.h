@@ -15,6 +15,7 @@ public:
 private:
 	void OnInit() override;
 	void OnShutdown() override;
+	void OnStartFrame() override;
 	void OnBeforeSceneUpdate() override;
 	void OnRender() override;
 private:

@@ -14,9 +14,9 @@
 #include "../Renderer/RenderContext2D.h"
 #include <unordered_set>
 #include <algorithm>
-#include <glm/glm/glm.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
-#include <glm/glm/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 RenderContext Scene::CollectRenderContext(Camera* camera)
 {
@@ -85,7 +85,6 @@ Scene::Scene()
 void Scene::EraseScene()
 {
 	AComponents.clear();
-	AwakeAComponents.clear();
 	StartAComponents.clear();
 	GameModule::GETGAMECONTEXT().clearGameAComponents();
 	renders.clear();

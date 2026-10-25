@@ -1,9 +1,9 @@
 #pragma once
 #include "AEngineComponent.h"
-#include <glm/glm/glm.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
-#include <glm/glm/gtc/type_ptr.hpp>
-#include <glm/glm/gtc/matrix_inverse.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_inverse.hpp>
 #include <memory>
 #include <string>
 #include <vector>
@@ -43,7 +43,7 @@ public:
 	AENGINE_API Framebuffer* GetFramebuffer(std::string name);
 	AENGINE_API std::vector<Framebuffer*> GetFramebuffers();
 
-	AENGINE_API void Start() override;
+	AENGINE_API void Awake() override;
 	AENGINE_API void OnInspector() override;
 	void RecultivateProjection(); 
 	AENGINE_API void SetViewport(int width, int height);

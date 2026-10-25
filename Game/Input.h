@@ -5,4 +5,5 @@ class Input
 {
 public:
 	static bool GetKey(KeyCode keycode);
+	static float GetAxis(const char* nameAxis);
 };

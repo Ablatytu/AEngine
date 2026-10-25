@@ -12,6 +12,7 @@ public:
 	static Application& Get();
 	virtual ~Application() = default;
 	virtual void OnSceneLoaded() {};
+	const bool GetUpdateGameModuleComponents() const;
 	void UpdateGameModule(bool update);
 	int run();
 	void close();
@@ -23,6 +24,7 @@ private:
 	virtual void OnInit() {}
 	virtual void OnShutdown() {}
 
+	virtual void OnStartFrame() {};
 	virtual void OnBeforeSceneUpdate() {}
 	virtual void OnAfterSceneUpdate() {}
 

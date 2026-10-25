@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include <glm/glm/glm.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
-#include <glm/glm/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <string>
 #include "../core/AEngineAPI.h"
 #include "../../GameAPI/GameABI.h"
@@ -28,7 +28,6 @@ class Scene
 	public:
 		std::vector<std::unique_ptr<GameObject>> objects;
 		std::vector<AEngineComponent*> AComponents;
-		std::vector<AEngineComponent*> AwakeAComponents;
 		std::vector<AEngineComponent*> StartAComponents;
 		std::vector<Render*> renders;
 		std::vector<SpriteRenderer2D*> sprites;

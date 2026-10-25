@@ -6,6 +6,8 @@
 #include "EngineAPIContext.h"
 
 class AComponent;
+class RenderImage;
+class Camera; 
 
 class ComponentStorage
 {
@@ -105,6 +107,7 @@ public:
 	void RemoveAllGameComponents();
 	void UpdateComponents(float deltaTime);
 	void StartComponents();
+	bool OnRenderImageComponents(RenderImage source, RenderImage destionation, AE_COMPONENT_HANDLE ae_camera_handle, AE_GAMEOBJECT_HANDLE ae_gameobject_handle);
 	AE_COMPONENT_HANDLE ReturnComponentHandle(AComponent* component);
 	int ReturnComponentCountFromGameObject(AE_GAMEOBJECT_HANDLE gameObject_handle);
 	void ReturnComponentInfoFromGameObject(AE_GAMEOBJECT_HANDLE gameObject_handle, AE_COMPONENT_INFO* ae_component_handle, int size);

@@ -70,12 +70,16 @@ public:
 	}
 private:
 	friend class GameObject;
+	friend class ComponentStorage;
 
-	explicit AComponentRef(AE_COMPONENT_HANDLE newHandle)
+	explicit AComponentRef(AE_COMPONENT_HANDLE newHandle, AE_GAMEOBJECT_HANDLE newObjectHandle = {})
 	{
 		storage.handle = newHandle;
 		if constexpr (EngineComponentWrapper<type>::supported)
+		{
 			storage.componentWrapper.ae_component_handle = newHandle;
+			storage.componentWrapper.owner = newObjectHandle;
+		}
 	}
 	AComponentRefStorage<type, EngineComponentWrapper<type>::supported> storage;
 };

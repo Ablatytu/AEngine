@@ -40,6 +40,7 @@ public:
 	AENGINE_API static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 	AENGINE_API static bool GetMouseButtonDown(int button);
 	AENGINE_API static bool GetMouseButtonUp(int button);
+	AENGINE_API static void Reset();
 private:
 	static float viewportX;
 	static float viewportY;

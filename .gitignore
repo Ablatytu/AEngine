@@ -5,7 +5,6 @@
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -32,9 +31,15 @@
 *.app
 *.ipch
 
+CMakeCache.txt
+CMakeFiles/
+
 /x64/
 /x86/
 /.vs/
 /Debug/
 /Release/
+build/
+bin/
+out/
 AEngine/.vs/AEngine/v18/Insiders/Browse.VC.db

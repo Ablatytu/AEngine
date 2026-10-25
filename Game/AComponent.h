@@ -31,7 +31,10 @@ SetColorFieldInInspector(#valueName);
 #define AE_SET_RANGE(valueName, minValue, maxValue)\
 SetRangeFieldInInspector(#valueName, minValue, maxValue);
  
+class RenderImage;
 class GameObject;
+class Camera;
+
 template<typename type> class AComponentRef;
 
 class AComponent
@@ -65,6 +68,8 @@ public:
 	virtual void OnInspector() {};
 
 	virtual void OnDestroy() {};
+
+	virtual bool OnRenderImage(RenderImage* source, RenderImage* destination, Camera* cam) { return false; };
 
 	virtual const char* GetComponentName() const { return "New AComponent"; }
 	GameObject GetGameObject() const;

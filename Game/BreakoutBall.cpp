@@ -1,10 +1,11 @@
 #include "BreakoutBall.h"
 #include "GameObject.h"
 #include "ParticleSystem.h"
-
+#
 void BreakoutBall::Start()
 {
 	transform = GetGameObject().GetAComponent<Transform>();
+	spriteRenderer = GetGameObject().GetAComponent<SpriteRenderer2D>();
 }
 
 Vector2 BreakoutBall::Move(float dt, unsigned int width, unsigned int height)
@@ -40,9 +41,11 @@ bool BreakoutBall::CheckReset()
 void BreakoutBall::Reset(Vector2 posPlatform, Vector2 scalePlatform)
 {
 	Stuck = true;
+	Sticky = false;
+	PassThrough = false;
+	Velocity = Vector2(1.0f, 3.5f);
+	spriteRenderer->setColor(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	transform->SetPosition(Vector3(posPlatform.x, posPlatform.y + (scalePlatform.y / 2) + (Radius), transform->GetPosition().z));
 	transform->SetScale(Vector3(Radius * 2, Radius * 2, 1.0f));
 }
-
-
 AE_REGISTER_COMPONENT(BreakoutBall)

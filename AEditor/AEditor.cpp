@@ -43,7 +43,13 @@ using namespace RenderSystem2D;
 void AEditor::OnInit()
 {
 	std::filesystem::current_path(AEDITOR_WORKING_DIR);
+#ifdef _WIN32
 	GameModule::Load("Game.dll");
+#endif
+
+#ifdef __APPLE__
+	GameModule::Load("Game.dylib");
+#endif
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
@@ -64,6 +70,10 @@ void AEditor::OnInit()
 	//Shader* explodingStandartShader = AssetManager::LoadShader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl", "Shaders/ExplodingGeometryShader.glsl");
 	Shader* toonShader = AssetManager::LoadShader("Assets/ToonshaderVS.glsl", "Assets/ToonshaderFS.glsl");
 	Shader* particleShader = AssetManager::LoadShader("Shaders/ParticleShaderVS.glsl", "Shaders/ParticleShaderFS.glsl");
+
+	//GAME
+	Shader* breakoutEffectsGame = AssetManager::LoadShader("Shaders/BreakoutScreenEffectsVS.glsl", "Shaders/BreakoutScreenEffectsFS.glsl");
+
 
 	Cubemap* cubeMapDefaultSkyBox = AssetManager::CreateCubemap("cubeMap", 2048);
 	Texture* textureRight = AssetManager::LoadTexture("Assets/Textures/skybox/right.jpg");
@@ -90,6 +100,10 @@ void AEditor::OnInit()
 	Material* spherePBRMaterial = AssetManager::CreateMaterial("spherePBRMaterial", standartShader);
 	Material* standartUIMaterial = AssetManager::CreateMaterial("standartUIMaterial", standartUIShader);
 	Material* standartParticleMaterial = AssetManager::CreateMaterial("standartParticleMaterial", particleShader);
+
+	//GAME
+	Material* breakoutEffectsGameMaterial = AssetManager::CreateMaterial("BreakoutEffectsMaterial", breakoutEffectsGame);
+
 
 	Texture* texture = AssetManager::LoadTexture("Assets/Textures/d8c637d6-f500-44a3-bf33-c7896b95f8a0.png");
 	Texture* terrainTexture = AssetManager::LoadTexture("Assets/Textures/diff2.jpg");
@@ -145,12 +159,8 @@ void AEditor::OnSceneLoaded()
 	camera->GetComponent<PostProcess>()->AutoExposure = false;
 	SceneManager::Get().GetActiveScene().UnregisterCamera(camera->GetComponent<Camera>());
 
-	//GameObject* gameCamera = SceneManager::Get().CreateGameObject();
-	//gameCamera->AddComponent<Camera>();
 	//gameCamera->GetComponent<Camera>()->projectionType = Camera::ProjectionType::Orthographic;
 	//gameCamera->GetComponent<Camera>()->orthographicSize = 3.0f;
-	//gameCamera->GetComponent<Transform>()->position = glm::vec3(4.0f, 3.0f, 10.0f);
-	//gameCamera->GetComponent<Transform>()->UpdateMatrices();
 	//GameObject* particleSys = SceneManager::Get().CreateGameObject();
 	//particleSys->AddComponent<ParticleSystem>();
 	//ParticleSystem* particleComponent = particleSys->GetComponent<ParticleSystem>();
@@ -165,13 +175,13 @@ void AEditor::OnSceneLoaded()
 }
 void AEditor::OnBeforeSceneUpdate()
 {	
-	frame++;
+	//frame++;
 	//if (frame == 4)
-	//	SceneManager::Get().LoadScene("Assets/NewScene.ascene");
-	//if (frame == 15)
-	//	SceneManager::Get().LoadScene("Assets/TestScene.ascene");
-	if (frame > 20)
-		close();
+	//	editorGUI->SetGameMode();
+	//if (frame == 7)
+	//	editorGUI->SetEditMode();
+	//if (frame > 20)
+	//	close();
 
 	//GameModule::CheckForChanges();
 	if (SceneManager::Get().CheckChangeScenePathState())
@@ -233,7 +243,20 @@ void AEditor::OnRender()
 	rs_PostProcess(renderContext, sceneHDR);
 	rs2D_Start(sceneHDR);
 	rs2D_Render(renderContext2D);
-	rs_Present(renderContext, sceneHDR, output);
+	if (GetUpdateGameModuleComponents() && GameModule::OnRenderImage(renderContext, "defaultFramebuffer", "ViewportFramebuffer"))
+	{
+		rs_Present(renderContext, sceneHDR, output);
+
+		rs_CopyColorBufferToOtherBuffer(output, sceneHDR, output->GetWidth(), output->GetHeight());
+
+		rs_ClearFramebuffer(output, output->GetWidth(), output->GetHeight(), GL_COLOR_BUFFER_BIT);
+
+		rs_ExecuteGameCommands(renderContext);
+	}
+	else
+	{
+		rs_Present(renderContext, sceneHDR, output);
+	}
 	renderContext = SceneManager::Get().GetActiveScene().CollectRenderContext();
 	renderContext.width = editorGUI->sizegameport[0];
 	renderContext.height = editorGUI->sizegameport[1];
@@ -252,7 +275,20 @@ void AEditor::OnRender()
 		rs_PostProcess(renderContext, sceneHDR);
 		rs2D_Start(sceneHDR);
 		rs2D_Render(renderContext2D);
-		rs_Present(renderContext, sceneHDR, output);
+		if (GetUpdateGameModuleComponents() && GameModule::OnRenderImage(renderContext, "defaultFramebuffer", "ViewportFramebuffer"))
+		{
+			rs_Present(renderContext, sceneHDR, output);
+
+			rs_CopyColorBufferToOtherBuffer(output, sceneHDR, output->GetWidth(), output->GetHeight());
+
+			rs_ClearFramebuffer(output, output->GetWidth(), output->GetHeight(), GL_COLOR_BUFFER_BIT);
+
+			rs_ExecuteGameCommands(renderContext);
+		}
+		else
+		{
+			rs_Present(renderContext, sceneHDR, output);
+		}
 	}
 	editorGUI->BeginDockspace();
 	editorGUI->ShowInspectorWindow();
@@ -263,6 +299,10 @@ void AEditor::OnRender()
 	editorGUI->ShowLightingMenu();
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+void AEditor::OnStartFrame()
+{
+	Input::Reset();
 }
 void AEditor::OnShutdown()
 {

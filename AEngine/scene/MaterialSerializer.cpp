@@ -5,9 +5,9 @@
 #include "../Renderer/Cubemap.h"
 #include "../APIs/ParserGLSL.h"
 #include "../scene/AssetManager.h"
-#include <glm/glm/glm.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
-#include <glm/glm/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <ostream>
 #include <yaml-cpp/yaml.h>
 

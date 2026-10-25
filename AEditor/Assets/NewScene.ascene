@@ -11,7 +11,7 @@ GameObjects:
       - ComponentName: Render
         Fields:
           material: Assets/NewMaterial3.amat
-          mesh: Assets\Models/stoneBocchi.obj@@##AENGINENUMBERMESH##@@0
+          mesh: Assets/Models/stoneBocchi.obj@@##AENGINENUMBERMESH##@@0
   - Name: New GameObject
     Components:
       - ComponentName: Transform
@@ -36,4 +36,4 @@ GameObjects:
       - ComponentName: Render
         Fields:
           material: Assets/NewMaterial.amat
-          mesh: Assets\Models/Quad.obj@@##AENGINENUMBERMESH##@@0
+          mesh: Assets/Models/Quad.obj@@##AENGINENUMBERMESH##@@0
